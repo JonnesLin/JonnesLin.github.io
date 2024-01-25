@@ -1,6 +1,6 @@
 ---
 id:             2023-golden
-title:          "Prompt Tuning Vision Language Models is Robust to Noisy Labels"
+title:          "Patch Ranking: Efficient CLIP by Learning to Rank Local Patches"
 authors:        [eq_ChengEn, eq_Me, YuHen, Pedro]
 venue:          Under Review
 year:           "2023-01"
