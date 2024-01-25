@@ -1,25 +1,18 @@
-<!--
- * @Author: Jones Lin jlin398@wisc.edu
- * @Date: 2024-01-24 21:49:55
- * @LastEditors: Jones Lin jlin398@wisc.edu
- * @LastEditTime: 2024-01-25 09:54:39
- * @FilePath: /JonnesLin.github.io/_publications/2023-golden.md
- * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
--->
+
 ---
-id:             2023-robust-pt
-title:          "Prompt Tuning Vision Language Models is Robust to Noisy Labels"
-authors:        [ChengEn, Yu Tian, Haichao Yu, Heng Wang, Me, YuHen, Linjie Yang]
+id:             2023-golden
+title:          "Patch Ranking: Efficient CLIP by Learning to Rank Local Patches"
+authors:        [ChengEn*, Me*, ]
 venue:          Under Review
-year:           "2023-01"
-thumbnail:      assets/publications/2023-robust-pt/title-image.png
-bibtex:         "@InProceedings{wu2023_robust_pt,<br>&emsp;title={Why Is Prompt Tuning for Vision-Language Models Robust to Noisy Labels?},<br>&emsp;author={Cheng-En Wu, Yu Tian, Haichao Yu, Heng Wang, Pedro Morgado, Yu Hen Hu, Linjie Yang},<br>&emsp;booktitle={International Conference in Computer Vision (ICCV)},<br>&emsp;year={2023}<br>&emsp;}"
-links:
-    paper:      https://arxiv.org/abs/2307.11978
-    bibtex:     assets/publications/2023-robust-pt/ref.txt
+year:           "2023-11"
+thumbnail:      assets/publications/2023-golden/title-image.jpg
+# bibtex:         "@InProceedings{wu2023_robust_pt,<br>&emsp;title={Why Is Prompt Tuning for Vision-Language Models Robust to Noisy Labels?},<br>&emsp;author={Cheng-En Wu, Yu Tian, Haichao Yu, Heng Wang, Pedro Morgado, Yu Hen Hu, Linjie Yang},<br>&emsp;booktitle={International Conference in Computer Vision (ICCV)},<br>&emsp;year={2023}<br>&emsp;}"
+# links:
+#    paper:      https://arxiv.org/abs/2307.11978
+#    bibtex:     assets/publications/2023-robust-pt/ref.txt
 #    code:       https://github.com/stoneMo/SLAVC
 
 layout: project
-short_title: Robustness of Prompt Tuning
-abstract: "Vision-language models such as CLIP learns a generic text-image embedding from large-scale of training data. A vision-language model can be adapted to a new classification task through few-shot prompt tuning. We find that such prompt tuning process is highly robust to label noises. This intrigues us to study the key reasons contributing to the robustness of the prompt tuning paradigm. We conducted extensive experiments to explore this property and find the key factors are: 1. the fixed classname tokens provide a strong regularization to the optimization of the model, reducing gradients induces by the noisy samples; 2. the powerful pre-trained image-text embedding that is learned from diverse and generic web data provides strong prior knowledge for image classification. Further, we demonstrate that noisy zero-shot predictions from CLIP can be used to tune its own prompt, significantly enhancing prediction accuracy in the unsupervised setting."
+short_title: Efficient CLIP by Learning to Rank Local Patches
+abstract: "Contrastive image-text pre-trained models such as CLIP have shown excellent adaptive ability to downstream tasks, but they face challenges due to the high computational requirements of the Vision Transformer (ViT) backbone. Existing approaches to enhance ViT efficiency focus on pruning patch tokens but fall short in addressing the multimodal nature of CLIP and identifying the optimal subset of tokens for peak performance. To bridge this gap, we propose greedy search methods to establish "Golden Ranking" and introduce a lightweight predictor trained specifically to approximate this Golden Ranking. To compensate for any performance degradation resulting from token pruning, we incorporate learnable visual tokens, which aid in restoring and potentially enhancing the model's performance. Our work presents a comprehensive and systematic investigation of pruning tokens within the ViT backbone of CLIP models. Through our framework, we successfully achieve a 60% reduction in patch tokens in CLIP's ViT while incurring only a minimal average accuracy loss of 0.3% across seven datasets. Our study paves the way for constructing more computationally efficient multimodal models without compromising their performance, addressing a critical challenge in the application of advanced vision-language models."
 ---
