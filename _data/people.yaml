@@ -1,9 +1,17 @@
 Me:
+  name: Jinhong Lin
+  website: https://jonneslin.github.io/
+
+Pedro:
   name: Pedro Morgado
   website: https://pedro-morgado.github.io/
 
 ChengEn:
   name: Cheng-En Wu
+  website: https://cewu.github.io/
+
+eq_ChengEn:
+  name: \*Cheng-En Wu
   website: https://cewu.github.io/
 
 YuHen:
