@@ -209,8 +209,7 @@
     <h1 class="col-12 px-0 mb-0">Publications</h1>
     {% assign sorted = site.publications | sort: 'year' | reverse %}
     {% for pub in sorted %}
-    {% if pub.venue == "Under Review" %}
-    {% continue %}
+    
     {% endif %}
     <div class="row each_pub">
       <div class="d-none d-md-block col-md-4 d-lg-block col-lg-4 pub-thumbnail" style="min-height: 100px">
