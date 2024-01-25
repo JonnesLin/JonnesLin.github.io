@@ -1,6 +1,9 @@
 Me:
   name: Jinhong Lin
   website: https://jonneslin.github.io/
+eq_Me:
+  name: "*Jinhong Lin"
+  website: https://cewu.github.io/
 
 Pedro:
   name: Pedro Morgado
@@ -9,7 +12,6 @@ Pedro:
 ChengEn:
   name: Cheng-En Wu
   website: https://cewu.github.io/
-
 eq_ChengEn:
   name: "*Cheng-En Wu"
   website: https://cewu.github.io/
