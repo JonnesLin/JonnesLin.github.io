@@ -4,7 +4,7 @@ title:          "Prompt Tuning Vision Language Models is Robust to Noisy Labels"
 authors:        [eq_ChengEn, eq_Me, YuHen, Pedro]
 venue:          Under Review
 year:           "2023-01"
-thumbnail:      _publications/2023-golden/title-image.jpg
+thumbnail:      assets/proj/2023-golden/title-image.jpg
 
 layout: project
 short_title: Robustness of Prompt Tuning
