@@ -1,9 +1,9 @@
 ---
 id:             2023-robust-pt
-title:          "Prompt Tuning Vision Language Models is Robust to Noisy Labels"
+title:          "Patch Ranking: Efficient CLIP by Learning to Rank Local Patches"
 authors:        [eq_ChengEn, eq_Me, YuHen, Pedro]
 venue:          Under Review
-year:           "2023-01"
+year:           "2023-11"
 thumbnail:      assets/proj/2023-golden/title-image.jpg
 
 layout: project
