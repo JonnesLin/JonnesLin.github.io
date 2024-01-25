@@ -1,15 +1,11 @@
 ---
 id:             2023-robust-pt
 title:          "Prompt Tuning Vision Language Models is Robust to Noisy Labels"
-authors:        [* ChengEn, * Me]
+authors:        [ChengEn, Me]
 venue:          International Conference on Computer Vision (ICCV), Paris, France, 2023.
 year:           "2023-01"
 thumbnail:      assets/publications/2023-robust-pt/title-image.png
 bibtex:         "@InProceedings{wu2023_robust_pt,<br>&emsp;title={Why Is Prompt Tuning for Vision-Language Models Robust to Noisy Labels?},<br>&emsp;author={Cheng-En Wu, Yu Tian, Haichao Yu, Heng Wang, Pedro Morgado, Yu Hen Hu, Linjie Yang},<br>&emsp;booktitle={International Conference in Computer Vision (ICCV)},<br>&emsp;year={2023}<br>&emsp;}"
-links:
-    paper:      https://arxiv.org/abs/2307.11978
-    bibtex:     assets/publications/2023-robust-pt/ref.txt
-#    code:       https://github.com/stoneMo/SLAVC
 
 layout: project
 short_title: Robustness of Prompt Tuning
