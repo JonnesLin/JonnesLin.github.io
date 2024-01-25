@@ -2,7 +2,7 @@
 ---
 id:             2023-golden
 title:          "Patch Ranking: Efficient CLIP by Learning to Rank Local Patches"
-authors:        [ChengEn*, Me*, ]
+authors:        [ChengEn*, Me*, A]
 venue:          Under Review
 year:           "2023-11"
 thumbnail:      assets/publications/2023-golden/title-image.jpg
