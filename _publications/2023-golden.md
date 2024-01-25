@@ -1,5 +1,5 @@
 ---
-id:             2023-robust-pt
+id:             2023-golden
 title:          "Prompt Tuning Vision Language Models is Robust to Noisy Labels"
 authors:        [eq_ChengEn, eq_Me, YuHen, Pedro]
 venue:          Under Review
