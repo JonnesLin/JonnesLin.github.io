@@ -8,5 +8,5 @@ thumbnail:      assets/proj/2023-golden/title-image.jpg
 
 layout: project
 short_title: Efficient CLIP by Learning to Rank Local Patches
-abstract: "AAAa"
+abstract: "/'s"
 ---
