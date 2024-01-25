@@ -1,8 +1,16 @@
+<!--
+ * @Author: Jones Lin jlin398@wisc.edu
+ * @Date: 2024-01-24 21:49:55
+ * @LastEditors: Jones Lin jlin398@wisc.edu
+ * @LastEditTime: 2024-01-25 09:54:39
+ * @FilePath: /JonnesLin.github.io/_publications/2023-golden.md
+ * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+-->
 ---
 id:             2023-robust-pt
 title:          "Prompt Tuning Vision Language Models is Robust to Noisy Labels"
 authors:        [ChengEn, Yu Tian, Haichao Yu, Heng Wang, Me, YuHen, Linjie Yang]
-venue:          International Conference on Computer Vision (ICCV), Paris, France, 2023.
+venue:          Under Review
 year:           "2023-01"
 thumbnail:      assets/publications/2023-robust-pt/title-image.png
 bibtex:         "@InProceedings{wu2023_robust_pt,<br>&emsp;title={Why Is Prompt Tuning for Vision-Language Models Robust to Noisy Labels?},<br>&emsp;author={Cheng-En Wu, Yu Tian, Haichao Yu, Heng Wang, Pedro Morgado, Yu Hen Hu, Linjie Yang},<br>&emsp;booktitle={International Conference in Computer Vision (ICCV)},<br>&emsp;year={2023}<br>&emsp;}"
