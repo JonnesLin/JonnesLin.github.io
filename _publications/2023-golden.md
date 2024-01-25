@@ -1,5 +1,5 @@
 ---
-id:             2023-robust-pt
+id:             2023-golden-ranking
 title:          "Patch Ranking: Efficient CLIP by Learning to Rank Local Patches"
 authors:        [eq_ChengEn, eq_Me, YuHen, Pedro]
 venue:          Under Review
