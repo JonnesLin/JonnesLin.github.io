@@ -79,7 +79,7 @@ li {
 
 h1, h2, h3, h4, h5, h6 {
   font-weight: 300;
-  color: #00274d !important;
+  color: #4d0800 !important;
 }
 
 h1 {
@@ -104,11 +104,11 @@ h3 {
 }
 
 .bg-primary {
-  background-color: #00274D !important;
+  background-color: #4d1500 !important;
 }
 
 .bg-dark {
-  background-color: #00274D !important;
+  background-color: #4d1500 !important;
 }
 
 .text-faded {
@@ -122,7 +122,7 @@ h3 {
 
 .header-1 {
   font-size: 2rem;
-  color: #00274d !important;
+  color: #4d1500 !important;
   font-weight: 300;
 }
 .header-2 {
@@ -158,13 +158,13 @@ h3 {
 
 ::-moz-selection {
   color: #fff;
-  background: #00274D;
+  background: #4d1500;
   text-shadow: none;
 }
 
 ::selection {
   color: #fff;
-  background: #00274D;
+  background: #4d1500;
   text-shadow: none;
 }
 
@@ -389,7 +389,7 @@ a.anchor {
 }
 
 .pub_title:hover {
-   color :#00278D!important;
+   color :#8d1800!important;
    text-decoration: none!important;
  }
 
