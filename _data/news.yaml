@@ -1,20 +1,20 @@
-recent:
-  - <b>(Jul 2023)</b> Paper on the <a href="https://arxiv.org/abs/2307.11978">robustness of prompt-tuning</a> accepted at ICCV 2023.
-  - <b>(Jun 2023)</b> Invited talk at the <a href="https://ml4mi.wisc.edu/">ML4MI Seminar Series</a> @ University of Wisconsin-Madison.
-  - <b>(Apr 2023)</b> Paper on unified audio-visual modeling (<a href="https://arxiv.org/abs/2305.19458">OneAVM</a>) accepted at ICML 2023.
-  - <b>(Mar 2023)</b> Serving as Area Chair at CVPR 2023 and NeurIPS 2023.
-  - <b>(Feb 2023)</b> Invited talk at the <a href="https://uob-mavi.github.io/meetings/">MaVi Seminar Series</a> @ University of Bristol.
-  - <b>(Feb 2023)</b> Invited talk at the SIO ML Group @ University of California San Diego.
-  - <b>(Jan 2023)</b> Awarded the <a href="https://www.warf.org/news/five-projects-selected-for-warf-accelerator-big-data-challenge/">WARF Big Data Challenge Grant</a>. Thank you WARF for supporting our research.
-  - <b>(Oct 2022)</b> Invited talk at <a href="https://av4d.org/">AV4D Workshop</a> @ ECCV 2022.
-  - <b>(Sep 2022)</b> Two papers (<a href="https://arxiv.org/abs/2209.09634">SLAVC</a> and <a href="https://arxiv.org/abs/2209.13583">RepLAI</a>) accepted at NeurIPS 2022.
-more:
-  - <b>(Aug 2022)</b> Starting as Assistant Professor at University of Wisconsin-Madison.
-  - <b>(Jul 2022)</b> Two papers on <a href="https://arxiv.org/abs/2203.12710">Continuous SSL</a> and <a href="https://arxiv.org/abs/2203.09324">Visual Sound Localization</a> accepted at ECCV 2022.
-  - <b>(Jun 2022)</b> Invited talk at the <a href="https://https://sightsound.org/">Sight and Sound Workshop</a> @ CVPR 2022.
-  - <b>(Aug 2021)</b> Starting my postdoc at Carnegie Mellon University.
-  - <b>(Jun 2021)</b> Successfully defended my <a href="https://escholarship.org/uc/item/13s568v6">PhD thesis</a>. Thank you to all mentors and collaborators!
-  - <b>(Jun 2021)</b> Our <a href="https://arxiv.org/abs/2004.12943">CVPR 2021 paper on audio-visual self-supervised learning (AVID)</a> is a Best Paper Candidate.
-  - <b>(Mar 2021)</b> Two papers (<a href="https://arxiv.org/abs/2004.12943">AVID</a> and <a href="https://arxiv.org/abs/2103.15916">Robust xID</a>) accepted at CVPR 2021 (1 as oral).
-  #- <b>(Sep 2020)</b> Paper on <a href="https://arxiv.org/abs/2011.01819">Audio-Visual Spatial Alignment</a> accepted at NeurIPS 2020.
-  #- <b>(Jul 2020)</b> Paper on <a href="http://arxiv.org/abs/2007.13912">Deep Hashing</a> accepted at IJCV.
+# recent:
+#   - <b>(Jul 2023)</b> Paper on the <a href="https://arxiv.org/abs/2307.11978">robustness of prompt-tuning</a> accepted at ICCV 2023.
+#   - <b>(Jun 2023)</b> Invited talk at the <a href="https://ml4mi.wisc.edu/">ML4MI Seminar Series</a> @ University of Wisconsin-Madison.
+#   - <b>(Apr 2023)</b> Paper on unified audio-visual modeling (<a href="https://arxiv.org/abs/2305.19458">OneAVM</a>) accepted at ICML 2023.
+#   - <b>(Mar 2023)</b> Serving as Area Chair at CVPR 2023 and NeurIPS 2023.
+#   - <b>(Feb 2023)</b> Invited talk at the <a href="https://uob-mavi.github.io/meetings/">MaVi Seminar Series</a> @ University of Bristol.
+#   - <b>(Feb 2023)</b> Invited talk at the SIO ML Group @ University of California San Diego.
+#   - <b>(Jan 2023)</b> Awarded the <a href="https://www.warf.org/news/five-projects-selected-for-warf-accelerator-big-data-challenge/">WARF Big Data Challenge Grant</a>. Thank you WARF for supporting our research.
+#   - <b>(Oct 2022)</b> Invited talk at <a href="https://av4d.org/">AV4D Workshop</a> @ ECCV 2022.
+#   - <b>(Sep 2022)</b> Two papers (<a href="https://arxiv.org/abs/2209.09634">SLAVC</a> and <a href="https://arxiv.org/abs/2209.13583">RepLAI</a>) accepted at NeurIPS 2022.
+# more:
+#   - <b>(Aug 2022)</b> Starting as Assistant Professor at University of Wisconsin-Madison.
+#   - <b>(Jul 2022)</b> Two papers on <a href="https://arxiv.org/abs/2203.12710">Continuous SSL</a> and <a href="https://arxiv.org/abs/2203.09324">Visual Sound Localization</a> accepted at ECCV 2022.
+#   - <b>(Jun 2022)</b> Invited talk at the <a href="https://https://sightsound.org/">Sight and Sound Workshop</a> @ CVPR 2022.
+#   - <b>(Aug 2021)</b> Starting my postdoc at Carnegie Mellon University.
+#   - <b>(Jun 2021)</b> Successfully defended my <a href="https://escholarship.org/uc/item/13s568v6">PhD thesis</a>. Thank you to all mentors and collaborators!
+#   - <b>(Jun 2021)</b> Our <a href="https://arxiv.org/abs/2004.12943">CVPR 2021 paper on audio-visual self-supervised learning (AVID)</a> is a Best Paper Candidate.
+#   - <b>(Mar 2021)</b> Two papers (<a href="https://arxiv.org/abs/2004.12943">AVID</a> and <a href="https://arxiv.org/abs/2103.15916">Robust xID</a>) accepted at CVPR 2021 (1 as oral).
+#   #- <b>(Sep 2020)</b> Paper on <a href="https://arxiv.org/abs/2011.01819">Audio-Visual Spatial Alignment</a> accepted at NeurIPS 2020.
+#   #- <b>(Jul 2020)</b> Paper on <a href="http://arxiv.org/abs/2007.13912">Deep Hashing</a> accepted at IJCV.

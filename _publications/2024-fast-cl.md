@@ -1,7 +1,7 @@
 ---
 id:             2024-fast-cl
 title:          "Accelerating Augmentation Invariance Pretraining"
-authors:        [Jones, ChengEn, Yibing, Me]
+authors:        [Me, ChengEn, Yibing, Pedro]
 venue:          Neural Information Processing Systems (NeurIPS), Vancouver, 2024.
 year:           "2024-12"
 thumbnail:      assets/publications/2024-fast-cl/banner.png
