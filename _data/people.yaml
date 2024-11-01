@@ -13,7 +13,7 @@ ChengEn:
   name: Cheng-En Wu
   website: https://cewu.github.io/
 eq_ChengEn:
-  name: "*Cheng-En Wu"
+  name: "Cheng-En Wu*"
   website: https://cewu.github.io/
 
 YuHen:
@@ -23,6 +23,7 @@ YuHen:
 Yibing:
   name: Yibing Wei
   website: https://yibingwei-1.github.io/
+
 # Nuno:
 #   name: Nuno Vasconcelos
 #   website: http://www.svcl.ucsd.edu/~nuno/
