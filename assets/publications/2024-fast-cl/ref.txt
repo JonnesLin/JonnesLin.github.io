@@ -1,0 +1,6 @@
+@InProceedings{wei24latentmim,
+  title={Accelerating Augmentation Invariance Pretraining},
+  author={Jinhong Lin and Cheng-En Wu and Yibing Wei and Pedro Morgado},
+  booktitle={Advances in Neural Information Processing Systems (NeurIPS)},
+  year={2024},
+}

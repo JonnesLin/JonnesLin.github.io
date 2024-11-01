@@ -1,0 +1,6 @@
+@InProceedings{wei24latentmim,
+  title={Patch Ranking: Token Pruning as Ranking Prediction for Efficient CLIP Inference},
+  author={Cheng-En Wu and Jinhong Lin and Yu-Hen Yu and Pedro Morgado},
+  booktitle={IEEE/CVF Winter Applications in Computer Vision (WACV)},
+  year={2025},
+}
