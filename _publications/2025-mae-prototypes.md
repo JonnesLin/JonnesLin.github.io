@@ -3,7 +3,7 @@ id:             2025-mae-prototypes
 title:          "From Prototypes to General Distributions: An Efficient Curriculum for Masked Image Modeling"
 authors:        [Me, ChengEn, Huanran, Jifan, YuHen, Pedro]
 venue:          under review.
-year:           "2024-12"
+year:           "2025-05"
 thumbnail:      assets/publications/2025-mae-prototypes/banner.jpg
 bibtex:         "@misc{lin2024prototypesgeneraldistributionsefficient,
       title={From Prototypes to General Distributions: An Efficient Curriculum for Masked Image Modeling}, 
