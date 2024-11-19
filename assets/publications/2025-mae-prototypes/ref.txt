@@ -1,0 +1,9 @@
+@misc{lin2024prototypesgeneraldistributionsefficient,
+      title={From Prototypes to General Distributions: An Efficient Curriculum for Masked Image Modeling}, 
+      author={Jinhong Lin and Cheng-En Wu and Huanran Li and Jifan Zhang and Yu Hen Hu and Pedro Morgado},
+      year={2024},
+      eprint={2411.10685},
+      archivePrefix={arXiv},
+      primaryClass={cs.CV},
+      url={https://arxiv.org/abs/2411.10685}, 
+}
