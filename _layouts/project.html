@@ -37,6 +37,7 @@
 
   <!-- Custom styles -->
   <link href="/assets/css/home.css" rel="stylesheet">
+  <link href="/assets/css/modern.css" rel="stylesheet">
 
   <!-- Resize videos -->
   <script type="text/javascript">
@@ -56,16 +57,16 @@
 <body id="page-top">
 
   <!-- Navigation bar -->
-  <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+  <nav class="navbar navbar-expand-lg navbar-light fixed-top shadow-sm" id="mainNav">
     <div class="container">
-      <a class="navbar-brand ml-auto js-scroll-trigger my-0" href=".."></a>
+      <a class="navbar-brand ml-auto js-scroll-trigger my-0" href="..">Jinhong Lin</a>
       <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="#page-top"></a>
+            <a class="nav-link js-scroll-trigger" href="#page-top">Top</a>
           </li>
           {% for nav_item in page.nav_items %}
           <li class="nav-item">
@@ -77,8 +78,8 @@
     </div>
   </nav>
 
-  <div class="container align-items-center my-auto pt-4">
-    <section class="container">
+  <div class="container align-items-center my-auto pt-5 mt-4">
+    <section class="container fade-in delay-1">
       <a class="anchor" id="about"></a>
 
       <!-- Title-->
@@ -87,7 +88,7 @@
       </div>
 
       <!-- Authors-->
-      <div class="row justify-content-center">
+      <div class="row justify-content-center mt-3">
         {% for author in page.authors %}
         <div class="text-center px-4">
           {% if author.first %}
@@ -113,88 +114,122 @@
 
       <!-- Video -->
       {% if page.video_embed %}
-      <div class="col-12 my-4 text-center">
-        <div style="width: 75%;height: 0;padding-bottom: 42%;position: relative;margin-left: auto;margin-right: auto;">
+      <div class="col-12 my-4 text-center fade-in delay-2">
+        <div class="shadow rounded overflow-hidden" style="width: 75%;height: 0;padding-bottom: 42%;position: relative;margin-left: auto;margin-right: auto;">
           <iframe src="{{ page.video_embed }}" type="text/html" allowfullscreen="" style="position: absolute; width: 100%; height: 100%; left: 0; top: 0;"></iframe>
         </div>
       </div>
       {% elsif page.front_image %}
-      <div class="col-10 my-4 mx-auto text-center">
-        <img src="{{ page.front_image }}" style="width: 100%">
+      <div class="col-10 my-4 mx-auto text-center fade-in delay-2">
+        <img src="{{ page.front_image }}" class="img-fluid shadow rounded" style="width: 100%">
       </div>
       {% elsif page.thumbnail %}
-      <div class="col-6 my-4 mx-auto text-center">
-        <img src="../{{ page.thumbnail }}" style="width: 100%">
+      <div class="col-6 my-4 mx-auto text-center fade-in delay-2">
+        <img src="../{{ page.thumbnail }}" class="img-fluid shadow rounded" style="width: 100%">
       </div>
       {% endif %}
 
       <!--   Abstract   -->
-      <div class="row my-4 col-lg-10 col-md-10 col-sm-12 mx-auto justify-content-around">
-        <h1 class="section-heading">Abstract</h1>
-        <p class="text-justify">{{ page.abstract }}</p>
-        <p class="text-justify" style="width: 100%"><b>Published at:</b> {{ page.venue }}</p>
+      <div class="row my-4 col-lg-10 col-md-10 col-sm-12 mx-auto justify-content-around fade-in delay-3">
+        <div class="card shadow-sm rounded p-4 w-100">
+          <h2 class="mb-3">Abstract</h2>
+          <p class="text-justify">{{ page.abstract }}</p>
+          <p class="text-justify" style="width: 100%"><b>Published at:</b> {{ page.venue }}</p>
+        </div>
       </div>
 
       <!--   Links   -->
-      <div class="row my-4 justify-content-center">
+      <div class="row my-4 justify-content-center fade-in delay-4">
       {% for link in page.links %}
         {% if link[0] == 'paper' %}
           <div class="col-lg-2 col-md-2 col-sm-4 col-6 text-center">
-          <a href="{{ link[1] }}" style="color:#00278D!important" target="_blank"><i class="fa fa-2x fa-file-lines mb-3"></i></a>
+          <a href="{{ link[1] }}" class="transition" style="color:var(--primary-color)!important" target="_blank"><i class="fa fa-2x fa-file-lines mb-3"></i></a>
           <h4>Paper</h4>
           </div>
         {% endif %}
         {% if link[0] == 'suppl' %}
         <div class="col-lg-2 col-md-2 col-sm-4 col-6 text-center">
-          <a href="{{ link[1] }}" style="color:#00278D!important" target="_blank"><i class="far fa-2x fa-file-archive mb-3"></i></a>
+          <a href="{{ link[1] }}" class="transition" style="color:var(--primary-color)!important" target="_blank"><i class="far fa-2x fa-file-archive mb-3"></i></a>
           <h4>Supplement</h4>
         </div>
         {% endif %}
         {% if link[0] == 'arxiv' %}
         <div class="col-lg-2 col-md-2 col-sm-4 col-6 text-center">
-          <a href="{{ link[1] }}" style="color:#00278D!important" target="_blank"><i class="ai fa-2x ai-arxiv mb-3"></i></a>
+          <a href="{{ link[1] }}" class="transition" style="color:var(--primary-color)!important" target="_blank"><i class="ai fa-2x ai-arxiv mb-3"></i></a>
           <h4>ArXiv</h4>
         </div>
         {% endif %}
         {% if link[0] == 'website' %}
         <div class="col-lg-2 col-md-2 col-sm-4 col-6 text-center">
-          <a href="{{ link[1] }}" style="color:#00278D!important" target="_blank"><i class="fa-solid fa-2x fa-globe mb-3"></i></a>
+          <a href="{{ link[1] }}" class="transition" style="color:var(--primary-color)!important" target="_blank"><i class="fa-solid fa-2x fa-globe mb-3"></i></a>
           <h4>Website</h4>
         </div>
         {% endif %}
         {% if link[0] == 'code' %}
         <div class="col-lg-2 col-md-2 col-sm-4 col-6 text-center">
-          <a href="{{ link[1] }}" style="color:#00278D!important" target="_blank"><i class="fab fa-2x fa-github mb-3"></i></a>
+          <a href="{{ link[1] }}" class="transition" style="color:var(--primary-color)!important" target="_blank"><i class="fab fa-2x fa-github mb-3"></i></a>
           <h4>Code</h4>
         </div>
         {% endif %}
         {% if link[0] == 'data' %}
         <div class="col-lg-2 col-md-2 col-sm-4 col-6 text-center">
-          <a href="{{ link[1] }}" style="color:#00278D!important" target="_blank"><i class="fa fa-2x fa-database mb-3"></i></a>
+          <a href="{{ link[1] }}" class="transition" style="color:var(--primary-color)!important" target="_blank"><i class="fa fa-2x fa-database mb-3"></i></a>
           <h4>Data</h4>
         </div>
         {% endif %}
       {% endfor %}
       </div>
       {% if page.bibtex %}
-      <div class="row my-4 col-lg-8 col-md-10 col-sm-12 mx-auto" style="">
-        <h4 class="mx-auto">Bibtex</h4>
-        <p style="width: 100%; font-family: JetBrains Mono; font-size: 10pt; border: dashed; border-width: 1pt; background: #fbfdfd; border-color: #b3b3b3;  padding: 1em">{{ page.bibtex }}</p>
+      <div class="row my-4 col-lg-8 col-md-10 col-sm-12 mx-auto fade-in delay-5" style="">
+        <div class="card shadow-sm rounded p-3 w-100">
+          <h4 class="mx-auto mb-3">BibTeX</h4>
+          <p style="width: 100%; font-family: JetBrains Mono; font-size: 10pt; border: dashed; border-width: 1pt; background: #fbfdfd; border-color: #b3b3b3; padding: 1em">{{ page.bibtex }}</p>
+        </div>
       </div>
       {% endif %}
     </section>
 
-    {{ page.content }}
+    <div class="fade-in delay-6">
+      {{ page.content }}
+    </div>
 
-    <section id="footnote" class="mt-2">
+    <section id="footnote" class="mt-4 fade-in delay-7">
       <div class="row justify-content-center col-12 pb-5">
-        <a href="#page-top"><i class="fa-solid fa-angles-up"></i>&nbsp;&nbsp;Back to the top</a>
-        &emsp;
-        <a href=".."><i class="fa-solid fa-home"></i>&nbsp;&nbsp;Back to home</a>
+        <a href="#page-top" class="btn btn-primary mr-2"><i class="fa-solid fa-angles-up"></i>&nbsp;&nbsp;Back to the top</a>
+        <a href=".." class="btn btn-outline-primary"><i class="fa-solid fa-home"></i>&nbsp;&nbsp;Back to home</a>
       </div>
     </section>
 
   </div>
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="/vendor/bootstrap/bootstrap-4.0.0-dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Animation on scroll -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Get all elements with the fade-in class
+      const fadeElements = document.querySelectorAll('.fade-in');
+      
+      // Create an Intersection Observer
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          // If the element is in the viewport
+          if (entry.isIntersecting) {
+            // Add the visible class
+            entry.target.style.opacity = '1';
+            // Unobserve the element
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.1 });
+      
+      // Observe each fade element
+      fadeElements.forEach(element => {
+        observer.observe(element);
+      });
+    });
+  </script>
 </body>
 
 </html>
