@@ -58,6 +58,9 @@
           <a class="nav-link js-scroll-trigger" href="#about">About</a>
         </li>
         <li class="nav-item">
+          <a class="nav-link js-scroll-trigger" href="#news">News</a>
+        </li>
+        <li class="nav-item">
           <a class="nav-link js-scroll-trigger" href="#teaching">Teaching</a>
         </li>
         <li class="nav-item">
@@ -147,39 +150,19 @@
 </section>
 
 <!-- News -->
-<!-- 
-<section class="container lead" >
+<section class="container lead fade-in delay-3" >
   <hr>
   <a class="anchor" id="news"></a>
-  <h1 class="col-12 px-0 mb-0">News</h1>
-  <ul class="my-0">
-  {% for news in site.data.news.recent %}
-    <li>{{ news }}</li>
-  {% endfor %}
-  </ul>
-  <span id="moreNews" style="display:none">
-  <ul class="my-0">
-  {% for news in site.data.news.more %}
-  <li>{{ news }}</li>
-  {% endfor %}
-  </ul>
-  </span>
-  <a href="javascript:;" onclick="showMoreNews()" id="moreNewsBtn" class="my-2 px-4">--- show more ---</a>
+  <h1 class="col-12 px-0 mb-3">News</h1>
+  <div class="card shadow-sm rounded p-3">
+    <ul class="my-0">
+    {% for news in site.data.news.recent %}
+      <li class="mb-2">{{ news }}</li>
+    {% endfor %}
+    </ul>
+  </div>
 </section>
-<script>
-    function showMoreNews() {
-        var moreNewsTxt = document.getElementById("moreNews");
-        var moreNewsBtn = document.getElementById("moreNewsBtn");
-        if (moreNewsTxt.style.display === "none") {
-            moreNewsBtn.innerHTML = "--- show less ---";
-            moreNewsTxt.style.display = "inline";
-        } else {
-            moreNewsBtn.innerHTML = "--- show more ---";
-            moreNewsTxt.style.display = "none";
-        }
-    }
-</script>
- -->
+
 <!-- Group-->
 <!-- 
 <section class="container lead" >
