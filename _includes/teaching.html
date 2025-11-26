@@ -1,0 +1,15 @@
+<section id="teaching">
+    <div class="container">
+        <h2 class="fade-in">Teaching</h2>
+        <div class="card fade-in delay-2">
+            <ul style="list-style: none; padding: 0;">
+                {% for course in site.data.teaching %}
+                <li style="margin-bottom: 0.8rem; display: flex; align-items: center;">
+                    <i class="fas fa-chalkboard-teacher" style="color: var(--accent-color); margin-right: 1rem;"></i>
+                    {{ course }}
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,68 @@
+<section id="publications">
+    <div class="container">
+        <h2 class="fade-in">Publications</h2>
+        <p class="fade-in delay-1" style="margin-bottom: 2rem; font-size: 0.9rem; color: var(--text-secondary);">*
+            Denotes equal contribution</p>
+
+        <div class="publications-grid fade-in delay-2">
+            {% assign sorted = site.publications | sort: 'year' | reverse %}
+            {% for pub in sorted %}
+            <div class="pub-item">
+                <div class="pub-image-container">
+                    <a href="{{ pub.url }}">
+                        <img src="{{ pub.thumbnail }}" alt="{{ pub.title }}" class="pub-image">
+                    </a>
+                </div>
+                <div class="pub-content">
+                    <a href="{{ pub.url }}" class="pub-title">{{ pub.title }}</a>
+                    <div class="pub-authors">
+                        {% for author in pub.authors %}
+                        {% if author.first %}
+                        {% assign author2 = author[0] %}
+                        {% assign extra = author[1] %}
+                        {% else %}
+                        {% assign author2 = author %}
+                        {% assign extra = "" %}
+                        {% endif %}
+
+                        {% assign author_info = site.data.people[author2] %}
+                        {% if author_info %}
+                        {% if author_info.website %}
+                        <a href="{{ author_info.website }}" style="color: var(--text-primary);">{{ author_info.name
+                            }}</a>{{ extra }}{% if forloop.last == false %}, {% endif %}
+                        {% else %}
+                        {% if author2 == "Me" %}<b>{{ author_info.name }}</b>{% else %}{{ author_info.name }}{% endif
+                        %}{% if forloop.last == false %}, {% endif %}
+                        {% endif %}
+                        {% else %}
+                        {{ author2 }}{{ extra }}{% if forloop.last == false %}, {% endif %}
+                        {% endif %}
+                        {% endfor %}
+                    </div>
+                    <div class="pub-venue">{{ pub.venue }}</div>
+
+                    <div class="pub-links">
+                        {% for link in pub.links %}
+                        {% if link[0] == 'paper' %}
+                        <a href="{{ link[1] }}" class="btn-sm" target="_blank"><i class="fas fa-file-pdf"></i> Paper</a>
+                        {% elsif link[0] == 'code' %}
+                        <a href="{{ link[1] }}" class="btn-sm" target="_blank"><i class="fab fa-github"></i> Code</a>
+                        {% elsif link[0] == 'website' %}
+                        <a href="{{ link[1] }}" class="btn-sm" target="_blank"><i class="fas fa-globe"></i> Website</a>
+                        {% elsif link[0] == 'video' %}
+                        <a href="{{ link[1] }}" class="btn-sm" target="_blank"><i class="fas fa-video"></i> Video</a>
+                        {% elsif link[0] == 'slides' %}
+                        <a href="{{ link[1] }}" class="btn-sm" target="_blank"><i class="fas fa-file-powerpoint"></i>
+                            Slides</a>
+                        {% elsif link[0] == 'bibtex' %}
+                        <a href="{{ link[1] }}" class="btn-sm" target="_blank"><i class="fas fa-quote-right"></i>
+                            BibTeX</a>
+                        {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>

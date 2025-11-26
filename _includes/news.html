@@ -1,0 +1,14 @@
+<section id="news">
+    <div class="container">
+        <h2 class="fade-in">News</h2>
+        <div class="card fade-in delay-2">
+            <ul class="news-list">
+                {% for news in site.data.news.recent %}
+                <li class="news-item">
+                    <span class="news-content">{{ news }}</span>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</section>

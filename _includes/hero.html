@@ -1,0 +1,53 @@
+<section id="about" class="hero">
+    <div class="container">
+        <div class="hero-content fade-in delay-1">
+            <div class="hero-image-container">
+                <img src="/assets/images/profile.jpg" alt="{{ site.name }}" class="hero-image">
+            </div>
+            <div class="hero-text">
+                <h1>{{ site.data.info.name }}</h1>
+                <p class="hero-subtitle">{{ site.data.info.position }}</p>
+                {% for x in site.data.info.institution %}
+                <p class="hero-subtitle" style="font-size: 1rem; color: var(--text-secondary);">{{ x }}</p>
+                {% endfor %}
+
+                <div class="lead">
+                    <p>
+                        I am a second-year Master's student at the University of Wisconsin-Madison, under the
+                        supervision of Prof. <a href="https://www.biostat.wisc.edu/~yli/">Yin Li</a>.
+                    </p>
+                    <p>
+                        My primary research focus lies at the intersection of computer vision and machine learning, with
+                        a particular interest in:
+                    </p>
+                    <ul style="list-style: none; padding-left: 0; margin-top: 1rem;">
+                        <li style="margin-bottom: 0.5rem;"><i class="fas fa-chevron-right"
+                                style="color: var(--accent-color); margin-right: 0.5rem;"></i>Enhancing training and
+                            inference efficiency</li>
+                        <li style="margin-bottom: 0.5rem;"><i class="fas fa-chevron-right"
+                                style="color: var(--accent-color); margin-right: 0.5rem;"></i>Integrating multiple
+                            sensory modalities to understand the world</li>
+                        <li style="margin-bottom: 0.5rem;"><i class="fas fa-chevron-right"
+                                style="color: var(--accent-color); margin-right: 0.5rem;"></i>Efficiently identifying
+                            high-quality datasets.</li>
+                    </ul>
+                </div>
+
+                <div class="social-links">
+                    {% for link in site.data.info.links %}
+                    {% if link[0] == "Email" %}
+                    <a href="{{ link[1] }}" class="social-link" title="Email"><i class="fas fa-envelope"></i></a>
+                    {% elsif link[0] == "Github" %}
+                    <a href="{{ link[1] }}" class="social-link" title="GitHub"><i class="fab fa-github"></i></a>
+                    {% elsif link[0] == "Scholar" %}
+                    <a href="{{ link[1] }}" class="social-link" title="Google Scholar"><i
+                            class="ai ai-google-scholar"></i></a>
+                    {% elsif link[0] == "CV" %}
+                    <a href="{{ link[1] }}" class="social-link" title="CV"><i class="fas fa-file-alt"></i></a>
+                    {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
