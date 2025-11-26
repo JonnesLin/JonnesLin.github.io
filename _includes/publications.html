@@ -9,12 +9,13 @@
             {% for pub in sorted %}
             <div class="pub-item">
                 <div class="pub-image-container">
-                    <a href="{{ pub.url }}">
+                    <a href="{% if pub.links.paper %}{{ pub.links.paper }}{% else %}{{ pub.url }}{% endif %}">
                         <img src="{{ pub.thumbnail }}" alt="{{ pub.title }}" class="pub-image">
                     </a>
                 </div>
                 <div class="pub-content">
-                    <a href="{{ pub.url }}" class="pub-title">{{ pub.title }}</a>
+                    <a href="{% if pub.links.paper %}{{ pub.links.paper }}{% else %}{{ pub.url }}{% endif %}"
+                        class="pub-title">{{ pub.title }}</a>
                     <div class="pub-authors">
                         {% for author in pub.authors %}
                         {% if author.first %}
