@@ -1,0 +1,66 @@
+<!doctype html><html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="一项自修改保证，究竟相对于什么目标和假设成立？"><title>AI 凭什么接受一次自我修改？ — Jinhong Lin</title><link rel="icon" href="assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="assets/style.css"><link rel="stylesheet" href="assets/selected-b.css"><script src="assets/reader.js" defer></script><link rel="canonical" href="https://jonneslin.github.io/rsi-02-zh.html"><meta property="og:url" content="https://jonneslin.github.io/rsi-02-zh.html"><meta property="og:title" content="AI 凭什么接受一次自我修改？ — Jinhong Lin"><meta property="og:type" content="article"><link rel="alternate" hreflang="en" href="https://jonneslin.github.io/rsi-02-en.html"><link rel="alternate" hreflang="zh" href="https://jonneslin.github.io/rsi-02-zh.html"><meta property="og:image" content="https://jonneslin.github.io/assets/02/social-zh.png"></head><body id="top" class="reading-page"><a class="skip" href="#main">Skip to content</a><header class="site-header wrap"><a class="brand" href="index.html">Jinhong Lin</a><nav class="site-nav" aria-label="Main navigation"><a href="index.html">Home</a><a href="index.html#research">Research</a><a href="index.html#projects">Projects</a><a href="blog.html" aria-current="page">Blog</a></nav></header><div class="reading-progress" aria-hidden="true"></div><main id="main" class="wrap"><div class="article-heading" lang="zh"><div class="breadcrumbs"><a href="blog.html">Blog</a><span>/</span><a href="blog.html">Recursive self-improvement</a><span>/ 02</span></div><div class="eyebrow">A reading series · Essay 02 of 12</div><h1>AI 凭什么接受一次自我修改？</h1><div class="article-meta"><span>Jinhong Lin</span><span class="separator">/</span><span>约 6 分钟阅读</span><span class="separator">/</span><span>文献检索截至 2026 年 9 月 17 日</span><nav class="language-switch" aria-label="Article language"><a href="rsi-02-en.html" lang="en" hreflang="en">EN</a><a href="rsi-02-zh.html" lang="zh" hreflang="zh" aria-current="page">中文</a></nav></div></div><details class="mobile-toc"><summary>文章目录</summary><ul class="toc"><li><a href="#_1">等待也是一种选择</a></li><li><a href="#_2">有用、可证明、及时找到证明</a></li><li><a href="#_3">如果修改连目标也改了呢？</a></li><li><a href="#_4">保持结果到底保持了什么？</a></li><li><a href="#_5">怎样用这些区别检查实现？</a></li><li><a href="#_6">参考来源</a></li></ul></details><div class="article-grid"><article class="article-body" lang="zh"><p>设想一个编程 agent 找到了修改自身搜索程序的补丁。它看起来有助于找到更好的解，却也可能删掉有用分支、改变“成功”的含义，或让系统失去明天找到更好补丁的机会。只比较新旧版本的当前表现，还不足以处理这些可能性。</p>
+<p>两类形式分析把缺失的比较写清楚了。Gödel machine 问：什么时候可以证明，现在切换比继续当前搜索更好？Everitt 等人问：后继系统的策略或效用可以变化时，应该用哪个效用评价未来？这些工作的价值，在于说明接受保证究竟需要什么。</p>
+<p><img alt="文章卡片说明：自修改的保证需要明确目标和适用假设。" src="assets/02/social-zh.png" /></p>
+<p><em>“保证改进”需要说清目标，也需要说清范围。</em></p>
+<h2 id="_1">等待也是一种选择</h2>
+<p>在 Schmidhuber 的 <a href="https://arxiv.org/abs/cs/0309048">Gödel machine</a> 中，证明搜索程序寻找有益的自修改。通过接受条件后，修改可以重写可写软件，包括证明搜索器本身。寻找改进的方法因此也进入可改进范围。</p>
+<p>但机器首先需要效用函数，以及描述硬件、初始软件和相关环境假设的公理系统。“有益”要在这些描述中获得证明，证明结论也受形式模型约束。</p>
+<p>关键比较比“补丁胜过旧任务程序”更强。用教学性的表达，接受条件是：</p>
+<blockquote>
+<p>在给定公理下，证明现在切换的效用高于继续运行当前证明搜索器。</p>
+</blockquote>
+<p>“继续”包含日后找到并执行其他修改的可能性，也包含继续搜索的时间和资源消耗。两个选项必须从相同当前状态比较。等待可能找到更好的方案，但等待有成本，这就是机会成本必须进入接受决定的原因。</p>
+<p>回到那个教学例子。补丁即使能让今后的每次搜索更快，如果安装成本很高、剩下的有用工作很少，也未必值得执行。反过来，为追求理想补丁而继续搜索，也可能比现在采用一个不错的补丁更昂贵。这些例子用于解释比较对象，并非论文测量结果。</p>
+<p><img alt="在相同效用和公理下，比较现在执行候选修改与继续证明搜索。" src="assets/02/figure-zh.png" /></p>
+<p><em>继续搜索包含未来修改；证明成本与形式目标是否忠实于真实意图，仍需分别检查。</em></p>
+<p>论文的“全局最优”相对于这项比较及一致的公理系统成立。它没有找出所有可设想架构中最好的程序，也没有保证现实能力无限增长。比较的选项、效用和环境模型，都是结论的一部分。<a href="https://arxiv.org/abs/cs/0309048">论文</a></p>
+<h2 id="_2">有用、可证明、及时找到证明</h2>
+<p>严格的接受规则，仍然留下实际搜索问题。一项修改可能有益，却无法在所选公理系统中证明；另一项可能有证明，但机器在预算用完之前找不到。</p>
+<p>Gödel machine 明确讨论了这两种限制。初始证明搜索方法 BIOPS 在特定条件下，相对于固定证明技术具有渐近搜索保证。不过，其中隐藏的常数依赖分配给该技术的先验概率的倒数。增长阶相同，也可能因为常数太大而无法实际运行。</p>
+<p>因此要分别检查三件事：修改在相关意义上是否有益，采用的系统能否证明它有益，以及能否及时找到证明。关于接受规则的结果，不会自动说明实现满足了全部要求。该论文也没有报告大模型的实测多代增长。<a href="https://arxiv.org/abs/cs/0309048">论文</a></p>
+<h2 id="_3">如果修改连目标也改了呢？</h2>
+<p><a href="https://arxiv.org/abs/1605.03142v1">Everitt 等人</a>研究能够修改未来策略或效用函数的 agent。策略决定系统怎样行动；效用函数评价交互历史的价值。问题是，当两者可能变化时，当前系统应该怎样评价未来？</p>
+<p>再看一个教学例子。系统按修复结果获得奖励。它可以更好地修复问题，也可以把未来评分函数改成无论结果如何都给满分。两条路都可能让后来的分数变高，但只有前一条必然涉及原先的修复目标。</p>
+<p>论文把效用限制在零到一之间，并区分三种具有精确定义的价值函数：</p>
+<table>
+<thead>
+<tr>
+<th>价值函数</th>
+<th>如何评价未来</th>
+<th>论文模型中的后果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Hedonistic</td>
+<td>使用未来效用函数</td>
+<td>把未来效用设为恒定满分，即可优化这类价值。</td>
+</tr>
+<tr>
+<td>Ignorant</td>
+<td>使用当前效用，却未计入后继策略变化</td>
+<td>在论文条件下，可能对有害自修改无差别。</td>
+</tr>
+<tr>
+<td>Realistic</td>
+<td>使用当前效用，并计入后继策略</td>
+<td>在定理前提下，行为可保持相对初始效用的最优性。</td>
+</tr>
+</tbody>
+</table>
+<p>这些名称指数学定义，不能当作性格或提示词。要求大模型“考虑得现实一点”，并没有实现该定理的前提。</p>
+<h2 id="_4">保持结果到底保持了什么？</h2>
+<p>Realistic 的保持结果要求初始策略已经最优，并且模型计入自修改的后果。环境信念与初始效用还须满足“修改独立性”：两段历史若有相同外部行动与感知，只是内部修改记录不同，记录差异本身不会改变效用或环境预测。修改仍然可以改变后续行为，这恰恰是模型需要计入的部分。</p>
+<p>在这些条件下，作者给出的是沿实际策略产生的历史，保持相对初始效用的最优行为。这就是 on-policy 范围。它没有覆盖所有随意设想的反事实历史，也不能直接用于只有近似优化能力的大模型 agent。<a href="https://arxiv.org/abs/1605.03142v1">论文</a></p>
+<p>还要保留两个边界。第一，初始目标被保持，不代表目标表达正确。作者讨论了它与纠正错误效用、价值学习及探索之间的张力。第二，效用不变，并不保护送进效用函数的所有输入。篡改感知或奖励输入的作弊方式，在该论文保证之外。</p>
+<p>例如，前面的教学修复系统可能保持评分函数不变，却改变评分函数读取的报告。此时，分数升高需要同时检查报告通道和修复结果。目标保持与信息通道完整性，是两个需要不同证据的问题。这个例子没有反驳定理，它涉及的正是定理声明的保证范围之外。</p>
+<h2 id="_5">怎样用这些区别检查实现？</h2>
+<p>审读工程系统时，先把接受主张写成比较：执行补丁改善什么，参照的是哪种继续运行方式，考虑多长时间，付出什么成本？再逐项指出，测试、证明或预测究竟支持了哪一部分。</p>
+<p>随后追踪补丁影响的是行为、评价方式，还是评价输入。这些形式工作为拆分问题提供了理由，但没有替某个具体测试环境作认证。实现仍需拿出有关搜索预算、后果模型，以及分数与预期结果之间联系的证据。读者能够检查前提的保证，才真正有用。</p>
+<h2 id="_6">参考来源</h2>
+<ul>
+<li>Schmidhuber，<a href="https://arxiv.org/abs/cs/0309048">《Gödel Machines: Self-Referential Universal Problem Solvers Making Provably Optimal Self-Improvements》</a>，v5，2006。</li>
+<li>Everitt 等，<a href="https://arxiv.org/abs/1605.03142v1">《Self-Modification of Policy and Utility Function in Rational Agents》</a>，v1，2016。</li>
+</ul>
+<p>本文基于文献纳入截至 2026 年 9 月 17 日的书稿整理。</p>
+<!-- claims-used: rsi-foundations-003, rsi-foundations-004, rsi-foundations-005, rsi-foundations-006 --><nav class="article-end" aria-label="Article navigation"><a rel="prev" href="rsi-01-zh.html"><span>上一篇 · 01</span><strong>AI 修好了一个 bug，然后呢？</strong></a><a rel="next" href="rsi-03-zh.html"><span>下一篇 · 03</span><strong>模型能从自己生成的数据中学到什么？</strong></a><a class="backtop" href="#top">回到顶部 ↑</a></nav></article><aside class="article-sidebar" aria-label="文章目录"><h2>文章目录</h2><ul class="toc"><li><a href="#_1">等待也是一种选择</a></li><li><a href="#_2">有用、可证明、及时找到证明</a></li><li><a href="#_3">如果修改连目标也改了呢？</a></li><li><a href="#_4">保持结果到底保持了什么？</a></li><li><a href="#_5">怎样用这些区别检查实现？</a></li><li><a href="#_6">参考来源</a></li></ul><div class="series-note"><strong>RECURSIVE SELF-IMPROVEMENT</strong><p>递归自我改进阅读系列：从答案修订到改进器演化。</p><span>02 / 12 · EN / 中文</span><br><a href="blog.html">全部 12 篇文章 →</a></div></aside></div></main><footer class="site-footer wrap"><span>Jinhong Lin · University of Wisconsin–Madison</span><span><a href="mailto:jlin398@wisc.edu">Get in touch ↗</a> &nbsp; / &nbsp; <a href="https://github.com/JonnesLin">GitHub ↗</a></span></footer></body></html>

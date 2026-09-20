@@ -1,0 +1,68 @@
+<!doctype html><html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="系统持续进步，与进步速度持续提高之间还差什么条件？"><title>有正反馈，为什么还不一定持续加速？ — Jinhong Lin</title><link rel="icon" href="assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="assets/style.css"><link rel="stylesheet" href="assets/selected-b.css"><script src="assets/reader.js" defer></script><link rel="canonical" href="https://jonneslin.github.io/rsi-11-zh.html"><meta property="og:url" content="https://jonneslin.github.io/rsi-11-zh.html"><meta property="og:title" content="有正反馈，为什么还不一定持续加速？ — Jinhong Lin"><meta property="og:type" content="article"><link rel="alternate" hreflang="en" href="https://jonneslin.github.io/rsi-11-en.html"><link rel="alternate" hreflang="zh" href="https://jonneslin.github.io/rsi-11-zh.html"><meta property="og:image" content="https://jonneslin.github.io/assets/11/social-zh.png"></head><body id="top" class="reading-page"><a class="skip" href="#main">Skip to content</a><header class="site-header wrap"><a class="brand" href="index.html">Jinhong Lin</a><nav class="site-nav" aria-label="Main navigation"><a href="index.html">Home</a><a href="index.html#research">Research</a><a href="index.html#projects">Projects</a><a href="blog.html" aria-current="page">Blog</a></nav></header><div class="reading-progress" aria-hidden="true"></div><main id="main" class="wrap"><div class="article-heading" lang="zh"><div class="breadcrumbs"><a href="blog.html">Blog</a><span>/</span><a href="blog.html">Recursive self-improvement</a><span>/ 11</span></div><div class="eyebrow">A reading series · Essay 11 of 12</div><h1>有正反馈，为什么还不一定持续加速？</h1><div class="article-meta"><span>Jinhong Lin</span><span class="separator">/</span><span>约 6 分钟阅读</span><span class="separator">/</span><span>文献检索截至 2026 年 9 月 17 日</span><nav class="language-switch" aria-label="Article language"><a href="rsi-11-en.html" lang="en" hreflang="en">EN</a><a href="rsi-11-zh.html" lang="zh" hreflang="zh" aria-current="page">中文</a></nav></div></div><details class="mobile-toc"><summary>文章目录</summary><ul class="toc"><li><a href="#_1">先分清效率存量与新增效率</a></li><li><a href="#_2">一个幂律例子让区别更直观</a></li><li><a href="#_3">反馈有直接路径，也有能力路径</a></li><li><a href="#_4">跨过一次阈值，不保证始终超过它</a></li><li><a href="#_5">从窄研发能力到广泛影响，还要另一座桥</a></li><li><a href="#_6">参考来源</a></li></ul></details><div class="article-grid"><article class="article-body" lang="zh"><p>设想一个研究系统，每轮都找到有用改进。新版本比前一版更好，也帮助了下一轮研究。可是，再获得同样比例的收益，需要的时间越来越长。改进仍在继续，比例增长却在放慢。</p>
+<p>这个假想情形指出了递归自我改进论证中的一处缺口：正反馈说明已有进步能够帮助产生更多进步；持续加速还需要判断，这种帮助相对于已经积累的能力，增长得够不够快。</p>
+<p><img alt="文章卡片区分持续改进与持续加速。" src="assets/11/social-zh.png" /></p>
+<p><em>讨论加速之前，先说清哪一个量的增长率在上升。</em></p>
+<h2 id="_1">先分清效率存量与新增效率</h2>
+<p>Cunningham 等人的<a href="https://arxiv.org/abs/2609.15802">《The Economics of Recursive Self-Improvement》</a>把这项区别写进模型。算法效率 <code>A</code> 定义为达到给定能力所需训练算力的倒数。同样能力所需算力越少，<code>A</code> 越大。</p>
+<p>“给定能力”很重要。相同预算下 benchmark 得分更高，不会自动成为这个倒数量的直接测量。实证分析仍需找到办法，比较达到共同能力目标所需的算力。</p>
+<p>接下来区分三个量：</p>
+<table>
+<thead>
+<tr>
+<th>量</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>A</code></td>
+<td>已经积累的算法效率水平。</td>
+</tr>
+<tr>
+<td><code>A_dot</code></td>
+<td>单位时间产生的新增算法效率。</td>
+</tr>
+<tr>
+<td><code>g = A_dot / A</code></td>
+<td>效率的比例增长率。</td>
+</tr>
+</tbody>
+</table>
+<p>分母说明了为什么单位时间产出增加，仍可能没有增长率上升。效率水平越大，同样的新增量所占比例越小。新增量即使上升，也可能赶不上存量增长。</p>
+<p>在这套模型中，“自维持加速”指外生投入固定时，<code>g</code> 随 <code>A</code> 上升。这是围绕算法效率选择的一种加速定义。讨论阈值之前，需要先把定义放在桌面上。</p>
+<h2 id="_2">一个幂律例子让区别更直观</h2>
+<p>用一个教学假设，设新增效率满足：</p>
+<p><code>A_dot = k × A^p</code>，其中 <code>k &gt; 0</code></p>
+<p>它不是对当前 AI 拟合出的规律。两边除以 <code>A</code>，得到：</p>
+<p><code>g = k × A^(p − 1)</code></p>
+<p>当 <code>0 &lt; p &lt; 1</code> 时，效率更高的系统每单位时间产生更多新增效率，反馈方向为正。但新增量的增长慢于存量，因此比例增长率下降。<code>p = 1</code> 时增长率不变；<code>p &gt; 1</code> 时，在这项假设关系内增长率上升。</p>
+<p>这解释了为什么关键阈值是一，而不是零。一般模型不要求某个幂律永远成立，而是用局部弹性表达同一比较：已有效率变化一个比例，新增效率的生产会变化多少比例？</p>
+<h2 id="_3">反馈有直接路径，也有能力路径</h2>
+<p>现有算法效率可以直接影响继续研发，也可以先提高研发能力 <code>C</code>，再由能力促进新的算法进步。Cunningham 等人把两条路径合为：</p>
+<p><code>E = e_direct + e_research × e_capability</code></p>
+<p><code>e_direct</code> 描述能力及其他投入不变时，<code>A_dot</code> 对 <code>A</code> 的直接响应；<code>e_capability</code> 描述 <code>C</code> 对 <code>A</code> 的响应；<code>e_research</code> 描述 <code>A_dot</code> 对 <code>C</code> 的响应。后两者相乘，表达经过能力的两步传递，再与直接路径相加。</p>
+<p>这个乘积还区分了间接路径变弱的两种原因：效率提升可能不再明显增加研发能力；研发能力也可能继续上升，却无法明显增加新增效率。例如，实验吞吐量限制第二段关系时，第一段仍可能很强。这是由模型结构推出的判断：只观察到其中一条边很强，还不足以说明整个两步反馈同样强。测量需要覆盖两段传递，不能把其中一段默认成无限有效。</p>
+<p>弹性是局部的比例敏感度：粗略地说，相关其他投入固定时，输入小幅增加约百分之一，输出会增加多少百分比。它并不等于两条 benchmark 曲线之间的相关性。</p>
+<p>在生产函数为正、可微，且外生投入固定时，对增长率定义求导得到：</p>
+<p><code>d log(g) / d log(A) = E − 1</code></p>
+<p>所以 <code>E &gt; 1</code> 对应这一点上的比例增长率上升；<code>E = 1</code> 对应局部不变；<code>E &lt; 1</code> 对应下降。这是模型内部条件，不能当作现有 AI 已跨过阈值的证据。<a href="https://arxiv.org/abs/2609.15802">论文</a></p>
+<p><img alt="概念反馈环展示直接路径、经研发能力的路径、固定外生投入，以及三种局部弹性情形。" src="assets/11/figure-zh.png" /></p>
+<p><em>阈值属于固定外生投入下的局部模型。研发能力与广泛能力之间，还需要另外建立联系。</em></p>
+<h2 id="_4">跨过一次阈值，不保证始终超过它</h2>
+<p>系统变化时，弹性也可能变化。某个瓶颈占主导时很有效的方法，可能在另一项投入成为约束后不再同样有用。</p>
+<p>设想一个实验吞吐量固定的研究组。更好的提议能力，起初可以帮助它选到更有价值的实验；这一步改善之后，继续增加提议数量，未必能增加实际完成的实验数量或信息量。这是解释投入互补性的教学例子，不是论文测得的上限。</p>
+<p>经济模型讨论了人力、实验或推理算力、训练算力与数据等互补约束。固定这些外生投入，有助于辨认反馈本身。如果下一次运行同时获得更多算力或人工协助，结果变好便不能单独说明自维持反馈更强。</p>
+<p>因此，要把局部阈值外推到后续所有状态，还需要知道响应关系如何改变。论文中研发弹性与校准仍有较大不确定性，没有据此判定现实系统已能持续加速。这个阈值本身也不证明有限时间奇点。</p>
+<h2 id="_5">从窄研发能力到广泛影响，还要另一座桥</h2>
+<p>模型进一步区分有助于算法研发的窄能力，与关联更广经济产出的能力。围绕前者形成强反馈，不会自动使后者以相同方式加速。广能力条件还取决于，随着效率提高，广能力对效率的敏感度怎样变化。</p>
+<p>这与 <a href="https://consc.net/papers/singularity.pdf">Chalmers 的分析</a>形成一种有用对照：自放大能力与另一项所关心能力需要额外的跟踪关系。这是分析上的联系，两篇论文并非两次独立实验，不能共同充当“所有重要能力已同步加速”的证据。</p>
+<p>具体评价时，可以先定义共同能力目标及效率指标，再比较单位时间或资源获得的新增改进，同时记录外生投入。随后从不同能力起点重复比较，观察研发过程的资源花在什么地方。这些是拟议测量，不是本文已经建立的结果。</p>
+<p>例如，以更低成本达到同一目标，可以改变 <code>A</code>；换一个目标后得到更高分，则同时改变了被测对象。记录目标身份，能避免把两种观察悄悄拼成同一条效率序列。失败研究也要进入时间与投入统计，因为增长率讨论的是整个过程在时间中实际产生了什么。</p>
+<p>一连串更好的系统可以支持“持续改进”。要支持“持续加速”，还需要说明增长率怎样变、代价多少、投入是什么。更强主张中的每一段联系，都需要自己的证据。</p>
+<h2 id="_6">参考来源</h2>
+<ul>
+<li>Cunningham 等，<a href="https://arxiv.org/abs/2609.15802">《The Economics of Recursive Self-Improvement》</a>，v1，2026。</li>
+<li>Chalmers，<a href="https://consc.net/papers/singularity.pdf">《The Singularity: A Philosophical Analysis》</a>，2010。</li>
+</ul>
+<p>本文基于文献纳入截至 2026 年 9 月 17 日的书稿整理。文中数值阈值是分析条件，不是当前系统的实测判定。</p>
+<!-- claims-used: rsi-foundations-002, rsi-foundations-011, rsi-foundations-012 --><nav class="article-end" aria-label="Article navigation"><a rel="prev" href="rsi-10-zh.html"><span>上一篇 · 10</span><strong>AI 研究能力的曲线，究竟测量了什么？</strong></a><a rel="next" href="rsi-12-zh.html"><span>下一篇 · 12</span><strong>下一项 RSI 实验，怎样让结果更有解释力？</strong></a><a class="backtop" href="#top">回到顶部 ↑</a></nav></article><aside class="article-sidebar" aria-label="文章目录"><h2>文章目录</h2><ul class="toc"><li><a href="#_1">先分清效率存量与新增效率</a></li><li><a href="#_2">一个幂律例子让区别更直观</a></li><li><a href="#_3">反馈有直接路径，也有能力路径</a></li><li><a href="#_4">跨过一次阈值，不保证始终超过它</a></li><li><a href="#_5">从窄研发能力到广泛影响，还要另一座桥</a></li><li><a href="#_6">参考来源</a></li></ul><div class="series-note"><strong>RECURSIVE SELF-IMPROVEMENT</strong><p>递归自我改进阅读系列：从答案修订到改进器演化。</p><span>11 / 12 · EN / 中文</span><br><a href="blog.html">全部 12 篇文章 →</a></div></aside></div></main><footer class="site-footer wrap"><span>Jinhong Lin · University of Wisconsin–Madison</span><span><a href="mailto:jlin398@wisc.edu">Get in touch ↗</a> &nbsp; / &nbsp; <a href="https://github.com/JonnesLin">GitHub ↗</a></span></footer></body></html>

@@ -1,0 +1,43 @@
+<!doctype html><html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="当测试、日志或评价器也会变化，什么让前后分数继续可比？"><title>分数变高时，任务还相同吗？ — Jinhong Lin</title><link rel="icon" href="assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="assets/style.css"><link rel="stylesheet" href="assets/selected-b.css"><script src="assets/reader.js" defer></script><link rel="canonical" href="https://jonneslin.github.io/rsi-09-zh.html"><meta property="og:url" content="https://jonneslin.github.io/rsi-09-zh.html"><meta property="og:title" content="分数变高时，任务还相同吗？ — Jinhong Lin"><meta property="og:type" content="article"><link rel="alternate" hreflang="en" href="https://jonneslin.github.io/rsi-09-en.html"><link rel="alternate" hreflang="zh" href="https://jonneslin.github.io/rsi-09-zh.html"><meta property="og:image" content="https://jonneslin.github.io/assets/09/social-zh.png"></head><body id="top" class="reading-page"><a class="skip" href="#main">Skip to content</a><header class="site-header wrap"><a class="brand" href="index.html">Jinhong Lin</a><nav class="site-nav" aria-label="Main navigation"><a href="index.html">Home</a><a href="index.html#research">Research</a><a href="index.html#projects">Projects</a><a href="blog.html" aria-current="page">Blog</a></nav></header><div class="reading-progress" aria-hidden="true"></div><main id="main" class="wrap"><div class="article-heading" lang="zh"><div class="breadcrumbs"><a href="blog.html">Blog</a><span>/</span><a href="blog.html">Recursive self-improvement</a><span>/ 09</span></div><div class="eyebrow">A reading series · Essay 09 of 12</div><h1>分数变高时，任务还相同吗？</h1><div class="article-meta"><span>Jinhong Lin</span><span class="separator">/</span><span>约 6 分钟阅读</span><span class="separator">/</span><span>文献检索截至 2026 年 9 月 17 日</span><nav class="language-switch" aria-label="Article language"><a href="rsi-09-en.html" lang="en" hreflang="en">EN</a><a href="rsi-09-zh.html" lang="zh" hreflang="zh" aria-current="page">中文</a></nav></div></div><details class="mobile-toc"><summary>文章目录</summary><ul class="toc"><li><a href="#_1">从分数沿着路径找回行为</a></li><li><a href="#_2">内部测试有用，接受决定仍需依据</a></li><li><a href="#_3">如果评价器本身需要变化</a></li><li><a href="#_4">正常有用性与受攻击安全性，单位不同</a></li><li><a href="#_5">审计发现是线索，不是真实作弊率</a></li><li><a href="#_6">参考来源</a></li></ul></details><div class="article-grid"><article class="article-body" lang="zh"><p>一个 agent 删除日志中的标记后，在“减少工具幻觉”的评价中拿到了满分。作者检查发现，实际行为没有修复。检测器依赖那个标记，观察路径改变了，分数能够看见的东西也变了。</p>
+<p>这发生在 <a href="https://arxiv.org/abs/2505.22954">Darwin Gödel Machine</a> 论文独立的工具幻觉实验中，不能据此把主编码成绩都归为作弊。它说明了一个更具体的问题：隐藏检测器，不等于保护了检测器读取的每项输入。</p>
+<p><img alt="文章卡片追问：分数上涨之后，测量的还是同一个任务吗？" src="assets/09/social-zh.png" /></p>
+<p><em>先追踪测量过程，再解释能力提高。</em></p>
+<h2 id="_1">从分数沿着路径找回行为</h2>
+<p>这项 DGM 实验运行 150 轮，每个 agent 在三道软件工程任务上接受评价。到 node 114，系统修改日志实现，移除了检测需要的特殊标记。自修改时，检测函数隐藏，日志却仍可编辑。</p>
+<p>因此，“评价代码没变”可能只是部分保护。行为产生观察材料，测试或评分程序读取材料，分数再影响选择。链条中的变化，都可能改变结果的含义。</p>
+<p>看一个教学例子：函数可能真的开始返回正确值，也可能是测试包装程序不再输入困难案例。两种变化都可能提高通过率。要辨认原因，需要同时检查候选、测试，以及连接两者的执行路径。这个例子不是 DGM 的另一项实测结果。</p>
+<p>下一步的问题是：允许系统改进自己的测试时，宣布改进成功的权力应该放在哪里？</p>
+<h2 id="_2">内部测试有用，接受决定仍需依据</h2>
+<p><a href="https://arxiv.org/abs/2607.24300v1">Guo 等人的 SEAL</a>研究能同时修改游戏策略和可见测试的 agent。它与 Zweiger 等人用于模型权重适应的 SEAL 是两项工作。</p>
+<p>Guo SEAL 保留自写测试作为内部反馈，再由固定外部审计比较候选策略与当前保留策略。agent 只获得接受或拒绝的一位信息，看不到审计分数、样本和内部规则。拒绝时，系统连策略和测试一起恢复；只恢复策略，可能留下适应了被丢弃修改的测试。</p>
+<p>审计样本与训练、自测及最终部署评价分开，模型权重和外层接受门也不由 agent 一起改写。这些边界约束了候选为通过检查而能改变什么。</p>
+<p>但接受规则允许指定容差内的回退，有限审计仍是部署质量的代理。论文报告一次被接受的修改：审计分数从 12.7 升至 14.2，部署回报却从 17.6 降至 13.8。两者是不同测量，不能跨量纲相减；关键在于变化方向相反。</p>
+<p>封闭审计增加了依据，却没有证明部署表现单调提高。比较效果时还要计入候选与审计预算；论文主结果与匹配候选次数的 pilot，不能当作同一种实验。</p>
+<p><img alt="行为经过日志和测试形成分数；外部比较与明确的评价器时期分别保护测量中的不同关系。" src="assets/09/figure-zh.png" /></p>
+<p><em>改变代理指标可以改变分数，却不改变行为。比较尺度稳定之后，仍需确认它测量了预期目标。</em></p>
+<h2 id="_3">如果评价器本身需要变化</h2>
+<p>固定评价器可能覆盖不足，改进它有价值，却会带来记账问题：新旧分数可能不在同一尺度上。</p>
+<p><a href="https://arxiv.org/abs/2606.26294v2">Red Queen Gödel Machine，简称 RQGM</a>，把搜索分成评价器固定的 epoch。这里是“评分规则稳定的一段时期”，不是遍历训练集一遍。某个角色的时期内，评价器、产物生成协议和二元计分规则保持固定。</p>
+<p>更换时，候选评价器要与固定锚点比较，锚点由客观标签或既有人类偏好标签构成。评价器不能只靠自己打高分宣布进步。更换之后，依赖旧评价器的效用记录被清除，程序及不受影响的记录保留；以后重新访问旧候选，再用新评价器评分。</p>
+<p>固定锚点上的评分可以支持跨时期比较。没有独立锚点的角色，例如所讨论设置中的写作者或证明生成器，需要先在各时期选局部优胜者，再用固定外部标准评价产物。旧裁判的 0.8 和新裁判的 0.9，不能直接解释成质量增加 0.1。</p>
+<p>成本也有范围。RQGM 的 <code>ε-best-belief</code> 是根据成功与失败记录得到的保守估计。成本累计到所选候选首次达到自身最高 <code>ε-best-belief</code> 分数的时点，包含此前生成与评价；它不是候选刚生成时的成本，也不是整次运行预算，原文匹配了运行总预算。其写作接受率来自 AI 评审面板，也不是人类会议录用率。同名纵轴不能抹去这些区别。</p>
+<h2 id="_4">正常有用性与受攻击安全性，单位不同</h2>
+<p><a href="https://arxiv.org/abs/2312.06942v5">AI Control</a>提供了另一种拆分：强模型正常产生代码时测量有用性；红队策略替代强模型、试图植入后门时测量安全性。这是对研究者设计的监督协议进行评价，本身不是递归自修改实验。</p>
+<p>这里的后门特指通过 APPS 测试，却能由 GPT-4 找出一个使其偏离参考解的输入的程序。明确这个定义后，正常测试通过与攻击成功就是两个不同事件；逐题正确率与整个部署序列无后门概率，也不能相互替换。</p>
+<p>其安全性指模拟的 5,000 题部署序列中，没有任何一次后门成功提交的概率。模拟对 1,500 道题的响应重采样，既不是逐题正确率，也不是运行了 5,000 轮自修改。归一化有用性则以弱、强模型正常正确率为两端，也不等于原始正确率。</p>
+<p>前提同样具体：常规高质量审计覆盖 2% 问题，最初十题免费审计；该通道由不受红队替换的 GPT-4 模拟。攻击策略不能跨调用保留状态，开发与评价还使用同一题集。因此，测得安全性属于指定攻击与协议，而非一切可能部署。</p>
+<h2 id="_5">审计发现是线索，不是真实作弊率</h2>
+<p>除了执行得分，也可以直接检查代码变化。<a href="https://arxiv.org/abs/2609.00069v1">Wang 等人</a>把一次 harness 代码差分及准确的修改前文件作为输入，检查改动位于哪里、可能违反什么义务，例如保持评价有效或记录相关结果。</p>
+<p>审计器在构造的篡改与无害配对修改上接受评价。所选审计器的定位召回率为 74.9%，无害对照假阳性率为 6.3%。这些数值不能直接给出自然运行中某项发现为真的概率，因为篡改比例与代码分布都可能不同。</p>
+<p>论文在公开 agent 轨迹中报告了审计发现。它们值得进一步调查，但不等于经过独立确认的真实作弊率。可疑差分还需要解释它究竟改变了什么行为。</p>
+<p>面对下一次分数上涨，保留候选、评价器身份、评价输入和选择规则，再问增益能否在测量同一种行为的比较中成立。目标是让一次具体的改进主张具有明确含义，同时保留审计自身的不确定性。</p>
+<h2 id="_6">参考来源</h2>
+<ul>
+<li>Zhang 等，<a href="https://arxiv.org/abs/2505.22954">《Darwin Gödel Machine》</a>，v3，2025。</li>
+<li>Guo 等，<a href="https://arxiv.org/abs/2607.24300v1">《Self-Authored Verification Is Unreliable in Heuristic Self-Improving Agents》</a>，v1，2026。</li>
+<li>Iacob 等，<a href="https://arxiv.org/abs/2606.26294v2">《The Red Queen Gödel Machine》</a>，v2，2026。</li>
+<li>Greenblatt 等，<a href="https://arxiv.org/abs/2312.06942v5">《AI Control: Improving Safety Despite Intentional Subversion》</a>，v5，2024。</li>
+<li>Wang 等，<a href="https://arxiv.org/abs/2609.00069v1">《Auditing Harness Tampering in Self-Improving Agents》</a>，v1，2026。</li>
+</ul>
+<p>本文基于文献纳入截至 2026 年 9 月 17 日的书稿整理。所述实验结果来自论文报告，本系列未复现实验。</p>
+<!-- claims-used: rsi-agents-007, rsi-agents-018, rsi-agents-019, rsi-foundations-020, rsi-foundations-021, rsi-foundations-023, rsi-foundations-024, rsi-foundations-025 --><nav class="article-end" aria-label="Article navigation"><a rel="prev" href="rsi-08-zh.html"><span>上一篇 · 08</span><strong>怎样证明系统更会“产生改进”了？</strong></a><a rel="next" href="rsi-10-zh.html"><span>下一篇 · 10</span><strong>AI 研究能力的曲线，究竟测量了什么？</strong></a><a class="backtop" href="#top">回到顶部 ↑</a></nav></article><aside class="article-sidebar" aria-label="文章目录"><h2>文章目录</h2><ul class="toc"><li><a href="#_1">从分数沿着路径找回行为</a></li><li><a href="#_2">内部测试有用，接受决定仍需依据</a></li><li><a href="#_3">如果评价器本身需要变化</a></li><li><a href="#_4">正常有用性与受攻击安全性，单位不同</a></li><li><a href="#_5">审计发现是线索，不是真实作弊率</a></li><li><a href="#_6">参考来源</a></li></ul><div class="series-note"><strong>RECURSIVE SELF-IMPROVEMENT</strong><p>递归自我改进阅读系列：从答案修订到改进器演化。</p><span>09 / 12 · EN / 中文</span><br><a href="blog.html">全部 12 篇文章 →</a></div></aside></div></main><footer class="site-footer wrap"><span>Jinhong Lin · University of Wisconsin–Madison</span><span><a href="mailto:jlin398@wisc.edu">Get in touch ↗</a> &nbsp; / &nbsp; <a href="https://github.com/JonnesLin">GitHub ↗</a></span></footer></body></html>

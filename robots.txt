@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://jonneslin.github.io/sitemap.xml

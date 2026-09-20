@@ -1,0 +1,81 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="How can a bug fix leave useful experience for the next task, or change the program that makes the next repair?"><title>An AI Fixed a Bug. What Happens Next? — Jinhong Lin</title><link rel="icon" href="assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="assets/style.css"><link rel="stylesheet" href="assets/selected-b.css"><script src="assets/reader.js" defer></script><link rel="canonical" href="https://jonneslin.github.io/rsi-01-en.html"><meta property="og:url" content="https://jonneslin.github.io/rsi-01-en.html"><meta property="og:title" content="An AI Fixed a Bug. What Happens Next? — Jinhong Lin"><meta property="og:type" content="article"><link rel="alternate" hreflang="en" href="https://jonneslin.github.io/rsi-01-en.html"><link rel="alternate" hreflang="zh" href="https://jonneslin.github.io/rsi-01-zh.html"></head><body id="top" class="reading-page"><a class="skip" href="#main">Skip to content</a><header class="site-header wrap"><a class="brand" href="index.html">Jinhong Lin</a><nav class="site-nav" aria-label="Main navigation"><a href="index.html">Home</a><a href="index.html#research">Research</a><a href="index.html#projects">Projects</a><a href="blog.html" aria-current="page">Blog</a></nav></header><div class="reading-progress" aria-hidden="true"></div><main id="main" class="wrap"><div class="article-heading" lang="en"><div class="breadcrumbs"><a href="blog.html">Blog</a><span>/</span><a href="blog.html">Recursive self-improvement</a><span>/ 01</span></div><div class="eyebrow">A reading series · Essay 01 of 12</div><h1>An AI Fixed a Bug. What Happens Next?</h1><div class="article-meta"><span>Jinhong Lin</span><span class="separator">/</span><span>6 min read</span><span class="separator">/</span><span>Literature through Sep 17, 2026</span><nav class="language-switch" aria-label="Article language"><a href="rsi-01-en.html" lang="en" hreflang="en" aria-current="page">EN</a><a href="rsi-01-zh.html" lang="zh" hreflang="zh">中文</a></nav></div></div><details class="mobile-toc"><summary>On this page</summary><ul class="toc"><li><a href="#what-remains-after-the-conversation-closes">What remains after the conversation closes?</a></li><li><a href="#leave-it-a-lesson-it-can-use">Leave it a lesson it can use</a></li><li><a href="#change-the-program-that-generates-patches">Change the program that generates patches</a></li><li><a href="#what-has-the-system-gained-when-the-next-task-begins">What has the system gained when the next task begins?</a></li></ul></details><div class="article-grid"><article class="article-body" lang="en"><p>Imagine asking an AI assistant to write a function that calculates the mean of a list of numbers, with one requirement: an empty list must return <code>None</code>. It gives you this code:</p>
+<pre><code class="language-python">def mean(xs):
+    return sum(xs) / len(xs)
+</code></pre>
+<p>For <code>[2, 4, 6]</code>, the result is <code>4</code>. But an empty list, <code>[]</code>, causes a division by zero. You point out that the assistant missed the requirement for empty input. It adds a check and fixes the bug.</p>
+<p>That change solves the immediate problem. Then you close the conversation and ask it to write another function that works with lists. Will it check for empty input on its own?</p>
+<p>The answer depends on what the fix leaves behind. We will use this bug to compare three assistants: one that revises only its current answer, one that saves a lesson, and one that modifies the program it uses to generate patches. In all three setups, the base model's weights stay fixed. These are independent teaching examples, not experiments reported in a paper or stages that a system must progress through.</p>
+<h2 id="what-remains-after-the-conversation-closes">What remains after the conversation closes?</h2>
+<p>The first assistant revises the function only within the conversation. It gives you the corrected code. It neither updates its model weights nor writes a record that it can read on the next task.</p>
+<p>If the next call uses the same model with an empty context, the assistant cannot read this fix. It may still write correct code using its existing capabilities, but this conversation has added no reusable information.</p>
+<p>This gives us a testable distinction between "fixed the code" and "learned something from the fix." The first asks whether this piece of code meets the requirements. The second also asks whether the next task can make use of this experience. Comparing the first and final drafts answers only the first question.</p>
+<h2 id="leave-it-a-lesson-it-can-use">Leave it a lesson it can use</h2>
+<p>After fixing the bug, the second assistant also saves a record:</p>
+<blockquote>
+<p>Before calculating statistics for a list, check whether the input is empty. What to return for empty input depends on the current task's requirements.</p>
+</blockquote>
+<p>Now ask it to write a function that calculates variance. If the system retrieves this record at the start of a relevant task, the assistant has an extra cue to check the input. The model weights can remain completely unchanged; external memory carries the experience into the next call.</p>
+<p>The record deliberately avoids saying "always return <code>None</code> for an empty list." That was the requirement for the mean function. Another interface might require an exception, in which case copying the old answer would also be wrong. The reusable part is the practice of checking; the response still depends on the new task.</p>
+<p>Saving the record is only the first step. Will the system retrieve it? Once the assistant reads it, will it follow the advice? Will it apply the advice even when it does not fit? All of these affect later performance.</p>
+<p>We could design a simple comparison: take two copies of the same base assistant, let one read this memory and keep it from the other, then give both a set of new tasks under the same budget. Alongside tasks that call for checking empty input, include tasks where this lesson is of no use, and observe whether it introduces extra errors.</p>
+<p>This is a proposed experiment to test the effect of memory. We have not run it. It does make clear what to compare: how does retaining this lesson affect the next set of tasks? Clearing both copies' memories before evaluation would prevent us from measuring the effect of this lesson.</p>
+<h2 id="change-the-program-that-generates-patches">Change the program that generates patches</h2>
+<p>The third assistant can modify more of its system. It has a program responsible for repairing code, which we will call the "improver." The improver decides what information to give the model, which change to try first, and how to use a limited number of attempts.</p>
+<p>Imagine that the original improver, A, is simple: when it sees an error, it asks the model to propose a patch. This time, A also treats its own source code as something to modify and produces a candidate improver, B. Their rules might look like this:</p>
+<table>
+<thead>
+<tr>
+<th>Improver</th>
+<th>How it starts a repair</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A</td>
+<td>Give the current error to the model and ask it to propose a patch</td>
+</tr>
+<tr>
+<td>B</td>
+<td>Read the input requirements, construct boundary cases, then use the check results to ask the model for a patch</td>
+</tr>
+</tbody>
+</table>
+<p>For the mean function, B would try to include empty input in its checks, without waiting for the user to report the error. This is a candidate rule; we have not established that it works better.</p>
+<p>There must also be an actual handoff. If B passes the acceptance checks, B generates the changes in the next round, and B's own source code remains open to modification. If B is merely saved to a file while A continues doing the work, the process that produces later changes has not changed in the way this setup describes.</p>
+<p>This identifies a key feature of recursive self-improvement: the program responsible for producing changes is itself among the things the system can modify. <a href="https://arxiv.org/abs/2609.13406">Generalized Agent Iteration (GAI)</a> uses this distinction to separate fixed improvement processes from recursive self-improvement. Our A and B are teaching examples to help explain this distinction, not experiments reported by GAI.</p>
+<p>Permission to modify, an actual handoff, and the effects of a modification are three separate things. B's extra boundary checks might find problems that A misses. They might also take too much time, leaving fewer opportunities to propose patches.</p>
+<p>To test whether B is better at improving programs, we could freeze versions A and B and prepare a set of new programming tasks that were not used to develop B. For each task, A and B would start from the same initial code and produce patches under the same total budget. We would then evaluate each final program using tests set aside in advance and kept hidden from both improvers. This comparison is also a proposal made in this article.</p>
+<h2 id="what-has-the-system-gained-when-the-next-task-begins">What has the system gained when the next task begins?</h2>
+<p>Returning to the same empty-list bug, we can now name what each assistant leaves behind:</p>
+<table>
+<thead>
+<tr>
+<th>Assistant</th>
+<th>What new information or program the next call can use</th>
+<th>What still needs to be tested</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Revises only the current answer</td>
+<td>No new state under the setup described above</td>
+<td>Whether the revised code meets the current task's requirements</td>
+</tr>
+<tr>
+<td>Saves a lesson</td>
+<td>A retrievable record about checking input</td>
+<td>Whether reading the record improves performance on new tasks</td>
+</tr>
+<tr>
+<td>Modifies the improver</td>
+<td>The improvement program B, actually put into use</td>
+<td>Whether B produces more useful changes with comparable resources</td>
+</tr>
+</tbody>
+</table>
+<p>These three cases help us explain where an "improvement" occurs. They do not automatically rank the assistants by capability: a relevant memory can be very useful, and a program that can modify itself can also get worse with each change.</p>
+<p>The next time an AI fixes its own mistake, look at the moment it starts a new task. What new state does it read? Which version of the improvement program does it run? Recording those two things makes "what did it learn?" a question we can keep testing.</p>
+<hr />
+<p>Further reading: the <a href="https://arxiv.org/abs/2609.13406">GAI paper</a>, particularly its distinction based on whether the improver can itself be modified. This article uses that distinction only to describe system structure, not to claim a performance gain. The examples and comparison designs are teaching illustrations.</p>
+<p>The research basis for this article comes from the survey manuscript, whose literature cutoff is September 17, 2026. This article reports no new experiments.</p>
+<!-- claims-used: rsi-foundations-009 --><nav class="article-end" aria-label="Article navigation"><a rel="next" href="rsi-02-en.html"><span>Next · 02</span><strong>When Should an AI Accept Its Own Rewrite?</strong></a><a class="backtop" href="#top">Back to top ↑</a></nav></article><aside class="article-sidebar" aria-label="On this page"><h2>On this page</h2><ul class="toc"><li><a href="#what-remains-after-the-conversation-closes">What remains after the conversation closes?</a></li><li><a href="#leave-it-a-lesson-it-can-use">Leave it a lesson it can use</a></li><li><a href="#change-the-program-that-generates-patches">Change the program that generates patches</a></li><li><a href="#what-has-the-system-gained-when-the-next-task-begins">What has the system gained when the next task begins?</a></li></ul><div class="series-note"><strong>RECURSIVE SELF-IMPROVEMENT</strong><p>A reading series on recursive self-improvement, from better answers to better improvers.</p><span>01 / 12 · EN / 中文</span><br><a href="blog.html">All 12 essays →</a></div></aside></div></main><footer class="site-footer wrap"><span>Jinhong Lin · University of Wisconsin–Madison</span><span><a href="mailto:jlin398@wisc.edu">Get in touch ↗</a> &nbsp; / &nbsp; <a href="https://github.com/JonnesLin">GitHub ↗</a></span></footer></body></html>
