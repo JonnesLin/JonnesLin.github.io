@@ -1,0 +1,128 @@
+<?xml version='1.0' encoding='utf-8'?>
+<ns0:svg xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:ns0="http://www.w3.org/2000/svg" xmlns:ns2="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" width="1200" height="900" viewBox="0 0 864 648" version="1.1">
+ <ns0:title>换状态，保留后缀，检验反事实</ns0:title>
+ <ns0:metadata>
+  <rdf:RDF>
+   <ns2:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+    <dc:title>换状态，保留后缀，检验反事实</dc:title>
+    <dc:date>2026-09-19T22:38:47.608165</dc:date>
+    <dc:description>Original conceptual drawing; no newly measured experimental results. Two natural-input trajectories form donor and recipient rows. Mark states s_d and s_r at the same computation stage. Only s_d is transplanted into the recipient at that stage; recipient suffix operations remain unchanged. The resulting answer box contains a question mark and is compared to a separately calculated counterfactual answer, never a success check. A secondary muted control row names unrelated-state, matched random, and input-cache-only swaps. No numerical recovery rates.</dc:description>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <ns2:Agent>
+      <dc:title>Matplotlib v3.8.0, https://matplotlib.org/</dc:title>
+     </ns2:Agent>
+    </dc:creator>
+   </ns2:Work>
+  </rdf:RDF>
+ </ns0:metadata>
+ <ns0:defs>
+  <ns0:style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</ns0:style>
+ </ns0:defs>
+ <ns0:g id="figure_1">
+  <ns0:g id="patch_1">
+   <ns0:path d="M 0 648  L 864 648  L 864 0  L 0 0  z " style="fill: #f6f5f0" />
+  </ns0:g>
+  <ns0:g id="axes_1">
+   <ns0:g id="patch_2">
+    <ns0:path d="M 56.16 199.44  L 231.84 199.44  Q 244.8 199.44 244.8 212.4  L 244.8 249.12  Q 244.8 262.08 231.84 262.08  L 56.16 262.08  Q 43.2 262.08 43.2 249.12  L 43.2 212.4  Q 43.2 199.44 56.16 199.44  z " clip-path="url(#peb9634fbea)" style="fill: #e1f1ee; stroke: #117d80; stroke-width: 1.8; stroke-linejoin: miter" />
+   </ns0:g>
+   <ns0:g id="patch_3">
+    <ns0:path d="M 344.16 199.44  L 494.64 199.44  Q 507.6 199.44 507.6 212.4  L 507.6 249.12  Q 507.6 262.08 494.64 262.08  L 344.16 262.08  Q 331.2 262.08 331.2 249.12  L 331.2 212.4  Q 331.2 199.44 344.16 199.44  z " clip-path="url(#peb9634fbea)" style="fill: #e1f1ee; stroke: #117d80; stroke-width: 1.8; stroke-linejoin: miter" />
+   </ns0:g>
+   <ns0:g id="patch_4">
+    <ns0:path d="M 253.999512 230.76  Q 287.997857 230.76 319.201117 230.76  " clip-path="url(#peb9634fbea)" style="fill: none; stroke: #117d80; stroke-width: 2.5; stroke-linecap: round" />
+    <ns0:path d="M 310.001117 226.16  L 319.201117 230.76  L 310.001117 235.36  z " clip-path="url(#peb9634fbea)" style="fill: #117d80; stroke: #117d80; stroke-width: 2.5; stroke-linecap: round" />
+   </ns0:g>
+   <ns0:g id="patch_5">
+    <ns0:path d="M 606.96 199.44  L 807.84 199.44  Q 820.8 199.44 820.8 212.4  L 820.8 249.12  Q 820.8 262.08 807.84 262.08  L 606.96 262.08  Q 594 262.08 594 249.12  L 594 212.4  Q 594 199.44 606.96 199.44  z " clip-path="url(#peb9634fbea)" style="fill: #e1f1ee; stroke: #117d80; stroke-width: 1.8; stroke-linejoin: miter" />
+   </ns0:g>
+   <ns0:g id="patch_6">
+    <ns0:path d="M 516.799512 230.76  Q 550.797857 230.76 582.001117 230.76  " clip-path="url(#peb9634fbea)" style="fill: none; stroke: #117d80; stroke-width: 2.5; stroke-linecap: round" />
+    <ns0:path d="M 572.801117 226.16  L 582.001117 230.76  L 572.801117 235.36  z " clip-path="url(#peb9634fbea)" style="fill: #117d80; stroke: #117d80; stroke-width: 2.5; stroke-linecap: round" />
+   </ns0:g>
+   <ns0:g id="patch_7">
+    <ns0:path d="M 419.04 271.27916  Q 419.04 318.239917 419.04 362.405588  " clip-path="url(#peb9634fbea)" style="fill: none; stroke: #346bb5; stroke-width: 2.5; stroke-linecap: round" />
+    <ns0:path d="M 423.64 353.205588  L 419.04 362.405588  L 414.44 353.205588  z " clip-path="url(#peb9634fbea)" style="fill: #346bb5; stroke: #346bb5; stroke-width: 2.5; stroke-linecap: round" />
+   </ns0:g>
+   <ns0:g id="patch_8">
+    <ns0:path d="M 56.16 375.12  L 213.84 375.12  Q 226.8 375.12 226.8 388.08  L 226.8 428.4  Q 226.8 441.36 213.84 441.36  L 56.16 441.36  Q 43.2 441.36 43.2 428.4  L 43.2 388.08  Q 43.2 375.12 56.16 375.12  z " clip-path="url(#peb9634fbea)" style="fill: #e5edf8; stroke: #346bb5; stroke-width: 1.8; stroke-linejoin: miter" />
+   </ns0:g>
+   <ns0:g id="patch_9">
+    <ns0:path d="M 311.76 375.12  L 440.64 375.12  Q 453.6 375.12 453.6 388.08  L 453.6 428.4  Q 453.6 441.36 440.64 441.36  L 311.76 441.36  Q 298.8 441.36 298.8 428.4  L 298.8 388.08  Q 298.8 375.12 311.76 375.12  z " clip-path="url(#peb9634fbea)" style="fill: #e5edf8; stroke: #346bb5; stroke-width: 1.8; stroke-linejoin: miter" />
+   </ns0:g>
+   <ns0:g id="patch_10">
+    <ns0:path d="M 236.000391 408.24  Q 262.8008 408.24 286.806125 408.24  " clip-path="url(#peb9634fbea)" style="fill: none; stroke: #346bb5; stroke-width: 2.5; stroke-linecap: round" />
+    <ns0:path d="M 277.606125 403.64  L 286.806125 408.24  L 277.606125 412.84  z " clip-path="url(#peb9634fbea)" style="fill: #346bb5; stroke: #346bb5; stroke-width: 2.5; stroke-linecap: round" />
+   </ns0:g>
+   <ns0:g id="patch_11">
+    <ns0:path d="M 513.36 375.12  L 663.84 375.12  Q 676.8 375.12 676.8 388.08  L 676.8 428.4  Q 676.8 441.36 663.84 441.36  L 513.36 441.36  Q 500.4 441.36 500.4 428.4  L 500.4 388.08  Q 500.4 375.12 513.36 375.12  z " clip-path="url(#peb9634fbea)" style="fill: #e5edf8; stroke: #346bb5; stroke-width: 1.8; stroke-linejoin: miter" />
+   </ns0:g>
+   <ns0:g id="patch_12">
+    <ns0:path d="M 462.797314 408.24  Q 476.998471 408.24 488.404543 408.24  " clip-path="url(#peb9634fbea)" style="fill: none; stroke: #346bb5; stroke-width: 2.5; stroke-linecap: round" />
+    <ns0:path d="M 479.204543 403.64  L 488.404543 408.24  L 479.204543 412.84  z " clip-path="url(#peb9634fbea)" style="fill: #346bb5; stroke: #346bb5; stroke-width: 2.5; stroke-linecap: round" />
+   </ns0:g>
+   <ns0:g id="patch_13">
+    <ns0:path d="M 750.96 375.12  L 807.84 375.12  Q 820.8 375.12 820.8 388.08  L 820.8 428.4  Q 820.8 441.36 807.84 441.36  L 750.96 441.36  Q 738 441.36 738 428.4  L 738 388.08  Q 738 375.12 750.96 375.12  z " clip-path="url(#peb9634fbea)" style="fill: #e5edf8; stroke: #346bb5; stroke-width: 1.8; stroke-linejoin: miter" />
+   </ns0:g>
+   <ns0:g id="patch_14">
+    <ns0:path d="M 686.002368 408.24  Q 707.401823 408.24 726.006193 408.24  " clip-path="url(#peb9634fbea)" style="fill: none; stroke: #346bb5; stroke-width: 2.5; stroke-linecap: round" />
+    <ns0:path d="M 716.806193 403.64  L 726.006193 408.24  L 716.806193 412.84  z " clip-path="url(#peb9634fbea)" style="fill: #346bb5; stroke: #346bb5; stroke-width: 2.5; stroke-linecap: round" />
+   </ns0:g>
+   <ns0:g id="patch_15">
+    <ns0:path d="M 56.16 485.28  L 411.84 485.28  Q 424.8 485.28 424.8 498.24  L 424.8 532.08  Q 424.8 545.04 411.84 545.04  L 56.16 545.04  Q 43.2 545.04 43.2 532.08  L 43.2 498.24  Q 43.2 485.28 56.16 485.28  z " clip-path="url(#peb9634fbea)" style="fill: #fcebd6; stroke: #a75513; stroke-width: 1.8; stroke-linejoin: miter" />
+   </ns0:g>
+   <ns0:g id="text_1">
+    <ns0:text style="fill: #425b64; font: 18px 'Arial Unicode MS'; text-anchor: start" x="43.2" y="34.484063" transform="rotate(-0 43.2 34.484063)">11 / 12   隐状态推理与循环 Transformer</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_2">
+    <ns0:text style="fill: #132a36; font: 37.44px 'Arial Unicode MS'; text-anchor: start" x="43.2" y="92.79135" transform="rotate(-0 43.2 92.79135)">换状态，保留后缀，检验反事实</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_3">
+    <ns0:text style="fill: #117d80; font: 25.92px 'Arial Unicode MS'; text-anchor: start" x="43.2" y="173.5434" transform="rotate(-0 43.2 173.5434)">供体轨迹</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_4">
+    <ns0:text style="fill: #132a36; font: 24.48px 'Arial Unicode MS'; text-anchor: middle" x="144" y="237.138188" transform="rotate(-0 144 237.138188)">供体输入</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_5">
+    <ns0:text style="fill: #132a36; font: 24.48px 'Arial Unicode MS'; text-anchor: middle" x="419.4" y="237.082725" transform="rotate(-0 419.4 237.082725)">s_d</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_6">
+    <ns0:text style="fill: #132a36; font: 24.48px 'Arial Unicode MS'; text-anchor: middle" x="707.4" y="237.136275" transform="rotate(-0 707.4 237.136275)">供体后续计算</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_7">
+    <ns0:text style="fill: #346bb5; font: 21.6px 'Arial Unicode MS'; text-anchor: start" x="457.2" y="302.740875" transform="rotate(-0 457.2 302.740875)">同一阶段的状态置换</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_8">
+    <ns0:text style="fill: #346bb5; font: 25.92px 'Arial Unicode MS'; text-anchor: start" x="43.2" y="351.19305" transform="rotate(-0 43.2 351.19305)">受体轨迹</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_9">
+    <ns0:text style="fill: #132a36; font: 22.32px 'Arial Unicode MS'; text-anchor: middle" x="135" y="414.055406" transform="rotate(-0 135 414.055406)">受体输入</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_10">
+    <ns0:text style="fill: #132a36; font: 22.32px 'Arial Unicode MS'; text-anchor: middle" x="376.2" y="414.496575" transform="rotate(-0 376.2 414.496575)">替换 s_r</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_11">
+    <ns0:text style="fill: #132a36; font: 22.32px 'Arial Unicode MS'; text-anchor: middle" x="588.6" y="414.032737" transform="rotate(-0 588.6 414.032737)">保留受体后缀</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_12">
+    <ns0:text style="fill: #132a36; font: 22.32px 'Arial Unicode MS'; text-anchor: middle" x="779.4" y="414.004838" transform="rotate(-0 779.4 414.004838)">?</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_13">
+    <ns0:text style="fill: #132a36; font: 23.04px 'Arial Unicode MS'; text-anchor: middle" x="234" y="521.145" transform="rotate(-0 234 521.145)">事先计算反事实答案</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_14">
+    <ns0:text style="fill: #132a36; font: 22.32px 'Arial Unicode MS'; text-anchor: start" x="470.16" y="515.757375" transform="rotate(-0 470.16 515.757375)">输出是否跟随？仍待检验。</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_15">
+    <ns0:text style="fill: #425b64; font: 19.44px 'Arial Unicode MS'; text-anchor: start" x="43.2" y="603.208912" transform="rotate(-0 43.2 603.208912)">对照：无关状态、匹配随机扰动、仅替换输入缓存。</ns0:text>
+   </ns0:g>
+  </ns0:g>
+ </ns0:g>
+ <ns0:defs>
+  <ns0:clipPath id="peb9634fbea">
+   <ns0:rect x="0" y="0" width="864" height="648" />
+  </ns0:clipPath>
+ </ns0:defs>
+</ns0:svg>

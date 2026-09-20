@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>少写八个词元，到底省了多少计算？</title><meta name="description" content="用32U与28U的假想账单，逐项算出内部调用、验证器与训练回本，再讨论真实缓存和延迟。"><link rel="canonical" href="https://jonneslin.github.io/hidden-reasoning/articles/zh/10-counting-the-cost-of-reasoning.html"><link rel="alternate" hreflang="zh" href="https://jonneslin.github.io/hidden-reasoning/articles/zh/10-counting-the-cost-of-reasoning.html"><link rel="alternate" hreflang="en" href="https://jonneslin.github.io/hidden-reasoning/articles/en/10-counting-the-cost-of-reasoning.html"><meta property="og:url" content="https://jonneslin.github.io/hidden-reasoning/articles/zh/10-counting-the-cost-of-reasoning.html"><meta property="og:title" content="少写八个词元，到底省了多少计算？"><meta property="og:description" content="用32U与28U的假想账单，逐项算出内部调用、验证器与训练回本，再讨论真实缓存和延迟。"><meta property="og:type" content="article"><meta property="og:image" content="https://jonneslin.github.io/hidden-reasoning/assets/10/cover.zh.png"><style>
+:root{color-scheme:light;--ink:#132a36;--muted:#425b64;--teal:#117d80;--paper:#f6f5f0}
+*{box-sizing:border-box}body{margin:0;color:var(--ink);background:var(--paper);font:18px/1.8 system-ui,-apple-system,'PingFang SC','Noto Sans CJK SC',sans-serif}
+a{color:#125f74;text-underline-offset:.18em}a:hover{color:#9a4e10}header,main,footer{max-width:1120px;margin:auto;padding:36px 28px}header{border-bottom:1px solid #cad7d9}header p{max-width:760px;color:var(--muted)}h1{font-size:clamp(32px,5vw,54px);line-height:1.15;letter-spacing:-.025em}h2{font-size:29px;line-height:1.3;margin-top:2em}h3{font-size:22px;line-height:1.4}img{display:block;max-width:100%;height:auto;border-radius:12px}nav{display:flex;gap:24px;flex-wrap:wrap}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:30px}.card{background:white;border:1px solid #cad7d9;border-radius:16px;padding:22px}.card h2{margin:16px 0 10px;font-size:26px}.card p{color:var(--muted);font-size:17px}.number{font:14px/1.5 ui-monospace,monospace;color:var(--muted);letter-spacing:.12em}.reading{max-width:850px}.reading p,.reading li{overflow-wrap:anywhere}.reading img{margin:28px 0 12px}.social{padding:24px;border:1px solid #cad7d9;border-radius:12px;background:white;margin:40px 0}pre{overflow:auto;white-space:pre-wrap;overflow-wrap:anywhere;background:#e9eeee;padding:18px;border-radius:8px;font-size:17px;line-height:1.65}code{font-family:ui-monospace,monospace;font-size:.9em}blockquote{margin-left:0;padding:4px 24px;border-left:4px solid var(--teal)}table{border-collapse:collapse;width:100%;font-size:16px}th,td{text-align:left;border-bottom:1px solid #cbd7d9;padding:10px}footer{font-size:14px;color:var(--muted)}@media(max-width:700px){.grid{grid-template-columns:1fr}header,main,footer{padding:24px 18px}body{font-size:17px}.card{padding:16px}h2{font-size:25px}}
+
+.reading figure{margin:28px 0}.reading figure>a{display:block}.reading figure img{margin:0}.reading figcaption{font-size:14px;margin-top:8px}
+</style></head><body><header><p><a href="../../../blog.html">← Main blog</a></p><nav><a href="../../index.html">全部文章 / All articles</a><a href="../en/10-counting-the-cost-of-reasoning.html">English</a><a href="../../zh/10-counting-the-cost-of-reasoning.md">Markdown</a></nav></header><main class="reading"><h1>少写八个词元，到底省了多少计算？</h1>
+<p>两个系统回答同一道题。甲先写八个推理词元，再写两个答案词元；乙在内部做四步连续计算，最后只写两个答案词元。屏幕上，乙短了很多。计算账单也一样吗？</p>
+<p>先做一笔<strong>完全假想的教学账单</strong>。下列工作量都是人为指定值，不来自某个模型的实测或 FLOPs 分析。单位记作 U：它表示同一种归一化运算量，不能换算成毫秒。我们假设每次调用的成本已包含该步需要的注意力、缓存读取与读出；为便于算术，同类调用在这段短请求里成本恒定。</p>
+<h2>从调用次数算起</h2>
+<p>两者预处理都花 12 U。甲的每个生成步骤花 2 U；乙的连续步骤花 3 U，答案步骤花 2 U。它们都只产生一个候选，不用额外选择器。</p>
+<table>
+<thead>
+<tr>
+<th>账项</th>
+<th style="text-align: right;">甲：文字链</th>
+<th style="text-align: right;">乙：连续链</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>预处理</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">12</td>
+</tr>
+<tr>
+<td>中间计算</td>
+<td style="text-align: right;">8 × 2 = 16</td>
+<td style="text-align: right;">4 × 3 = 12</td>
+</tr>
+<tr>
+<td>答案生成</td>
+<td style="text-align: right;">2 × 2 = 4</td>
+<td style="text-align: right;">2 × 2 = 4</td>
+</tr>
+<tr>
+<td>合计</td>
+<td style="text-align: right;">32 U</td>
+<td style="text-align: right;">28 U</td>
+</tr>
+</tbody>
+</table>
+<p>乙少了八个可见词元，但这笔账里只少了 <code>32 − 28 = 4 U</code>，即甲总量的 12.5%。它用四次较贵的内部调用，替换了八次较便宜的文字调用。答案长度不是这张表的计量单位。</p>
+<p>现在只改一个假设：乙还要调用一个花 6 U 的验证器。总量变成 34 U，超过甲的 32 U。或者乙的连续调用单价从 3 U 变为 4 U，它即使不用验证器，也会达到 32 U。几次简单加法就说明了为什么应先还原执行路径，再比较生成长度。</p>
+<p>这个例子还没有给甲乙分配准确率。因此，它只能演示怎样核算，不能推荐哪个系统。真正的比较至少要把答对多少题放到账单旁边。</p>
+<figure><a href="../../assets/10/cover.zh.png"><img alt="同一份共享权重被连续调用，下面把存储、运算量和实际时间分开。" src="../../assets/10/cover.zh.png" /></a><figcaption><a href="../../assets/10/cover.zh.png">查看完整 PNG</a> · <a href="../../references/matplotlib-layouts/assets/10/cover.zh.svg">SVG 结构参考</a></figcaption></figure>
+<p><em>图中的三个调用只是结构示意，并非上表甲或乙的调用次数。权重可以存一份，使用它的每次运算仍须计入。</em></p>
+<h2>把这张小表换成真实模型的账</h2>
+<p>在实际系统里，单步成本会随上下文长度、缓存策略、精度与路由变化。一个可用的记账抽象是：</p>
+<p><code>请求工作量 = 预处理 + 中间更新之和 + 答案生成之和 + 候选选择</code></p>
+<p>如果需要符号，可以写成：</p>
+<p><code>F = Fpre + Σⱼ rⱼ Fcore(nⱼ) + Σᵢ Fout(nᵢ) + Fselect</code></p>
+<p>第 j 个中间位置执行 <code>rⱼ</code> 次核心，当时可访问的上下文长度是 <code>nⱼ</code>。输出项逐步累计答案生成。这个式子只是把调用分组，不是某篇论文的精确 FLOPs 公式。若一次输出调用已经包含循环核心，就只在一个账项里计入；视觉编码、检索和裁判也应进入实际执行的账项。</p>
+<p>CODI 的学生逐步产生连续状态后再输出答案，教师任务和激活对齐参与训练。TRM 则复用小网络更新潜在状态和答案表示。两者都需要沿各自的计算图数调用，不能仅从输出长度或参数量推出开销。<a href="https://arxiv.org/abs/2502.21074v3">CODI v3，§3</a>；<a href="https://arxiv.org/abs/2510.04871v1">TRM v1，图3</a></p>
+<p>缓存尤其容易漏算。保留旧 key/value 可以避免重算历史，却需要存储和读取；不同深度的表示也不一定能共用同一份缓存。Log-ICoT 还有一个直观例子：其理论推理保留被置零的 CoT 位置。没有生成那些中间词元，不代表相应位置不参与计算。<a href="https://arxiv.org/abs/2605.28600v1">Log-ICoT v1，§3.1 Evaluation</a></p>
+<h2>工作量更少，为什么还要测时间？</h2>
+<p>回到 32 U 与 28 U。只有假设两种执行使用相同的有效运算速率、没有其他开销，才能按这个比例估计时间。真实硬件上，串行依赖、小算子的启动、内存带宽和批处理都可能改变速率。</p>
+<p>如果乙把四步连成一条依赖链，下一步必须等上一步完成；甲的另一个策略可能同时生成多个独立候选。两者的总工作量和完成时间可以朝不同方向变化。省下的运算是否转化成用户更早收到答案，要在目标硬件上测。</p>
+<p>测量边界也要一致：从请求进入到首个答案词元，和到完整答案返回，是两段不同时间。固定精度与批量，分别报告预热后的请求延迟、尾部延迟和吞吐；冷启动另报。GPU 计时须处理异步执行，否则主机“提交完工作”可能被误记为“设备做完工作”。</p>
+<figure><a href="../../assets/10/diagram.zh.png"><img alt="一条请求拆成预处理、内部更新、输出与可选选择器，下方给出四种不同预算约束。" src="../../assets/10/diagram.zh.png" /></a><figcaption><a href="../../assets/10/diagram.zh.png">查看完整 PNG</a> · <a href="../../references/matplotlib-layouts/assets/10/diagram.zh.svg">SVG 结构参考</a></figcaption></figure>
+<p><em>上半部帮助补齐账项；下半部提醒我们选择比较问题。四个预算条件通常无法同时配平。</em></p>
+<p>固定参数量适合问存储规模的价值；固定训练 FLOPs 适合问同样投入能训练出什么；固定推理 FLOPs 比较一次请求如何使用计算；固定硬件延迟则把实现效率也纳入答案。报告时选定主约束，并公开其他差异。</p>
+<h2>训练账单会不会改变选择？</h2>
+<p>假设乙比甲额外花了 4,000 U 的训练工作，此后每次请求恰好省 4 U。这仍是同一教学账单中的人为设定。处理 N 次请求后，额外训练恰好被抵消的条件是：</p>
+<p><code>4,000 = N × (32 − 28)</code></p>
+<p>所以 <code>N = 1,000</code>。少于一千次，乙尚未抵消额外训练；多于一千次，才开始节省这种工作量。如果加入刚才的 6 U 验证器，乙的单请求成本更高，就没有这个正的盈亏平衡点。这里也没算货币价格：训练与服务硬件的单位成本可能不同。</p>
+<p>真实训练的前向、反向和重复监督都要入账。TRM 的图3区分无梯度递归与带梯度递归；前者仍执行前向。HRM 的梯度近似与深监督同样影响训练路径。<a href="https://arxiv.org/abs/2510.04871v1">TRM v1，图3、§4.1</a>；<a href="https://arxiv.org/abs/2506.21734v3">HRM v3，梯度近似与深监督</a></p>
+<p>若方法共享同一个基础 checkpoint，可以另报增量训练成本；若起点不同，已知的训练历史和未知项都应写明。教师轨迹生成一次后缓存，与每批在线生成，也会得到不同账单。</p>
+<p>最后给同一批保留测试题同时保存答案与成本：所有题都进入分母，解析失败和超时也留下记录；阈值与 checkpoint 在验证集选定。按同一个 checkpoint 扫预算，回答的是它能否利用更多计算；每档预算重新训练，回答的是另一件事。可复核的结论应当能从模型、数据、调用日志和计时边界重新算出来，就像开头那张小表一样。</p><aside class="social"><h2>Twitter / X</h2><pre>少写八个词元，未必少算八步。用一张假想账单算清内部调用、答案与验证器，再看额外训练要多少请求才能回本。所有数字都是教学设定；真实速度还要在目标硬件上测。</pre><p><a href="../../social/10-counting-the-cost-of-reasoning.zh.md">配图和替代文本 / Attachment and alt text</a></p><img src="../../assets/10/cover.zh.png" alt="一份共享权重连接到反复执行的核心，输出旁分别列出存储、运算与时间，说明三者需独立测量。"></aside></main></body></html>

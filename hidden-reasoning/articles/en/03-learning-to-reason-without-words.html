@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Where Does the Training Error Come From After We Remove the Steps?</title><meta name="description" content="Work through a three-step marbles problem, calculate answer loss, and locate the targets supplied by curricula and state distillation."><link rel="canonical" href="https://jonneslin.github.io/hidden-reasoning/articles/en/03-learning-to-reason-without-words.html"><link rel="alternate" hreflang="en" href="https://jonneslin.github.io/hidden-reasoning/articles/en/03-learning-to-reason-without-words.html"><link rel="alternate" hreflang="zh" href="https://jonneslin.github.io/hidden-reasoning/articles/zh/03-learning-to-reason-without-words.html"><meta property="og:url" content="https://jonneslin.github.io/hidden-reasoning/articles/en/03-learning-to-reason-without-words.html"><meta property="og:title" content="Where Does the Training Error Come From After We Remove the Steps?"><meta property="og:description" content="Work through a three-step marbles problem, calculate answer loss, and locate the targets supplied by curricula and state distillation."><meta property="og:type" content="article"><meta property="og:image" content="https://jonneslin.github.io/hidden-reasoning/assets/03/cover.en.png"><style>
+:root{color-scheme:light;--ink:#132a36;--muted:#425b64;--teal:#117d80;--paper:#f6f5f0}
+*{box-sizing:border-box}body{margin:0;color:var(--ink);background:var(--paper);font:18px/1.8 system-ui,-apple-system,'PingFang SC','Noto Sans CJK SC',sans-serif}
+a{color:#125f74;text-underline-offset:.18em}a:hover{color:#9a4e10}header,main,footer{max-width:1120px;margin:auto;padding:36px 28px}header{border-bottom:1px solid #cad7d9}header p{max-width:760px;color:var(--muted)}h1{font-size:clamp(32px,5vw,54px);line-height:1.15;letter-spacing:-.025em}h2{font-size:29px;line-height:1.3;margin-top:2em}h3{font-size:22px;line-height:1.4}img{display:block;max-width:100%;height:auto;border-radius:12px}nav{display:flex;gap:24px;flex-wrap:wrap}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:30px}.card{background:white;border:1px solid #cad7d9;border-radius:16px;padding:22px}.card h2{margin:16px 0 10px;font-size:26px}.card p{color:var(--muted);font-size:17px}.number{font:14px/1.5 ui-monospace,monospace;color:var(--muted);letter-spacing:.12em}.reading{max-width:850px}.reading p,.reading li{overflow-wrap:anywhere}.reading img{margin:28px 0 12px}.social{padding:24px;border:1px solid #cad7d9;border-radius:12px;background:white;margin:40px 0}pre{overflow:auto;white-space:pre-wrap;overflow-wrap:anywhere;background:#e9eeee;padding:18px;border-radius:8px;font-size:17px;line-height:1.65}code{font-family:ui-monospace,monospace;font-size:.9em}blockquote{margin-left:0;padding:4px 24px;border-left:4px solid var(--teal)}table{border-collapse:collapse;width:100%;font-size:16px}th,td{text-align:left;border-bottom:1px solid #cbd7d9;padding:10px}footer{font-size:14px;color:var(--muted)}@media(max-width:700px){.grid{grid-template-columns:1fr}header,main,footer{padding:24px 18px}body{font-size:17px}.card{padding:16px}h2{font-size:25px}}
+
+.reading figure{margin:28px 0}.reading figure>a{display:block}.reading figure img{margin:0}.reading figcaption{font-size:14px;margin-top:8px}
+</style></head><body><header><p><a href="../../../blog.html">← Main blog</a></p><nav><a href="../../index.html">全部文章 / All articles</a><a href="../zh/03-learning-to-reason-without-words.html">中文</a><a href="../../en/03-learning-to-reason-without-words.md">Markdown</a></nav></header><main class="reading"><h1>Where Does the Training Error Come From After We Remove the Steps?</h1>
+<p>Four bags contain six marbles each. After removing eight marbles, we divide the rest equally between two people. How many does each person receive?</p>
+<p>For this <strong>teaching problem</strong>, a training example could contain:</p>
+<pre><code class="language-text">A: 4 × 6 = 24
+B: 24 − 8 = 16
+C: 16 ÷ 2 = 8
+Answer: 8
+</code></pre>
+<p>A, B, and C name written steps. They are not individual tokens or known hidden states. Suppose we want to train a model that eventually answers only <code>8</code>. Deleting A, B, and C is easy; keeping the model useful after their removal is the challenge.</p>
+<p>The question is: <strong>which prediction targets disappear with the text, and which error signals can still reach the model?</strong></p>
+<h2>What can one answer loss tell the model?</h2>
+<p>For a hand calculation, assume the answer <code>8</code> is one token. If the model assigns it probability 0.25, its cross-entropy loss is <code>−ln(0.25) ≈ 1.386</code>. Raising that probability to 0.5 reduces the loss to <code>−ln(0.5) ≈ 0.693</code>.</p>
+<p>These are illustrative probabilities, not measured model predictions. They show what answer supervision rewards: a higher probability for the correct token. Through the chain rule, the loss can update earlier parameters, so answer-only supervision can teach a model.</p>
+<p>It does not separately require the model to obtain <code>24</code> and then <code>16</code>. A complete written chain provides additional prediction targets: predict A from the question, B after reading the correct A, and so on. Teacher forcing supplies these correct prefixes during training; generation instead uses the model's own outputs.</p>
+<p>Removing steps therefore changes two things: the text available to later predictions and the text the model must predict. Different training methods address this change at different points.</p>
+<h2>Remove less at first, so the next target can carry the training</h2>
+<p>Rather than delete everything at once, train on the complete chain and gradually remove its beginning until only the answer remains.</p>
+<table>
+<thead>
+<tr>
+<th>Curriculum point</th>
+<th>Remaining targets</th>
+<th>First prediction</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Full chain</td>
+<td>A → B → C → answer</td>
+<td>A from the question</td>
+</tr>
+<tr>
+<td>A removed</td>
+<td>B → C → answer</td>
+<td>B from the question</td>
+</tr>
+<tr>
+<td>A and B removed</td>
+<td>C → answer</td>
+<td>C from the question</td>
+</tr>
+<tr>
+<td>All steps removed</td>
+<td>Answer</td>
+<td>8 directly from the question</td>
+</tr>
+</tbody>
+</table>
+<p><em>These are coarse milestones at whole-step boundaries. The stepwise-internalization paper removes prefix tokens, passing through additional stages not drawn here. The question always remains; removed steps do not leave blank placeholders in the input.</em></p>
+<p>Look at the second row. The model must still predict <code>24 − 8 = 16</code>, but no longer reads <code>4 × 6 = 24</code> first. This remaining target makes the new learning problem concrete: compensate for the missing text using the question itself. After adapting, it can lose more of the prefix.</p>
+<p>Stepwise internalization uses this curriculum, with optimizer-state resets and randomized offsets in the removal count to handle unstable transitions. It does not require a hidden vector to reconstruct A word for word. The final target is direct answering; deletion alone adds no test-time loop. <a href="https://arxiv.org/abs/2405.14838v1">Stepwise internalization v1, Section 3</a></p>
+<p>Success still needs measurement. The paper reports strong multiplication results, but explicit CoT remains stronger on GSM8K. Checkpoints along a harder multiplication curriculum also trade accuracy for speed. The last table row is a training target, not a guarantee of success. <a href="https://arxiv.org/abs/2405.14838v1">Stepwise internalization v1, Sections 5–6 and Tables 2–3</a></p>
+<h2>How can the loss pass through an internal computation position?</h2>
+<p>Consider a different execution path: A is gone, but the model produces continuous states <code>h1, h2</code> before answering. There are no correct words to fill into those positions.</p>
+<pre><code class="language-text">Question → h1 → h2 → predict remaining text and answer
+                         ↑
+                 Compute prediction loss here
+</code></pre>
+<p>If <code>h2</code> affects the answer probability, the answer loss can update the parameters that produced <code>h2</code>. If <code>h2</code> depends on <code>h1</code>, gradients can continue through <code>h1</code>. <strong>A position without its own token target can still receive gradients.</strong></p>
+<p>Coconut combines continuous feedback with a curriculum. It computes loss on remaining text and answers, masking token losses on the question and continuous positions. Article 04 follows the execution in detail. Here the important point is loss placement: continuous states learn by helping later predictions, without having to reconstruct each removed sentence. <a href="https://arxiv.org/abs/2412.06769v2">Coconut v2, Section 3 and Figure 2</a></p>
+<p>This supplies a learning path, but leaves a choice. Is final prediction supervision enough to make useful internal states easy to learn? If a teacher has already worked through a complete solution, could it supply another target?</p>
+<h2>A teacher can supply states—but who produces them at test time?</h2>
+<p>Early implicit-CoT distillation separates three stages: teach a student to answer using teacher states, train an emulator to predict those states from the question, and jointly optimize the connected emulator and student. The targets are representations at selected layers and token positions, not every activation in the trajectory. <a href="https://arxiv.org/abs/2311.01460v1">Implicit CoT distillation v1, Sections 3.1–3.3</a></p>
+<p>For the marbles problem, training can first run a teacher with A, B, and C, extract selected states, and teach the student to use them. At test time only the question is available. We cannot quietly supply the correct A, B, and C again. The state predictor is therefore essential, and its cost belongs in inference accounting.</p>
+<p>This division also exposes a difficulty: one problem can have several correct written solutions. We could first allocate <code>24 ÷ 2 = 12</code> marbles to each person, then subtract each person's share of the removed marbles, <code>8 ÷ 2 = 4</code>, again obtaining <code>8</code>. Different teacher paths may produce different state targets. The paper introduces mixture representations with intermediate-token supervision to address multiple pathways rather than averaging their modes together. <a href="https://arxiv.org/abs/2311.01460v1">Implicit CoT distillation v1, Section 3.2</a></p>
+<p>A state target is thus not a ready-made universal answer key. We must choose what to align, handle alternative targets, and produce replacement states at test time.</p>
+<h2>Put additional supervision just before the answer</h2>
+<p>CODI chooses a more focused alignment location: the colon in <code>The answer is:</code>. Its two training tasks share model weights. The teacher reads written reasoning, the student performs continuous computation, and their activations at this position are aligned across layers. <a href="https://arxiv.org/abs/2502.21074v2">CODI v2, Sections 3.1–3.4</a></p>
+<p>Why inspect this position? In the marbles example, it sits between access to earlier computation and prediction of the answer. Alignment supplies an internal target related to answering without assigning <code>24</code>, <code>16</code>, and <code>8</code> to individual continuous positions.</p>
+<p>Separate the three losses first:</p>
+<table>
+<thead>
+<tr>
+<th>Loss</th>
+<th>What it compares</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Teacher text loss</td>
+<td>Predictions of reasoning and answer against correct tokens</td>
+</tr>
+<tr>
+<td>Student answer loss</td>
+<td>Answer predictions after continuous computation against correct tokens</td>
+</tr>
+<tr>
+<td>State distillation loss</td>
+<td>Student activations before the answer against teacher activations</td>
+</tr>
+</tbody>
+</table>
+<p>The total objective combines them with weights:</p>
+<p><code>L = α Lteacher + β Lstudent + γ LKD</code></p>
+<p>The first two are the token prediction losses we already discussed. The third uses L1 distance: coordinate-wise absolute differences, with normalization based on teacher activation scales. As a <strong>pure illustration</strong>, normalized teacher coordinates <code>[2, −1]</code> and student coordinates <code>[1, −0.5]</code> have absolute differences <code>[1, 0.5]</code>. The actual loss aggregates activations at the selected position across layers. These two coordinates do not represent marble counts. <a href="https://arxiv.org/abs/2502.21074v2">CODI v2, Sections 3.4–3.5</a></p>
+<figure><a href="../../assets/03/diagram.en.png"><img alt="CODI tasks share model weights. Teacher text loss supervises reasoning and answer, student text loss supervises the answer, and normalized L1 aligns pre-answer activations." src="../../assets/03/diagram.en.png" /></a><figcaption><a href="../../assets/03/diagram.en.png">Open full PNG</a> · <a href="../../references/matplotlib-layouts/assets/03/diagram.en.svg">Layout-reference SVG</a></figcaption></figure>
+<p><em>Follow the horizontal paths to the text losses, then the dashed edge to the state loss. Stop-gradient applies only to the teacher target on that edge. The teacher's text loss still updates shared weights.</em></p>
+<p>If the state loss also pulled the teacher toward the student, both sides could move toward each other. CODI stops teacher gradients on this edge so the student moves toward the current teacher target. The teacher task still has its own learning signal. Drawing the entire teacher as permanently frozen would misrepresent the shared-weight design.</p>
+<p>There is also a data detail. Step C in our example already states <code>8</code>. If the teacher reads it, the pre-answer state may only need to retain the answer. CODI removes the final answer-giving step from training trajectories and reports worse ablation performance when keeping it. This reduces a shortcut; it does not establish that all remaining states encode complete algorithms. <a href="https://arxiv.org/abs/2502.21074v2">CODI v2, Sections 3.5 and 4.4, Table 2</a></p>
+<h2>Return to the shortened training example</h2>
+<p>The same <code>A → B → C → answer</code> now suggests three kinds of help: gradually reduce the written support, supply teacher-state targets, or align representations just before answering.</p>
+<figure><a href="../../assets/03/cover.en.png"><img alt="Teacher-state supervision, a curriculum removing prefixes, and pre-answer alignment provide three learning signals." src="../../assets/03/cover.en.png" /></a><figcaption><a href="../../assets/03/cover.en.png">Open full PNG</a> · <a href="../../references/matplotlib-layouts/assets/03/cover.en.svg">Layout-reference SVG</a></figcaption></figure>
+<p><em>The middle panel's A, B, and C can represent our written steps. This is a map of supervision methods, not a claim that each removed step is stored in one vector.</em></p>
+<p>These methods can improve direct or continuous answering. Their loss functions do not imply universal equivalence to explicit CoT. CODI's out-of-distribution math evaluation gives a concrete reminder: its GPT-2 setting beats the table's explicit baseline, while its LLaMA-1B setting trails explicit CoT on the same three benchmarks. <a href="https://arxiv.org/abs/2502.21074v2">CODI v2, Section 4.3 and Table 1</a></p>
+<p>When reading the next implicit-reasoning method, take one training example and mark the retained targets, the locations of its losses, and what must produce states at test time. That describes the learning problem more precisely than asking only whether it uses CoT supervision.</p><aside class="social"><h2>Twitter / X</h2><pre>After removing the written steps, where does training error come from? Work through one marbles problem: calculate answer loss, mark remaining targets, and see how teacher states add supervision.</pre><p><a href="../../social/03-learning-to-reason-without-words.en.md">配图和替代文本 / Attachment and alt text</a></p><img src="../../assets/03/cover.en.png" alt="Three supervision methods: teacher-state targets, a curriculum removing prefixes A, B, and C, and alignment of teacher and student pre-answer states."></aside></main></body></html>

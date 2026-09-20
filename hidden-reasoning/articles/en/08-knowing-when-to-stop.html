@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>What if the Model Was Right One Round Ago?</title><meta name="description" content="Calculate an exit distribution and expected depth, then distinguish threshold stopping, random exits, and a diagnostic oracle."><link rel="canonical" href="https://jonneslin.github.io/hidden-reasoning/articles/en/08-knowing-when-to-stop.html"><link rel="alternate" hreflang="en" href="https://jonneslin.github.io/hidden-reasoning/articles/en/08-knowing-when-to-stop.html"><link rel="alternate" hreflang="zh" href="https://jonneslin.github.io/hidden-reasoning/articles/zh/08-knowing-when-to-stop.html"><meta property="og:url" content="https://jonneslin.github.io/hidden-reasoning/articles/en/08-knowing-when-to-stop.html"><meta property="og:title" content="What if the Model Was Right One Round Ago?"><meta property="og:description" content="Calculate an exit distribution and expected depth, then distinguish threshold stopping, random exits, and a diagnostic oracle."><meta property="og:type" content="article"><meta property="og:image" content="https://jonneslin.github.io/hidden-reasoning/assets/08/cover.en.png"><style>
+:root{color-scheme:light;--ink:#132a36;--muted:#425b64;--teal:#117d80;--paper:#f6f5f0}
+*{box-sizing:border-box}body{margin:0;color:var(--ink);background:var(--paper);font:18px/1.8 system-ui,-apple-system,'PingFang SC','Noto Sans CJK SC',sans-serif}
+a{color:#125f74;text-underline-offset:.18em}a:hover{color:#9a4e10}header,main,footer{max-width:1120px;margin:auto;padding:36px 28px}header{border-bottom:1px solid #cad7d9}header p{max-width:760px;color:var(--muted)}h1{font-size:clamp(32px,5vw,54px);line-height:1.15;letter-spacing:-.025em}h2{font-size:29px;line-height:1.3;margin-top:2em}h3{font-size:22px;line-height:1.4}img{display:block;max-width:100%;height:auto;border-radius:12px}nav{display:flex;gap:24px;flex-wrap:wrap}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:30px}.card{background:white;border:1px solid #cad7d9;border-radius:16px;padding:22px}.card h2{margin:16px 0 10px;font-size:26px}.card p{color:var(--muted);font-size:17px}.number{font:14px/1.5 ui-monospace,monospace;color:var(--muted);letter-spacing:.12em}.reading{max-width:850px}.reading p,.reading li{overflow-wrap:anywhere}.reading img{margin:28px 0 12px}.social{padding:24px;border:1px solid #cad7d9;border-radius:12px;background:white;margin:40px 0}pre{overflow:auto;white-space:pre-wrap;overflow-wrap:anywhere;background:#e9eeee;padding:18px;border-radius:8px;font-size:17px;line-height:1.65}code{font-family:ui-monospace,monospace;font-size:.9em}blockquote{margin-left:0;padding:4px 24px;border-left:4px solid var(--teal)}table{border-collapse:collapse;width:100%;font-size:16px}th,td{text-align:left;border-bottom:1px solid #cbd7d9;padding:10px}footer{font-size:14px;color:var(--muted)}@media(max-width:700px){.grid{grid-template-columns:1fr}header,main,footer{padding:24px 18px}body{font-size:17px}.card{padding:16px}h2{font-size:25px}}
+
+.reading figure{margin:28px 0}.reading figure>a{display:block}.reading figure img{margin:0}.reading figcaption{font-size:14px;margin-top:8px}
+</style></head><body><header><p><a href="../../../blog.html">← Main blog</a></p><nav><a href="../../index.html">全部文章 / All articles</a><a href="../zh/08-knowing-when-to-stop.html">中文</a><a href="../../en/08-knowing-when-to-stop.md">Markdown</a></nav></header><main class="reading"><h1>What if the Model Was Right One Round Ago?</h1>
+<p>Suppose a question produces this sequence of readouts: <strong>wrong, right, right, wrong</strong>. This is a constructed teaching trajectory. The final readout fails, although an observer with labels can see a correct answer at round two.</p>
+<p>A deployed system does not know those correctness labels. It must decide whether to return an answer or run another round using only available signals.</p>
+<figure><a href="../../assets/08/cover.en.png"><img alt="A constructed four-round trajectory reads wrong, right, right, wrong; its final round loses an earlier correct answer." src="../../assets/08/cover.en.png" /></a><figcaption><a href="../../assets/08/cover.en.png">Open full PNG</a> · <a href="../../references/matplotlib-layouts/assets/08/cover.en.svg">Layout-reference SVG</a></figcaption></figure>
+<p><em>Correctness is visible to the analyst, not supplied to the stopping policy. These are not recorded model outputs.</em></p>
+<h2>Separate “stop now” from “exit at this round”</h2>
+<p>Let <code>a[r]</code> be the conditional stopping probability: <strong>given that computation has reached round r, how likely is it to stop now?</strong> Assign <code>0.2, 0.5, 0.75, 1</code> to the four rounds. These are also teaching values; setting the final value to 1 assigns all remaining probability to round four.</p>
+<p>The second value, 0.5, does not mean half of all requests exit at round two. Twenty percent have already stopped. Only the remaining 80% can reach that round, so its exit mass is <code>0.8 × 0.5 = 0.4</code>.</p>
+<p>Continue the calculation. <strong>Reach</strong> is the probability of reaching the round; <strong>Stop</strong> is the conditional probability of stopping there. <strong>Exit</strong> is their product, the probability of exiting at that round. <strong>So far</strong> sums Exit through the current round.</p>
+<table>
+<thead>
+<tr>
+<th>Round</th>
+<th style="text-align: right;">Reach</th>
+<th style="text-align: right;">Stop</th>
+<th style="text-align: right;">Exit</th>
+<th style="text-align: right;">So far</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0.2</td>
+<td style="text-align: right;">0.2</td>
+<td style="text-align: right;">0.2</td>
+</tr>
+<tr>
+<td>2</td>
+<td style="text-align: right;">0.8</td>
+<td style="text-align: right;">0.5</td>
+<td style="text-align: right;">0.4</td>
+<td style="text-align: right;">0.6</td>
+</tr>
+<tr>
+<td>3</td>
+<td style="text-align: right;">0.4</td>
+<td style="text-align: right;">0.75</td>
+<td style="text-align: right;">0.3</td>
+<td style="text-align: right;">0.9</td>
+</tr>
+<tr>
+<td>4</td>
+<td style="text-align: right;">0.1</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0.1</td>
+<td style="text-align: right;">1</td>
+</tr>
+</tbody>
+</table>
+<p>Round three receives <code>0.8 × 0.5 × 0.75 = 0.3</code>: survive the first two rounds, then stop. In general:</p>
+<p><code>q[r] = a[r] × ∏(1 − a[j]), for j &lt; r</code></p>
+<p>The resulting <code>q = (0.2, 0.4, 0.3, 0.1)</code> is a distribution over exit rounds. Ouro constructs a cumulative distribution from conditional stopping probabilities and applies an exit threshold. <a href="https://arxiv.org/abs/2510.25741v1">Ouro v1, Section 3.2, Algorithm 1</a></p>
+<h2>One distribution, different decision rules</h2>
+<p>With the rule “exit once cumulative mass reaches 0.8,” round two's 0.6 is insufficient; round three's 0.9 crosses the threshold. Raising the threshold to 0.95 selects round four. In our invented trajectory, the longer computation selects a wrong answer.</p>
+<p>Alternatively, actually sample an exit round from <code>q</code>. Its expected depth is:</p>
+<p><code>1 × 0.2 + 2 × 0.4 + 3 × 0.3 + 4 × 0.1 = 2.3</code></p>
+<p>The correct rounds receive combined probability <code>0.4 + 0.3 = 0.7</code>. This 70% is a calculation for random selection on an invented trajectory, not benchmark accuracy. The 0.8-threshold rule deterministically runs three rounds; 2.3 is not its cost.</p>
+<p>ACT uses halting values differently. Given the same first three values, <code>0.2, 0.5, 0.75</code>, use the paper’s experimental threshold <code>1 − ε = 0.99</code> (<code>ε = 0.01</code>). The sum is 0.7 after round two and 1.45 after round three, first crossing the threshold there. The final mixing weight becomes the remainder, 0.3, producing <code>0.2s[1] + 0.5s[2] + 0.3s[3]</code>. This mixes states rather than sampling one. ACT also penalizes computation. <a href="https://arxiv.org/abs/1603.08983v6">ACT v6, Sections 2–2.1</a></p>
+<p>A “stopping probability” therefore needs an execution rule: sampling, cumulative thresholding, or state mixing. A finite budget also needs a tail convention and forced termination. Our example makes that explicit through <code>a[4] = 1</code>.</p>
+<h2>Can real models get worse with more rounds?</h2>
+<p>Ouro v1 Table 10 reports the 1.4B base model's MMLU five-shot average dropping from <strong>67.45</strong> at four rounds to <strong>64.49</strong> at eight. More rounds do not necessarily help in this setting. Table 5 lists earlier eight-round training, conflicting with Section 5.3's maximum-four-round description; we therefore do not call depth eight previously unseen. <a href="https://arxiv.org/abs/2510.25741v1">Ouro v1, Tables 5 and 10, Section 5.3</a></p>
+<p>An aggregate table still cannot tell a deployed system when to stop on each question. Two abilities need separate evaluation: producing a useful answer somewhere on a trajectory, and selecting it.</p>
+<h2>Having an answer to choose is not choosing it</h2>
+<p>Fix the computation and cache rules that produce a full trajectory. An oracle with correctness labels can inspect every round within the budget, counting success if any answer is correct. An actual policy selects a round using signals without labels.</p>
+<figure><a href="../../assets/08/diagram.en.png"><img alt="On one trajectory, final-depth selection returns the last state, a label-free policy has an unresolved choice, and a label-using oracle supplies only a diagnostic upper bound." src="../../assets/08/diagram.en.png" /></a><figcaption><a href="../../assets/08/diagram.en.png">Open full PNG</a> · <a href="../../references/matplotlib-layouts/assets/08/diagram.en.svg">Layout-reference SVG</a></figcaption></figure>
+<p><em>The oracle uses information unavailable to the policy. Its bound applies to the same selectable trajectory, not a trajectory produced by different cache or generation rules.</em></p>
+<p>In our opening example, the oracle succeeds while final-depth selection fails. For “wrong, wrong, wrong, wrong,” no selector can recover a correct state.</p>
+<p>A stochastic-stopping study compares oracle and policy accuracy on Unique Set. It also notes that a small gap can mean a model is consistently wrong, so the gap must be read alongside policy accuracy. <a href="https://arxiv.org/abs/2606.29983v1">Stochastic Stopping v1, Appendix C.3</a></p>
+<p>This diagnosis changes what to improve. Frequently available correct states motivate better selection. Rare correct states instead motivate better training or updates. <em>End-to-end Algorithm Synthesis</em> studies restarting from randomly reached intermediate states, detaching the early history, and supervising subsequent progress alongside a full-unroll loss on its algorithmic tasks. <a href="https://arxiv.org/abs/2202.05826v3">Paper v3, Sections 3.1–3.3</a></p>
+<h2>Make the decision without test labels</h2>
+<p>Low entropy, unchanged answers, and small state changes can supply stopping signals. Confidence and the value of further computation are different targets. Ouro's dedicated gate-training phase uses improvement in adjacent-depth task losses as supervision; inference relies on the gate's prediction. <a href="https://arxiv.org/abs/2510.25741v1">Ouro v1, Section 3.4</a></p>
+<p>A deployable comparison can begin with one checkpoint. Choose a fixed depth and stopping threshold on validation data, freeze both decisions, and compare on held-out tests:</p>
+<table>
+<thead>
+<tr>
+<th>Comparison</th>
+<th>Question it answers</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Fixed depth</td>
+<td>What quality and latency are achievable without an extra selector?</td>
+</tr>
+<tr>
+<td>Actual stopping policy</td>
+<td>Without test labels, is the saved work worth the accuracy change?</td>
+</tr>
+<tr>
+<td>Same-trajectory oracle</td>
+<td>How many correct answers appeared but were missed by the policy?</td>
+</tr>
+</tbody>
+</table>
+<p>With token-specific depths, early exits can change the cache entries available to later positions. Mixture-of-Recursions jointly designs routing and cache rules for this reason. <a href="https://arxiv.org/abs/2507.10524v3">Mixture-of-Recursions v3, Section 2.2</a> Latency measurements must include those execution details; average rounds alone are insufficient.</p>
+<p>The opening trajectory has no unique deployment answer because we deliberately supplied no usable signal for recognizing correctness. It separates the goals: produce states worth selecting, then learn a label-free rule that returns an appropriate one in time.</p><aside class="social"><h2>Twitter / X</h2><pre>A conditional stopping probability is not an exit probability. Calculate a four-round example, compare thresholding with sampling, and see why a useful state still needs a label-free selector.</pre><p><a href="../../social/08-knowing-when-to-stop.en.md">配图和替代文本 / Attachment and alt text</a></p><img src="../../assets/08/cover.en.png" alt="An invented four-round correctness sequence reads wrong, right, right, wrong. It illustrates that the last answer can lose an earlier correct result."></aside></main></body></html>

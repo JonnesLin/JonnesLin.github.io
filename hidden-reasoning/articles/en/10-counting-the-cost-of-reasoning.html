@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Eight Fewer Tokens: How Much Computation Did We Save?</title><meta name="description" content="A hypothetical 32-U versus 28-U ledger makes internal calls, verification, and training break-even calculable before discussing real latency."><link rel="canonical" href="https://jonneslin.github.io/hidden-reasoning/articles/en/10-counting-the-cost-of-reasoning.html"><link rel="alternate" hreflang="en" href="https://jonneslin.github.io/hidden-reasoning/articles/en/10-counting-the-cost-of-reasoning.html"><link rel="alternate" hreflang="zh" href="https://jonneslin.github.io/hidden-reasoning/articles/zh/10-counting-the-cost-of-reasoning.html"><meta property="og:url" content="https://jonneslin.github.io/hidden-reasoning/articles/en/10-counting-the-cost-of-reasoning.html"><meta property="og:title" content="Eight Fewer Tokens: How Much Computation Did We Save?"><meta property="og:description" content="A hypothetical 32-U versus 28-U ledger makes internal calls, verification, and training break-even calculable before discussing real latency."><meta property="og:type" content="article"><meta property="og:image" content="https://jonneslin.github.io/hidden-reasoning/assets/10/cover.en.png"><style>
+:root{color-scheme:light;--ink:#132a36;--muted:#425b64;--teal:#117d80;--paper:#f6f5f0}
+*{box-sizing:border-box}body{margin:0;color:var(--ink);background:var(--paper);font:18px/1.8 system-ui,-apple-system,'PingFang SC','Noto Sans CJK SC',sans-serif}
+a{color:#125f74;text-underline-offset:.18em}a:hover{color:#9a4e10}header,main,footer{max-width:1120px;margin:auto;padding:36px 28px}header{border-bottom:1px solid #cad7d9}header p{max-width:760px;color:var(--muted)}h1{font-size:clamp(32px,5vw,54px);line-height:1.15;letter-spacing:-.025em}h2{font-size:29px;line-height:1.3;margin-top:2em}h3{font-size:22px;line-height:1.4}img{display:block;max-width:100%;height:auto;border-radius:12px}nav{display:flex;gap:24px;flex-wrap:wrap}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:30px}.card{background:white;border:1px solid #cad7d9;border-radius:16px;padding:22px}.card h2{margin:16px 0 10px;font-size:26px}.card p{color:var(--muted);font-size:17px}.number{font:14px/1.5 ui-monospace,monospace;color:var(--muted);letter-spacing:.12em}.reading{max-width:850px}.reading p,.reading li{overflow-wrap:anywhere}.reading img{margin:28px 0 12px}.social{padding:24px;border:1px solid #cad7d9;border-radius:12px;background:white;margin:40px 0}pre{overflow:auto;white-space:pre-wrap;overflow-wrap:anywhere;background:#e9eeee;padding:18px;border-radius:8px;font-size:17px;line-height:1.65}code{font-family:ui-monospace,monospace;font-size:.9em}blockquote{margin-left:0;padding:4px 24px;border-left:4px solid var(--teal)}table{border-collapse:collapse;width:100%;font-size:16px}th,td{text-align:left;border-bottom:1px solid #cbd7d9;padding:10px}footer{font-size:14px;color:var(--muted)}@media(max-width:700px){.grid{grid-template-columns:1fr}header,main,footer{padding:24px 18px}body{font-size:17px}.card{padding:16px}h2{font-size:25px}}
+
+.reading figure{margin:28px 0}.reading figure>a{display:block}.reading figure img{margin:0}.reading figcaption{font-size:14px;margin-top:8px}
+</style></head><body><header><p><a href="../../../blog.html">← Main blog</a></p><nav><a href="../../index.html">全部文章 / All articles</a><a href="../zh/10-counting-the-cost-of-reasoning.html">中文</a><a href="../../en/10-counting-the-cost-of-reasoning.md">Markdown</a></nav></header><main class="reading"><h1>Eight Fewer Tokens: How Much Computation Did We Save?</h1>
+<p>Two systems answer the same question. A writes eight reasoning tokens and two answer tokens. B performs four continuous steps internally, then writes only two answer tokens. B looks much shorter. Does its computational bill shrink by the same amount?</p>
+<p>Start with a <strong>wholly hypothetical teaching ledger</strong>. Every cost below is assigned for this example, not measured from a model or derived from its FLOPs. The unit U denotes the same normalized amount of operations throughout; it cannot be converted into milliseconds. Each call's assigned cost includes its required attention, cache reads, and readout. To keep the arithmetic simple, calls of the same kind cost the same over this short request.</p>
+<h2>Count the calls first</h2>
+<p>Preprocessing costs 12 U in either system. Each generation step in A costs 2 U. A continuous step in B costs 3 U, and an answer step costs 2 U. Each produces one candidate with no additional selector.</p>
+<table>
+<thead>
+<tr>
+<th>Item</th>
+<th style="text-align: right;">A: written chain</th>
+<th style="text-align: right;">B: continuous chain</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Preprocessing</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">12</td>
+</tr>
+<tr>
+<td>Intermediate work</td>
+<td style="text-align: right;">8 × 2 = 16</td>
+<td style="text-align: right;">4 × 3 = 12</td>
+</tr>
+<tr>
+<td>Answer generation</td>
+<td style="text-align: right;">2 × 2 = 4</td>
+<td style="text-align: right;">2 × 2 = 4</td>
+</tr>
+<tr>
+<td>Total</td>
+<td style="text-align: right;">32 U</td>
+<td style="text-align: right;">28 U</td>
+</tr>
+</tbody>
+</table>
+<p>B removes eight visible tokens but saves only <code>32 − 28 = 4 U</code>, or 12.5% of A's total. Four more expensive internal calls replace eight cheaper text calls. Output length is not the unit of this ledger.</p>
+<p>Change one assumption: B needs a verifier costing another 6 U. Its total becomes 34 U, exceeding A's 32 U. Alternatively, increase B's continuous-call cost from 3 U to 4 U. Even without a verifier, B then reaches 32 U. The arithmetic shows why reconstructing execution comes before comparing generated length.</p>
+<p>We have assigned no accuracy to either system. This ledger teaches accounting; it does not recommend a system. A real comparison must put answer quality beside the bill.</p>
+<figure><a href="../../assets/10/cover.en.png"><img alt="One set of shared weights feeds repeated calls, with storage, operations, and elapsed time shown separately." src="../../assets/10/cover.en.png" /></a><figcaption><a href="../../assets/10/cover.en.png">Open full PNG</a> · <a href="../../references/matplotlib-layouts/assets/10/cover.en.svg">Layout-reference SVG</a></figcaption></figure>
+<p><em>The three illustrated calls show a structure, not either call count in the table. Weights may be stored once while every use still incurs computation.</em></p>
+<h2>Replace the toy entries with actual execution</h2>
+<p>Real call costs depend on context length, caching, precision, and routing. A useful accounting abstraction is:</p>
+<p><code>request work = preprocessing + intermediate updates + answer generation + candidate selection</code></p>
+<p>In symbols:</p>
+<p><code>F = Fpre + Σⱼ rⱼ Fcore(nⱼ) + Σᵢ Fout(nᵢ) + Fselect</code></p>
+<p>Intermediate position j invokes the core <code>rⱼ</code> times with accessible context length <code>nⱼ</code>. The output term accumulates answer-generation steps. This groups calls; it is not an exact FLOPs formula from a particular paper. If an output call already includes the recurrent core, count that work in only one term. Include visual encoding, retrieval, and judging wherever the implementation actually performs them.</p>
+<p>CODI's student produces continuous states before its answer, while the teacher task and activation alignment contribute to training. TRM reuses a small network to update latent and answer representations. Each requires accounting along its own computation graph; neither output length nor parameter count determines the bill. <a href="https://arxiv.org/abs/2502.21074v3">CODI v3, Section 3</a>, <a href="https://arxiv.org/abs/2510.04871v1">TRM v1, Figure 3</a></p>
+<p>Caching is easy to omit. Keeping old keys and values avoids recomputing history but incurs storage and reads. Representations at different depths need not share an interchangeable cache. Log-ICoT offers another useful example: its theoretical inference setup retains zero-filled CoT positions. Avoiding generation of those tokens does not remove computation at those positions. <a href="https://arxiv.org/abs/2605.28600v1">Log-ICoT v1, Section 3.1, Evaluation</a></p>
+<h2>Why measure time after counting operations?</h2>
+<p>Return to 32 U and 28 U. Estimating time in that ratio would require equal effective operation rates and no other overhead. Sequential dependencies, small-kernel launches, memory bandwidth, and batching can change those rates on actual hardware.</p>
+<p>If B's four steps form a dependent chain, each waits for its predecessor. Another strategy for A might generate several independent candidates concurrently. Total work and completion time can move in different directions. Whether fewer operations make the answer arrive sooner must be measured on the intended hardware.</p>
+<p>The measurement boundary matters too. Request arrival to the first answer token differs from arrival to the complete answer. Fix precision and batch size; report warm-request latency, tail latency, and throughput, with cold start separately. Account for asynchronous GPU execution so that finishing submission of work is not mistaken for finishing the work itself.</p>
+<figure><a href="../../assets/10/diagram.en.png"><img alt="A request is split into preprocessing, internal updates, output, and optional selection; four different budget constraints appear underneath." src="../../assets/10/diagram.en.png" /></a><figcaption><a href="../../assets/10/diagram.en.png">Open full PNG</a> · <a href="../../references/matplotlib-layouts/assets/10/diagram.en.svg">Layout-reference SVG</a></figcaption></figure>
+<p><em>The upper path helps complete the bill. The lower row identifies comparison questions; these four budgets usually cannot all be matched simultaneously.</em></p>
+<p>Fixed parameters ask about value at a storage scale. Fixed training FLOPs ask what an equal investment can produce. Fixed inference FLOPs compare how requests use computation. Fixed hardware latency includes implementation efficiency. Choose the primary constraint and disclose differences in the others.</p>
+<h2>Can training change the decision?</h2>
+<p>Suppose B requires an extra 4,000 U of training and then saves exactly 4 U per request. These remain invented values in the same teaching ledger. After N requests, the extra training is offset when:</p>
+<p><code>4,000 = N × (32 − 28)</code></p>
+<p>Thus <code>N = 1,000</code>. Before one thousand requests, B has not recovered its additional training work. Afterwards, it begins saving this measure of work. Add the earlier 6 U verifier, and B costs more per request: there is no positive break-even point. This is still not a financial calculation; training and serving hardware may have different unit prices.</p>
+<p>Real training needs its forward passes, backward passes, and repeated supervision counted. TRM's Figure 3 separates recursion without gradients from recursion with gradients; both perform forward work. HRM's gradient approximation and deep supervision also shape the training path. <a href="https://arxiv.org/abs/2510.04871v1">TRM v1, Figure 3 and Section 4.1</a>, <a href="https://arxiv.org/abs/2506.21734v3">HRM v3, gradient approximation and deep supervision</a></p>
+<p>When methods share a base checkpoint, incremental training cost can be reported separately. With different starting points, state the known training histories and unknown items. Generating teacher traces once and caching them differs from generating them online for every batch.</p>
+<p>Finally, save answers and costs for the same held-out questions. Keep every question in the denominator, including parsing failures and timeouts; choose thresholds and checkpoints on validation data. Sweeping a fixed checkpoint's budget asks whether that system can use more computation. Retraining at every budget asks a different question. A reproducible claim should be reconstructible from the model, data, call logs, and timing boundaries, just as the opening ledger can be reconstructed from its entries.</p><aside class="social"><h2>Twitter / X</h2><pre>Eight fewer tokens need not mean eight fewer steps. A hypothetical ledger counts internal calls, answer generation, verification, and training break-even. The arithmetic is reproducible; real speed still needs hardware measurements.</pre><p><a href="../../social/10-counting-the-cost-of-reasoning.en.md">配图和替代文本 / Attachment and alt text</a></p><img src="../../assets/10/cover.en.png" alt="One shared weight block feeds repeated core calls; storage, operations, and elapsed time appear as separate quantities to measure."></aside></main></body></html>

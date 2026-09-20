@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>模型上一轮答对了，为什么还要继续？</title><meta name="description" content="从一条自造轨迹算出退出分布与期望轮数，区分阈值停机、随机退出和只能用于诊断的oracle。"><link rel="canonical" href="https://jonneslin.github.io/hidden-reasoning/articles/zh/08-knowing-when-to-stop.html"><link rel="alternate" hreflang="zh" href="https://jonneslin.github.io/hidden-reasoning/articles/zh/08-knowing-when-to-stop.html"><link rel="alternate" hreflang="en" href="https://jonneslin.github.io/hidden-reasoning/articles/en/08-knowing-when-to-stop.html"><meta property="og:url" content="https://jonneslin.github.io/hidden-reasoning/articles/zh/08-knowing-when-to-stop.html"><meta property="og:title" content="模型上一轮答对了，为什么还要继续？"><meta property="og:description" content="从一条自造轨迹算出退出分布与期望轮数，区分阈值停机、随机退出和只能用于诊断的oracle。"><meta property="og:type" content="article"><meta property="og:image" content="https://jonneslin.github.io/hidden-reasoning/assets/08/cover.zh.png"><style>
+:root{color-scheme:light;--ink:#132a36;--muted:#425b64;--teal:#117d80;--paper:#f6f5f0}
+*{box-sizing:border-box}body{margin:0;color:var(--ink);background:var(--paper);font:18px/1.8 system-ui,-apple-system,'PingFang SC','Noto Sans CJK SC',sans-serif}
+a{color:#125f74;text-underline-offset:.18em}a:hover{color:#9a4e10}header,main,footer{max-width:1120px;margin:auto;padding:36px 28px}header{border-bottom:1px solid #cad7d9}header p{max-width:760px;color:var(--muted)}h1{font-size:clamp(32px,5vw,54px);line-height:1.15;letter-spacing:-.025em}h2{font-size:29px;line-height:1.3;margin-top:2em}h3{font-size:22px;line-height:1.4}img{display:block;max-width:100%;height:auto;border-radius:12px}nav{display:flex;gap:24px;flex-wrap:wrap}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:30px}.card{background:white;border:1px solid #cad7d9;border-radius:16px;padding:22px}.card h2{margin:16px 0 10px;font-size:26px}.card p{color:var(--muted);font-size:17px}.number{font:14px/1.5 ui-monospace,monospace;color:var(--muted);letter-spacing:.12em}.reading{max-width:850px}.reading p,.reading li{overflow-wrap:anywhere}.reading img{margin:28px 0 12px}.social{padding:24px;border:1px solid #cad7d9;border-radius:12px;background:white;margin:40px 0}pre{overflow:auto;white-space:pre-wrap;overflow-wrap:anywhere;background:#e9eeee;padding:18px;border-radius:8px;font-size:17px;line-height:1.65}code{font-family:ui-monospace,monospace;font-size:.9em}blockquote{margin-left:0;padding:4px 24px;border-left:4px solid var(--teal)}table{border-collapse:collapse;width:100%;font-size:16px}th,td{text-align:left;border-bottom:1px solid #cbd7d9;padding:10px}footer{font-size:14px;color:var(--muted)}@media(max-width:700px){.grid{grid-template-columns:1fr}header,main,footer{padding:24px 18px}body{font-size:17px}.card{padding:16px}h2{font-size:25px}}
+
+.reading figure{margin:28px 0}.reading figure>a{display:block}.reading figure img{margin:0}.reading figcaption{font-size:14px;margin-top:8px}
+</style></head><body><header><p><a href="../../../blog.html">← Main blog</a></p><nav><a href="../../index.html">全部文章 / All articles</a><a href="../en/08-knowing-when-to-stop.html">English</a><a href="../../zh/08-knowing-when-to-stop.md">Markdown</a></nav></header><main class="reading"><h1>模型上一轮答对了，为什么还要继续？</h1>
+<p>假设同一个问题在连续四轮的读出结果是：<strong>错、对、对、错</strong>。这是人为构造的教学轨迹。最终读出会失败；知道标签的人却能指出，第二轮已经有正确答案了。</p>
+<p>问题在于，部署系统并不知道这些“对”和“错”。它必须只凭当前可见信号，决定现在交卷，还是再算一轮。</p>
+<figure><a href="../../assets/08/cover.zh.png"><img alt="四轮人为轨迹依次为错、对、对、错，最后一轮丢失了较早的正确答案。" src="../../assets/08/cover.zh.png" /></a><figcaption><a href="../../assets/08/cover.zh.png">查看完整 PNG</a> · <a href="../../references/matplotlib-layouts/assets/08/cover.zh.svg">SVG 结构参考</a></figcaption></figure>
+<p><em>正确性标签来自分析者视角，不是给停机策略的输入。这张图没有记录任何真实模型输出。</em></p>
+<h2>把“现在停”与“在这一轮退出”分开</h2>
+<p>设模型每轮输出一个条件停止概率 <code>a[r]</code>，意思是：<strong>已经运行到第 r 轮的情况下，现在停止的概率。</strong> 假设四轮的值为 <code>0.2、0.5、0.75、1</code>。这些数字同样是教学设定；最后设为 1，让剩余概率全部在第四轮退出。</p>
+<p>第二轮的 0.5 并不代表一半请求在第二轮退出。第一轮已经停了 20%，只有剩下的 80% 能来到第二轮。因此，第二轮真正分到的退出质量为 <code>0.8 × 0.5 = 0.4</code>。</p>
+<p>依次计算：</p>
+<table>
+<thead>
+<tr>
+<th>轮次</th>
+<th style="text-align: right;">到达本轮的概率</th>
+<th style="text-align: right;">条件停止概率</th>
+<th style="text-align: right;">本轮退出质量</th>
+<th style="text-align: right;">累计退出质量</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0.2</td>
+<td style="text-align: right;">0.2</td>
+<td style="text-align: right;">0.2</td>
+</tr>
+<tr>
+<td>2</td>
+<td style="text-align: right;">0.8</td>
+<td style="text-align: right;">0.5</td>
+<td style="text-align: right;">0.4</td>
+<td style="text-align: right;">0.6</td>
+</tr>
+<tr>
+<td>3</td>
+<td style="text-align: right;">0.4</td>
+<td style="text-align: right;">0.75</td>
+<td style="text-align: right;">0.3</td>
+<td style="text-align: right;">0.9</td>
+</tr>
+<tr>
+<td>4</td>
+<td style="text-align: right;">0.1</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0.1</td>
+<td style="text-align: right;">1</td>
+</tr>
+</tbody>
+</table>
+<p>第三轮的 0.3，就是前两轮都没停的 <code>0.8 × 0.5</code>，再乘本轮停止的 0.75。一般写成：</p>
+<p><code>q[r] = a[r] × ∏(1 − a[j])，其中 j &lt; r</code></p>
+<p>现在得到的 <code>q = (0.2, 0.4, 0.3, 0.1)</code> 才是各轮的退出分布。Ouro 用这类条件概率构造累计分布，再以阈值确定退出深度。<a href="https://arxiv.org/abs/2510.25741v1">Ouro v1，§3.2、算法1</a></p>
+<h2>同一分布，可以有不同的交卷规则</h2>
+<p>若规则是“累计质量达到 0.8 就退出”，前两轮累计只有 0.6，第三轮达到 0.9，于是选择第三轮。阈值改为 0.95，就会走到第四轮。在我们的教学轨迹里，后一种更长的计算反而选中了错误结果。</p>
+<p>还有另一种规则：真正按 <code>q</code> 随机抽取退出轮次。它在这个例子中的期望轮数为：</p>
+<p><code>1 × 0.2 + 2 × 0.4 + 3 × 0.3 + 4 × 0.1 = 2.3</code></p>
+<p>正确的第二、三轮合计概率为 <code>0.4 + 0.3 = 0.7</code>。这里的 70% 是对这条自造轨迹进行随机选择的计算结果，不是基准准确率。阈值 0.8 的规则则确定地运行三轮，不能拿 2.3 作为它的成本。</p>
+<p>ACT 又是另一种用法。若把同样的前三个数 <code>0.2、0.5、0.75</code> 当作 ACT 停机值，按原文实验设置取阈值 <code>1 − ε = 0.99</code>（<code>ε = 0.01</code>），前两轮累计为 0.7，第三轮累计为 1.45，首次越过阈值；最后用剩余量 0.3 取代第三个权重。状态混合变成 <code>0.2s[1] + 0.5s[2] + 0.3s[3]</code>，而不是随机选择其中一个状态。它还加入计算成本惩罚。<a href="https://arxiv.org/abs/1603.08983v6">ACT v6，§2–2.1</a></p>
+<p>因此，看见一组“停机概率”以后，还要读清它怎样参与计算：用于采样、用于累计阈值，还是用于状态混合。有限预算下也要规定尾部质量和强制停止规则；本例通过 <code>a[4] = 1</code> 明确处理了尾部。</p>
+<h2>真实模型会不会越算越差？</h2>
+<p>Ouro v1 表10报告，1.4B 基础模型的 MMLU 五样本平均成绩从四轮的 <strong>67.45</strong> 降到八轮的 <strong>64.49</strong>。这支持该设置下追加轮数未必改善准确率。表5又列出了前期八轮训练，与§5.3的“最大训练四轮”表述不一致，因此这里不把八轮描述为训练中从未出现的深度。<a href="https://arxiv.org/abs/2510.25741v1">Ouro v1，表5、表10、§5.3</a></p>
+<p>但一张按深度汇总的成绩表，仍不足以告诉部署系统该在每道题的哪一轮停下。我们需要分别评估两件事：轨迹里有没有好答案，选择器能不能找到它。</p>
+<h2>有答案可选，与能选中答案</h2>
+<p>先固定一套产生完整轨迹的计算和缓存规则。一个知道正确标签的 oracle 可以检查预算内每轮，只要其中有正确答案，就把这道题计为成功。真实策略只能使用不含标签的信号，选择其中一轮。</p>
+<figure><a href="../../assets/08/diagram.zh.png"><img alt="同一条轨迹上，固定末轮选择最后状态；实际策略不看标签，选择未知；oracle能看标签，只用于诊断上界。" src="../../assets/08/diagram.zh.png" /></a><figcaption><a href="../../assets/08/diagram.zh.png">查看完整 PNG</a> · <a href="../../references/matplotlib-layouts/assets/08/diagram.zh.svg">SVG 结构参考</a></figcaption></figure>
+<p><em>Oracle 的箭头使用了真实策略没有的信息。上界只针对同一条可选轨迹；不能拿另一种缓存或生成规则产生的轨迹冒充共同上界。</em></p>
+<p>在开头的例子里，oracle 成功，固定末轮失败。若轨迹是“错、错、错、错”，再聪明的选择器也找不到正确状态。</p>
+<p>随机停止研究在 Unique Set 上对比了 oracle 与实际停机策略的差距，并指出差距小也可能只是模型稳定地答错。因而必须同时看策略准确率与差距。<a href="https://arxiv.org/abs/2606.29983v1">Stochastic Stopping v1，附录C.3</a></p>
+<p>这个诊断也会改变下一步工作。如果轨迹经常含有正确答案，才值得重点改进选择；若很少出现正确答案，就应先改训练或更新机制。End-to-end Algorithm Synthesis 的一种训练思路是从随机到达的中间状态重新开始，截断早段梯度，再监督后续进展，并结合完整展开损失。它在所研究的算法任务中检验了这类改动。<a href="https://arxiv.org/abs/2202.05826v3">论文 v3，§3.1–3.3</a></p>
+<h2>最后，要在不知道标签时作出选择</h2>
+<p>低熵、答案不再变化、相邻状态距离变小，都可以是停机信号。但“很确定”与“继续算没有收益”是不同目标。Ouro 的专门门控阶段利用相邻深度损失改善提供监督：训练时可用标签，推理时依靠门控预测。<a href="https://arxiv.org/abs/2510.25741v1">Ouro v1，§3.4</a></p>
+<p>一个可执行的部署比较，可以先固定同一个 checkpoint，在验证集上选择固定深度与停机阈值，随后冻结这些选择，在测试集比较：</p>
+<table>
+<thead>
+<tr>
+<th>比较对象</th>
+<th>需要回答的问题</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>固定深度</td>
+<td>不使用额外选择器，能达到什么质量与延迟？</td>
+</tr>
+<tr>
+<td>实际停机策略</td>
+<td>在不知道测试标签时，省下的计算是否值得准确率变化？</td>
+</tr>
+<tr>
+<td>同轨迹 oracle</td>
+<td>有多少正确答案已经出现，却被实际规则错过？</td>
+</tr>
+</tbody>
+</table>
+<p>如果实现按 token 分配深度，提前退出还会改变后续位置的缓存访问；Mixture-of-Recursions 因而联合设计路由与缓存。<a href="https://arxiv.org/abs/2507.10524v3">Mixture-of-Recursions v3，§2.2</a> 实测延迟需要包含这些执行细节，不能只用平均轮数替代。</p>
+<p>开头那条“错、对、对、错”的轨迹没有唯一的部署答案，因为我们故意没有给出可用的识别信号。它清楚地划开了目标：先让模型产生值得选的状态，再训练一条不看标签的规则，把合适的状态及时交出去。</p><aside class="social"><h2>Twitter / X</h2><pre>条件停止概率不等于本轮退出概率。手算一组四轮分布，再看为什么更高的停机阈值不保证更好答案，以及部署时怎样选规则。</pre><p><a href="../../social/08-knowing-when-to-stop.zh.md">配图和替代文本 / Attachment and alt text</a></p><img src="../../assets/08/cover.zh.png" alt="人为构造的四轮正确性依次为错、对、对、错，用来说明最终答案可能丢失较早的正确结果。"></aside></main></body></html>

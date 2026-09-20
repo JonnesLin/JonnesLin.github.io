@@ -1,0 +1,116 @@
+<?xml version='1.0' encoding='utf-8'?>
+<ns0:svg xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:ns0="http://www.w3.org/2000/svg" xmlns:ns2="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" width="1200" height="900" viewBox="0 0 864 648" version="1.1">
+ <ns0:title>Trace the request, then choose the budget</ns0:title>
+ <ns0:metadata>
+  <rdf:RDF>
+   <ns2:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+    <dc:title>Trace the request, then choose the budget</dc:title>
+    <dc:date>2026-09-19T22:38:47.453094</dc:date>
+    <dc:description>Original conceptual drawing; no newly measured experimental results. A horizontal pipeline shows preprocessing, latent/recurrent updates with a variable loop, output generation, and candidate selection. Distinguish selection as optional but billable. Below, four separate comparison cards read fixed parameters, fixed training FLOPs, fixed inference FLOPs, and fixed hardware latency. Do not use a common equals sign claiming all constraints match at once. Add a small note that an output call containing the core must not be counted twice.</dc:description>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <ns2:Agent>
+      <dc:title>Matplotlib v3.8.0, https://matplotlib.org/</dc:title>
+     </ns2:Agent>
+    </dc:creator>
+   </ns2:Work>
+  </rdf:RDF>
+ </ns0:metadata>
+ <ns0:defs>
+  <ns0:style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</ns0:style>
+ </ns0:defs>
+ <ns0:g id="figure_1">
+  <ns0:g id="patch_1">
+   <ns0:path d="M 0 648  L 864 648  L 864 0  L 0 0  z " style="fill: #f6f5f0" />
+  </ns0:g>
+  <ns0:g id="axes_1">
+   <ns0:g id="patch_2">
+    <ns0:path d="M 56.16 186.48  L 174.24 186.48  Q 187.2 186.48 187.2 199.44  L 187.2 252.72  Q 187.2 265.68 174.24 265.68  L 56.16 265.68  Q 43.2 265.68 43.2 252.72  L 43.2 199.44  Q 43.2 186.48 56.16 186.48  z " clip-path="url(#p78ebc126a1)" style="fill: #e5edf8; stroke: #346bb5; stroke-width: 1.8; stroke-linejoin: miter" />
+   </ns0:g>
+   <ns0:g id="patch_3">
+    <ns0:path d="M 239.76 186.48  L 465.84 186.48  Q 478.8 186.48 478.8 199.44  L 478.8 252.72  Q 478.8 265.68 465.84 265.68  L 239.76 265.68  Q 226.8 265.68 226.8 252.72  L 226.8 199.44  Q 226.8 186.48 239.76 186.48  z " clip-path="url(#p78ebc126a1)" style="fill: #e5edf8; stroke: #346bb5; stroke-width: 1.8; stroke-linejoin: miter" />
+   </ns0:g>
+   <ns0:g id="patch_4">
+    <ns0:path d="M 196.402588 226.08  Q 207.000283 226.08 214.802892 226.08  " clip-path="url(#p78ebc126a1)" style="fill: none; stroke: #346bb5; stroke-width: 2.5; stroke-linecap: round" />
+    <ns0:path d="M 205.602892 221.48  L 214.802892 226.08  L 205.602892 230.68  z " clip-path="url(#p78ebc126a1)" style="fill: #346bb5; stroke: #346bb5; stroke-width: 2.5; stroke-linecap: round" />
+   </ns0:g>
+   <ns0:g id="patch_5">
+    <ns0:path d="M 534.96 186.48  L 627.84 186.48  Q 640.8 186.48 640.8 199.44  L 640.8 252.72  Q 640.8 265.68 627.84 265.68  L 534.96 265.68  Q 522 265.68 522 252.72  L 522 199.44  Q 522 186.48 534.96 186.48  z " clip-path="url(#p78ebc126a1)" style="fill: #e5edf8; stroke: #346bb5; stroke-width: 1.8; stroke-linejoin: miter" />
+   </ns0:g>
+   <ns0:g id="patch_6">
+    <ns0:path d="M 488.000391 226.08  Q 500.400771 226.08 510.006067 226.08  " clip-path="url(#p78ebc126a1)" style="fill: none; stroke: #346bb5; stroke-width: 2.5; stroke-linecap: round" />
+    <ns0:path d="M 500.806067 221.48  L 510.006067 226.08  L 500.806067 230.68  z " clip-path="url(#p78ebc126a1)" style="fill: #346bb5; stroke: #346bb5; stroke-width: 2.5; stroke-linecap: round" />
+   </ns0:g>
+   <ns0:g id="patch_7">
+    <ns0:path d="M 700.56 186.48  L 807.84 186.48  Q 820.8 186.48 820.8 199.44  L 820.8 252.72  Q 820.8 265.68 807.84 265.68  L 700.56 265.68  Q 687.6 265.68 687.6 252.72  L 687.6 199.44  Q 687.6 186.48 700.56 186.48  z " clip-path="url(#p78ebc126a1)" style="fill: #e5edf8; stroke: #346bb5; stroke-width: 1.8; stroke-linejoin: miter" />
+   </ns0:g>
+   <ns0:g id="patch_8">
+    <ns0:path d="M 649.997314 226.08  Q 664.198471 226.08 675.604543 226.08  " clip-path="url(#p78ebc126a1)" style="fill: none; stroke: #346bb5; stroke-width: 2.5; stroke-linecap: round" />
+    <ns0:path d="M 666.404543 221.48  L 675.604543 226.08  L 666.404543 230.68  z " clip-path="url(#p78ebc126a1)" style="fill: #346bb5; stroke: #346bb5; stroke-width: 2.5; stroke-linecap: round" />
+   </ns0:g>
+   <ns0:g id="patch_9">
+    <ns0:path d="M 424.746453 274.210389  Q 353.518921 336.998563 284.388092 276.056819  " clip-path="url(#p78ebc126a1)" style="fill: none; stroke: #346bb5; stroke-width: 2.5; stroke-linecap: round" />
+    <ns0:path d="M 288.247489 285.591233  L 284.388092 276.056819  L 294.331262 278.68995  z " clip-path="url(#p78ebc126a1)" style="fill: #346bb5; stroke: #346bb5; stroke-width: 2.5; stroke-linecap: round" />
+   </ns0:g>
+   <ns0:g id="patch_10">
+    <ns0:path d="M 56.16 397.44  L 408.24 397.44  Q 421.2 397.44 421.2 410.4  L 421.2 450  Q 421.2 462.96 408.24 462.96  L 56.16 462.96  Q 43.2 462.96 43.2 450  L 43.2 410.4  Q 43.2 397.44 56.16 397.44  z " clip-path="url(#p78ebc126a1)" style="fill: #e1f1ee; stroke: #117d80; stroke-width: 1.8; stroke-linejoin: miter" />
+   </ns0:g>
+   <ns0:g id="patch_11">
+    <ns0:path d="M 455.76 397.44  L 807.84 397.44  Q 820.8 397.44 820.8 410.4  L 820.8 450  Q 820.8 462.96 807.84 462.96  L 455.76 462.96  Q 442.8 462.96 442.8 450  L 442.8 410.4  Q 442.8 397.44 455.76 397.44  z " clip-path="url(#p78ebc126a1)" style="fill: #e1f1ee; stroke: #117d80; stroke-width: 1.8; stroke-linejoin: miter" />
+   </ns0:g>
+   <ns0:g id="patch_12">
+    <ns0:path d="M 56.16 488.16  L 408.24 488.16  Q 421.2 488.16 421.2 501.12  L 421.2 540.72  Q 421.2 553.68 408.24 553.68  L 56.16 553.68  Q 43.2 553.68 43.2 540.72  L 43.2 501.12  Q 43.2 488.16 56.16 488.16  z " clip-path="url(#p78ebc126a1)" style="fill: #e1f1ee; stroke: #117d80; stroke-width: 1.8; stroke-linejoin: miter" />
+   </ns0:g>
+   <ns0:g id="patch_13">
+    <ns0:path d="M 455.76 488.16  L 807.84 488.16  Q 820.8 488.16 820.8 501.12  L 820.8 540.72  Q 820.8 553.68 807.84 553.68  L 455.76 553.68  Q 442.8 553.68 442.8 540.72  L 442.8 501.12  Q 442.8 488.16 455.76 488.16  z " clip-path="url(#p78ebc126a1)" style="fill: #e1f1ee; stroke: #117d80; stroke-width: 1.8; stroke-linejoin: miter" />
+   </ns0:g>
+   <ns0:g id="text_1">
+    <ns0:text style="fill: #425b64; font: 18px 'Arial Unicode MS'; text-anchor: start" x="43.2" y="34.484063" transform="rotate(-0 43.2 34.484063)">10 / 12   HIDDEN REASONING / LOOPED TRANSFORMERS</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_2">
+    <ns0:text style="fill: #132a36; font: 37.44px 'Arial Unicode MS'; text-anchor: start" x="43.2" y="90.15885" transform="rotate(-0 43.2 90.15885)">Trace the request, then choose the budget</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_3">
+    <ns0:text style="fill: #132a36; font: 23.76px 'Arial Unicode MS'; text-anchor: middle" x="115.2" y="232.216762" transform="rotate(-0 115.2 232.216762)">Preprocess</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_4">
+    <ns0:text style="fill: #132a36; font: 23.76px 'Arial Unicode MS'" transform="translate(262.339369 219.645866)">Latent / recurrent</ns0:text>
+    <ns0:text style="fill: #132a36; font: 23.76px 'Arial Unicode MS'" transform="translate(310.527619 244.787659)">updates</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_5">
+    <ns0:text style="fill: #132a36; font: 23.76px 'Arial Unicode MS'; text-anchor: middle" x="581.4" y="232.36155" transform="rotate(-0 581.4 232.36155)">Output</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_6">
+    <ns0:text style="fill: #132a36; font: 23.76px 'Arial Unicode MS'; text-anchor: middle" x="754.2" y="232.216762" transform="rotate(-0 754.2 232.216762)">Selection</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_7">
+    <ns0:text style="fill: #a75513; font: 19.44px 'Arial Unicode MS'" transform="translate(681.12 307.191712)">Optional, but</ns0:text>
+    <ns0:text style="fill: #a75513; font: 19.44px 'Arial Unicode MS'" transform="translate(681.12 327.76227)">billable</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_8">
+    <ns0:text style="fill: #132a36; font: 24.48px 'Arial Unicode MS'; text-anchor: start" x="43.2" y="359.820675" transform="rotate(-0 43.2 359.820675)">Choose separate comparisons; do not equate all four</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_9">
+    <ns0:text style="fill: #132a36; font: 25.92px 'Arial Unicode MS'; text-anchor: middle" x="232.2" y="436.89465" transform="rotate(-0 232.2 436.89465)">Fixed parameters</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_10">
+    <ns0:text style="fill: #132a36; font: 25.92px 'Arial Unicode MS'; text-anchor: middle" x="631.8" y="436.912875" transform="rotate(-0 631.8 436.912875)">Fixed training FLOPs</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_11">
+    <ns0:text style="fill: #132a36; font: 25.92px 'Arial Unicode MS'; text-anchor: middle" x="232.2" y="527.61465" transform="rotate(-0 232.2 527.61465)">Fixed inference FLOPs</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_12">
+    <ns0:text style="fill: #132a36; font: 25.92px 'Arial Unicode MS'; text-anchor: middle" x="631.8" y="527.474925" transform="rotate(-0 631.8 527.474925)">Fixed hardware latency</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_13">
+    <ns0:text style="fill: #425b64; font: 19.44px 'Arial Unicode MS'; text-anchor: start" x="43.2" y="603.111712" transform="rotate(-0 43.2 603.111712)">If an output call already includes the core, do not count the core twice.</ns0:text>
+   </ns0:g>
+  </ns0:g>
+ </ns0:g>
+ <ns0:defs>
+  <ns0:clipPath id="p78ebc126a1">
+   <ns0:rect x="0" y="0" width="864" height="648" />
+  </ns0:clipPath>
+ </ns0:defs>
+</ns0:svg>

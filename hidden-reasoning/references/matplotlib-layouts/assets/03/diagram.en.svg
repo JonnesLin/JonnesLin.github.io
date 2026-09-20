@@ -1,0 +1,128 @@
+<?xml version='1.0' encoding='utf-8'?>
+<ns0:svg xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:ns0="http://www.w3.org/2000/svg" xmlns:ns2="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" width="1200" height="900" viewBox="0 0 864 648" version="1.1">
+ <ns0:title>CODI aligns the state before the answer</ns0:title>
+ <ns0:metadata>
+  <rdf:RDF>
+   <ns2:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+    <dc:title>CODI aligns the state before the answer</dc:title>
+    <dc:date>2026-09-19T22:38:46.049792</dc:date>
+    <dc:description>Original conceptual drawing; no newly measured experimental results. Two parallel paths labelled teacher task and student task, tied by a shared-weights bracket. Teacher inputs question plus explicit CoT and reaches a marked pre-answer colon position, then answer; teacher CE supervises both trajectory and answer. Student sees question plus self-generated continuous states, reaches its own pre-answer colon position, then answer with student CE. Dashed KD edge runs from teacher multilayer activations to student activations; place stop-gradient only on the teacher target of that edge. The teacher branch remains updated by teacher CE; do not mark it frozen. Label alignment as normalized L1. Small caption notes simplified continuous generation and layer injection details.</dc:description>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <ns2:Agent>
+      <dc:title>Matplotlib v3.8.0, https://matplotlib.org/</dc:title>
+     </ns2:Agent>
+    </dc:creator>
+   </ns2:Work>
+  </rdf:RDF>
+ </ns0:metadata>
+ <ns0:defs>
+  <ns0:style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</ns0:style>
+ </ns0:defs>
+ <ns0:g id="figure_1">
+  <ns0:g id="patch_1">
+   <ns0:path d="M 0 648  L 864 648  L 864 0  L 0 0  z " style="fill: #f6f5f0" />
+  </ns0:g>
+  <ns0:g id="axes_1">
+   <ns0:g id="patch_2">
+    <ns0:path d="M 56.16 218.88  L 285.84 218.88  Q 298.8 218.88 298.8 231.84  L 298.8 275.76  Q 298.8 288.72 285.84 288.72  L 56.16 288.72  Q 43.2 288.72 43.2 275.76  L 43.2 231.84  Q 43.2 218.88 56.16 218.88  z " clip-path="url(#p15944bc215)" style="fill: #fcebd6; stroke: #a75513; stroke-width: 1.8; stroke-linejoin: miter" />
+   </ns0:g>
+   <ns0:g id="patch_3">
+    <ns0:path d="M 398.16 218.88  L 584.64 218.88  Q 597.6 218.88 597.6 231.84  L 597.6 275.76  Q 597.6 288.72 584.64 288.72  L 398.16 288.72  Q 385.2 288.72 385.2 275.76  L 385.2 231.84  Q 385.2 218.88 398.16 218.88  z " clip-path="url(#p15944bc215)" style="fill: #fcebd6; stroke: #a75513; stroke-width: 1.8; stroke-linejoin: miter" />
+   </ns0:g>
+   <ns0:g id="patch_4">
+    <ns0:path d="M 307.999512 253.8  Q 341.997857 253.8 373.201117 253.8  " clip-path="url(#p15944bc215)" style="fill: none; stroke: #a75513; stroke-width: 2.5; stroke-linecap: round" />
+    <ns0:path d="M 364.001117 249.2  L 373.201117 253.8  L 364.001117 258.4  z " clip-path="url(#p15944bc215)" style="fill: #a75513; stroke: #a75513; stroke-width: 2.5; stroke-linecap: round" />
+   </ns0:g>
+   <ns0:g id="patch_5">
+    <ns0:path d="M 700.56 218.88  L 807.84 218.88  Q 820.8 218.88 820.8 231.84  L 820.8 275.76  Q 820.8 288.72 807.84 288.72  L 700.56 288.72  Q 687.6 288.72 687.6 275.76  L 687.6 231.84  Q 687.6 218.88 700.56 218.88  z " clip-path="url(#p15944bc215)" style="fill: #fcebd6; stroke: #a75513; stroke-width: 1.8; stroke-linejoin: miter" />
+   </ns0:g>
+   <ns0:g id="patch_6">
+    <ns0:path d="M 606.797974 253.8  Q 642.599448 253.8 675.605837 253.8  " clip-path="url(#p15944bc215)" style="fill: none; stroke: #a75513; stroke-width: 2.5; stroke-linecap: round" />
+    <ns0:path d="M 666.405837 249.2  L 675.605837 253.8  L 666.405837 258.4  z " clip-path="url(#p15944bc215)" style="fill: #a75513; stroke: #a75513; stroke-width: 2.5; stroke-linecap: round" />
+   </ns0:g>
+   <ns0:g id="patch_7">
+    <ns0:path d="M 56.16 410.4  L 285.84 410.4  Q 298.8 410.4 298.8 423.36  L 298.8 467.28  Q 298.8 480.24 285.84 480.24  L 56.16 480.24  Q 43.2 480.24 43.2 467.28  L 43.2 423.36  Q 43.2 410.4 56.16 410.4  z " clip-path="url(#p15944bc215)" style="fill: #e1f1ee; stroke: #117d80; stroke-width: 1.8; stroke-linejoin: miter" />
+   </ns0:g>
+   <ns0:g id="patch_8">
+    <ns0:path d="M 398.16 410.4  L 584.64 410.4  Q 597.6 410.4 597.6 423.36  L 597.6 467.28  Q 597.6 480.24 584.64 480.24  L 398.16 480.24  Q 385.2 480.24 385.2 467.28  L 385.2 423.36  Q 385.2 410.4 398.16 410.4  z " clip-path="url(#p15944bc215)" style="fill: #e1f1ee; stroke: #117d80; stroke-width: 1.8; stroke-linejoin: miter" />
+   </ns0:g>
+   <ns0:g id="patch_9">
+    <ns0:path d="M 307.999512 445.32  Q 341.997857 445.32 373.201117 445.32  " clip-path="url(#p15944bc215)" style="fill: none; stroke: #117d80; stroke-width: 2.5; stroke-linecap: round" />
+    <ns0:path d="M 364.001117 440.72  L 373.201117 445.32  L 364.001117 449.92  z " clip-path="url(#p15944bc215)" style="fill: #117d80; stroke: #117d80; stroke-width: 2.5; stroke-linecap: round" />
+   </ns0:g>
+   <ns0:g id="patch_10">
+    <ns0:path d="M 700.56 410.4  L 807.84 410.4  Q 820.8 410.4 820.8 423.36  L 820.8 467.28  Q 820.8 480.24 807.84 480.24  L 700.56 480.24  Q 687.6 480.24 687.6 467.28  L 687.6 423.36  Q 687.6 410.4 700.56 410.4  z " clip-path="url(#p15944bc215)" style="fill: #e1f1ee; stroke: #117d80; stroke-width: 1.8; stroke-linejoin: miter" />
+   </ns0:g>
+   <ns0:g id="patch_11">
+    <ns0:path d="M 606.797974 445.32  Q 642.599448 445.32 675.605837 445.32  " clip-path="url(#p15944bc215)" style="fill: none; stroke: #117d80; stroke-width: 2.5; stroke-linecap: round" />
+    <ns0:path d="M 666.405837 440.72  L 675.605837 445.32  L 666.405837 449.92  z " clip-path="url(#p15944bc215)" style="fill: #117d80; stroke: #117d80; stroke-width: 2.5; stroke-linecap: round" />
+   </ns0:g>
+   <ns0:g id="patch_12">
+    <ns0:path d="M 491.76 294.318369  Q 491.76 348.477577 491.76 399.841699  " clip-path="url(#p15944bc215)" style="fill: none; stroke-dasharray: 9.25,4; stroke-dashoffset: 0; stroke: #346bb5; stroke-width: 2.5; stroke-linecap: round" />
+    <ns0:path d="M 496.36 390.641699  L 491.76 399.841699  L 487.16 390.641699  z " clip-path="url(#p15944bc215)" style="fill: #346bb5; stroke-dasharray: 9.25,4; stroke-dashoffset: 0; stroke: #346bb5; stroke-width: 2.5; stroke-linecap: round" />
+   </ns0:g>
+   <ns0:g id="patch_13">
+    <ns0:path d="M 488.16 514.8  L 807.84 514.8  Q 820.8 514.8 820.8 527.76  L 820.8 550.8  Q 820.8 563.76 807.84 563.76  L 488.16 563.76  Q 475.2 563.76 475.2 550.8  L 475.2 527.76  Q 475.2 514.8 488.16 514.8  z " clip-path="url(#p15944bc215)" style="fill: #e5edf8; stroke: #346bb5; stroke-width: 1.8; stroke-linejoin: miter" />
+   </ns0:g>
+   <ns0:g id="text_1">
+    <ns0:text style="fill: #425b64; font: 18px 'Arial Unicode MS'; text-anchor: start" x="43.2" y="34.484063" transform="rotate(-0 43.2 34.484063)">03 / 12   HIDDEN REASONING / LOOPED TRANSFORMERS</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_2">
+    <ns0:text style="fill: #132a36; font: 37.44px 'Arial Unicode MS'; text-anchor: start" x="43.2" y="90.61515" transform="rotate(-0 43.2 90.61515)">CODI aligns states before the answer</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_3">
+    <ns0:text style="fill: #425b64; font: 23.04px 'Arial Unicode MS'; text-anchor: start" x="43.2" y="163.6524" transform="rotate(-0 43.2 163.6524)">Shared weights; the teacher still has a text loss</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_4">
+    <ns0:text style="fill: #a75513; font: 26.64px 'Arial Unicode MS'; text-anchor: start" x="43.2" y="196.908413" transform="rotate(-0 43.2 196.908413)">Teacher task</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_5">
+    <ns0:text style="fill: #132a36; font: 24.48px 'Arial Unicode MS'" transform="translate(72.014738 247.170892)">Question + written</ns0:text>
+    <ns0:text style="fill: #132a36; font: 24.48px 'Arial Unicode MS'" transform="translate(141.740663 273.074557)">chain</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_6">
+    <ns0:text style="fill: #132a36; font: 24.48px 'Arial Unicode MS'; text-anchor: middle" x="491.4" y="260.122725" transform="rotate(-0 491.4 260.122725)">Pre-answer state</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_7">
+    <ns0:text style="fill: #132a36; font: 24.48px 'Arial Unicode MS'; text-anchor: middle" x="754.2" y="260.122725" transform="rotate(-0 754.2 260.122725)">Answer</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_8">
+    <ns0:text style="fill: #117d80; font: 26.64px 'Arial Unicode MS'; text-anchor: start" x="43.2" y="388.428413" transform="rotate(-0 43.2 388.428413)">Student task</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_9">
+    <ns0:text style="fill: #132a36; font: 24.48px 'Arial Unicode MS'" transform="translate(78.123263 438.690893)">Question + latent</ns0:text>
+    <ns0:text style="fill: #132a36; font: 24.48px 'Arial Unicode MS'" transform="translate(138.345975 464.594558)">states</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_10">
+    <ns0:text style="fill: #132a36; font: 24.48px 'Arial Unicode MS'; text-anchor: middle" x="491.4" y="451.642725" transform="rotate(-0 491.4 451.642725)">Pre-answer state</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_11">
+    <ns0:text style="fill: #132a36; font: 24.48px 'Arial Unicode MS'; text-anchor: middle" x="754.2" y="451.642725" transform="rotate(-0 754.2 451.642725)">Answer</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_12">
+    <ns0:text style="fill: #346bb5; font: 21.6px 'Arial Unicode MS'" transform="translate(524.16 330.820875)">Normalized L1</ns0:text>
+    <ns0:text style="fill: #346bb5; font: 21.6px 'Arial Unicode MS'" transform="translate(524.16 353.99295)">Stop gradient on target</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_13">
+    <ns0:text style="fill: #132a36; font: 21.6px 'Arial Unicode MS'; text-anchor: start" x="43.2" y="325.060875" transform="rotate(-0 43.2 325.060875)">Teacher CE: chain + answer</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_14">
+    <ns0:text style="fill: #132a36; font: 23.04px 'Arial Unicode MS'; text-anchor: start" x="43.2" y="527.6916" transform="rotate(-0 43.2 527.6916)">Student CE: answer</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_15">
+    <ns0:text style="fill: #132a36; font: 19.44px 'Arial Unicode MS'" transform="translate(513.470644 533.924584)">Stop-gradient is only on the KD</ns0:text>
+    <ns0:text style="fill: #132a36; font: 19.44px 'Arial Unicode MS'" transform="translate(623.147175 554.704729)">target</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_16">
+    <ns0:text style="fill: #425b64; font: 19.44px 'Arial Unicode MS'; text-anchor: start" x="43.2" y="603.111712" transform="rotate(-0 43.2 603.111712)">Continuous generation and layer details simplified; teacher is not frozen.</ns0:text>
+   </ns0:g>
+  </ns0:g>
+ </ns0:g>
+ <ns0:defs>
+  <ns0:clipPath id="p15944bc215">
+   <ns0:rect x="0" y="0" width="864" height="648" />
+  </ns0:clipPath>
+ </ns0:defs>
+</ns0:svg>

@@ -1,0 +1,112 @@
+<?xml version='1.0' encoding='utf-8'?>
+<ns0:svg xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:ns0="http://www.w3.org/2000/svg" xmlns:ns2="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" width="1200" height="900" viewBox="0 0 864 648" version="1.1">
+ <ns0:title>Keep the problem available</ns0:title>
+ <ns0:metadata>
+  <rdf:RDF>
+   <ns2:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+    <dc:title>Keep the problem available</dc:title>
+    <dc:date>2026-09-19T22:38:46.466482</dc:date>
+    <dc:description>Original conceptual drawing; no newly measured experimental results. A fixed problem-condition box spans the top and feeds each of several identical shared update boxes through separate downward arrows. A candidate-state path runs left to right through those updates, with state boxes between them. Use ellipses to make the unroll generic, with no actual iteration counts. Same block color denotes shared weights. Mark this as an architecture/algorithm analogy, not evidence that the Transformer executes gradient descent or converges.</dc:description>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <ns2:Agent>
+      <dc:title>Matplotlib v3.8.0, https://matplotlib.org/</dc:title>
+     </ns2:Agent>
+    </dc:creator>
+   </ns2:Work>
+  </rdf:RDF>
+ </ns0:metadata>
+ <ns0:defs>
+  <ns0:style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</ns0:style>
+ </ns0:defs>
+ <ns0:g id="figure_1">
+  <ns0:g id="patch_1">
+   <ns0:path d="M 0 648  L 864 648  L 864 0  L 0 0  z " style="fill: #f6f5f0" />
+  </ns0:g>
+  <ns0:g id="axes_1">
+   <ns0:g id="patch_2">
+    <ns0:path d="M 120.96 164.88  L 743.04 164.88  Q 756 164.88 756 177.84  L 756 230.4  Q 756 243.36 743.04 243.36  L 120.96 243.36  Q 108 243.36 108 230.4  L 108 177.84  Q 108 164.88 120.96 164.88  z " clip-path="url(#p6e44924119)" style="fill: #e1f1ee; stroke: #117d80; stroke-width: 1.8; stroke-linejoin: miter" />
+   </ns0:g>
+   <ns0:g id="patch_3">
+    <ns0:path d="M 255.6 248.241819  Q 255.6 294.120895 255.6 337.204885  " clip-path="url(#p6e44924119)" style="fill: none; stroke: #117d80; stroke-width: 2.5; stroke-linecap: round" />
+    <ns0:path d="M 260.2 328.004885  L 255.6 337.204885  L 251 328.004885  z " clip-path="url(#p6e44924119)" style="fill: #117d80; stroke: #117d80; stroke-width: 2.5; stroke-linecap: round" />
+   </ns0:g>
+   <ns0:g id="patch_4">
+    <ns0:path d="M 561.6 248.241819  Q 561.6 294.120895 561.6 337.204885  " clip-path="url(#p6e44924119)" style="fill: none; stroke: #117d80; stroke-width: 2.5; stroke-linecap: round" />
+    <ns0:path d="M 566.2 328.004885  L 561.6 337.204885  L 557 328.004885  z " clip-path="url(#p6e44924119)" style="fill: #117d80; stroke: #117d80; stroke-width: 2.5; stroke-linecap: round" />
+   </ns0:g>
+   <ns0:g id="patch_5">
+    <ns0:path d="M 56.16 352.08  L 120.24 352.08  Q 133.2 352.08 133.2 365.04  L 133.2 411.12  Q 133.2 424.08 120.24 424.08  L 56.16 424.08  Q 43.2 424.08 43.2 411.12  L 43.2 365.04  Q 43.2 352.08 56.16 352.08  z " clip-path="url(#p6e44924119)" style="fill: #e5edf8; stroke: #346bb5; stroke-width: 1.8; stroke-linejoin: miter" />
+   </ns0:g>
+   <ns0:g id="patch_6">
+    <ns0:path d="M 192.96 352.08  L 339.84 352.08  Q 352.8 352.08 352.8 365.04  L 352.8 411.12  Q 352.8 424.08 339.84 424.08  L 192.96 424.08  Q 180 424.08 180 411.12  L 180 365.04  Q 180 352.08 192.96 352.08  z " clip-path="url(#p6e44924119)" style="fill: #e5edf8; stroke: #346bb5; stroke-width: 1.8; stroke-linejoin: miter" />
+   </ns0:g>
+   <ns0:g id="patch_7">
+    <ns0:path d="M 142.397314 388.08  Q 156.598471 388.08 168.004543 388.08  " clip-path="url(#p6e44924119)" style="fill: none; stroke: #346bb5; stroke-width: 2.5; stroke-linecap: round" />
+    <ns0:path d="M 158.804543 383.48  L 168.004543 388.08  L 158.804543 392.68  z " clip-path="url(#p6e44924119)" style="fill: #346bb5; stroke: #346bb5; stroke-width: 2.5; stroke-linecap: round" />
+   </ns0:g>
+   <ns0:g id="patch_8">
+    <ns0:path d="M 401.76 352.08  L 447.84 352.08  Q 460.8 352.08 460.8 365.04  L 460.8 411.12  Q 460.8 424.08 447.84 424.08  L 401.76 424.08  Q 388.8 424.08 388.8 411.12  L 388.8 365.04  Q 388.8 352.08 401.76 352.08  z " clip-path="url(#p6e44924119)" style="fill: #e5edf8; stroke: #346bb5; stroke-width: 1.8; stroke-linejoin: miter" />
+   </ns0:g>
+   <ns0:g id="patch_9">
+    <ns0:path d="M 362.00127 388.08  Q 370.802994 388.08 376.809634 388.08  " clip-path="url(#p6e44924119)" style="fill: none; stroke: #346bb5; stroke-width: 2.5; stroke-linecap: round" />
+    <ns0:path d="M 367.609634 383.48  L 376.809634 388.08  L 367.609634 392.68  z " clip-path="url(#p6e44924119)" style="fill: #346bb5; stroke: #346bb5; stroke-width: 2.5; stroke-linecap: round" />
+   </ns0:g>
+   <ns0:g id="patch_10">
+    <ns0:path d="M 498.96 352.08  L 645.84 352.08  Q 658.8 352.08 658.8 365.04  L 658.8 411.12  Q 658.8 424.08 645.84 424.08  L 498.96 424.08  Q 486 424.08 486 411.12  L 486 365.04  Q 486 352.08 498.96 352.08  z " clip-path="url(#p6e44924119)" style="fill: #e5edf8; stroke: #346bb5; stroke-width: 1.8; stroke-linejoin: miter" />
+   </ns0:g>
+   <ns0:g id="patch_11">
+    <ns0:path d="M 470.00127 388.08  Q 473.401755 388.08 474.007156 388.08  " clip-path="url(#p6e44924119)" style="fill: none; stroke: #346bb5; stroke-width: 2.5; stroke-linecap: round" />
+    <ns0:path d="M 464.807156 383.48  L 474.007156 388.08  L 464.807156 392.68  z " clip-path="url(#p6e44924119)" style="fill: #346bb5; stroke: #346bb5; stroke-width: 2.5; stroke-linecap: round" />
+   </ns0:g>
+   <ns0:g id="patch_12">
+    <ns0:path d="M 743.76 352.08  L 807.84 352.08  Q 820.8 352.08 820.8 365.04  L 820.8 411.12  Q 820.8 424.08 807.84 424.08  L 743.76 424.08  Q 730.8 424.08 730.8 411.12  L 730.8 365.04  Q 730.8 352.08 743.76 352.08  z " clip-path="url(#p6e44924119)" style="fill: #e5edf8; stroke: #346bb5; stroke-width: 1.8; stroke-linejoin: miter" />
+   </ns0:g>
+   <ns0:g id="patch_13">
+    <ns0:path d="M 668.000391 388.08  Q 694.8008 388.08 718.806125 388.08  " clip-path="url(#p6e44924119)" style="fill: none; stroke: #346bb5; stroke-width: 2.5; stroke-linecap: round" />
+    <ns0:path d="M 709.606125 383.48  L 718.806125 388.08  L 709.606125 392.68  z " clip-path="url(#p6e44924119)" style="fill: #346bb5; stroke: #346bb5; stroke-width: 2.5; stroke-linecap: round" />
+   </ns0:g>
+   <ns0:g id="text_1">
+    <ns0:text style="fill: #425b64; font: 18px 'Arial Unicode MS'; text-anchor: start" x="43.2" y="34.484063" transform="rotate(-0 43.2 34.484063)">05 / 12   HIDDEN REASONING / LOOPED TRANSFORMERS</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_2">
+    <ns0:text style="fill: #132a36; font: 37.44px 'Arial Unicode MS'; text-anchor: start" x="43.2" y="90.15885" transform="rotate(-0 43.2 90.15885)">Keep the problem available</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_3">
+    <ns0:text style="fill: #132a36; font: 32.4px 'Arial Unicode MS'; text-anchor: middle" x="432" y="212.488313" transform="rotate(-0 432 212.488313)">Fixed problem condition</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_4">
+    <ns0:text style="fill: #132a36; font: 25.92px 'Arial Unicode MS'; text-anchor: middle" x="88.2" y="394.77465" transform="rotate(-0 88.2 394.77465)">s</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_5">
+    <ns0:text style="fill: #132a36; font: 25.92px 'Arial Unicode MS'" transform="translate(224.6121 381.060945)">Shared</ns0:text>
+    <ns0:text style="fill: #132a36; font: 25.92px 'Arial Unicode MS'" transform="translate(226.764675 408.488355)">update</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_6">
+    <ns0:text style="fill: #132a36; font: 25.92px 'Arial Unicode MS'; text-anchor: middle" x="424.8" y="394.77465" transform="rotate(-0 424.8 394.77465)">s′</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_7">
+    <ns0:text style="fill: #132a36; font: 25.92px 'Arial Unicode MS'" transform="translate(530.6121 381.060945)">Shared</ns0:text>
+    <ns0:text style="fill: #132a36; font: 25.92px 'Arial Unicode MS'" transform="translate(532.764675 408.488355)">update</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_8">
+    <ns0:text style="fill: #132a36; font: 25.92px 'Arial Unicode MS'; text-anchor: middle" x="775.8" y="394.77465" transform="rotate(-0 775.8 394.77465)">…</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_9">
+    <ns0:text style="fill: #346bb5; font: 25.92px 'Arial Unicode MS'; text-anchor: start" x="43.2" y="482.23305" transform="rotate(-0 43.2 482.23305)">The changing candidate state moves across rounds</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_10">
+    <ns0:text style="fill: #132a36; font: 24.48px 'Arial Unicode MS'; text-anchor: start" x="43.2" y="528.722325" transform="rotate(-0 43.2 528.722325)">Matching update blocks share weights</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_11">
+    <ns0:text style="fill: #425b64; font: 19.44px 'Arial Unicode MS'; text-anchor: start" x="43.2" y="603.111712" transform="rotate(-0 43.2 603.111712)">An iterative-design analogy, not proof of gradient descent or convergence.</ns0:text>
+   </ns0:g>
+  </ns0:g>
+ </ns0:g>
+ <ns0:defs>
+  <ns0:clipPath id="p6e44924119">
+   <ns0:rect x="0" y="0" width="864" height="648" />
+  </ns0:clipPath>
+ </ns0:defs>
+</ns0:svg>

@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>What Happens Before a Model Gives Its Answer?</title><meta name="description" content="Follow three execution traces for one arithmetic problem to see what is passed forward and which part of the model runs again."><link rel="canonical" href="https://jonneslin.github.io/hidden-reasoning/articles/en/01-where-reasoning-happens.html"><link rel="alternate" hreflang="en" href="https://jonneslin.github.io/hidden-reasoning/articles/en/01-where-reasoning-happens.html"><link rel="alternate" hreflang="zh" href="https://jonneslin.github.io/hidden-reasoning/articles/zh/01-where-reasoning-happens.html"><meta property="og:url" content="https://jonneslin.github.io/hidden-reasoning/articles/en/01-where-reasoning-happens.html"><meta property="og:title" content="What Happens Before a Model Gives Its Answer?"><meta property="og:description" content="Follow three execution traces for one arithmetic problem to see what is passed forward and which part of the model runs again."><meta property="og:type" content="article"><meta property="og:image" content="https://jonneslin.github.io/hidden-reasoning/assets/01/cover.en.png"><style>
+:root{color-scheme:light;--ink:#132a36;--muted:#425b64;--teal:#117d80;--paper:#f6f5f0}
+*{box-sizing:border-box}body{margin:0;color:var(--ink);background:var(--paper);font:18px/1.8 system-ui,-apple-system,'PingFang SC','Noto Sans CJK SC',sans-serif}
+a{color:#125f74;text-underline-offset:.18em}a:hover{color:#9a4e10}header,main,footer{max-width:1120px;margin:auto;padding:36px 28px}header{border-bottom:1px solid #cad7d9}header p{max-width:760px;color:var(--muted)}h1{font-size:clamp(32px,5vw,54px);line-height:1.15;letter-spacing:-.025em}h2{font-size:29px;line-height:1.3;margin-top:2em}h3{font-size:22px;line-height:1.4}img{display:block;max-width:100%;height:auto;border-radius:12px}nav{display:flex;gap:24px;flex-wrap:wrap}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:30px}.card{background:white;border:1px solid #cad7d9;border-radius:16px;padding:22px}.card h2{margin:16px 0 10px;font-size:26px}.card p{color:var(--muted);font-size:17px}.number{font:14px/1.5 ui-monospace,monospace;color:var(--muted);letter-spacing:.12em}.reading{max-width:850px}.reading p,.reading li{overflow-wrap:anywhere}.reading img{margin:28px 0 12px}.social{padding:24px;border:1px solid #cad7d9;border-radius:12px;background:white;margin:40px 0}pre{overflow:auto;white-space:pre-wrap;overflow-wrap:anywhere;background:#e9eeee;padding:18px;border-radius:8px;font-size:17px;line-height:1.65}code{font-family:ui-monospace,monospace;font-size:.9em}blockquote{margin-left:0;padding:4px 24px;border-left:4px solid var(--teal)}table{border-collapse:collapse;width:100%;font-size:16px}th,td{text-align:left;border-bottom:1px solid #cbd7d9;padding:10px}footer{font-size:14px;color:var(--muted)}@media(max-width:700px){.grid{grid-template-columns:1fr}header,main,footer{padding:24px 18px}body{font-size:17px}.card{padding:16px}h2{font-size:25px}}
+
+.reading figure{margin:28px 0}.reading figure>a{display:block}.reading figure img{margin:0}.reading figcaption{font-size:14px;margin-top:8px}
+</style></head><body><header><p><a href="../../../blog.html">← Main blog</a></p><nav><a href="../../index.html">全部文章 / All articles</a><a href="../zh/01-where-reasoning-happens.html">中文</a><a href="../../en/01-where-reasoning-happens.md">Markdown</a></nav></header><main class="reading"><h1>What Happens Before a Model Gives Its Answer?</h1>
+<p>A warehouse has three boxes of parts, with twelve parts in each box. Four parts in total are unusable. How many remain?</p>
+<p>One response says <code>3 × 12 = 36, then 36 − 4 = 32</code>. Another says only <code>32</code>. It is tempting to imagine the first model working through the problem and the second guessing. But what if the second model updated its internal state dozens of times before answering? The chat window would not tell us.</p>
+<p>We will use this <strong>teaching problem</strong> to trace three possible computation paths. These are hypothetical execution traces, not measured outputs from three models. Our question is: <strong>before the answer appears, what does the model use to keep computing?</strong></p>
+<h2>Put “36” back into the model</h2>
+<p>Start with written reasoning. Once a model generates <code>3 × 12 = 36</code>, that text becomes part of the context. While generating the subtraction, it can read the earlier <code>36</code>.</p>
+<p>The number on the page does not go directly into the next layer. Ordinary generation passes through an interface:</p>
+<pre><code class="language-text">Context → model pass → selected token
+                           ↓
+Next model pass ← that token's embedding
+</code></pre>
+<p>A token is a unit produced by the tokenizer; <code>36</code> may take one or more tokens. The output head converts the final hidden state into vocabulary scores. A decoding rule selects a token, and an embedding lookup turns it into the input at the next position. Each selected token extends the context.</p>
+<p>Writing an intermediate step therefore has a computational role: <strong>a result from one round can enter later computation through a text interface.</strong> The original CoT work supplied worked examples in prompts, improving sufficiently large models on several reasoning tasks. This changed the prompt rather than training a new model for each task. <a href="https://arxiv.org/abs/2201.11903v6">CoT v6, Sections 2–3</a></p>
+<p>Hiding that text from the interface changes what we see. If the system still generates it token by token, it still follows this path. Quiet-STaR's internal rationales, for example, consist of discrete tokens that help predict subsequent text. <a href="https://arxiv.org/abs/2403.09629v2">Quiet-STaR v2, Section 4</a></p>
+<h2>What if the model did not have to select a word first?</h2>
+<p>Before choosing a token, the model already has a vector. Could that vector become the next input directly?</p>
+<p>Coconut uses this feedback during its continuous phase. For our parts problem, a schematic trace looks like this:</p>
+<pre><code class="language-text">Process question → produce h[0]
+Input h[0] → run model → produce h[1]
+Input h[1] → run model → produce h[2]
+End continuous phase → resume text output
+</code></pre>
+<p>Boundary tokens are omitted, and the step count is illustrative. The change occurs between model passes: a continuous vector replaces token selection followed by embedding lookup. This still adds sequence positions and still waits for the previous state. The model can also retain access to historical keys and values in its KV cache. <a href="https://arxiv.org/abs/2412.06769v2">Coconut v2, Section 3</a></p>
+<p>Can we label <code>h[1]</code> as “36”? Not yet. We know how it is produced, but have not measured what it contains or established how the next step uses it. An arrow shows that information can travel; it does not reveal the learned algorithm. Article 04 develops the training of this path.</p>
+<h2>Stay at the same positions and repeat an internal module</h2>
+<p>Both paths above advance along the sequence. Recurrent depth changes a different part of the computation: before reading out the next token, a shared internal module updates the state repeatedly.</p>
+<p>Temporarily divide the model into three parts: <code>P</code> encodes the input, <code>F</code> updates the state, and <code>C</code> reads out the result. A hypothetical three-round execution is:</p>
+<pre><code class="language-text">e  = P(question)
+s1 = F(e, s0)
+s2 = F(e, s1)
+s3 = F(e, s2)
+next-token scores = C(s3)
+</code></pre>
+<p>First notice what stays unchanged: each round can access the input encoding <code>e</code>. Then follow <code>s0 → s1 → s2 → s3</code>: this is the state being updated. All three calls to <code>F</code> use the same weights but receive different states, so their outputs need not be identical. This follows the recurrent-depth paper's macroscopic prelude, shared core, and coda design; the paper also specifies details such as state initialization. We call the core <code>F</code> here, and use three rounds only for illustration. <a href="https://arxiv.org/abs/2502.05171v1">Recurrent depth v1, Section 3.1 and Figure 2</a></p>
+<p>Each round need not add an intermediate token position. The state can span several existing positions. Nor does the architecture prescribe multiplication in the first round and subtraction in the second. Those are our written solution steps, not observations about the model.</p>
+<figure><a href="../../assets/01/diagram.en.png"><img alt="Token selection followed by embedding, direct hidden-state feedback, and shared-core updates at the same positions. Each core update also receives the input encoding." src="../../assets/01/diagram.en.png" /></a><figcaption><a href="../../assets/01/diagram.en.png">Open full PNG</a> · <a href="../../references/matplotlib-layouts/assets/01/diagram.en.svg">Layout-reference SVG</a></figcaption></figure>
+<p><em>Follow the next-position input in the top two rows. Then locate the unchanged input encoding and the updated state in the bottom row. Historical caches are omitted; an LM box and an F box do not represent equal work.</em></p>
+<h2>Three paths leave different execution traces</h2>
+<p>If we could inspect system logs, the answer to the parts problem could remain <code>32</code> while the intermediate records differed:</p>
+<table>
+<thead>
+<tr>
+<th>Path</th>
+<th>What is added</th>
+<th>What runs again</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Token feedback</td>
+<td>A selected token and position</td>
+<td>Model pass at a new position</td>
+</tr>
+<tr>
+<td>Continuous feedback</td>
+<td>A computed vector and position</td>
+<td>Model pass at a new position</td>
+</tr>
+<tr>
+<td>Recurrent depth</td>
+<td>A new state at existing positions</td>
+<td>Shared core</td>
+</tr>
+</tbody>
+</table>
+<p>The table compares the three designs we just traced. It is not a set of mutually exclusive categories: a recurrent model can also generate a written chain, and a system can combine interfaces across stages.</p>
+<figure><a href="../../assets/01/cover.en.png"><img alt="Token feedback, vector feedback, and a shared core all lead to the answer 32 in three schematic paths." src="../../assets/01/cover.en.png" /></a><figcaption><a href="../../assets/01/cover.en.png">Open full PNG</a> · <a href="../../references/matplotlib-layouts/assets/01/cover.en.svg">Layout-reference SVG</a></figcaption></figure>
+<p><em>The overview now has a concrete meaning: all three outputs can be identical. The arrow counts do not rank latency, FLOPs, or accuracy.</em></p>
+<p>One more case belongs in the logs. A specially trained model may answer directly, with neither intermediate text nor an added feedback loop. Stepwise internalization progressively removes CoT prefixes from the training target until the model learns to predict the answer directly. It changes how the parameters learn the task; the training rule itself adds no extendable runtime loop. <a href="https://arxiv.org/abs/2405.14838v1">Stepwise internalization v1, Section 3</a></p>
+<p>The absence of written steps can therefore come from a change in learning. We need to record both the help supplied during training and the operations executed at test time.</p>
+<h2>Ask questions the execution log can answer</h2>
+<p>For the parts problem, we want to know where intermediate information is kept, which module runs again, and who determines the repetition count. These identify the state, operation, and budget.</p>
+<p>Only then can we assess the result. Whether extra rounds improve accuracy requires testing on a fixed task. Whether they are faster requires measuring passes, cache handling, and final output. Sharing weights reduces the storage of distinct parameters; it does not turn three executions into one.</p>
+<p>A readable explanation does not replace this investigation. The CoT paper presents written chains as a window into behavior while noting that they do not fully characterize the neural computation supporting an answer. <a href="https://arxiv.org/abs/2201.11903v6">CoT v6, Sections 2 and 6</a></p>
+<p>The <code>32</code> in the chat window is where the investigation starts. Following its inputs, states, and repeated operations backward reveals what happened before it appeared.</p><aside class="social"><h2>Twitter / X</h2><pre>The same answer, 32, can follow different computation paths. Trace token feedback, vector feedback, and recurrent depth through one problem: what is passed forward, what runs again, and who sets the number of rounds?</pre><p><a href="../../social/01-where-reasoning-happens.en.md">配图和替代文本 / Attachment and alt text</a></p><img src="../../assets/01/cover.en.png" alt="Three teaching paths reach 32: token feedback, direct vector feedback, and repeated shared-core updates. Arrows do not imply equal computation."></aside></main></body></html>

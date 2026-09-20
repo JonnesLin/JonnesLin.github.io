@@ -1,0 +1,134 @@
+<?xml version='1.0' encoding='utf-8'?>
+<ns0:svg xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:ns0="http://www.w3.org/2000/svg" xmlns:ns2="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" width="1200" height="675" viewBox="0 0 864 486" version="1.1">
+ <ns0:title>同一个答案，三条计算路径</ns0:title>
+ <ns0:metadata>
+  <rdf:RDF>
+   <ns2:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+    <dc:title>同一个答案，三条计算路径</dc:title>
+    <dc:date>2026-09-19T22:40:09.761712</dc:date>
+    <dc:description>Original conceptual drawing; no newly measured experimental results. Three separate horizontal paths start from an input and end in the same small answer tile. Top path contains a word token followed by a feedback arrow; middle contains a vector tile followed by feedback; bottom contains the same shared-core tile visited repeatedly. No numerical runtime comparison, no ranking. Make the three interfaces visibly different. The number of drawn steps is illustrative; do not suggest equal cost.</dc:description>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <ns2:Agent>
+      <dc:title>Matplotlib v3.8.0, https://matplotlib.org/</dc:title>
+     </ns2:Agent>
+    </dc:creator>
+   </ns2:Work>
+  </rdf:RDF>
+ </ns0:metadata>
+ <ns0:defs>
+  <ns0:style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</ns0:style>
+ </ns0:defs>
+ <ns0:g id="figure_1">
+  <ns0:g id="patch_1">
+   <ns0:path d="M 0 486  L 864 486  L 864 0  L 0 0  z " style="fill: #f6f5f0" />
+  </ns0:g>
+  <ns0:g id="axes_1">
+   <ns0:g id="patch_2">
+    <ns0:path d="M 56.16 156.96  L 149.04 156.96  Q 162 156.96 162 169.92  L 162 198  Q 162 210.96 149.04 210.96  L 56.16 210.96  Q 43.2 210.96 43.2 198  L 43.2 169.92  Q 43.2 156.96 56.16 156.96  z " clip-path="url(#pf150f74e8e)" style="fill: #fcebd6; stroke: #a75513; stroke-width: 1.8; stroke-linejoin: miter" />
+   </ns0:g>
+   <ns0:g id="patch_3">
+    <ns0:path d="M 290.16 156.96  L 523.44 156.96  Q 536.4 156.96 536.4 169.92  L 536.4 198  Q 536.4 210.96 523.44 210.96  L 290.16 210.96  Q 277.2 210.96 277.2 198  L 277.2 169.92  Q 277.2 156.96 290.16 156.96  z " clip-path="url(#pf150f74e8e)" style="fill: #fcebd6; stroke: #a75513; stroke-width: 1.8; stroke-linejoin: miter" />
+   </ns0:g>
+   <ns0:g id="patch_4">
+    <ns0:path d="M 171.202588 183.96  Q 219.601802 183.96 265.205932 183.96  " clip-path="url(#pf150f74e8e)" style="fill: none; stroke: #a75513; stroke-width: 2.5; stroke-linecap: round" />
+    <ns0:path d="M 256.005932 179.36  L 265.205932 183.96  L 256.005932 188.56  z " clip-path="url(#pf150f74e8e)" style="fill: #a75513; stroke: #a75513; stroke-width: 2.5; stroke-linecap: round" />
+   </ns0:g>
+   <ns0:g id="patch_5">
+    <ns0:path d="M 700.56 156.96  L 807.84 156.96  Q 820.8 156.96 820.8 169.92  L 820.8 198  Q 820.8 210.96 807.84 210.96  L 700.56 210.96  Q 687.6 210.96 687.6 198  L 687.6 169.92  Q 687.6 156.96 700.56 156.96  z " clip-path="url(#pf150f74e8e)" style="fill: #fcebd6; stroke: #a75513; stroke-width: 1.8; stroke-linejoin: miter" />
+   </ns0:g>
+   <ns0:g id="patch_6">
+    <ns0:path d="M 545.599731 183.96  Q 611.998161 183.96 675.601505 183.96  " clip-path="url(#pf150f74e8e)" style="fill: none; stroke: #a75513; stroke-width: 2.5; stroke-linecap: round" />
+    <ns0:path d="M 666.401505 179.36  L 675.601505 183.96  L 666.401505 188.56  z " clip-path="url(#pf150f74e8e)" style="fill: #a75513; stroke: #a75513; stroke-width: 2.5; stroke-linecap: round" />
+   </ns0:g>
+   <ns0:g id="patch_7">
+    <ns0:path d="M 477.306453 215.170389  Q 406.078921 277.958563 336.948092 217.016819  " clip-path="url(#pf150f74e8e)" style="fill: none; stroke: #a75513; stroke-width: 2.5; stroke-linecap: round" />
+    <ns0:path d="M 340.807489 226.551233  L 336.948092 217.016819  L 346.891262 219.64995  z " clip-path="url(#pf150f74e8e)" style="fill: #a75513; stroke: #a75513; stroke-width: 2.5; stroke-linecap: round" />
+   </ns0:g>
+   <ns0:g id="patch_8">
+    <ns0:path d="M 56.16 247.68  L 149.04 247.68  Q 162 247.68 162 260.64  L 162 288.72  Q 162 301.68 149.04 301.68  L 56.16 301.68  Q 43.2 301.68 43.2 288.72  L 43.2 260.64  Q 43.2 247.68 56.16 247.68  z " clip-path="url(#pf150f74e8e)" style="fill: #e1f1ee; stroke: #117d80; stroke-width: 1.8; stroke-linejoin: miter" />
+   </ns0:g>
+   <ns0:g id="patch_9">
+    <ns0:path d="M 290.16 247.68  L 523.44 247.68  Q 536.4 247.68 536.4 260.64  L 536.4 288.72  Q 536.4 301.68 523.44 301.68  L 290.16 301.68  Q 277.2 301.68 277.2 288.72  L 277.2 260.64  Q 277.2 247.68 290.16 247.68  z " clip-path="url(#pf150f74e8e)" style="fill: #e1f1ee; stroke: #117d80; stroke-width: 1.8; stroke-linejoin: miter" />
+   </ns0:g>
+   <ns0:g id="patch_10">
+    <ns0:path d="M 171.202588 274.68  Q 219.601802 274.68 265.205932 274.68  " clip-path="url(#pf150f74e8e)" style="fill: none; stroke: #117d80; stroke-width: 2.5; stroke-linecap: round" />
+    <ns0:path d="M 256.005932 270.08  L 265.205932 274.68  L 256.005932 279.28  z " clip-path="url(#pf150f74e8e)" style="fill: #117d80; stroke: #117d80; stroke-width: 2.5; stroke-linecap: round" />
+   </ns0:g>
+   <ns0:g id="patch_11">
+    <ns0:path d="M 700.56 247.68  L 807.84 247.68  Q 820.8 247.68 820.8 260.64  L 820.8 288.72  Q 820.8 301.68 807.84 301.68  L 700.56 301.68  Q 687.6 301.68 687.6 288.72  L 687.6 260.64  Q 687.6 247.68 700.56 247.68  z " clip-path="url(#pf150f74e8e)" style="fill: #e1f1ee; stroke: #117d80; stroke-width: 1.8; stroke-linejoin: miter" />
+   </ns0:g>
+   <ns0:g id="patch_12">
+    <ns0:path d="M 545.599731 274.68  Q 611.998161 274.68 675.601505 274.68  " clip-path="url(#pf150f74e8e)" style="fill: none; stroke: #117d80; stroke-width: 2.5; stroke-linecap: round" />
+    <ns0:path d="M 666.401505 270.08  L 675.601505 274.68  L 666.401505 279.28  z " clip-path="url(#pf150f74e8e)" style="fill: #117d80; stroke: #117d80; stroke-width: 2.5; stroke-linecap: round" />
+   </ns0:g>
+   <ns0:g id="patch_13">
+    <ns0:path d="M 477.306453 305.890389  Q 406.078921 368.678563 336.948092 307.736819  " clip-path="url(#pf150f74e8e)" style="fill: none; stroke: #117d80; stroke-width: 2.5; stroke-linecap: round" />
+    <ns0:path d="M 340.807489 317.271233  L 336.948092 307.736819  L 346.891262 310.36995  z " clip-path="url(#pf150f74e8e)" style="fill: #117d80; stroke: #117d80; stroke-width: 2.5; stroke-linecap: round" />
+   </ns0:g>
+   <ns0:g id="patch_14">
+    <ns0:path d="M 56.16 338.4  L 149.04 338.4  Q 162 338.4 162 351.36  L 162 379.44  Q 162 392.4 149.04 392.4  L 56.16 392.4  Q 43.2 392.4 43.2 379.44  L 43.2 351.36  Q 43.2 338.4 56.16 338.4  z " clip-path="url(#pf150f74e8e)" style="fill: #e5edf8; stroke: #346bb5; stroke-width: 1.8; stroke-linejoin: miter" />
+   </ns0:g>
+   <ns0:g id="patch_15">
+    <ns0:path d="M 290.16 338.4  L 523.44 338.4  Q 536.4 338.4 536.4 351.36  L 536.4 379.44  Q 536.4 392.4 523.44 392.4  L 290.16 392.4  Q 277.2 392.4 277.2 379.44  L 277.2 351.36  Q 277.2 338.4 290.16 338.4  z " clip-path="url(#pf150f74e8e)" style="fill: #e5edf8; stroke: #346bb5; stroke-width: 1.8; stroke-linejoin: miter" />
+   </ns0:g>
+   <ns0:g id="patch_16">
+    <ns0:path d="M 171.202588 365.4  Q 219.601802 365.4 265.205932 365.4  " clip-path="url(#pf150f74e8e)" style="fill: none; stroke: #346bb5; stroke-width: 2.5; stroke-linecap: round" />
+    <ns0:path d="M 256.005932 360.8  L 265.205932 365.4  L 256.005932 370  z " clip-path="url(#pf150f74e8e)" style="fill: #346bb5; stroke: #346bb5; stroke-width: 2.5; stroke-linecap: round" />
+   </ns0:g>
+   <ns0:g id="patch_17">
+    <ns0:path d="M 700.56 338.4  L 807.84 338.4  Q 820.8 338.4 820.8 351.36  L 820.8 379.44  Q 820.8 392.4 807.84 392.4  L 700.56 392.4  Q 687.6 392.4 687.6 379.44  L 687.6 351.36  Q 687.6 338.4 700.56 338.4  z " clip-path="url(#pf150f74e8e)" style="fill: #e5edf8; stroke: #346bb5; stroke-width: 1.8; stroke-linejoin: miter" />
+   </ns0:g>
+   <ns0:g id="patch_18">
+    <ns0:path d="M 545.599731 365.4  Q 611.998161 365.4 675.601505 365.4  " clip-path="url(#pf150f74e8e)" style="fill: none; stroke: #346bb5; stroke-width: 2.5; stroke-linecap: round" />
+    <ns0:path d="M 666.401505 360.8  L 675.601505 365.4  L 666.401505 370  z " clip-path="url(#pf150f74e8e)" style="fill: #346bb5; stroke: #346bb5; stroke-width: 2.5; stroke-linecap: round" />
+   </ns0:g>
+   <ns0:g id="patch_19">
+    <ns0:path d="M 477.306453 396.610389  Q 406.078921 459.398563 336.948092 398.456819  " clip-path="url(#pf150f74e8e)" style="fill: none; stroke: #346bb5; stroke-width: 2.5; stroke-linecap: round" />
+    <ns0:path d="M 340.807489 407.991233  L 336.948092 398.456819  L 346.891262 401.08995  z " clip-path="url(#pf150f74e8e)" style="fill: #346bb5; stroke: #346bb5; stroke-width: 2.5; stroke-linecap: round" />
+   </ns0:g>
+   <ns0:g id="text_1">
+    <ns0:text style="fill: #425b64; font: 18px 'Arial Unicode MS'; text-anchor: start" x="43.2" y="34.484063" transform="rotate(-0 43.2 34.484063)">01 / 12   隐状态推理与循环 Transformer</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_2">
+    <ns0:text style="fill: #132a36; font: 37.44px 'Arial Unicode MS'; text-anchor: start" x="43.2" y="92.7387" transform="rotate(-0 43.2 92.7387)">同一个答案，三条计算路径</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_3">
+    <ns0:text style="fill: #132a36; font: 27.36px 'Arial Unicode MS'; text-anchor: middle" x="102.6" y="191.088562" transform="rotate(-0 102.6 191.088562)">输入</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_4">
+    <ns0:text style="fill: #132a36; font: 27.36px 'Arial Unicode MS'; text-anchor: middle" x="406.8" y="191.026575" transform="rotate(-0 406.8 191.026575)">文字反馈</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_5">
+    <ns0:text style="fill: #132a36; font: 27.36px 'Arial Unicode MS'; text-anchor: middle" x="754.2" y="191.026575" transform="rotate(-0 754.2 191.026575)">答案</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_6">
+    <ns0:text style="fill: #132a36; font: 27.36px 'Arial Unicode MS'; text-anchor: middle" x="102.6" y="281.808562" transform="rotate(-0 102.6 281.808562)">输入</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_7">
+    <ns0:text style="fill: #132a36; font: 27.36px 'Arial Unicode MS'; text-anchor: middle" x="406.8" y="281.746575" transform="rotate(-0 406.8 281.746575)">向量反馈</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_8">
+    <ns0:text style="fill: #132a36; font: 27.36px 'Arial Unicode MS'; text-anchor: middle" x="754.2" y="281.746575" transform="rotate(-0 754.2 281.746575)">答案</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_9">
+    <ns0:text style="fill: #132a36; font: 27.36px 'Arial Unicode MS'; text-anchor: middle" x="102.6" y="372.528562" transform="rotate(-0 102.6 372.528562)">输入</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_10">
+    <ns0:text style="fill: #132a36; font: 27.36px 'Arial Unicode MS'; text-anchor: middle" x="406.8" y="372.466575" transform="rotate(-0 406.8 372.466575)">共享核心</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_11">
+    <ns0:text style="fill: #132a36; font: 27.36px 'Arial Unicode MS'; text-anchor: middle" x="754.2" y="372.466575" transform="rotate(-0 754.2 372.466575)">答案</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_12">
+    <ns0:text style="fill: #425b64; font: 19.44px 'Arial Unicode MS'; text-anchor: start" x="43.2" y="442.28115" transform="rotate(-0 43.2 442.28115)">概念路径；示意步数不代表等量成本。</ns0:text>
+   </ns0:g>
+  </ns0:g>
+ </ns0:g>
+ <ns0:defs>
+  <ns0:clipPath id="pf150f74e8e">
+   <ns0:rect x="0" y="0" width="864" height="486" />
+  </ns0:clipPath>
+ </ns0:defs>
+</ns0:svg>

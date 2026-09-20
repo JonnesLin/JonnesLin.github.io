@@ -1,0 +1,83 @@
+<?xml version='1.0' encoding='utf-8'?>
+<ns0:svg xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:ns0="http://www.w3.org/2000/svg" xmlns:ns2="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" width="1200" height="675" viewBox="0 0 864 486" version="1.1">
+ <ns0:title>三种保证，三份证据</ns0:title>
+ <ns0:metadata>
+  <rdf:RDF>
+   <ns2:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+    <dc:title>三种保证，三份证据</dc:title>
+    <dc:date>2026-09-19T22:38:47.103376</dc:date>
+    <dc:description>Original conceptual drawing; no newly measured experimental results. Three equal, visually separate gate-like cards, no staircase and no arrow implying automatic progress. Left: model class containing a marked solution; middle: optimization trajectory ending at a question mark; right: train-length strip and longer test strip with a question mark. A shared lower band lists attention, precision, and steps. This is a conceptual distinction, never a measured result.</dc:description>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <ns2:Agent>
+      <dc:title>Matplotlib v3.8.0, https://matplotlib.org/</dc:title>
+     </ns2:Agent>
+    </dc:creator>
+   </ns2:Work>
+  </rdf:RDF>
+ </ns0:metadata>
+ <ns0:defs>
+  <ns0:style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</ns0:style>
+ </ns0:defs>
+ <ns0:g id="figure_1">
+  <ns0:g id="patch_1">
+   <ns0:path d="M 0 486  L 864 486  L 864 0  L 0 0  z " style="fill: #f6f5f0" />
+  </ns0:g>
+  <ns0:g id="axes_1">
+   <ns0:g id="patch_2">
+    <ns0:path d="M 56.16 164.16  L 275.04 164.16  Q 288 164.16 288 177.12  L 288 372.96  Q 288 385.92 275.04 385.92  L 56.16 385.92  Q 43.2 385.92 43.2 372.96  L 43.2 177.12  Q 43.2 164.16 56.16 164.16  z " clip-path="url(#p2f2c6cfc32)" style="fill: #e5edf8; stroke: #346bb5; stroke-width: 1.8; stroke-linejoin: miter" />
+   </ns0:g>
+   <ns0:g id="patch_3">
+    <ns0:path d="M 322.56 164.16  L 541.44 164.16  Q 554.4 164.16 554.4 177.12  L 554.4 372.96  Q 554.4 385.92 541.44 385.92  L 322.56 385.92  Q 309.6 385.92 309.6 372.96  L 309.6 177.12  Q 309.6 164.16 322.56 164.16  z " clip-path="url(#p2f2c6cfc32)" style="fill: #fcebd6; stroke: #a75513; stroke-width: 1.8; stroke-linejoin: miter" />
+   </ns0:g>
+   <ns0:g id="patch_4">
+    <ns0:path d="M 588.96 164.16  L 807.84 164.16  Q 820.8 164.16 820.8 177.12  L 820.8 372.96  Q 820.8 385.92 807.84 385.92  L 588.96 385.92  Q 576 385.92 576 372.96  L 576 177.12  Q 576 164.16 588.96 164.16  z " clip-path="url(#p2f2c6cfc32)" style="fill: #e1f1ee; stroke: #117d80; stroke-width: 1.8; stroke-linejoin: miter" />
+   </ns0:g>
+   <ns0:g id="patch_5">
+    <ns0:path d="M 165.6 246.96  C 179.348129 246.96 192.535021 252.422189 202.256416 262.143584  C 211.977811 271.864979 217.44 285.051871 217.44 298.8  C 217.44 312.548129 211.977811 325.735021 202.256416 335.456416  C 192.535021 345.177811 179.348129 350.64 165.6 350.64  C 151.851871 350.64 138.664979 345.177811 128.943584 335.456416  C 119.222189 325.735021 113.76 312.548129 113.76 298.8  C 113.76 285.051871 119.222189 271.864979 128.943584 262.143584  C 138.664979 252.422189 151.851871 246.96 165.6 246.96  z " clip-path="url(#p2f2c6cfc32)" style="fill: #e5edf8; stroke: #346bb5; stroke-width: 2.5; stroke-linejoin: miter" />
+   </ns0:g>
+   <ns0:g id="patch_6">
+    <ns0:path d="M 604.8 268.56  L 705.6 268.56  L 705.6 293.76  L 604.8 293.76  z " clip-path="url(#p2f2c6cfc32)" style="fill: #e1f1ee; stroke: #117d80; stroke-width: 2; stroke-linejoin: miter" />
+   </ns0:g>
+   <ns0:g id="patch_7">
+    <ns0:path d="M 604.8 315.36  L 763.2 315.36  L 763.2 340.56  L 604.8 340.56  z " clip-path="url(#p2f2c6cfc32)" style="fill: #e1f1ee; stroke: #117d80; stroke-width: 2; stroke-linejoin: miter" />
+   </ns0:g>
+   <ns0:g id="line2d_1">
+    <ns0:path d="M 339.84 328.32  L 365.04 279.36  L 397.44 300.24  L 439.2 271.44  " clip-path="url(#p2f2c6cfc32)" style="fill: none; stroke: #a75513; stroke-width: 2.5; stroke-linecap: square" />
+   </ns0:g>
+   <ns0:g id="text_1">
+    <ns0:text style="fill: #425b64; font: 18px 'Arial Unicode MS'; text-anchor: start" x="43.2" y="34.484063" transform="rotate(-0 43.2 34.484063)">09 / 12   隐状态推理与循环 Transformer</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_2">
+    <ns0:text style="fill: #132a36; font: 37.44px 'Arial Unicode MS'; text-anchor: start" x="43.2" y="92.55735" transform="rotate(-0 43.2 92.55735)">三种保证，三份证据</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_3">
+    <ns0:text style="fill: #346bb5; font: 25.2px 'Arial Unicode MS'; text-anchor: start" x="57.6" y="195.34275" transform="rotate(-0 57.6 195.34275)">存在一组参数？</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_4">
+    <ns0:text style="fill: #a75513; font: 25.2px 'Arial Unicode MS'; text-anchor: start" x="324" y="195.244312" transform="rotate(-0 324 195.244312)">训练能找到？</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_5">
+    <ns0:text style="fill: #117d80; font: 25.2px 'Arial Unicode MS'; text-anchor: start" x="590.4" y="195.417563" transform="rotate(-0 590.4 195.417563)">新输入仍正确？</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_6">
+    <ns0:text style="fill: #132a36; font: 37.44px 'Arial Unicode MS'; text-anchor: middle" x="165.6" y="308.47005" transform="rotate(-0 165.6 308.47005)">θ*</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_7">
+    <ns0:text style="fill: #a75513; font: 48.24px 'Arial Unicode MS'; text-anchor: start" x="485.28" y="307.409288" transform="rotate(-0 485.28 307.409288)">?</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_8">
+    <ns0:text style="fill: #117d80; font: 32.4px 'Arial Unicode MS'; text-anchor: start" x="781.2" y="326.311312" transform="rotate(-0 781.2 326.311312)">?</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_9">
+    <ns0:text style="fill: #425b64; font: 19.44px 'Arial Unicode MS'; text-anchor: start" x="43.2" y="441.1026" transform="rotate(-0 43.2 441.1026)">共同条件：注意力规则、数值精度、计算步数。</ns0:text>
+   </ns0:g>
+  </ns0:g>
+ </ns0:g>
+ <ns0:defs>
+  <ns0:clipPath id="p2f2c6cfc32">
+   <ns0:rect x="0" y="0" width="864" height="486" />
+  </ns0:clipPath>
+ </ns0:defs>
+</ns0:svg>

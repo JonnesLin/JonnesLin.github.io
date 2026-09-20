@@ -1,0 +1,139 @@
+<?xml version='1.0' encoding='utf-8'?>
+<ns0:svg xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:ns0="http://www.w3.org/2000/svg" xmlns:ns2="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" width="1200" height="900" viewBox="0 0 864 648" version="1.1">
+ <ns0:title>Which interface does feedback skip?</ns0:title>
+ <ns0:metadata>
+  <rdf:RDF>
+   <ns2:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+    <dc:title>Which interface does feedback skip?</dc:title>
+    <dc:date>2026-09-19T22:45:56.916575</dc:date>
+    <dc:description>Original conceptual drawing; no newly measured experimental results. Two detailed rows. Ordinary autoregressive generation: current hidden state h_t -&gt; output head W -&gt; token choice u -&gt; token embedding E(u) -&gt; next full model forward -&gt; next hidden state. Direct continuous feedback: h_t routes directly as the next position's input e_(t+1), then next full model forward. Both rows lead eventually to a language readout and final answer. Show historical KV cache as a separate shared-access concept, not eliminated by direct feedback. A small optional alternative on the continuous edge says projection possible (CODI); avoid suggesting it is part of basic Coconut. No internal-search tree and no timing claims.</dc:description>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <ns2:Agent>
+      <dc:title>Matplotlib v3.8.0, https://matplotlib.org/</dc:title>
+     </ns2:Agent>
+    </dc:creator>
+   </ns2:Work>
+  </rdf:RDF>
+ </ns0:metadata>
+ <ns0:defs>
+  <ns0:style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</ns0:style>
+ </ns0:defs>
+ <ns0:g id="figure_1">
+  <ns0:g id="patch_1">
+   <ns0:path d="M 0 648  L 864 648  L 864 0  L 0 0  z " style="fill: #f6f5f0" />
+  </ns0:g>
+  <ns0:g id="axes_1">
+   <ns0:g id="patch_2">
+    <ns0:path d="M 56.16 204.48  L 138.24 204.48  Q 151.2 204.48 151.2 217.44  L 151.2 256.32  Q 151.2 269.28 138.24 269.28  L 56.16 269.28  Q 43.2 269.28 43.2 256.32  L 43.2 217.44  Q 43.2 204.48 56.16 204.48  z " clip-path="url(#p1b4f326c1d)" style="fill: #fcebd6; stroke: #a75513; stroke-width: 1.8; stroke-linejoin: miter" />
+   </ns0:g>
+   <ns0:g id="patch_3">
+    <ns0:path d="M 210.96 204.48  L 289.44 204.48  Q 302.4 204.48 302.4 217.44  L 302.4 256.32  Q 302.4 269.28 289.44 269.28  L 210.96 269.28  Q 198 269.28 198 256.32  L 198 217.44  Q 198 204.48 210.96 204.48  z " clip-path="url(#p1b4f326c1d)" style="fill: #fcebd6; stroke: #a75513; stroke-width: 1.8; stroke-linejoin: miter" />
+   </ns0:g>
+   <ns0:g id="patch_4">
+    <ns0:path d="M 160.397314 236.88  Q 174.598471 236.88 186.004543 236.88  " clip-path="url(#p1b4f326c1d)" style="fill: none; stroke: #a75513; stroke-width: 2.5; stroke-linecap: round" />
+    <ns0:path d="M 176.804543 232.28  L 186.004543 236.88  L 176.804543 241.48  z " clip-path="url(#p1b4f326c1d)" style="fill: #a75513; stroke: #a75513; stroke-width: 2.5; stroke-linecap: round" />
+   </ns0:g>
+   <ns0:g id="patch_5">
+    <ns0:path d="M 369.36 204.48  L 458.64 204.48  Q 471.6 204.48 471.6 217.44  L 471.6 256.32  Q 471.6 269.28 458.64 269.28  L 369.36 269.28  Q 356.4 269.28 356.4 256.32  L 356.4 217.44  Q 356.4 204.48 369.36 204.48  z " clip-path="url(#p1b4f326c1d)" style="fill: #fcebd6; stroke: #a75513; stroke-width: 1.8; stroke-linejoin: miter" />
+   </ns0:g>
+   <ns0:g id="patch_6">
+    <ns0:path d="M 311.596436 236.88  Q 329.399832 236.88 344.408144 236.88  " clip-path="url(#p1b4f326c1d)" style="fill: none; stroke: #a75513; stroke-width: 2.5; stroke-linecap: round" />
+    <ns0:path d="M 335.208144 232.28  L 344.408144 236.88  L 335.208144 241.48  z " clip-path="url(#p1b4f326c1d)" style="fill: #a75513; stroke: #a75513; stroke-width: 2.5; stroke-linecap: round" />
+   </ns0:g>
+   <ns0:g id="patch_7">
+    <ns0:path d="M 538.56 204.48  L 624.24 204.48  Q 637.2 204.48 637.2 217.44  L 637.2 256.32  Q 637.2 269.28 624.24 269.28  L 538.56 269.28  Q 525.6 269.28 525.6 256.32  L 525.6 217.44  Q 525.6 204.48 538.56 204.48  z " clip-path="url(#p1b4f326c1d)" style="fill: #fcebd6; stroke: #a75513; stroke-width: 1.8; stroke-linejoin: miter" />
+   </ns0:g>
+   <ns0:g id="patch_8">
+    <ns0:path d="M 480.796436 236.88  Q 498.599832 236.88 513.608144 236.88  " clip-path="url(#p1b4f326c1d)" style="fill: none; stroke: #a75513; stroke-width: 2.5; stroke-linecap: round" />
+    <ns0:path d="M 504.408144 232.28  L 513.608144 236.88  L 504.408144 241.48  z " clip-path="url(#p1b4f326c1d)" style="fill: #a75513; stroke: #a75513; stroke-width: 2.5; stroke-linecap: round" />
+   </ns0:g>
+   <ns0:g id="patch_9">
+    <ns0:path d="M 700.56 204.48  L 807.84 204.48  Q 820.8 204.48 820.8 217.44  L 820.8 256.32  Q 820.8 269.28 807.84 269.28  L 700.56 269.28  Q 687.6 269.28 687.6 256.32  L 687.6 217.44  Q 687.6 204.48 700.56 204.48  z " clip-path="url(#p1b4f326c1d)" style="fill: #fcebd6; stroke: #a75513; stroke-width: 1.8; stroke-linejoin: miter" />
+   </ns0:g>
+   <ns0:g id="patch_10">
+    <ns0:path d="M 646.399512 236.88  Q 662.401573 236.88 675.608548 236.88  " clip-path="url(#p1b4f326c1d)" style="fill: none; stroke: #a75513; stroke-width: 2.5; stroke-linecap: round" />
+    <ns0:path d="M 666.408548 232.28  L 675.608548 236.88  L 666.408548 241.48  z " clip-path="url(#p1b4f326c1d)" style="fill: #a75513; stroke: #a75513; stroke-width: 2.5; stroke-linecap: round" />
+   </ns0:g>
+   <ns0:g id="patch_11">
+    <ns0:path d="M 56.16 365.04  L 145.44 365.04  Q 158.4 365.04 158.4 378  L 158.4 413.28  Q 158.4 426.24 145.44 426.24  L 56.16 426.24  Q 43.2 426.24 43.2 413.28  L 43.2 378  Q 43.2 365.04 56.16 365.04  z " clip-path="url(#p1b4f326c1d)" style="fill: #e1f1ee; stroke: #117d80; stroke-width: 1.8; stroke-linejoin: miter" />
+   </ns0:g>
+   <ns0:g id="patch_12">
+    <ns0:path d="M 279.36 365.04  L 494.64 365.04  Q 507.6 365.04 507.6 378  L 507.6 413.28  Q 507.6 426.24 494.64 426.24  L 279.36 426.24  Q 266.4 426.24 266.4 413.28  L 266.4 378  Q 266.4 365.04 279.36 365.04  z " clip-path="url(#p1b4f326c1d)" style="fill: #e1f1ee; stroke: #117d80; stroke-width: 1.8; stroke-linejoin: miter" />
+   </ns0:g>
+   <ns0:g id="patch_13">
+    <ns0:path d="M 167.602368 395.64  Q 212.401851 395.64 254.406248 395.64  " clip-path="url(#p1b4f326c1d)" style="fill: none; stroke: #117d80; stroke-width: 2.5; stroke-linecap: round" />
+    <ns0:path d="M 245.206248 391.04  L 254.406248 395.64  L 245.206248 400.24  z " clip-path="url(#p1b4f326c1d)" style="fill: #117d80; stroke: #117d80; stroke-width: 2.5; stroke-linecap: round" />
+   </ns0:g>
+   <ns0:g id="patch_14">
+    <ns0:path d="M 610.56 365.04  L 807.84 365.04  Q 820.8 365.04 820.8 378  L 820.8 413.28  Q 820.8 426.24 807.84 426.24  L 610.56 426.24  Q 597.6 426.24 597.6 413.28  L 597.6 378  Q 597.6 365.04 610.56 365.04  z " clip-path="url(#p1b4f326c1d)" style="fill: #e1f1ee; stroke: #117d80; stroke-width: 1.8; stroke-linejoin: miter" />
+   </ns0:g>
+   <ns0:g id="patch_15">
+    <ns0:path d="M 516.797974 395.64  Q 552.599448 395.64 585.605837 395.64  " clip-path="url(#p1b4f326c1d)" style="fill: none; stroke: #117d80; stroke-width: 2.5; stroke-linecap: round" />
+    <ns0:path d="M 576.405837 391.04  L 585.605837 395.64  L 576.405837 400.24  z " clip-path="url(#p1b4f326c1d)" style="fill: #117d80; stroke: #117d80; stroke-width: 2.5; stroke-linecap: round" />
+   </ns0:g>
+   <ns0:g id="patch_16">
+    <ns0:path d="M 56.16 502.56  L 383.04 502.56  Q 396 502.56 396 515.52  L 396 553.68  Q 396 566.64 383.04 566.64  L 56.16 566.64  Q 43.2 566.64 43.2 553.68  L 43.2 515.52  Q 43.2 502.56 56.16 502.56  z " clip-path="url(#p1b4f326c1d)" style="fill: #ffffff; stroke: #cbd7d9; stroke-width: 1.8; stroke-linejoin: miter" />
+   </ns0:g>
+   <ns0:g id="patch_17">
+    <ns0:path d="M 495.36 502.56  L 807.84 502.56  Q 820.8 502.56 820.8 515.52  L 820.8 553.68  Q 820.8 566.64 807.84 566.64  L 495.36 566.64  Q 482.4 566.64 482.4 553.68  L 482.4 515.52  Q 482.4 502.56 495.36 502.56  z " clip-path="url(#p1b4f326c1d)" style="fill: #e5edf8; stroke: #346bb5; stroke-width: 1.8; stroke-linejoin: miter" />
+   </ns0:g>
+   <ns0:g id="text_1">
+    <ns0:text style="fill: #425b64; font: 18px 'Arial Unicode MS'; text-anchor: start" x="43.2" y="34.484063" transform="rotate(-0 43.2 34.484063)">04 / 12   HIDDEN REASONING / LOOPED TRANSFORMERS</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_2">
+    <ns0:text style="fill: #132a36; font: 37.44px 'Arial Unicode MS'; text-anchor: start" x="43.2" y="90.61515" transform="rotate(-0 43.2 90.61515)">Which interface does feedback skip?</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_3">
+    <ns0:text style="fill: #a75513; font: 25.92px 'Arial Unicode MS'; text-anchor: start" x="43.2" y="170.06895" transform="rotate(-0 43.2 170.06895)">Ordinary generation: through vocabulary choice</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_4">
+    <ns0:text style="fill: #132a36; font: 23.76px 'Arial Unicode MS'; text-anchor: middle" x="97.2" y="243.016762" transform="rotate(-0 97.2 243.016762)">h_t</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_5">
+    <ns0:text style="fill: #132a36; font: 23.76px 'Arial Unicode MS'; text-anchor: middle" x="250.2" y="243.016762" transform="rotate(-0 250.2 243.016762)">W</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_6">
+    <ns0:text style="fill: #132a36; font: 23.76px 'Arial Unicode MS'; text-anchor: middle" x="414" y="243.016762" transform="rotate(-0 414 243.016762)">Token u</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_7">
+    <ns0:text style="fill: #132a36; font: 23.76px 'Arial Unicode MS'; text-anchor: middle" x="581.4" y="243.033469" transform="rotate(-0 581.4 243.033469)">E(u)</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_8">
+    <ns0:text style="fill: #132a36; font: 23.76px 'Arial Unicode MS'; text-anchor: middle" x="754.2" y="243.016762" transform="rotate(-0 754.2 243.016762)">Next pass</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_9">
+    <ns0:text style="fill: #117d80; font: 24.48px 'Arial Unicode MS'; text-anchor: start" x="43.2" y="328.140675" transform="rotate(-0 43.2 328.140675)">Direct feedback: h_t becomes the next-position input</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_10">
+    <ns0:text style="fill: #132a36; font: 26.64px 'Arial Unicode MS'; text-anchor: middle" x="100.8" y="402.520612" transform="rotate(-0 100.8 402.520612)">h_t</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_11">
+    <ns0:text style="fill: #132a36; font: 26.64px 'Arial Unicode MS'; text-anchor: middle" x="387" y="402.539344" transform="rotate(-0 387 402.539344)">e_(t+1) = h_t</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_12">
+    <ns0:text style="fill: #132a36; font: 26.64px 'Arial Unicode MS'; text-anchor: middle" x="709.2" y="402.520612" transform="rotate(-0 709.2 402.520612)">Next pass</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_13">
+    <ns0:text style="fill: #425b64; font: 20.88px 'Arial Unicode MS'; text-anchor: start" x="43.2" y="462.319988" transform="rotate(-0 43.2 462.319988)">CODI can use a projection; basic Coconut need not.</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_14">
+    <ns0:text style="fill: #132a36; font: 24.48px 'Arial Unicode MS'" transform="translate(81.515588 527.83893)">Historical KV cache stays</ns0:text>
+    <ns0:text style="fill: #132a36; font: 24.48px 'Arial Unicode MS'" transform="translate(171.9711 554.00652)">separate</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_15">
+    <ns0:text style="fill: #132a36; font: 23.76px 'Arial Unicode MS'" transform="translate(497.716875 528.037785)">Eventually: language readout</ns0:text>
+    <ns0:text style="fill: #132a36; font: 23.76px 'Arial Unicode MS'" transform="translate(590.185969 553.43574)">and answer</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_16">
+    <ns0:text style="fill: #425b64; font: 19.44px 'Arial Unicode MS'; text-anchor: start" x="43.2" y="603.111712" transform="rotate(-0 43.2 603.111712)">Skipping vocabulary choice does not remove the full forward pass.</ns0:text>
+   </ns0:g>
+  </ns0:g>
+ </ns0:g>
+ <ns0:defs>
+  <ns0:clipPath id="p1b4f326c1d">
+   <ns0:rect x="0" y="0" width="864" height="648" />
+  </ns0:clipPath>
+ </ns0:defs>
+</ns0:svg>

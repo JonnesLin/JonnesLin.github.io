@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>隐状态里读出了36，然后呢？</title><meta name="description" content="从读出36走到移入40：保留受体减法，预测新的答案，并用同值、随机扰动和缓存对照追查因果作用。"><link rel="canonical" href="https://jonneslin.github.io/hidden-reasoning/articles/zh/11-testing-what-hidden-states-do.html"><link rel="alternate" hreflang="zh" href="https://jonneslin.github.io/hidden-reasoning/articles/zh/11-testing-what-hidden-states-do.html"><link rel="alternate" hreflang="en" href="https://jonneslin.github.io/hidden-reasoning/articles/en/11-testing-what-hidden-states-do.html"><meta property="og:url" content="https://jonneslin.github.io/hidden-reasoning/articles/zh/11-testing-what-hidden-states-do.html"><meta property="og:title" content="隐状态里读出了36，然后呢？"><meta property="og:description" content="从读出36走到移入40：保留受体减法，预测新的答案，并用同值、随机扰动和缓存对照追查因果作用。"><meta property="og:type" content="article"><meta property="og:image" content="https://jonneslin.github.io/hidden-reasoning/assets/11/cover.zh.png"><style>
+:root{color-scheme:light;--ink:#132a36;--muted:#425b64;--teal:#117d80;--paper:#f6f5f0}
+*{box-sizing:border-box}body{margin:0;color:var(--ink);background:var(--paper);font:18px/1.8 system-ui,-apple-system,'PingFang SC','Noto Sans CJK SC',sans-serif}
+a{color:#125f74;text-underline-offset:.18em}a:hover{color:#9a4e10}header,main,footer{max-width:1120px;margin:auto;padding:36px 28px}header{border-bottom:1px solid #cad7d9}header p{max-width:760px;color:var(--muted)}h1{font-size:clamp(32px,5vw,54px);line-height:1.15;letter-spacing:-.025em}h2{font-size:29px;line-height:1.3;margin-top:2em}h3{font-size:22px;line-height:1.4}img{display:block;max-width:100%;height:auto;border-radius:12px}nav{display:flex;gap:24px;flex-wrap:wrap}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:30px}.card{background:white;border:1px solid #cad7d9;border-radius:16px;padding:22px}.card h2{margin:16px 0 10px;font-size:26px}.card p{color:var(--muted);font-size:17px}.number{font:14px/1.5 ui-monospace,monospace;color:var(--muted);letter-spacing:.12em}.reading{max-width:850px}.reading p,.reading li{overflow-wrap:anywhere}.reading img{margin:28px 0 12px}.social{padding:24px;border:1px solid #cad7d9;border-radius:12px;background:white;margin:40px 0}pre{overflow:auto;white-space:pre-wrap;overflow-wrap:anywhere;background:#e9eeee;padding:18px;border-radius:8px;font-size:17px;line-height:1.65}code{font-family:ui-monospace,monospace;font-size:.9em}blockquote{margin-left:0;padding:4px 24px;border-left:4px solid var(--teal)}table{border-collapse:collapse;width:100%;font-size:16px}th,td{text-align:left;border-bottom:1px solid #cbd7d9;padding:10px}footer{font-size:14px;color:var(--muted)}@media(max-width:700px){.grid{grid-template-columns:1fr}header,main,footer{padding:24px 18px}body{font-size:17px}.card{padding:16px}h2{font-size:25px}}
+
+.reading figure{margin:28px 0}.reading figure>a{display:block}.reading figure img{margin:0}.reading figcaption{font-size:14px;margin-top:8px}
+</style></head><body><header><p><a href="../../../blog.html">← Main blog</a></p><nav><a href="../../index.html">全部文章 / All articles</a><a href="../en/11-testing-what-hidden-states-do.html">English</a><a href="../../zh/11-testing-what-hidden-states-do.md">Markdown</a></nav></header><main class="reading"><h1>隐状态里读出了36，然后呢？</h1>
+<p>三箱零件，每箱十二个，坏了四个，还剩多少？手算是 <code>3 × 12 = 36</code>，再算 <code>36 − 4 = 32</code>。假设研究者从模型的某个隐状态中读出了36，又看到模型最后回答32。能否说模型先算乘法，再使用36做减法？</p>
+<p>还差一个实验。下面用这道<strong>人为构造的教学题</strong>说明差在哪；我们没有运行模型，也没有声称某个向量实际编码了36。</p>
+<h2>读出器答对，可能是谁算对了？</h2>
+<p>研究者可以训练一个小网络，把隐状态 h 映射成中间答案。这个网络叫探针。写成 <code>q(h) ≈ 36</code>，意思是 q 能从 h 恢复36。</p>
+<p>一种可能是 h 已经保存了乘法结果。另一种可能是 h 只保留“3”和“12”，探针自己完成乘法。还有一种可能是36确实存在，但主模型得到32时走了另一条计算路径。三种情况都允许探针答对。</p>
+<figure><a href="../../assets/11/cover.zh.png"><img alt="隐状态通向探针与主模型读出两条路径，另有需要排查的输入旁路。" src="../../assets/11/cover.zh.png" /></a><figcaption><a href="../../assets/11/cover.zh.png">查看完整 PNG</a> · <a href="../../references/matplotlib-layouts/assets/11/cover.zh.svg">SVG 结构参考</a></figcaption></figure>
+<p><em>先沿上方路径看探针恢复了什么，再沿主路径问答案依赖什么。虚线是一种待排查的解释，不是所有模型都存在的已知旁路。</em></p>
+<p>因此，探针首先用于定位信息。应把探针训练数据与评价数据分开，在验证集选择容量，并加入“只看原输入”的同容量探针。如果后者也能得到36，就必须考虑探针本身的计算能力。Logit lens 借用词汇读出映射，注意力图展示路由权重；它们也各有可见范围，不能单凭一张热图决定信息的因果作用。</p>
+<h2>把“用了36”变成一个不同的预测</h2>
+<p>再准备一道题：五箱零件，每箱八个，坏了七个。它的中间值是40，答案是33。现在有两条自然运行可以作为候选：</p>
+<table>
+<thead>
+<tr>
+<th>运行</th>
+<th style="text-align: right;">乘法结果</th>
+<th>后续操作</th>
+<th style="text-align: right;">原答案</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>受体 A</td>
+<td style="text-align: right;">36</td>
+<td>减4</td>
+<td style="text-align: right;">32</td>
+</tr>
+<tr>
+<td>供体 B</td>
+<td style="text-align: right;">40</td>
+<td>减7</td>
+<td style="text-align: right;">33</td>
+</tr>
+</tbody>
+</table>
+<p>设想在相同的候选计算阶段，把 B 的一处激活移入 A，保留 A 后续的“减4”。如果这个激活承载了可供后续使用的中间数，新的预测应该是：</p>
+<p><code>40 − 4 = 36</code></p>
+<p>36同时不同于 A 原答案32和 B 原答案33。这个设计很重要：若我们期待的结果恰好就是供体答案，就难以排除整份答案被复制过去。</p>
+<p>这叫反事实续算：先用任务规则算出“换了中间值后应该得到什么”，再检查干预后的模型输出。预期的36来自手写算术，不是一个已观察到的模型结果。</p>
+<figure><a href="../../assets/11/diagram.zh.png"><img alt="同阶段供体状态移入受体，受体后续保持不变，输出与事先算出的反事实答案比较。" src="../../assets/11/diagram.zh.png" /></a><figcaption><a href="../../assets/11/diagram.zh.png">查看完整 PNG</a> · <a href="../../references/matplotlib-layouts/assets/11/diagram.zh.svg">SVG 结构参考</a></figcaption></figure>
+<p><em>图把“移什么、留什么、期待什么”分开。s表示候选运行状态，并不预先保证它只编码一个标量。</em></p>
+<p>真正实施时，必须明确替换对象：哪一层、哪个位置、残差流还是特定分量；是否重新计算下游缓存。输入长度与位置编码也要匹配。不能把一条轨迹的全部缓存搬过去，又把结果解释成某一个向量的作用。</p>
+<p>还要用多组前缀和多种后续操作重复这个检验。例如同样移入40，再分别要求减4、减6，预期答案就分别是36、34。如果同一候选状态能随受体后续改变结果，才更接近“可继续使用的中间量”这个解释。</p>
+<h2>哪些对照能排除更简单的解释？</h2>
+<p>先做不改变状态的自我替换。连它都破坏输出，通常应先检查实现。再找另一道中间值同为36、前缀却不同的题，替换到 A：按中间值假说仍应得到32。这检验的是表示兼容性，而不是单独证明因果使用。</p>
+<p>然后比较三种真正改变运行的对照。第一种移入同阶段但与目标中间量无关的状态；第二种加入与替换差向量 <code>h_B − h_A</code> 的范数相同的随机扰动；第三种只更换输入缓存、不动候选激活。如果只有语义匹配的替换稳定产生反事实答案，解释就比“受到了任意扰动”更有针对性。若缓存替换也能产生同样效果，输入旁路值得进一步定位。</p>
+<p>这些对照也不能让一次失败变得容易解释。混合供体激活和受体缓存可能制造训练中未出现的状态。所有替换都失败，只说明这次干预没有得到预期续算；还可能是替换位置不对、信息分散在多个位置，或者干预组合不兼容。不能直接宣布模型没有中间计算。</p>
+<h2>已有机制研究实际发现了什么？</h2>
+<p>《Do Latent-CoT Models Think Step-by-Step?》研究的是模数上的多项式迭代，而非上面的零件题。它用小型 GPT-2 风格的 CODI 模型，把探针、logit lens、注意力分析和激活替换结合起来。少跳任务中，中间“桥接状态”和最后输入的近直接路径共同参与答案形成；更多跳数时，分析看到的潜在轨迹更偏向较晚的中间量。<a href="https://arxiv.org/abs/2602.00449v1">原论文 v1，§3–4、附录C–D</a></p>
+<p>这说明“有中间信息”和“有完整逐步轨迹”之间可以存在很多结构。结论绑定该模型、任务、训练协议和诊断工具。没有读出某一步，也可能是所用读出器没有捕获其编码；论文中的模数结构更不能直接推广为所有自然语言任务的规律。上面的反事实数值例子与对照是本文教学设计，不是该论文报告的实验结果。</p>
+<p>同样的问题可以迁移到视觉输入。MCOUT-Base 反馈末端隐状态；MCOUT-Multi 将它与多模态嵌入结合，产生追加到序列中的思维嵌入。<a href="https://arxiv.org/abs/2508.12587v2">MCOUT v2，§3.1–3.2</a> 若想知道后期步骤是否还读取图像证据，可以保持问题文字不变，替换决定答案的视觉关系，再比较早期与后期的干预。重复读既有嵌入和重新运行视觉编码器是两种不同操作。</p>
+<p>模型命名也需要接受这种检验。HRM 的高低层模块是不同更新频率的 Transformer 模块；名称并不自动给出“规划/执行”的语义分工。<a href="https://arxiv.org/abs/2506.21734v3">HRM v3，架构细节</a> TRM 复用一个小网络更新潜在状态 z 和答案表示 y；这些结构给出了干预位置，实际功能仍需追踪。<a href="https://arxiv.org/abs/2510.04871v1">TRM v1，图3、§4.1</a></p>
+<p>下一次从隐状态读出36，可以把它看作一个值得追查的线索。更有说服力的下一步，是换掉相关信息后，模型按预先指定的方式继续计算，并且在匹配对照中表现出选择性。我们要解释的是这条作用路径，而不只是给向量贴上一个好懂的标签。</p><aside class="social"><h2>Twitter / X</h2><pre>从隐状态读出36，还不知道模型是否用了它。若换入另一道题的中间量40，保留“减4”，它会得到36吗？这个未运行的教学干预，用不同于双方原答案的反事实和匹配对照追查因果作用。</pre><p><a href="../../social/11-testing-what-hidden-states-do.zh.md">配图和替代文本 / Attachment and alt text</a></p><img src="../../assets/11/cover.zh.png" alt="隐状态分别连向探针和主模型答案，输入还有直接旁路；状态替换标记区分读出信息与改变计算。"></aside></main></body></html>

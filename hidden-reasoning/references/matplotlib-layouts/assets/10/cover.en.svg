@@ -1,0 +1,116 @@
+<?xml version='1.0' encoding='utf-8'?>
+<ns0:svg xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:ns0="http://www.w3.org/2000/svg" xmlns:ns2="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" width="1200" height="675" viewBox="0 0 864 486" version="1.1">
+ <ns0:title>One set of weights, repeated computation</ns0:title>
+ <ns0:metadata>
+  <rdf:RDF>
+   <ns2:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+    <dc:title>One set of weights, repeated computation</dc:title>
+    <dc:date>2026-09-19T22:38:47.344249</dc:date>
+    <dc:description>Original conceptual drawing; no newly measured experimental results. One weight-storage rectangle fans into three illustrative sequential core-call rectangles, followed by a small answer box. Label the three repeated boxes as an example only, not a model-specific count. Beneath, place independent storage, work, and elapsed-time cards with icons but no numeric bars. No declining cost curve or claimed speedup.</dc:description>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <ns2:Agent>
+      <dc:title>Matplotlib v3.8.0, https://matplotlib.org/</dc:title>
+     </ns2:Agent>
+    </dc:creator>
+   </ns2:Work>
+  </rdf:RDF>
+ </ns0:metadata>
+ <ns0:defs>
+  <ns0:style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</ns0:style>
+ </ns0:defs>
+ <ns0:g id="figure_1">
+  <ns0:g id="patch_1">
+   <ns0:path d="M 0 486  L 864 486  L 864 0  L 0 0  z " style="fill: #f6f5f0" />
+  </ns0:g>
+  <ns0:g id="axes_1">
+   <ns0:g id="patch_2">
+    <ns0:path d="M 293.76 158.4  L 584.64 158.4  Q 597.6 158.4 597.6 171.36  L 597.6 199.44  Q 597.6 212.4 584.64 212.4  L 293.76 212.4  Q 280.8 212.4 280.8 199.44  L 280.8 171.36  Q 280.8 158.4 293.76 158.4  z " clip-path="url(#pc237a114e2)" style="fill: #e1f1ee; stroke: #117d80; stroke-width: 1.8; stroke-linejoin: miter" />
+   </ns0:g>
+   <ns0:g id="patch_3">
+    <ns0:path d="M 437.229712 218.478999  Q 288.00275 242.639555 141.534943 266.35339  " clip-path="url(#pc237a114e2)" style="fill: none; stroke: #117d80; stroke-width: 2.5; stroke-linecap: round" />
+    <ns0:path d="M 151.351871 269.423883  L 141.534943 266.35339  L 149.881494 260.342144  z " clip-path="url(#pc237a114e2)" style="fill: #117d80; stroke: #117d80; stroke-width: 2.5; stroke-linecap: round" />
+   </ns0:g>
+   <ns0:g id="patch_4">
+    <ns0:path d="M 437.634888 219.41209  Q 408.598186 242.641451 381.744079 264.124736  " clip-path="url(#pc237a114e2)" style="fill: none; stroke: #117d80; stroke-width: 2.5; stroke-linecap: round" />
+    <ns0:path d="M 391.80167 261.969539  L 381.744079 264.124736  L 386.054475 254.785545  z " clip-path="url(#pc237a114e2)" style="fill: #117d80; stroke: #117d80; stroke-width: 2.5; stroke-linecap: round" />
+   </ns0:g>
+   <ns0:g id="patch_5">
+    <ns0:path d="M 441.130847 218.68519  Q 529.199488 242.639861 614.571034 265.860921  " clip-path="url(#pc237a114e2)" style="fill: none; stroke: #117d80; stroke-width: 2.5; stroke-linecap: round" />
+    <ns0:path d="M 606.900905 259.007519  L 614.571034 265.860921  L 604.486235 267.884983  z " clip-path="url(#pc237a114e2)" style="fill: #117d80; stroke: #117d80; stroke-width: 2.5; stroke-linecap: round" />
+   </ns0:g>
+   <ns0:g id="patch_6">
+    <ns0:path d="M 56.16 277.2  L 206.64 277.2  Q 219.6 277.2 219.6 290.16  L 219.6 328.32  Q 219.6 341.28 206.64 341.28  L 56.16 341.28  Q 43.2 341.28 43.2 328.32  L 43.2 290.16  Q 43.2 277.2 56.16 277.2  z " clip-path="url(#pc237a114e2)" style="fill: #e5edf8; stroke: #346bb5; stroke-width: 1.8; stroke-linejoin: miter" />
+   </ns0:g>
+   <ns0:g id="patch_7">
+    <ns0:path d="M 297.36 277.2  L 447.84 277.2  Q 460.8 277.2 460.8 290.16  L 460.8 328.32  Q 460.8 341.28 447.84 341.28  L 297.36 341.28  Q 284.4 341.28 284.4 328.32  L 284.4 290.16  Q 284.4 277.2 297.36 277.2  z " clip-path="url(#pc237a114e2)" style="fill: #e5edf8; stroke: #346bb5; stroke-width: 1.8; stroke-linejoin: miter" />
+   </ns0:g>
+   <ns0:g id="patch_8">
+    <ns0:path d="M 228.802588 309.24  Q 252.001384 309.24 272.405095 309.24  " clip-path="url(#pc237a114e2)" style="fill: none; stroke: #346bb5; stroke-width: 2.5; stroke-linecap: round" />
+    <ns0:path d="M 263.205095 304.64  L 272.405095 309.24  L 263.205095 313.84  z " clip-path="url(#pc237a114e2)" style="fill: #346bb5; stroke: #346bb5; stroke-width: 2.5; stroke-linecap: round" />
+   </ns0:g>
+   <ns0:g id="patch_9">
+    <ns0:path d="M 538.56 277.2  L 689.04 277.2  Q 702 277.2 702 290.16  L 702 328.32  Q 702 341.28 689.04 341.28  L 538.56 341.28  Q 525.6 341.28 525.6 328.32  L 525.6 290.16  Q 525.6 277.2 538.56 277.2  z " clip-path="url(#pc237a114e2)" style="fill: #e5edf8; stroke: #346bb5; stroke-width: 1.8; stroke-linejoin: miter" />
+   </ns0:g>
+   <ns0:g id="patch_10">
+    <ns0:path d="M 470.002588 309.24  Q 493.201384 309.24 513.605095 309.24  " clip-path="url(#pc237a114e2)" style="fill: none; stroke: #346bb5; stroke-width: 2.5; stroke-linecap: round" />
+    <ns0:path d="M 504.405095 304.64  L 513.605095 309.24  L 504.405095 313.84  z " clip-path="url(#pc237a114e2)" style="fill: #346bb5; stroke: #346bb5; stroke-width: 2.5; stroke-linecap: round" />
+   </ns0:g>
+   <ns0:g id="patch_11">
+    <ns0:path d="M 732.96 277.2  L 807.84 277.2  Q 820.8 277.2 820.8 290.16  L 820.8 328.32  Q 820.8 341.28 807.84 341.28  L 732.96 341.28  Q 720 341.28 720 328.32  L 720 290.16  Q 720 277.2 732.96 277.2  z " clip-path="url(#pc237a114e2)" style="fill: #e5edf8; stroke: #346bb5; stroke-width: 1.8; stroke-linejoin: miter" />
+   </ns0:g>
+   <ns0:g id="patch_12">
+    <ns0:path d="M 711.200391 309.24  Q 712.000195 309.24 710.004915 309.24  " clip-path="url(#pc237a114e2)" style="fill: none; stroke: #346bb5; stroke-width: 2.5; stroke-linecap: round" />
+    <ns0:path d="M 700.804915 304.64  L 710.004915 309.24  L 700.804915 313.84  z " clip-path="url(#pc237a114e2)" style="fill: #346bb5; stroke: #346bb5; stroke-width: 2.5; stroke-linecap: round" />
+   </ns0:g>
+   <ns0:g id="patch_13">
+    <ns0:path d="M 56.16 374.4  L 267.84 374.4  Q 280.8 374.4 280.8 387.36  L 280.8 404.64  Q 280.8 417.6 267.84 417.6  L 56.16 417.6  Q 43.2 417.6 43.2 404.64  L 43.2 387.36  Q 43.2 374.4 56.16 374.4  z " clip-path="url(#pc237a114e2)" style="fill: #ffffff; stroke: #cbd7d9; stroke-width: 1.8; stroke-linejoin: miter" />
+   </ns0:g>
+   <ns0:g id="patch_14">
+    <ns0:path d="M 326.16 374.4  L 537.84 374.4  Q 550.8 374.4 550.8 387.36  L 550.8 404.64  Q 550.8 417.6 537.84 417.6  L 326.16 417.6  Q 313.2 417.6 313.2 404.64  L 313.2 387.36  Q 313.2 374.4 326.16 374.4  z " clip-path="url(#pc237a114e2)" style="fill: #ffffff; stroke: #cbd7d9; stroke-width: 1.8; stroke-linejoin: miter" />
+   </ns0:g>
+   <ns0:g id="patch_15">
+    <ns0:path d="M 596.16 374.4  L 807.84 374.4  Q 820.8 374.4 820.8 387.36  L 820.8 404.64  Q 820.8 417.6 807.84 417.6  L 596.16 417.6  Q 583.2 417.6 583.2 404.64  L 583.2 387.36  Q 583.2 374.4 596.16 374.4  z " clip-path="url(#pc237a114e2)" style="fill: #ffffff; stroke: #cbd7d9; stroke-width: 1.8; stroke-linejoin: miter" />
+   </ns0:g>
+   <ns0:g id="text_1">
+    <ns0:text style="fill: #425b64; font: 18px 'Arial Unicode MS'; text-anchor: start" x="43.2" y="34.484063" transform="rotate(-0 43.2 34.484063)">10 / 12   HIDDEN REASONING / LOOPED TRANSFORMERS</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_2">
+    <ns0:text style="fill: #132a36; font: 37.44px 'Arial Unicode MS'; text-anchor: start" x="43.2" y="90.61515" transform="rotate(-0 43.2 90.61515)">One set of weights, repeated computation</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_3">
+    <ns0:text style="fill: #132a36; font: 28.8px 'Arial Unicode MS'; text-anchor: middle" x="439.2" y="192.85875" transform="rotate(-0 439.2 192.85875)">Shared weights</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_4">
+    <ns0:text style="fill: #132a36; font: 27.36px 'Arial Unicode MS'; text-anchor: middle" x="131.4" y="316.306575" transform="rotate(-0 131.4 316.306575)">F</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_5">
+    <ns0:text style="fill: #132a36; font: 27.36px 'Arial Unicode MS'; text-anchor: middle" x="372.6" y="316.306575" transform="rotate(-0 372.6 316.306575)">F</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_6">
+    <ns0:text style="fill: #132a36; font: 27.36px 'Arial Unicode MS'; text-anchor: middle" x="613.8" y="316.306575" transform="rotate(-0 613.8 316.306575)">F</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_7">
+    <ns0:text style="fill: #132a36; font: 27.36px 'Arial Unicode MS'; text-anchor: middle" x="770.4" y="316.306575" transform="rotate(-0 770.4 316.306575)">Answer</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_8">
+    <ns0:text style="fill: #132a36; font: 25.2px 'Arial Unicode MS'; text-anchor: middle" x="162" y="402.526406" transform="rotate(-0 162 402.526406)">Storage</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_9">
+    <ns0:text style="fill: #132a36; font: 25.2px 'Arial Unicode MS'; text-anchor: middle" x="432" y="402.66225" transform="rotate(-0 432 402.66225)">Operations</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_10">
+    <ns0:text style="fill: #132a36; font: 25.2px 'Arial Unicode MS'; text-anchor: middle" x="702" y="402.508688" transform="rotate(-0 702 402.508688)">Elapsed time</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_11">
+    <ns0:text style="fill: #425b64; font: 19.44px 'Arial Unicode MS'; text-anchor: start" x="43.2" y="440.874787" transform="rotate(-0 43.2 440.874787)">Illustrative call count; measure storage, work and elapsed time separately.</ns0:text>
+   </ns0:g>
+  </ns0:g>
+ </ns0:g>
+ <ns0:defs>
+  <ns0:clipPath id="pc237a114e2">
+   <ns0:rect x="0" y="0" width="864" height="486" />
+  </ns0:clipPath>
+ </ns0:defs>
+</ns0:svg>

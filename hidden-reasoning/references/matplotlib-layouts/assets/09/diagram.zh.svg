@@ -1,0 +1,97 @@
+<?xml version='1.0' encoding='utf-8'?>
+<ns0:svg xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:ns0="http://www.w3.org/2000/svg" xmlns:ns2="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" width="1200" height="900" viewBox="0 0 864 648" version="1.1">
+ <ns0:title>结论必须连同条件阅读</ns0:title>
+ <ns0:metadata>
+  <rdf:RDF>
+   <ns2:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+    <dc:title>结论必须连同条件阅读</dc:title>
+    <dc:date>2026-09-19T22:49:13.766592</dc:date>
+    <dc:description>Original conceptual drawing; no newly measured experimental results. Four horizontal rows, each with a claim card and a conditions card. CoT expressivity: linear intermediate steps can recognize regular languages; log precision and saturated attention. UHAT lower bound: parity needs Ω(n) CoT, bounded layer/head counts, unique hard choice. Looped approximation: fixed-length continuous permutation-equivariant functions in Lp, loops r&gt;n, infinite precision in universality corollary. Log-ICoT: log2(k) stages, structured parity curriculum and restricted training, zero-filled positions remain. Do not place these rows on a shared performance axis. The rows summarize model-dependent theorems and do not imply ordinary softmax BF16 training inherits them.</dc:description>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <ns2:Agent>
+      <dc:title>Matplotlib v3.8.0, https://matplotlib.org/</dc:title>
+     </ns2:Agent>
+    </dc:creator>
+   </ns2:Work>
+  </rdf:RDF>
+ </ns0:metadata>
+ <ns0:defs>
+  <ns0:style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</ns0:style>
+ </ns0:defs>
+ <ns0:g id="figure_1">
+  <ns0:g id="patch_1">
+   <ns0:path d="M 0 648  L 864 648  L 864 0  L 0 0  z " style="fill: #f6f5f0" />
+  </ns0:g>
+  <ns0:g id="axes_1">
+   <ns0:g id="patch_2">
+    <ns0:path d="M 56.16 159.12  L 807.84 159.12  Q 820.8 159.12 820.8 172.08  L 820.8 239.76  Q 820.8 252.72 807.84 252.72  L 56.16 252.72  Q 43.2 252.72 43.2 239.76  L 43.2 172.08  Q 43.2 159.12 56.16 159.12  z " clip-path="url(#p8b2ddfc5e0)" style="fill: #ffffff; stroke: #cbd7d9; stroke-width: 1.8; stroke-linejoin: miter" />
+   </ns0:g>
+   <ns0:g id="patch_3">
+    <ns0:path d="M 56.16 265.68  L 807.84 265.68  Q 820.8 265.68 820.8 278.64  L 820.8 346.32  Q 820.8 359.28 807.84 359.28  L 56.16 359.28  Q 43.2 359.28 43.2 346.32  L 43.2 278.64  Q 43.2 265.68 56.16 265.68  z " clip-path="url(#p8b2ddfc5e0)" style="fill: #ffffff; stroke: #cbd7d9; stroke-width: 1.8; stroke-linejoin: miter" />
+   </ns0:g>
+   <ns0:g id="patch_4">
+    <ns0:path d="M 56.16 372.24  L 807.84 372.24  Q 820.8 372.24 820.8 385.2  L 820.8 452.88  Q 820.8 465.84 807.84 465.84  L 56.16 465.84  Q 43.2 465.84 43.2 452.88  L 43.2 385.2  Q 43.2 372.24 56.16 372.24  z " clip-path="url(#p8b2ddfc5e0)" style="fill: #ffffff; stroke: #cbd7d9; stroke-width: 1.8; stroke-linejoin: miter" />
+   </ns0:g>
+   <ns0:g id="patch_5">
+    <ns0:path d="M 56.16 478.8  L 807.84 478.8  Q 820.8 478.8 820.8 491.76  L 820.8 559.44  Q 820.8 572.4 807.84 572.4  L 56.16 572.4  Q 43.2 572.4 43.2 559.44  L 43.2 491.76  Q 43.2 478.8 56.16 478.8  z " clip-path="url(#p8b2ddfc5e0)" style="fill: #ffffff; stroke: #cbd7d9; stroke-width: 1.8; stroke-linejoin: miter" />
+   </ns0:g>
+   <ns0:g id="text_1">
+    <ns0:text style="fill: #425b64; font: 18px 'Arial Unicode MS'; text-anchor: start" x="43.2" y="34.484063" transform="rotate(-0 43.2 34.484063)">09 / 12   隐状态推理与循环 Transformer</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_2">
+    <ns0:text style="fill: #132a36; font: 37.44px 'Arial Unicode MS'; text-anchor: start" x="43.2" y="90.15885" transform="rotate(-0 43.2 90.15885)">结论必须连同条件阅读</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_3">
+    <ns0:text style="fill: #346bb5; font: 23.76px 'Arial Unicode MS'; text-anchor: start" x="57.6" y="186.206962" transform="rotate(-0 57.6 186.206962)">CoT</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_4">
+    <ns0:text style="fill: #132a36; font: 23.04px 'Arial Unicode MS'; text-anchor: start" x="248.4" y="192.1716" transform="rotate(-0 248.4 192.1716)">线性中间步可识别正则语言</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_5">
+    <ns0:text style="fill: #117d80; font: 21.6px 'Arial Unicode MS'" transform="translate(561.6 188.260875)">对数精度</ns0:text>
+    <ns0:text style="fill: #117d80; font: 21.6px 'Arial Unicode MS'" transform="translate(561.6 211.11705)">饱和注意力</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_6">
+    <ns0:text style="fill: #346bb5; font: 23.76px 'Arial Unicode MS'; text-anchor: start" x="57.6" y="292.766962" transform="rotate(-0 57.6 292.766962)">UHAT</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_7">
+    <ns0:text style="fill: #132a36; font: 23.04px 'Arial Unicode MS'; text-anchor: start" x="248.4" y="301.4784" transform="rotate(-0 248.4 301.4784)">Parity 需要 Ω(n) 步</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_8">
+    <ns0:text style="fill: #117d80; font: 21.6px 'Arial Unicode MS'" transform="translate(561.6 294.820875)">固定层数／头数</ns0:text>
+    <ns0:text style="fill: #117d80; font: 21.6px 'Arial Unicode MS'" transform="translate(561.6 317.67705)">唯一硬选择</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_9">
+    <ns0:text style="fill: #346bb5; font: 23.76px 'Arial Unicode MS'; text-anchor: start" x="57.6" y="399.326962" transform="rotate(-0 57.6 399.326962)">循环逼近</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_10">
+    <ns0:text style="fill: #132a36; font: 21.6px 'Arial Unicode MS'" transform="translate(248.4 397.97325)">固定长度的连续、</ns0:text>
+    <ns0:text style="fill: #132a36; font: 21.6px 'Arial Unicode MS'" transform="translate(248.4 423.996525)">置换等变函数；Lp 逼近</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_11">
+    <ns0:text style="fill: #117d80; font: 21.6px 'Arial Unicode MS'" transform="translate(561.6 403.216875)">r &gt; n；普适性推论</ns0:text>
+    <ns0:text style="fill: #117d80; font: 21.6px 'Arial Unicode MS'" transform="translate(561.6 426.07305)">使用无限精度</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_12">
+    <ns0:text style="fill: #346bb5; font: 23.76px 'Arial Unicode MS'; text-anchor: start" x="57.6" y="506.176537" transform="rotate(-0 57.6 506.176537)">Log-ICoT</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_13">
+    <ns0:text style="fill: #132a36; font: 23.04px 'Arial Unicode MS'; text-anchor: start" x="248.4" y="514.7568" transform="rotate(-0 248.4 514.7568)">log₂(k) 轮的结构化 Parity</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_14">
+    <ns0:text style="fill: #117d80; font: 21.6px 'Arial Unicode MS'" transform="translate(561.6 507.940875)">受限训练</ns0:text>
+    <ns0:text style="fill: #117d80; font: 21.6px 'Arial Unicode MS'" transform="translate(561.6 530.79705)">零填位置仍保留</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_15">
+    <ns0:text style="fill: #425b64; font: 19.44px 'Arial Unicode MS'; text-anchor: start" x="43.2" y="604.527187" transform="rotate(-0 43.2 604.527187)">不同理论模型的条件性结果；不自动适用于普通 BF16 训练。</ns0:text>
+   </ns0:g>
+  </ns0:g>
+ </ns0:g>
+ <ns0:defs>
+  <ns0:clipPath id="p8b2ddfc5e0">
+   <ns0:rect x="0" y="0" width="864" height="648" />
+  </ns0:clipPath>
+ </ns0:defs>
+</ns0:svg>

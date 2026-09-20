@@ -1,0 +1,103 @@
+<?xml version='1.0' encoding='utf-8'?>
+<ns0:svg xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:ns0="http://www.w3.org/2000/svg" xmlns:ns2="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" width="1200" height="675" viewBox="0 0 864 486" version="1.1">
+ <ns0:title>不写步骤，怎样学会步骤？</ns0:title>
+ <ns0:metadata>
+  <rdf:RDF>
+   <ns2:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+    <dc:title>不写步骤，怎样学会步骤？</dc:title>
+    <dc:date>2026-09-19T22:38:45.883530</dc:date>
+    <dc:description>Original conceptual drawing; no newly measured experimental results. Three clear panels. State targets: teacher representation above student-predicted representation with supervision arrow. Curriculum: successive rows remove more prefix tokens, keeping suffix and answer targets. Terminal alignment: explicit and continuous paths meet at paired pre-answer states with a dashed alignment edge. Use no accuracy numbers, no claim that each deleted word is stored in a specific neuron. Panels depict training signals, not three free runtime options.</dc:description>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <ns2:Agent>
+      <dc:title>Matplotlib v3.8.0, https://matplotlib.org/</dc:title>
+     </ns2:Agent>
+    </dc:creator>
+   </ns2:Work>
+  </rdf:RDF>
+ </ns0:metadata>
+ <ns0:defs>
+  <ns0:style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</ns0:style>
+ </ns0:defs>
+ <ns0:g id="figure_1">
+  <ns0:g id="patch_1">
+   <ns0:path d="M 0 486  L 864 486  L 864 0  L 0 0  z " style="fill: #f6f5f0" />
+  </ns0:g>
+  <ns0:g id="axes_1">
+   <ns0:g id="patch_2">
+    <ns0:path d="M 56.16 162  L 275.04 162  Q 288 162 288 174.96  L 288 393.84  Q 288 406.8 275.04 406.8  L 56.16 406.8  Q 43.2 406.8 43.2 393.84  L 43.2 174.96  Q 43.2 162 56.16 162  z " clip-path="url(#p8a75221b35)" style="fill: #e1f1ee; stroke: #117d80; stroke-width: 1.8; stroke-linejoin: miter" />
+   </ns0:g>
+   <ns0:g id="patch_3">
+    <ns0:path d="M 322.56 162  L 541.44 162  Q 554.4 162 554.4 174.96  L 554.4 393.84  Q 554.4 406.8 541.44 406.8  L 322.56 406.8  Q 309.6 406.8 309.6 393.84  L 309.6 174.96  Q 309.6 162 322.56 162  z " clip-path="url(#p8a75221b35)" style="fill: #fcebd6; stroke: #a75513; stroke-width: 1.8; stroke-linejoin: miter" />
+   </ns0:g>
+   <ns0:g id="patch_4">
+    <ns0:path d="M 588.96 162  L 807.84 162  Q 820.8 162 820.8 174.96  L 820.8 393.84  Q 820.8 406.8 807.84 406.8  L 588.96 406.8  Q 576 406.8 576 393.84  L 576 174.96  Q 576 162 588.96 162  z " clip-path="url(#p8a75221b35)" style="fill: #e5edf8; stroke: #346bb5; stroke-width: 1.8; stroke-linejoin: miter" />
+   </ns0:g>
+   <ns0:g id="patch_5">
+    <ns0:path d="M 77.76 237.6  L 253.44 237.6  Q 266.4 237.6 266.4 250.56  L 266.4 272.16  Q 266.4 285.12 253.44 285.12  L 77.76 285.12  Q 64.8 285.12 64.8 272.16  L 64.8 250.56  Q 64.8 237.6 77.76 237.6  z " clip-path="url(#p8a75221b35)" style="fill: #ffffff; stroke: #cbd7d9; stroke-width: 1.8; stroke-linejoin: miter" />
+   </ns0:g>
+   <ns0:g id="patch_6">
+    <ns0:path d="M 165.6 297.198369  Q 165.6 314.279354 165.6 328.565255  " clip-path="url(#p8a75221b35)" style="fill: none; stroke-dasharray: 9.25,4; stroke-dashoffset: 0; stroke: #117d80; stroke-width: 2.5; stroke-linecap: round" />
+    <ns0:path d="M 170.2 319.365255  L 165.6 328.565255  L 161 319.365255  z " clip-path="url(#p8a75221b35)" style="fill: #117d80; stroke-dasharray: 9.25,4; stroke-dashoffset: 0; stroke: #117d80; stroke-width: 2.5; stroke-linecap: round" />
+   </ns0:g>
+   <ns0:g id="patch_7">
+    <ns0:path d="M 77.76 341.28  L 253.44 341.28  Q 266.4 341.28 266.4 354.24  L 266.4 372.96  Q 266.4 385.92 253.44 385.92  L 77.76 385.92  Q 64.8 385.92 64.8 372.96  L 64.8 354.24  Q 64.8 341.28 77.76 341.28  z " clip-path="url(#p8a75221b35)" style="fill: #ffffff; stroke: #cbd7d9; stroke-width: 1.8; stroke-linejoin: miter" />
+   </ns0:g>
+   <ns0:g id="patch_8">
+    <ns0:path d="M 793.44 243.36  C 797.258925 243.36 800.92195 244.877275 803.622338 247.577662  C 806.322725 250.27805 807.84 253.941075 807.84 257.76  C 807.84 261.578925 806.322725 265.24195 803.622338 267.942338  C 800.92195 270.642725 797.258925 272.16 793.44 272.16  C 789.621075 272.16 785.95805 270.642725 783.257662 267.942338  C 780.557275 265.24195 779.04 261.578925 779.04 257.76  C 779.04 253.941075 780.557275 250.27805 783.257662 247.577662  C 785.95805 244.877275 789.621075 243.36 793.44 243.36  z " clip-path="url(#p8a75221b35)" style="fill: #e5edf8; stroke: #346bb5; stroke-width: 2.5; stroke-linejoin: miter" />
+   </ns0:g>
+   <ns0:g id="patch_9">
+    <ns0:path d="M 793.44 337.68  C 797.258925 337.68 800.92195 339.197275 803.622338 341.897662  C 806.322725 344.59805 807.84 348.261075 807.84 352.08  C 807.84 355.898925 806.322725 359.56195 803.622338 362.262338  C 800.92195 364.962725 797.258925 366.48 793.44 366.48  C 789.621075 366.48 785.95805 364.962725 783.257662 362.262338  C 780.557275 359.56195 779.04 355.898925 779.04 352.08  C 779.04 348.261075 780.557275 344.59805 783.257662 341.897662  C 785.95805 339.197275 789.621075 337.68 793.44 337.68  z " clip-path="url(#p8a75221b35)" style="fill: #e5edf8; stroke: #346bb5; stroke-width: 2.5; stroke-linejoin: miter" />
+   </ns0:g>
+   <ns0:g id="patch_10">
+    <ns0:path d="M 793.44 266.96127  Q 793.44 298.078865 793.44 326.401376  " clip-path="url(#p8a75221b35)" style="fill: none; stroke-dasharray: 9.25,4; stroke-dashoffset: 0; stroke: #346bb5; stroke-width: 2.5; stroke-linecap: round" />
+    <ns0:path d="M 798.04 317.201376  L 793.44 326.401376  L 788.84 317.201376  z " clip-path="url(#p8a75221b35)" style="fill: #346bb5; stroke-dasharray: 9.25,4; stroke-dashoffset: 0; stroke: #346bb5; stroke-width: 2.5; stroke-linecap: round" />
+   </ns0:g>
+   <ns0:g id="text_1">
+    <ns0:text style="fill: #425b64; font: 18px 'Arial Unicode MS'; text-anchor: start" x="43.2" y="34.484063" transform="rotate(-0 43.2 34.484063)">03 / 12   隐状态推理与循环 Transformer</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_2">
+    <ns0:text style="fill: #132a36; font: 37.44px 'Arial Unicode MS'; text-anchor: start" x="43.2" y="92.8674" transform="rotate(-0 43.2 92.8674)">不写步骤，怎样学会步骤？</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_3">
+    <ns0:text style="fill: #117d80; font: 25.92px 'Arial Unicode MS'; text-anchor: start" x="57.6" y="193.51305" transform="rotate(-0 57.6 193.51305)">教师状态</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_4">
+    <ns0:text style="fill: #a75513; font: 25.92px 'Arial Unicode MS'; text-anchor: start" x="324" y="193.6629" transform="rotate(-0 324 193.6629)">逐步撤除</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_5">
+    <ns0:text style="fill: #346bb5; font: 25.92px 'Arial Unicode MS'; text-anchor: start" x="590.4" y="193.66695" transform="rotate(-0 590.4 193.66695)">答案前对齐</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_6">
+    <ns0:text style="fill: #132a36; font: 23.04px 'Arial Unicode MS'; text-anchor: middle" x="165.6" y="267.3108" transform="rotate(-0 165.6 267.3108)">教师目标</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_7">
+    <ns0:text style="fill: #132a36; font: 23.04px 'Arial Unicode MS'; text-anchor: middle" x="165.6" y="369.5508" transform="rotate(-0 165.6 369.5508)">学生状态</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_8">
+    <ns0:text style="fill: #a75513; font: 28.08px 'Arial Unicode MS'; text-anchor: start" x="347.04" y="264.899137" transform="rotate(-0 347.04 264.899137)">A  B  C  →</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_9">
+    <ns0:text style="fill: #a75513; font: 28.08px 'Arial Unicode MS'; text-anchor: start" x="347.04" y="311.699138" transform="rotate(-0 347.04 311.699138)">B  C  →</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_10">
+    <ns0:text style="fill: #a75513; font: 28.08px 'Arial Unicode MS'; text-anchor: start" x="347.04" y="358.499137" transform="rotate(-0 347.04 358.499137)">C  →</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_11">
+    <ns0:text style="fill: #132a36; font: 23.76px 'Arial Unicode MS'; text-anchor: start" x="594" y="258.206962" transform="rotate(-0 594 258.206962)">文字过程</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_12">
+    <ns0:text style="fill: #132a36; font: 23.76px 'Arial Unicode MS'; text-anchor: start" x="594" y="352.526962" transform="rotate(-0 594 352.526962)">连续过程</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_13">
+    <ns0:text style="fill: #425b64; font: 19.44px 'Arial Unicode MS'; text-anchor: start" x="43.2" y="442.156612" transform="rotate(-0 43.2 442.156612)">三种学习信号；不等于三种免训练的推理选项。</ns0:text>
+   </ns0:g>
+  </ns0:g>
+ </ns0:g>
+ <ns0:defs>
+  <ns0:clipPath id="p8a75221b35">
+   <ns0:rect x="0" y="0" width="864" height="486" />
+  </ns0:clipPath>
+ </ns0:defs>
+</ns0:svg>

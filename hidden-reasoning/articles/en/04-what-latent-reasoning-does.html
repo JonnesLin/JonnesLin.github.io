@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>How Does a Model Keep Computing Without Writing the Steps?</title><meta name="description" content="Follow a two-step arithmetic example through Coconut’s feedback path and training curriculum, then examine what its math and logic results show."><link rel="canonical" href="https://jonneslin.github.io/hidden-reasoning/articles/en/04-what-latent-reasoning-does.html"><link rel="alternate" hreflang="en" href="https://jonneslin.github.io/hidden-reasoning/articles/en/04-what-latent-reasoning-does.html"><link rel="alternate" hreflang="zh" href="https://jonneslin.github.io/hidden-reasoning/articles/zh/04-what-latent-reasoning-does.html"><meta property="og:url" content="https://jonneslin.github.io/hidden-reasoning/articles/en/04-what-latent-reasoning-does.html"><meta property="og:title" content="How Does a Model Keep Computing Without Writing the Steps?"><meta property="og:description" content="Follow a two-step arithmetic example through Coconut’s feedback path and training curriculum, then examine what its math and logic results show."><meta property="og:type" content="article"><meta property="og:image" content="https://jonneslin.github.io/hidden-reasoning/assets/04/cover.en.png"><style>
+:root{color-scheme:light;--ink:#132a36;--muted:#425b64;--teal:#117d80;--paper:#f6f5f0}
+*{box-sizing:border-box}body{margin:0;color:var(--ink);background:var(--paper);font:18px/1.8 system-ui,-apple-system,'PingFang SC','Noto Sans CJK SC',sans-serif}
+a{color:#125f74;text-underline-offset:.18em}a:hover{color:#9a4e10}header,main,footer{max-width:1120px;margin:auto;padding:36px 28px}header{border-bottom:1px solid #cad7d9}header p{max-width:760px;color:var(--muted)}h1{font-size:clamp(32px,5vw,54px);line-height:1.15;letter-spacing:-.025em}h2{font-size:29px;line-height:1.3;margin-top:2em}h3{font-size:22px;line-height:1.4}img{display:block;max-width:100%;height:auto;border-radius:12px}nav{display:flex;gap:24px;flex-wrap:wrap}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:30px}.card{background:white;border:1px solid #cad7d9;border-radius:16px;padding:22px}.card h2{margin:16px 0 10px;font-size:26px}.card p{color:var(--muted);font-size:17px}.number{font:14px/1.5 ui-monospace,monospace;color:var(--muted);letter-spacing:.12em}.reading{max-width:850px}.reading p,.reading li{overflow-wrap:anywhere}.reading img{margin:28px 0 12px}.social{padding:24px;border:1px solid #cad7d9;border-radius:12px;background:white;margin:40px 0}pre{overflow:auto;white-space:pre-wrap;overflow-wrap:anywhere;background:#e9eeee;padding:18px;border-radius:8px;font-size:17px;line-height:1.65}code{font-family:ui-monospace,monospace;font-size:.9em}blockquote{margin-left:0;padding:4px 24px;border-left:4px solid var(--teal)}table{border-collapse:collapse;width:100%;font-size:16px}th,td{text-align:left;border-bottom:1px solid #cbd7d9;padding:10px}footer{font-size:14px;color:var(--muted)}@media(max-width:700px){.grid{grid-template-columns:1fr}header,main,footer{padding:24px 18px}body{font-size:17px}.card{padding:16px}h2{font-size:25px}}
+
+.reading figure{margin:28px 0}.reading figure>a{display:block}.reading figure img{margin:0}.reading figcaption{font-size:14px;margin-top:8px}
+</style></head><body><header><p><a href="../../../blog.html">← Main blog</a></p><nav><a href="../../index.html">全部文章 / All articles</a><a href="../zh/04-what-latent-reasoning-does.html">中文</a><a href="../../en/04-what-latent-reasoning-does.md">Markdown</a></nav></header><main class="reading"><h1>How Does a Model Keep Computing Without Writing the Steps?</h1>
+<p>There are three boxes of parts, with twelve parts in each box. Four parts are damaged. How many usable parts remain?</p>
+<p>We could write <code>3 × 12 = 36</code>, followed by <code>36 − 4 = 32</code>. For an autoregressive language model, those written steps serve another purpose: they enter the context, where later computation can read them.</p>
+<p>That suggests a question: <strong>once a model has produced an internal representation, why must it turn that representation into tokens before continuing?</strong></p>
+<p>Coconut changes this interface. During part of its computation, it passes the current hidden state directly to the next position. We will follow the parts problem to understand how that path runs, how it is trained, and what the experiments show. The parts problem is a teaching example; the performance figures come from the paper.</p>
+<h2>How does a written result get back into the model?</h2>
+<p>Start with ordinary generation. The model processes the available context and produces a final hidden state <code>h[t]</code>. An output head maps it to scores over the vocabulary, and a decoding rule chooses a token <code>u</code>. The next step looks up its embedding <code>E(u)</code> and feeds that vector back into the model.</p>
+<pre><code class="language-text">Current hidden state → output head → token choice → embedding lookup → next forward pass
+</code></pre>
+<p>The “36” in our example enters the context through this process; the tokenizer determines how many tokens it takes. When generating the subtraction, the model can use attention to read the preceding text and its representations.</p>
+<p>Keep two things separate: <strong>the input at the new position</strong>, and <strong>the history it can read</strong>. The new input comes from the selected token. The history includes the question and the steps already written. This distinction will matter when we change the interface.</p>
+<h2>Feed the hidden state into the next position</h2>
+<p>During Coconut's continuous phase, the model skips token selection and embedding lookup. It uses:</p>
+<p><code>e[t+1] = h[t]</code></p>
+<p>The left side is the next position's input; the right side is the current position's final-layer hidden state. The equals sign is the key: <strong>the output vector from this computation becomes the input vector for the next one.</strong> <a href="https://arxiv.org/abs/2412.06769v2">Coconut v2, Section 3</a></p>
+<figure><a href="../../assets/04/diagram.en.png"><img alt="The top row passes through an output head, token selection, and token embedding. The bottom row sends the hidden state directly into the next position. Both run another forward pass and retain historical KV cache." src="../../assets/04/diagram.en.png" /></a><figcaption><a href="../../assets/04/diagram.en.png">Open full PNG</a> · <a href="../../references/matplotlib-layouts/assets/04/diagram.en.svg">Layout-reference SVG</a></figcaption></figure>
+<p><em>Follow the interface between h[t] and the next forward pass in the top row, then see what replaces it below. The optional CODI projection is a different design; basic Coconut uses direct feedback. Language readout denotes output after the continuous phase. The diagram omits phase-boundary tokens.</em> <a href="https://arxiv.org/abs/2502.21074v2">CODI v2, Section 3.3</a></p>
+<p>Walk through two steps. Coconut marks the beginning and end of a continuous interval with <code>&lt;bot&gt;</code> and <code>&lt;eot&gt;</code>:</p>
+<ol>
+<li>Process the question and <code>&lt;bot&gt;</code>. Call the final-layer hidden state at <code>&lt;bot&gt;</code> <code>h[0]</code>.</li>
+<li>Use <code>h[0]</code> as the input at the first continuous position. Run a forward pass to obtain <code>h[1]</code>.</li>
+<li>Use <code>h[1]</code> as the input at the second continuous position. Run another forward pass to obtain <code>h[2]</code>.</li>
+<li>End the continuous phase, insert <code>&lt;eot&gt;</code>, and resume ordinary token inputs and language output.</li>
+</ol>
+<p>Each step can still attend to the available history. A KV cache stores keys and values for positions already processed, avoiding their recomputation; the new position still needs a forward pass. A fuller picture of Coconut's running state is therefore “the current input vector, plus accessible history.” <a href="https://arxiv.org/abs/2412.06769v2">Coconut v2, Section 3</a></p>
+<p>For the parts problem, we now know how <code>h[0]</code>, <code>h[1]</code>, and <code>h[2]</code> are produced. We do not yet know whether any of them explicitly represents “36.” The interface specifies how data flows. Making that path useful requires learning what information to put through it.</p>
+<h2>How does the model learn to continue without written support?</h2>
+<p>Coconut starts with training examples that include written reasoning. It gradually removes the initial reasoning steps and replaces them with continuous positions. In this illustration, each removed step adds one continuous position: <code>c = 1</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Stage</th>
+<th style="text-align: right;">Positions</th>
+<th>Written steps</th>
+<th>Answer</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td style="text-align: right;">0</td>
+<td><code>3 × 12 = 36</code>; <code>36 − 4 = 32</code></td>
+<td><code>32</code></td>
+</tr>
+<tr>
+<td>1</td>
+<td style="text-align: right;">1</td>
+<td><code>36 − 4 = 32</code></td>
+<td><code>32</code></td>
+</tr>
+<tr>
+<td>2</td>
+<td style="text-align: right;">2</td>
+<td>None</td>
+<td><code>32</code></td>
+</tr>
+</tbody>
+</table>
+<p><em>The question remains at every stage. Boundary tokens are omitted. The model produces the vectors at continuous positions; those slots are not prefilled with “36” or “32.” This table illustrates the curriculum rule.</em></p>
+<p>At stage 1, the model must predict the remaining subtraction without receiving the first written step. Prediction error from the remaining text and answer backpropagates through the continuous feedback, encouraging the model to use the new interface. At stage 2, the written reasoning is gone, but the answer still supplies supervision.</p>
+<p>This explains an easy misunderstanding. The training schedule lets a continuous position take the place of a written step, but <strong>the loss does not require that vector to reconstruct the removed sentence word for word</strong>. Its representation is shaped by the downstream task and optimization.</p>
+<p>In the paper, stage <code>k</code> replaces the first <code>k</code> reasoning steps with <code>k × c</code> continuous positions. The GSM8K setting uses <code>c = 2</code>: the count rises from 0 to 2, 4, and 6, then stays at 6 in later stages while the remaining written steps are removed. Our two-step example illustrates the rule, not the complete experimental recipe. <a href="https://arxiv.org/abs/2412.06769v2">Coconut v2, Sections 3 and 4.2</a></p>
+<p>The execution path and training signal now fit together. Continuous feedback provides a place to keep computing; the curriculum teaches the model to use it as written support disappears. The next question is how many problems the resulting model gets right.</p>
+<h2>What did it learn? Start with math, then look at logic</h2>
+<p>The paper compares several training methods using GPT-2. Here are three rows from Table 1. Values are accuracy percentages, with the reported <code>±</code> terms retained.</p>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th style="text-align: right;">GSM8K math</th>
+<th style="text-align: right;">ProntoQA logic</th>
+<th style="text-align: right;">ProsQA logic</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Direct answer (No-CoT)</td>
+<td style="text-align: right;">16.5 ± 0.5</td>
+<td style="text-align: right;">93.8 ± 0.7</td>
+<td style="text-align: right;">76.7 ± 1.0</td>
+</tr>
+<tr>
+<td>Explicit chain of thought (CoT)</td>
+<td style="text-align: right;">42.9 ± 0.2</td>
+<td style="text-align: right;">98.8 ± 0.8</td>
+<td style="text-align: right;">77.5 ± 1.9</td>
+</tr>
+<tr>
+<td>Coconut</td>
+<td style="text-align: right;">34.1 ± 1.5</td>
+<td style="text-align: right;">99.8 ± 0.2</td>
+<td style="text-align: right;">97.0 ± 0.3</td>
+</tr>
+</tbody>
+</table>
+<p><em>Source: Coconut v2, Table 1. Experiments use greedy decoding and select checkpoints on validation data. These figures apply to the paper's models, datasets, and training settings.</em> <a href="https://arxiv.org/abs/2412.06769v2">Sections 4 and Table 1</a></p>
+<p>Start with GSM8K. Coconut's 34.1 exceeds the direct-answer model's 16.5, but falls short of explicit CoT's 42.9. For the mathematical motivation behind our parts example, this is a concrete tradeoff: continuous computation learns something useful, while retaining less accuracy than a written chain in this setting.</p>
+<p>On ProsQA, Coconut substantially outperforms explicit CoT. Those three rows, however, cannot assign all the gain to continuous feedback. The original table also includes iCoT, which gradually removes written reasoning and ultimately answers directly. It reaches <strong>98.2 ± 0.3</strong> on ProsQA, above Coconut. The curriculum itself is a factor to examine separately. <a href="https://arxiv.org/abs/2412.06769v2">Coconut v2, Table 1 and Section 4.3</a></p>
+<p>Writing fewer steps and running faster also require separate measurements. In our two-step walkthrough, the second continuous input cannot be produced until <code>h[1]</code> exists. That dependency remains. The main experiments generally use a preset number of continuous steps, and adding positions does not improve performance indefinitely. Deciding whether an implementation is worthwhile requires comparing answer quality with measured latency. <a href="https://arxiv.org/abs/2412.06769v2">Coconut v2, Sections 3 and 4.4, Appendix C</a></p>
+<h2>Could avoiding a token choice preserve several possible paths?</h2>
+<p>Continuous representations suggest a possibility: perhaps a model can retain several candidates, compute further, and commit later. The paper investigates this idea on synthetic logic tasks.</p>
+<p>The researchers train a variant with a mixture of curriculum stages, allowing it to switch back to language after different numbers of continuous steps. They then compare readout probabilities for candidate concepts. Several candidates receive appreciable probability, followed by concentration on more promising paths. These observations support a search-like interpretation. <a href="https://arxiv.org/abs/2412.06769v2">Coconut v2, Section 5</a></p>
+<p>The readouts reveal candidate probabilities, not a fully decoded internal search tree or proof of standard breadth-first search. This analysis also uses a specially trained variant. It can motivate a mechanism hypothesis, but it does not assign a known reasoning step to each vector in our parts example.</p>
+<h2>Where does this fit among continuous-reasoning methods?</h2>
+<p>We can now describe Coconut's core path: <strong>previous final-layer hidden state → next-position input → another model forward pass</strong>. “Continuous” describes the representation passed between steps; continued computation comes from the forward passes still being executed.</p>
+<p>Other methods give continuous vectors different jobs. This diagram is easier to read after working through Coconut:</p>
+<figure><a href="../../assets/04/cover.en.png"><img alt="Three uses of continuous representations: successive hidden-state feedback, predicted compressed states, and multiple soft prompts leading to written reasoning." src="../../assets/04/cover.en.png" /></a><figcaption><a href="../../assets/04/cover.en.png">Open full PNG</a> · <a href="../../references/matplotlib-layouts/assets/04/cover.en.svg">Layout-reference SVG</a></figcaption></figure>
+<p><em>The first row is the feedback mechanism developed in this article. The other rows locate related approaches; they do not imply equal computation costs.</em></p>
+<p>CCoT studies how to predict a small set of compressed teacher-trajectory states from the question and supply them to an answer decoder. SoftCoT++ uses diverse soft prompts to guide subsequent explicit reasoning. One focuses on predicting compressed states; the other adds starting points for reasoning. They are useful directions for further reading, without being prerequisites for understanding Coconut. <a href="https://arxiv.org/abs/2412.13171v1">CCoT v1, Sections 3–4</a>; <a href="https://arxiv.org/abs/2505.11484v1">SoftCoT++ v1, Section 3</a></p>
+<p>Return to the parts problem. Hiding the written work describes the output. Coconut makes a specific computational change: it passes intermediate computation to the next step through continuous vectors, then trains that path to support the task. What the states preserve, and when this works better than writing the steps, remain questions for mechanism analysis and experiments, respectively.</p><aside class="social"><h2>Twitter / X</h2><pre>How can a model keep computing without writing the steps? Follow a two-step arithmetic example through Coconut’s hidden-state feedback and training curriculum, then look at its math and logic results.</pre><p><a href="../../social/04-what-latent-reasoning-does.en.md">配图和替代文本 / Attachment and alt text</a></p><img src="../../assets/04/cover.en.png" alt="Three uses of continuous representations: feedback from the previous hidden state, predicted compressed teacher states, and soft prompts for later written reasoning."></aside></main></body></html>

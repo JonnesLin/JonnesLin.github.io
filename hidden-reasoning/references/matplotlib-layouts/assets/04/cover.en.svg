@@ -1,0 +1,158 @@
+<?xml version='1.0' encoding='utf-8'?>
+<ns0:svg xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:ns0="http://www.w3.org/2000/svg" xmlns:ns2="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" width="1200" height="675" viewBox="0 0 864 486" version="1.1">
+ <ns0:title>What does the vector do?</ns0:title>
+ <ns0:metadata>
+  <rdf:RDF>
+   <ns2:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+    <dc:title>What does the vector do?</dc:title>
+    <dc:date>2026-09-19T22:45:56.783273</dc:date>
+    <dc:description>Original conceptual drawing; no newly measured experimental results. Three panels, each with distinct topology: a vector feeding the next model pass; a question producing a short predicted state sequence; several soft-prompt tiles each leading to a written chain. Label feedback, compression, and prompt diversity. There is no universal ranking, no free branch expansion, and no promise of losslessness. Avoid drawing all three as the same unlabelled loop.</dc:description>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <ns2:Agent>
+      <dc:title>Matplotlib v3.8.0, https://matplotlib.org/</dc:title>
+     </ns2:Agent>
+    </dc:creator>
+   </ns2:Work>
+  </rdf:RDF>
+ </ns0:metadata>
+ <ns0:defs>
+  <ns0:style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</ns0:style>
+ </ns0:defs>
+ <ns0:g id="figure_1">
+  <ns0:g id="patch_1">
+   <ns0:path d="M 0 486  L 864 486  L 864 0  L 0 0  z " style="fill: #f6f5f0" />
+  </ns0:g>
+  <ns0:g id="axes_1">
+   <ns0:g id="patch_2">
+    <ns0:path d="M 282.96 167.76  L 393.84 167.76  Q 406.8 167.76 406.8 180.72  L 406.8 211.68  Q 406.8 224.64 393.84 224.64  L 282.96 224.64  Q 270 224.64 270 211.68  L 270 180.72  Q 270 167.76 282.96 167.76  z " clip-path="url(#pf488c48e2c)" style="fill: #e1f1ee; stroke: #117d80; stroke-width: 1.8; stroke-linejoin: miter" />
+   </ns0:g>
+   <ns0:g id="patch_3">
+    <ns0:path d="M 480.96 167.76  L 613.44 167.76  Q 626.4 167.76 626.4 180.72  L 626.4 211.68  Q 626.4 224.64 613.44 224.64  L 480.96 224.64  Q 468 224.64 468 211.68  L 468 180.72  Q 468 167.76 480.96 167.76  z " clip-path="url(#pf488c48e2c)" style="fill: #e1f1ee; stroke: #117d80; stroke-width: 1.8; stroke-linejoin: miter" />
+   </ns0:g>
+   <ns0:g id="patch_4">
+    <ns0:path d="M 416.002368 196.2  Q 437.401823 196.2 456.006193 196.2  " clip-path="url(#pf488c48e2c)" style="fill: none; stroke: #117d80; stroke-width: 2.5; stroke-linecap: round" />
+    <ns0:path d="M 446.806193 191.6  L 456.006193 196.2  L 446.806193 200.8  z " clip-path="url(#pf488c48e2c)" style="fill: #117d80; stroke: #117d80; stroke-width: 2.5; stroke-linecap: round" />
+   </ns0:g>
+   <ns0:g id="patch_5">
+    <ns0:path d="M 700.56 167.76  L 807.84 167.76  Q 820.8 167.76 820.8 180.72  L 820.8 211.68  Q 820.8 224.64 807.84 224.64  L 700.56 224.64  Q 687.6 224.64 687.6 211.68  L 687.6 180.72  Q 687.6 167.76 700.56 167.76  z " clip-path="url(#pf488c48e2c)" style="fill: #e1f1ee; stroke: #117d80; stroke-width: 1.8; stroke-linejoin: miter" />
+   </ns0:g>
+   <ns0:g id="patch_6">
+    <ns0:path d="M 635.602368 196.2  Q 657.001823 196.2 675.606193 196.2  " clip-path="url(#pf488c48e2c)" style="fill: none; stroke: #117d80; stroke-width: 2.5; stroke-linecap: round" />
+    <ns0:path d="M 666.406193 191.6  L 675.606193 196.2  L 666.406193 200.8  z " clip-path="url(#pf488c48e2c)" style="fill: #117d80; stroke: #117d80; stroke-width: 2.5; stroke-linecap: round" />
+   </ns0:g>
+   <ns0:g id="patch_7">
+    <ns0:path d="M 282.96 252  L 393.84 252  Q 406.8 252 406.8 264.96  L 406.8 295.92  Q 406.8 308.88 393.84 308.88  L 282.96 308.88  Q 270 308.88 270 295.92  L 270 264.96  Q 270 252 282.96 252  z " clip-path="url(#pf488c48e2c)" style="fill: #e5edf8; stroke: #346bb5; stroke-width: 1.8; stroke-linejoin: miter" />
+   </ns0:g>
+   <ns0:g id="patch_8">
+    <ns0:path d="M 480.96 252  L 613.44 252  Q 626.4 252 626.4 264.96  L 626.4 295.92  Q 626.4 308.88 613.44 308.88  L 480.96 308.88  Q 468 308.88 468 295.92  L 468 264.96  Q 468 252 480.96 252  z " clip-path="url(#pf488c48e2c)" style="fill: #e5edf8; stroke: #346bb5; stroke-width: 1.8; stroke-linejoin: miter" />
+   </ns0:g>
+   <ns0:g id="patch_9">
+    <ns0:path d="M 416.002368 280.44  Q 437.401823 280.44 456.006193 280.44  " clip-path="url(#pf488c48e2c)" style="fill: none; stroke: #346bb5; stroke-width: 2.5; stroke-linecap: round" />
+    <ns0:path d="M 446.806193 275.84  L 456.006193 280.44  L 446.806193 285.04  z " clip-path="url(#pf488c48e2c)" style="fill: #346bb5; stroke: #346bb5; stroke-width: 2.5; stroke-linecap: round" />
+   </ns0:g>
+   <ns0:g id="patch_10">
+    <ns0:path d="M 700.56 252  L 807.84 252  Q 820.8 252 820.8 264.96  L 820.8 295.92  Q 820.8 308.88 807.84 308.88  L 700.56 308.88  Q 687.6 308.88 687.6 295.92  L 687.6 264.96  Q 687.6 252 700.56 252  z " clip-path="url(#pf488c48e2c)" style="fill: #e5edf8; stroke: #346bb5; stroke-width: 1.8; stroke-linejoin: miter" />
+   </ns0:g>
+   <ns0:g id="patch_11">
+    <ns0:path d="M 635.602368 280.44  Q 657.001823 280.44 675.606193 280.44  " clip-path="url(#pf488c48e2c)" style="fill: none; stroke: #346bb5; stroke-width: 2.5; stroke-linecap: round" />
+    <ns0:path d="M 666.406193 275.84  L 675.606193 280.44  L 666.406193 285.04  z " clip-path="url(#pf488c48e2c)" style="fill: #346bb5; stroke: #346bb5; stroke-width: 2.5; stroke-linecap: round" />
+   </ns0:g>
+   <ns0:g id="patch_12">
+    <ns0:path d="M 282.96 334.08  L 354.24 334.08  Q 367.2 334.08 367.2 347.04  L 367.2 354.24  Q 367.2 367.2 354.24 367.2  L 282.96 367.2  Q 270 367.2 270 354.24  L 270 347.04  Q 270 334.08 282.96 334.08  z " clip-path="url(#pf488c48e2c)" style="fill: #fcebd6; stroke: #a75513; stroke-width: 1.8; stroke-linejoin: miter" />
+   </ns0:g>
+   <ns0:g id="patch_13">
+    <ns0:path d="M 477.36 334.08  L 645.84 334.08  Q 658.8 334.08 658.8 347.04  L 658.8 354.24  Q 658.8 367.2 645.84 367.2  L 477.36 367.2  Q 464.4 367.2 464.4 354.24  L 464.4 347.04  Q 464.4 334.08 477.36 334.08  z " clip-path="url(#pf488c48e2c)" style="fill: #fcebd6; stroke: #a75513; stroke-width: 1.8; stroke-linejoin: miter" />
+   </ns0:g>
+   <ns0:g id="patch_14">
+    <ns0:path d="M 376.398743 350.64  Q 415.800699 350.64 452.407569 350.64  " clip-path="url(#pf488c48e2c)" style="fill: none; stroke: #a75513; stroke-width: 2.5; stroke-linecap: round" />
+    <ns0:path d="M 443.207569 346.04  L 452.407569 350.64  L 443.207569 355.24  z " clip-path="url(#pf488c48e2c)" style="fill: #a75513; stroke: #a75513; stroke-width: 2.5; stroke-linecap: round" />
+   </ns0:g>
+   <ns0:g id="patch_15">
+    <ns0:path d="M 747.36 334.08  L 807.84 334.08  Q 820.8 334.08 820.8 347.04  L 820.8 354.24  Q 820.8 367.2 807.84 367.2  L 747.36 367.2  Q 734.4 367.2 734.4 354.24  L 734.4 347.04  Q 734.4 334.08 747.36 334.08  z " clip-path="url(#pf488c48e2c)" style="fill: #fcebd6; stroke: #a75513; stroke-width: 1.8; stroke-linejoin: miter" />
+   </ns0:g>
+   <ns0:g id="patch_16">
+    <ns0:path d="M 667.998413 350.64  Q 696.600107 350.64 722.406717 350.64  " clip-path="url(#pf488c48e2c)" style="fill: none; stroke: #a75513; stroke-width: 2.5; stroke-linecap: round" />
+    <ns0:path d="M 713.206717 346.04  L 722.406717 350.64  L 713.206717 355.24  z " clip-path="url(#pf488c48e2c)" style="fill: #a75513; stroke: #a75513; stroke-width: 2.5; stroke-linecap: round" />
+   </ns0:g>
+   <ns0:g id="patch_17">
+    <ns0:path d="M 282.96 379.44  L 354.24 379.44  Q 367.2 379.44 367.2 392.4  L 367.2 399.6  Q 367.2 412.56 354.24 412.56  L 282.96 412.56  Q 270 412.56 270 399.6  L 270 392.4  Q 270 379.44 282.96 379.44  z " clip-path="url(#pf488c48e2c)" style="fill: #fcebd6; stroke: #a75513; stroke-width: 1.8; stroke-linejoin: miter" />
+   </ns0:g>
+   <ns0:g id="patch_18">
+    <ns0:path d="M 477.36 379.44  L 645.84 379.44  Q 658.8 379.44 658.8 392.4  L 658.8 399.6  Q 658.8 412.56 645.84 412.56  L 477.36 412.56  Q 464.4 412.56 464.4 399.6  L 464.4 392.4  Q 464.4 379.44 477.36 379.44  z " clip-path="url(#pf488c48e2c)" style="fill: #fcebd6; stroke: #a75513; stroke-width: 1.8; stroke-linejoin: miter" />
+   </ns0:g>
+   <ns0:g id="patch_19">
+    <ns0:path d="M 376.398743 396  Q 415.800699 396 452.407569 396  " clip-path="url(#pf488c48e2c)" style="fill: none; stroke: #a75513; stroke-width: 2.5; stroke-linecap: round" />
+    <ns0:path d="M 443.207569 391.4  L 452.407569 396  L 443.207569 400.6  z " clip-path="url(#pf488c48e2c)" style="fill: #a75513; stroke: #a75513; stroke-width: 2.5; stroke-linecap: round" />
+   </ns0:g>
+   <ns0:g id="patch_20">
+    <ns0:path d="M 747.36 379.44  L 807.84 379.44  Q 820.8 379.44 820.8 392.4  L 820.8 399.6  Q 820.8 412.56 807.84 412.56  L 747.36 412.56  Q 734.4 412.56 734.4 399.6  L 734.4 392.4  Q 734.4 379.44 747.36 379.44  z " clip-path="url(#pf488c48e2c)" style="fill: #fcebd6; stroke: #a75513; stroke-width: 1.8; stroke-linejoin: miter" />
+   </ns0:g>
+   <ns0:g id="patch_21">
+    <ns0:path d="M 667.998413 396  Q 696.600107 396 722.406717 396  " clip-path="url(#pf488c48e2c)" style="fill: none; stroke: #a75513; stroke-width: 2.5; stroke-linecap: round" />
+    <ns0:path d="M 713.206717 391.4  L 722.406717 396  L 713.206717 400.6  z " clip-path="url(#pf488c48e2c)" style="fill: #a75513; stroke: #a75513; stroke-width: 2.5; stroke-linecap: round" />
+   </ns0:g>
+   <ns0:g id="text_1">
+    <ns0:text style="fill: #425b64; font: 18px 'Arial Unicode MS'; text-anchor: start" x="43.2" y="34.484063" transform="rotate(-0 43.2 34.484063)">04 / 12   HIDDEN REASONING / LOOPED TRANSFORMERS</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_2">
+    <ns0:text style="fill: #132a36; font: 37.44px 'Arial Unicode MS'; text-anchor: start" x="43.2" y="90.15885" transform="rotate(-0 43.2 90.15885)">What does the vector do?</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_3">
+    <ns0:text style="fill: #117d80; font: 26.64px 'Arial Unicode MS'; text-anchor: start" x="43.2" y="202.668413" transform="rotate(-0 43.2 202.668413)">Feedback</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_4">
+    <ns0:text style="fill: #132a36; font: 24.48px 'Arial Unicode MS'; text-anchor: middle" x="338.4" y="202.522725" transform="rotate(-0 338.4 202.522725)">h</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_5">
+    <ns0:text style="fill: #132a36; font: 24.48px 'Arial Unicode MS'; text-anchor: middle" x="547.2" y="202.522725" transform="rotate(-0 547.2 202.522725)">LM</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_6">
+    <ns0:text style="fill: #132a36; font: 24.48px 'Arial Unicode MS'; text-anchor: middle" x="754.2" y="202.522725" transform="rotate(-0 754.2 202.522725)">h′</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_7">
+    <ns0:text style="fill: #346bb5; font: 26.64px 'Arial Unicode MS'; text-anchor: start" x="43.2" y="287.233088" transform="rotate(-0 43.2 287.233088)">Compression</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_8">
+    <ns0:text style="fill: #132a36; font: 24.48px 'Arial Unicode MS'; text-anchor: middle" x="338.4" y="286.762725" transform="rotate(-0 338.4 286.762725)">Input</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_9">
+    <ns0:text style="fill: #132a36; font: 24.48px 'Arial Unicode MS'; text-anchor: middle" x="547.2" y="286.762725" transform="rotate(-0 547.2 286.762725)">Predictor</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_10">
+    <ns0:text style="fill: #132a36; font: 24.48px 'Arial Unicode MS'" transform="translate(719.512988 273.810893)">z_1 …</ns0:text>
+    <ns0:text style="fill: #132a36; font: 24.48px 'Arial Unicode MS'" transform="translate(731.764463 299.714558)">z_m</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_11">
+    <ns0:text style="fill: #a75513; font: 25.92px 'Arial Unicode MS'; text-anchor: start" x="43.2" y="365.59305" transform="rotate(-0 43.2 365.59305)">Prompt diversity</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_12">
+    <ns0:text style="fill: #132a36; font: 20.16px 'Arial Unicode MS'; text-anchor: middle" x="318.6" y="355.84695" transform="rotate(-0 318.6 355.84695)">p₁</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_13">
+    <ns0:text style="fill: #132a36; font: 20.16px 'Arial Unicode MS'; text-anchor: middle" x="561.6" y="355.84695" transform="rotate(-0 561.6 355.84695)">Written chain 1</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_14">
+    <ns0:text style="fill: #132a36; font: 20.16px 'Arial Unicode MS'; text-anchor: middle" x="777.6" y="355.6296" transform="rotate(-0 777.6 355.6296)">y₁</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_15">
+    <ns0:text style="fill: #132a36; font: 20.16px 'Arial Unicode MS'; text-anchor: middle" x="318.6" y="401.20695" transform="rotate(-0 318.6 401.20695)">p₂</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_16">
+    <ns0:text style="fill: #132a36; font: 20.16px 'Arial Unicode MS'; text-anchor: middle" x="561.6" y="401.20695" transform="rotate(-0 561.6 401.20695)">Written chain 2</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_17">
+    <ns0:text style="fill: #132a36; font: 20.16px 'Arial Unicode MS'; text-anchor: middle" x="777.6" y="400.9896" transform="rotate(-0 777.6 400.9896)">y₂</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_18">
+    <ns0:text style="fill: #425b64; font: 19.44px 'Arial Unicode MS'; text-anchor: start" x="43.2" y="441.111712" transform="rotate(-0 43.2 441.111712)">Different roles; no guarantee of lossless compression or free search.</ns0:text>
+   </ns0:g>
+  </ns0:g>
+ </ns0:g>
+ <ns0:defs>
+  <ns0:clipPath id="pf488c48e2c">
+   <ns0:rect x="0" y="0" width="864" height="486" />
+  </ns0:clipPath>
+ </ns0:defs>
+</ns0:svg>

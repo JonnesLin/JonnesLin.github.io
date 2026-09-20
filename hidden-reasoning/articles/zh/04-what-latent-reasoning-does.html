@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>不写中间步骤，模型怎样继续算？</title><meta name="description" content="用一道两步算术题走过 Coconut 的连续反馈和训练课程，再看数学与逻辑任务中它获得了什么、还缺什么。"><link rel="canonical" href="https://jonneslin.github.io/hidden-reasoning/articles/zh/04-what-latent-reasoning-does.html"><link rel="alternate" hreflang="zh" href="https://jonneslin.github.io/hidden-reasoning/articles/zh/04-what-latent-reasoning-does.html"><link rel="alternate" hreflang="en" href="https://jonneslin.github.io/hidden-reasoning/articles/en/04-what-latent-reasoning-does.html"><meta property="og:url" content="https://jonneslin.github.io/hidden-reasoning/articles/zh/04-what-latent-reasoning-does.html"><meta property="og:title" content="不写中间步骤，模型怎样继续算？"><meta property="og:description" content="用一道两步算术题走过 Coconut 的连续反馈和训练课程，再看数学与逻辑任务中它获得了什么、还缺什么。"><meta property="og:type" content="article"><meta property="og:image" content="https://jonneslin.github.io/hidden-reasoning/assets/04/cover.zh.png"><style>
+:root{color-scheme:light;--ink:#132a36;--muted:#425b64;--teal:#117d80;--paper:#f6f5f0}
+*{box-sizing:border-box}body{margin:0;color:var(--ink);background:var(--paper);font:18px/1.8 system-ui,-apple-system,'PingFang SC','Noto Sans CJK SC',sans-serif}
+a{color:#125f74;text-underline-offset:.18em}a:hover{color:#9a4e10}header,main,footer{max-width:1120px;margin:auto;padding:36px 28px}header{border-bottom:1px solid #cad7d9}header p{max-width:760px;color:var(--muted)}h1{font-size:clamp(32px,5vw,54px);line-height:1.15;letter-spacing:-.025em}h2{font-size:29px;line-height:1.3;margin-top:2em}h3{font-size:22px;line-height:1.4}img{display:block;max-width:100%;height:auto;border-radius:12px}nav{display:flex;gap:24px;flex-wrap:wrap}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:30px}.card{background:white;border:1px solid #cad7d9;border-radius:16px;padding:22px}.card h2{margin:16px 0 10px;font-size:26px}.card p{color:var(--muted);font-size:17px}.number{font:14px/1.5 ui-monospace,monospace;color:var(--muted);letter-spacing:.12em}.reading{max-width:850px}.reading p,.reading li{overflow-wrap:anywhere}.reading img{margin:28px 0 12px}.social{padding:24px;border:1px solid #cad7d9;border-radius:12px;background:white;margin:40px 0}pre{overflow:auto;white-space:pre-wrap;overflow-wrap:anywhere;background:#e9eeee;padding:18px;border-radius:8px;font-size:17px;line-height:1.65}code{font-family:ui-monospace,monospace;font-size:.9em}blockquote{margin-left:0;padding:4px 24px;border-left:4px solid var(--teal)}table{border-collapse:collapse;width:100%;font-size:16px}th,td{text-align:left;border-bottom:1px solid #cbd7d9;padding:10px}footer{font-size:14px;color:var(--muted)}@media(max-width:700px){.grid{grid-template-columns:1fr}header,main,footer{padding:24px 18px}body{font-size:17px}.card{padding:16px}h2{font-size:25px}}
+
+.reading figure{margin:28px 0}.reading figure>a{display:block}.reading figure img{margin:0}.reading figcaption{font-size:14px;margin-top:8px}
+</style></head><body><header><p><a href="../../../blog.html">← Main blog</a></p><nav><a href="../../index.html">全部文章 / All articles</a><a href="../en/04-what-latent-reasoning-does.html">English</a><a href="../../zh/04-what-latent-reasoning-does.md">Markdown</a></nav></header><main class="reading"><h1>不写中间步骤，模型怎样继续算？</h1>
+<p>三箱零件，每箱十二个，其中四个损坏，还剩多少个？</p>
+<p>我们可以先写 <code>3 × 12 = 36</code>，再写 <code>36 − 4 = 32</code>。对自回归语言模型来说，写下这些中间步骤还有一个作用：它们进入上下文，成为后续计算可以读取的输入。</p>
+<p>于是出现了一个值得追问的问题：<strong>模型已经产生了内部表示，为什么一定要先把它变成词元，才能继续？</strong></p>
+<p>Coconut 尝试改变这个接口：在一段计算中，把当前隐状态直接交给下一个位置。下面就沿着这道零件题，走一遍它怎样运行、怎样训练，以及实验中得到了什么。零件题是教学示例；文中的性能数字来自论文。</p>
+<h2>写下来的结果，怎样回到模型里？</h2>
+<p>先看普通生成。模型读完已有上下文，得到末端隐状态 <code>h[t]</code>。输出头把它映射成词表上的分数，生成规则选出一个词元 <code>u</code>；下一步再查嵌入表，把 <code>u</code> 变成向量 <code>E(u)</code>，送回模型。</p>
+<pre><code class="language-text">当前隐状态 → 输出头 → 选词元 → 查嵌入表 → 下一次前向
+</code></pre>
+<p>零件题中的“36”就是这样逐词元写进上下文的；实际切成几个词元取决于 tokenizer。生成后面的减法时，模型可以通过注意力读取前面的文字及其表示。</p>
+<p>这里有两份要分开的东西：<strong>新位置的输入</strong>，以及<strong>它可以读取的历史</strong>。前者来自刚选出的词元，后者包括问题和已经写下的过程。这个区分很快会派上用场。</p>
+<h2>把隐状态直接交给下一位置</h2>
+<p>在 Coconut 的连续阶段，模型不再先选词、再查嵌入表，而是直接使用：</p>
+<p><code>e[t+1] = h[t]</code></p>
+<p>左边是下一位置的输入，右边是当前位置的末层隐状态。读这条式子时，可以把注意力放在那个等号上：<strong>这次计算的输出向量，直接成为下一次计算的输入向量。</strong> <a href="https://arxiv.org/abs/2412.06769v2">Coconut v2，§3</a></p>
+<figure><a href="../../assets/04/diagram.zh.png"><img alt="上排经过输出头、词元选择和词嵌入；下排把当前隐状态直接送入下一位置，两排都继续执行模型前向，并保留历史 KV 缓存。" src="../../assets/04/diagram.zh.png" /></a><figcaption><a href="../../assets/04/diagram.zh.png">查看完整 PNG</a> · <a href="../../references/matplotlib-layouts/assets/04/diagram.zh.svg">SVG 结构参考</a></figcaption></figure>
+<p><em>沿上排找到 h[t] 与下一次前向之间的接口，再看下排怎样替换它。图中 CODI 的投影属于另一种设计；基本 Coconut 使用直接反馈。语言读出表示连续阶段结束后的输出路径，图中省略了阶段边界词元。</em> <a href="https://arxiv.org/abs/2502.21074v2">CODI v2，§3.3</a></p>
+<p>具体走两步会更清楚。Coconut 用 <code>&lt;bot&gt;</code> 和 <code>&lt;eot&gt;</code> 标记连续区间的开始和结束：</p>
+<ol>
+<li>先处理问题和 <code>&lt;bot&gt;</code>，取 <code>&lt;bot&gt;</code> 位置的末层隐状态，记为 <code>h[0]</code>。</li>
+<li>把 <code>h[0]</code> 放到第一个连续位置作为输入，执行一次前向，得到 <code>h[1]</code>。</li>
+<li>把 <code>h[1]</code> 放到第二个连续位置，再执行一次前向，得到 <code>h[2]</code>。</li>
+<li>连续阶段结束，接入 <code>&lt;eot&gt;</code>，恢复正常的词元输入和语言输出。</li>
+</ol>
+<p>每一步仍能访问已有历史。工程上，KV 缓存保存已经处理位置的键和值，避免重算它们；新位置的前向仍然要执行。理解 Coconut 时，更完整的状态图景是“当前输入向量，加上可访问的历史”。<a href="https://arxiv.org/abs/2412.06769v2">Coconut v2，§3</a></p>
+<p>回到零件题，我们知道 <code>h[0]</code>、<code>h[1]</code>、<code>h[2]</code> 是怎样产生的，却还不知道其中是否有一个明确表示了“36”。计算接口告诉我们数据怎样流动。要让这条路径有用，模型还得学会往里面放什么信息。</p>
+<h2>模型怎样学会不用文字支撑下一步？</h2>
+<p>Coconut 从有文字推理步骤的数据开始训练，再逐步移除前面的步骤，用连续位置接替。下面取“每删一个推理步骤，增加一个连续位置”，也就是 <code>c = 1</code>，展示零件题的课程变化：</p>
+<table>
+<thead>
+<tr>
+<th>阶段</th>
+<th style="text-align: right;">连续位置数</th>
+<th>保留的文字推理</th>
+<th>最终答案</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td style="text-align: right;">0</td>
+<td><code>3 × 12 = 36</code>；<code>36 − 4 = 32</code></td>
+<td><code>32</code></td>
+</tr>
+<tr>
+<td>1</td>
+<td style="text-align: right;">1</td>
+<td><code>36 − 4 = 32</code></td>
+<td><code>32</code></td>
+</tr>
+<tr>
+<td>2</td>
+<td style="text-align: right;">2</td>
+<td>无</td>
+<td><code>32</code></td>
+</tr>
+</tbody>
+</table>
+<p><em>问题始终保留。表中省略边界词元；连续位置里的向量由模型运行产生，没有预先填写“36”或“32”。这是课程规则的教学示意。</em></p>
+<p>在阶段 1，模型要预测剩下的减法过程，但输入中已经没有写好的第一步。训练误差从剩余文字和答案一路反传，经过连续反馈，推动模型学会利用这个新接口。到阶段 2，文字推理也移除了，答案仍提供监督。</p>
+<p>这解释了一个容易误读的地方：训练安排让一个连续位置接替了一句文字，<strong>损失函数却没有要求这个向量逐字还原那句话</strong>。它学到怎样的表示，要由后续任务和优化共同决定。</p>
+<p>实际论文中，第 <code>k</code> 阶段用 <code>k × c</code> 个连续位置替换前 <code>k</code> 个推理步骤。GSM8K 设置采用 <code>c = 2</code>，连续位置数先从 0 增至 2、4、6，后续阶段保持 6 个并移除剩余文字步骤。上面的两步示例解释的是课程规则，并非论文完整训练配方。<a href="https://arxiv.org/abs/2412.06769v2">Coconut v2，§3、§4.2</a></p>
+<p>运行路径和训练信号现在接上了：连续反馈提供继续计算的地方，课程则教模型在文字支架逐渐减少时使用它。接下来要看，这样学出来的模型能答对多少题。</p>
+<h2>它学会了多少？先看数学题，再看逻辑题</h2>
+<p>论文用 GPT-2 比较了几种训练方式。下面选取表 1 中的三行；数值为准确率百分比，<code>±</code> 按原表保留。</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th style="text-align: right;">GSM8K 数学题</th>
+<th style="text-align: right;">ProntoQA 逻辑题</th>
+<th style="text-align: right;">ProsQA 逻辑题</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>直接回答（No-CoT）</td>
+<td style="text-align: right;">16.5 ± 0.5</td>
+<td style="text-align: right;">93.8 ± 0.7</td>
+<td style="text-align: right;">76.7 ± 1.0</td>
+</tr>
+<tr>
+<td>显式思维链（CoT）</td>
+<td style="text-align: right;">42.9 ± 0.2</td>
+<td style="text-align: right;">98.8 ± 0.8</td>
+<td style="text-align: right;">77.5 ± 1.9</td>
+</tr>
+<tr>
+<td>Coconut</td>
+<td style="text-align: right;">34.1 ± 1.5</td>
+<td style="text-align: right;">99.8 ± 0.2</td>
+<td style="text-align: right;">97.0 ± 0.3</td>
+</tr>
+</tbody>
+</table>
+<p><em>来源：Coconut v2，表 1。实验使用贪心解码，并在验证集上选择 checkpoint；这些数字对应论文的模型、数据与训练设置。</em> <a href="https://arxiv.org/abs/2412.06769v2">原文 §4、表1</a></p>
+<p>先看 GSM8K：34.1 高于直接回答的 16.5，却仍低于写出思维链的 42.9。对于零件题这样的数学推理动机，这组结果呈现了一个具体取舍：连续计算可以学到有用的东西，但这里还没有保住显式链的全部准确率。</p>
+<p>再看 ProsQA，Coconut 明显超过表中的显式 CoT。不过，只看这三行还不能把收益全部归给连续反馈。原表另有逐步移除文字、最终直接回答的 iCoT，它在 ProsQA 达到 <strong>98.2 ± 0.3</strong>，也高于 Coconut。课程本身就是需要单独考察的因素。<a href="https://arxiv.org/abs/2412.06769v2">Coconut v2，表1、§4.3</a></p>
+<p>“少写了步骤”和“更快”也需要分开测量。刚才的两步演示中，得到 <code>h[1]</code> 后才能产生第二个连续输入，这个等待仍然存在。论文主实验通常使用预设的连续步数；增加这些位置，也没有持续改善表现。想知道一套实现是否值得采用，最终还得把答案质量和实测延迟放在一起比较。<a href="https://arxiv.org/abs/2412.06769v2">Coconut v2，§3、§4.4、附录C</a></p>
+<h2>不选一个词，会不会保留更多可能的路径？</h2>
+<p>连续表示很容易让人想到一种可能：模型也许不必立刻选定一条文字路径，可以先保留多个候选，算几步以后再作决定。论文在合成逻辑任务上专门研究了这个问题。</p>
+<p>研究者使用混合不同训练阶段的变体，使模型能在不同连续位置切回文字，然后比较它对候选概念的读出概率。他们观察到多个候选获得较高概率，后续分布逐渐集中到更有希望的路径。这为“搜索式计算”的解释提供了证据。<a href="https://arxiv.org/abs/2412.06769v2">Coconut v2，§5</a></p>
+<p>这里读出的是候选概率，并没有完整解码隐状态中的搜索树，也没有证明模型执行标准广度优先搜索。这组分析使用的还是专门训练的变体。因而，我们可以用它提出机制假说，但不能据此给零件题中的每个向量指定一条已知推理步骤。</p>
+<h2>把它放回连续推理的地图</h2>
+<p>到这里，Coconut 的核心可以用一条路径描述：<strong>上一步末层隐状态 → 下一位置输入 → 又一次模型前向。</strong> “连续”指两步之间传递的表示；“继续算”来自仍然执行的前向过程。</p>
+<p>其他研究也使用连续向量，但交给它们的工作不同。下面这张图适合在理解 Coconut 后再看：</p>
+<figure><a href="../../assets/04/cover.zh.png"><img alt="三种连续表示的用途：隐状态逐步反馈、从问题预测压缩状态，以及用多个软提示引导后续文字推理。" src="../../assets/04/cover.zh.png" /></a><figcaption><a href="../../assets/04/cover.zh.png">查看完整 PNG</a> · <a href="../../references/matplotlib-layouts/assets/04/cover.zh.svg">SVG 结构参考</a></figcaption></figure>
+<p><em>第一行是本文展开的连续反馈。后两行用于定位相邻路线，不表示它们具有相同的计算成本。</em></p>
+<p>CCoT 研究怎样从问题预测少量压缩后的教师轨迹状态，再供答案解码器使用；SoftCoT++ 用多种软提示引导后续显式推理。前者关注压缩状态的预测，后者增加推理的起点。它们可以留作下一步阅读，无须先把这些接口都记住，才能理解 Coconut。<a href="https://arxiv.org/abs/2412.13171v1">CCoT v1，§3–4</a>；<a href="https://arxiv.org/abs/2505.11484v1">SoftCoT++ v1，§3</a></p>
+<p>再看最初那道零件题：隐藏中间文字只是输出形式。Coconut 做出的具体改变，是让中间计算经由连续向量接到下一步，并通过训练让这条路径承担任务。它究竟保留了什么、比写草稿好在哪里，分别需要机制分析与实验回答。</p><aside class="social"><h2>Twitter / X</h2><pre>模型不写中间步骤，下一步拿什么继续算？用一道两步算术题，走过 Coconut 的连续反馈与训练课程，再看它在数学和逻辑任务中答对了多少题。</pre><p><a href="../../social/04-what-latent-reasoning-does.zh.md">配图和替代文本 / Attachment and alt text</a></p><img src="../../assets/04/cover.zh.png" alt="三种连续表示用途：上一隐状态反馈到下一步、从问题预测压缩教师状态、软提示分别引导后续文字推理。"></aside></main></body></html>

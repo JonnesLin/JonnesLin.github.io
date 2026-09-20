@@ -1,0 +1,91 @@
+<?xml version='1.0' encoding='utf-8'?>
+<ns0:svg xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:ns0="http://www.w3.org/2000/svg" xmlns:ns2="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" width="1200" height="675" viewBox="0 0 864 486" version="1.1">
+ <ns0:title>A loop count is not a training recipe</ns0:title>
+ <ns0:metadata>
+  <rdf:RDF>
+   <ns2:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+    <dc:title>A loop count is not a training recipe</dc:title>
+    <dc:date>2026-09-19T22:40:10.056947</dc:date>
+    <dc:description>Original conceptual drawing; no newly measured experimental results. Create a clean five-part conceptual overview with five equally legible cards: starting state, forward rounds, backward window, readout, and cache. Organize state-to-forward-to-readout as the main flow; show backward window and cache as explicitly separate controls, not extra forward layers. No measured throughput or score. No made-up probability distributions.</dc:description>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <ns2:Agent>
+      <dc:title>Matplotlib v3.8.0, https://matplotlib.org/</dc:title>
+     </ns2:Agent>
+    </dc:creator>
+   </ns2:Work>
+  </rdf:RDF>
+ </ns0:metadata>
+ <ns0:defs>
+  <ns0:style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</ns0:style>
+ </ns0:defs>
+ <ns0:g id="figure_1">
+  <ns0:g id="patch_1">
+   <ns0:path d="M 0 486  L 864 486  L 864 0  L 0 0  z " style="fill: #f6f5f0" />
+  </ns0:g>
+  <ns0:g id="axes_1">
+   <ns0:g id="patch_2">
+    <ns0:path d="M 56.16 172.08  L 228.24 172.08  Q 241.2 172.08 241.2 185.04  L 241.2 242.64  Q 241.2 255.6 228.24 255.6  L 56.16 255.6  Q 43.2 255.6 43.2 242.64  L 43.2 185.04  Q 43.2 172.08 56.16 172.08  z " clip-path="url(#pf9d98ddbb1)" style="fill: #e5edf8; stroke: #346bb5; stroke-width: 1.8; stroke-linejoin: miter" />
+   </ns0:g>
+   <ns0:g id="patch_3">
+    <ns0:path d="M 326.16 172.08  L 505.44 172.08  Q 518.4 172.08 518.4 185.04  L 518.4 242.64  Q 518.4 255.6 505.44 255.6  L 326.16 255.6  Q 313.2 255.6 313.2 242.64  L 313.2 185.04  Q 313.2 172.08 326.16 172.08  z " clip-path="url(#pf9d98ddbb1)" style="fill: #e5edf8; stroke: #346bb5; stroke-width: 1.8; stroke-linejoin: miter" />
+   </ns0:g>
+   <ns0:g id="patch_4">
+    <ns0:path d="M 250.400391 213.84  Q 277.2008 213.84 301.206125 213.84  " clip-path="url(#pf9d98ddbb1)" style="fill: none; stroke: #346bb5; stroke-width: 2.5; stroke-linecap: round" />
+    <ns0:path d="M 292.006125 209.24  L 301.206125 213.84  L 292.006125 218.44  z " clip-path="url(#pf9d98ddbb1)" style="fill: #346bb5; stroke: #346bb5; stroke-width: 2.5; stroke-linecap: round" />
+   </ns0:g>
+   <ns0:g id="patch_5">
+    <ns0:path d="M 606.96 172.08  L 807.84 172.08  Q 820.8 172.08 820.8 185.04  L 820.8 242.64  Q 820.8 255.6 807.84 255.6  L 606.96 255.6  Q 594 255.6 594 242.64  L 594 185.04  Q 594 172.08 606.96 172.08  z " clip-path="url(#pf9d98ddbb1)" style="fill: #e5edf8; stroke: #346bb5; stroke-width: 1.8; stroke-linejoin: miter" />
+   </ns0:g>
+   <ns0:g id="patch_6">
+    <ns0:path d="M 527.598413 213.84  Q 556.200107 213.84 582.006717 213.84  " clip-path="url(#pf9d98ddbb1)" style="fill: none; stroke: #346bb5; stroke-width: 2.5; stroke-linecap: round" />
+    <ns0:path d="M 572.806717 209.24  L 582.006717 213.84  L 572.806717 218.44  z " clip-path="url(#pf9d98ddbb1)" style="fill: #346bb5; stroke: #346bb5; stroke-width: 2.5; stroke-linecap: round" />
+   </ns0:g>
+   <ns0:g id="patch_7">
+    <ns0:path d="M 167.76 316.08  L 401.04 316.08  Q 414 316.08 414 329.04  L 414 372.24  Q 414 385.2 401.04 385.2  L 167.76 385.2  Q 154.8 385.2 154.8 372.24  L 154.8 329.04  Q 154.8 316.08 167.76 316.08  z " clip-path="url(#pf9d98ddbb1)" style="fill: #fcebd6; stroke: #a75513; stroke-width: 1.8; stroke-linejoin: miter" />
+   </ns0:g>
+   <ns0:g id="patch_8">
+    <ns0:path d="M 480.96 316.08  L 699.84 316.08  Q 712.8 316.08 712.8 329.04  L 712.8 372.24  Q 712.8 385.2 699.84 385.2  L 480.96 385.2  Q 468 385.2 468 372.24  L 468 329.04  Q 468 316.08 480.96 316.08  z " clip-path="url(#pf9d98ddbb1)" style="fill: #e1f1ee; stroke: #117d80; stroke-width: 1.8; stroke-linejoin: miter" />
+   </ns0:g>
+   <ns0:g id="patch_9">
+    <ns0:path d="M 286.185278 309.413628  Q 331.200214 286.559891 373.722865 264.971468  " clip-path="url(#pf9d98ddbb1)" style="fill: none; stroke-dasharray: 9.25,4; stroke-dashoffset: 0; stroke: #a75513; stroke-width: 2.5; stroke-linecap: round" />
+    <ns0:path d="M 363.437146 265.034571  L 373.722865 264.971468  L 367.601916 273.237905  z " clip-path="url(#pf9d98ddbb1)" style="fill: #a75513; stroke-dasharray: 9.25,4; stroke-dashoffset: 0; stroke: #a75513; stroke-width: 2.5; stroke-linecap: round" />
+   </ns0:g>
+   <ns0:g id="patch_10">
+    <ns0:path d="M 588.554297 309.558647  Q 532.802511 286.561036 479.634609 264.629276  " clip-path="url(#pf9d98ddbb1)" style="fill: none; stroke-dasharray: 9.25,4; stroke-dashoffset: 0; stroke: #117d80; stroke-width: 2.5; stroke-linecap: round" />
+    <ns0:path d="M 486.385322 272.389938  L 479.634609 264.629276  L 489.893567 263.885103  z " clip-path="url(#pf9d98ddbb1)" style="fill: #117d80; stroke-dasharray: 9.25,4; stroke-dashoffset: 0; stroke: #117d80; stroke-width: 2.5; stroke-linecap: round" />
+   </ns0:g>
+   <ns0:g id="text_1">
+    <ns0:text style="fill: #425b64; font: 18px 'Arial Unicode MS'; text-anchor: start" x="43.2" y="34.484063" transform="rotate(-0 43.2 34.484063)">06 / 12   HIDDEN REASONING / LOOPED TRANSFORMERS</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_2">
+    <ns0:text style="fill: #132a36; font: 37.44px 'Arial Unicode MS'; text-anchor: start" x="43.2" y="90.15885" transform="rotate(-0 43.2 90.15885)">A loop count is not a training recipe</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_3">
+    <ns0:text style="fill: #132a36; font: 29.52px 'Arial Unicode MS'; text-anchor: middle" x="142.2" y="221.485219" transform="rotate(-0 142.2 221.485219)">Starting state</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_4">
+    <ns0:text style="fill: #132a36; font: 29.52px 'Arial Unicode MS'" transform="translate(361.672313 205.846076)">Forward</ns0:text>
+    <ns0:text style="fill: #132a36; font: 29.52px 'Arial Unicode MS'" transform="translate(370.673606 237.082849)">rounds</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_5">
+    <ns0:text style="fill: #132a36; font: 29.52px 'Arial Unicode MS'; text-anchor: middle" x="707.4" y="221.464463" transform="rotate(-0 707.4 221.464463)">Readout</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_6">
+    <ns0:text style="fill: #132a36; font: 28.8px 'Arial Unicode MS'; text-anchor: middle" x="284.4" y="358.0785" transform="rotate(-0 284.4 358.0785)">Backward window</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_7">
+    <ns0:text style="fill: #132a36; font: 28.8px 'Arial Unicode MS'; text-anchor: middle" x="590.4" y="358.0785" transform="rotate(-0 590.4 358.0785)">Cache rules</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_8">
+    <ns0:text style="fill: #425b64; font: 19.44px 'Arial Unicode MS'; text-anchor: start" x="43.2" y="441.111712" transform="rotate(-0 43.2 441.111712)">Gradient history and cache are separate controls, not extra layers.</ns0:text>
+   </ns0:g>
+  </ns0:g>
+ </ns0:g>
+ <ns0:defs>
+  <ns0:clipPath id="pf9d98ddbb1">
+   <ns0:rect x="0" y="0" width="864" height="486" />
+  </ns0:clipPath>
+ </ns0:defs>
+</ns0:svg>

@@ -1,0 +1,134 @@
+<?xml version='1.0' encoding='utf-8'?>
+<ns0:svg xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:ns0="http://www.w3.org/2000/svg" xmlns:ns2="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" width="1200" height="900" viewBox="0 0 864 648" version="1.1">
+ <ns0:title>有正确状态，还要能选中它</ns0:title>
+ <ns0:metadata>
+  <rdf:RDF>
+   <ns2:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+    <dc:title>有正确状态，还要能选中它</dc:title>
+    <dc:date>2026-09-19T22:38:47.009001</dc:date>
+    <dc:description>Original conceptual drawing; no newly measured experimental results. Reuse the four-state wrong/right/right/wrong illustrative trajectory. Under it, show three separate decision rows: fixed final depth points to the final wrong state; actual policy has no access to correctness labels and its choice is marked unresolved rather than assumed correct; oracle has explicit label access and can identify either earlier correct state. Make correctness labels visibly part of the analyst view, never an input arrow to the actual policy. Label oracle as diagnostic upper bound only. Do not use measured scores or guarantee a learned gate can select a correct state.</dc:description>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <ns2:Agent>
+      <dc:title>Matplotlib v3.8.0, https://matplotlib.org/</dc:title>
+     </ns2:Agent>
+    </dc:creator>
+   </ns2:Work>
+  </rdf:RDF>
+ </ns0:metadata>
+ <ns0:defs>
+  <ns0:style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</ns0:style>
+ </ns0:defs>
+ <ns0:g id="figure_1">
+  <ns0:g id="patch_1">
+   <ns0:path d="M 0 648  L 864 648  L 864 0  L 0 0  z " style="fill: #f6f5f0" />
+  </ns0:g>
+  <ns0:g id="axes_1">
+   <ns0:g id="patch_2">
+    <ns0:path d="M 56.16 195.12  L 181.44 195.12  Q 194.4 195.12 194.4 208.08  L 194.4 254.16  Q 194.4 267.12 181.44 267.12  L 56.16 267.12  Q 43.2 267.12 43.2 254.16  L 43.2 208.08  Q 43.2 195.12 56.16 195.12  z " clip-path="url(#p149d7de534)" style="fill: #fcebd6; stroke: #a75513; stroke-width: 1.8; stroke-linejoin: miter" />
+   </ns0:g>
+   <ns0:g id="patch_3">
+    <ns0:path d="M 264.96 195.12  L 390.24 195.12  Q 403.2 195.12 403.2 208.08  L 403.2 254.16  Q 403.2 267.12 390.24 267.12  L 264.96 267.12  Q 252 267.12 252 254.16  L 252 208.08  Q 252 195.12 264.96 195.12  z " clip-path="url(#p149d7de534)" style="fill: #e1f1ee; stroke: #117d80; stroke-width: 1.8; stroke-linejoin: miter" />
+   </ns0:g>
+   <ns0:g id="patch_4">
+    <ns0:path d="M 202.162588 231.12  Q 222.480678 231.12 240.003684 231.12  " clip-path="url(#p149d7de534)" style="fill: none; stroke: #627a82; stroke-width: 2.5; stroke-linecap: round" />
+    <ns0:path d="M 230.803684 226.52  L 240.003684 231.12  L 230.803684 235.72  z " clip-path="url(#p149d7de534)" style="fill: #627a82; stroke: #627a82; stroke-width: 2.5; stroke-linecap: round" />
+   </ns0:g>
+   <ns0:g id="patch_5">
+    <ns0:path d="M 473.76 195.12  L 599.04 195.12  Q 612 195.12 612 208.08  L 612 254.16  Q 612 267.12 599.04 267.12  L 473.76 267.12  Q 460.8 267.12 460.8 254.16  L 460.8 208.08  Q 460.8 195.12 473.76 195.12  z " clip-path="url(#p149d7de534)" style="fill: #e1f1ee; stroke: #117d80; stroke-width: 1.8; stroke-linejoin: miter" />
+   </ns0:g>
+   <ns0:g id="patch_6">
+    <ns0:path d="M 410.962588 231.12  Q 431.280678 231.12 448.803684 231.12  " clip-path="url(#p149d7de534)" style="fill: none; stroke: #627a82; stroke-width: 2.5; stroke-linecap: round" />
+    <ns0:path d="M 439.603684 226.52  L 448.803684 231.12  L 439.603684 235.72  z " clip-path="url(#p149d7de534)" style="fill: #627a82; stroke: #627a82; stroke-width: 2.5; stroke-linecap: round" />
+   </ns0:g>
+   <ns0:g id="patch_7">
+    <ns0:path d="M 682.56 195.12  L 807.84 195.12  Q 820.8 195.12 820.8 208.08  L 820.8 254.16  Q 820.8 267.12 807.84 267.12  L 682.56 267.12  Q 669.6 267.12 669.6 254.16  L 669.6 208.08  Q 669.6 195.12 682.56 195.12  z " clip-path="url(#p149d7de534)" style="fill: #fcebd6; stroke: #a75513; stroke-width: 1.8; stroke-linejoin: miter" />
+   </ns0:g>
+   <ns0:g id="patch_8">
+    <ns0:path d="M 619.762588 231.12  Q 640.080678 231.12 657.603684 231.12  " clip-path="url(#p149d7de534)" style="fill: none; stroke: #627a82; stroke-width: 2.5; stroke-linecap: round" />
+    <ns0:path d="M 648.403684 226.52  L 657.603684 231.12  L 648.403684 235.72  z " clip-path="url(#p149d7de534)" style="fill: #627a82; stroke: #627a82; stroke-width: 2.5; stroke-linecap: round" />
+   </ns0:g>
+   <ns0:g id="patch_9">
+    <ns0:path d="M 326.71994 331.2  Q 502.560226 331.2 675.605427 331.2  " clip-path="url(#p149d7de534)" style="fill: none; stroke: #a75513; stroke-width: 2.5; stroke-linecap: round" />
+    <ns0:path d="M 666.405427 326.6  L 675.605427 331.2  L 666.405427 335.8  z " clip-path="url(#p149d7de534)" style="fill: #a75513; stroke: #a75513; stroke-width: 2.5; stroke-linecap: round" />
+   </ns0:g>
+   <ns0:g id="patch_10">
+    <ns0:path d="M 709.2 303.12  L 807.84 303.12  Q 820.8 303.12 820.8 316.08  L 820.8 348.48  Q 820.8 361.44 807.84 361.44  L 709.2 361.44  Q 696.24 361.44 696.24 348.48  L 696.24 316.08  Q 696.24 303.12 709.2 303.12  z " clip-path="url(#p149d7de534)" style="fill: #fcebd6; stroke: #a75513; stroke-width: 1.8; stroke-linejoin: miter" />
+   </ns0:g>
+   <ns0:g id="patch_11">
+    <ns0:path d="M 321.84 385.2  L 580.32 385.2  Q 593.28 385.2 593.28 398.16  L 593.28 432.72  Q 593.28 445.68 580.32 445.68  L 321.84 445.68  Q 308.88 445.68 308.88 432.72  L 308.88 398.16  Q 308.88 385.2 321.84 385.2  z " clip-path="url(#p149d7de534)" style="fill: #e5edf8; stroke: #346bb5; stroke-width: 1.8; stroke-linejoin: miter" />
+   </ns0:g>
+   <ns0:g id="patch_12">
+    <ns0:path d="M 603.20083 415.44  Q 642.96282 415.44 679.929725 415.44  " clip-path="url(#p149d7de534)" style="fill: none; stroke: #346bb5; stroke-width: 2.5; stroke-linecap: round" />
+    <ns0:path d="M 670.729725 410.84  L 679.929725 415.44  L 670.729725 420.04  z " clip-path="url(#p149d7de534)" style="fill: #346bb5; stroke: #346bb5; stroke-width: 2.5; stroke-linecap: round" />
+   </ns0:g>
+   <ns0:g id="patch_13">
+    <ns0:path d="M 709.2 385.2  L 807.84 385.2  Q 820.8 385.2 820.8 398.16  L 820.8 432.72  Q 820.8 445.68 807.84 445.68  L 709.2 445.68  Q 696.24 445.68 696.24 432.72  L 696.24 398.16  Q 696.24 385.2 709.2 385.2  z " clip-path="url(#p149d7de534)" style="fill: #e5edf8; stroke: #346bb5; stroke-width: 1.8; stroke-linejoin: miter" />
+   </ns0:g>
+   <ns0:g id="patch_14">
+    <ns0:path d="M 321.84 477.36  L 580.32 477.36  Q 593.28 477.36 593.28 490.32  L 593.28 528.48  Q 593.28 541.44 580.32 541.44  L 321.84 541.44  Q 308.88 541.44 308.88 528.48  L 308.88 490.32  Q 308.88 477.36 321.84 477.36  z " clip-path="url(#p149d7de534)" style="fill: #e1f1ee; stroke: #117d80; stroke-width: 1.8; stroke-linejoin: miter" />
+   </ns0:g>
+   <ns0:g id="patch_15">
+    <ns0:path d="M 603.20083 509.04  Q 642.96282 509.04 679.929725 509.04  " clip-path="url(#p149d7de534)" style="fill: none; stroke: #117d80; stroke-width: 2.5; stroke-linecap: round" />
+    <ns0:path d="M 670.729725 504.44  L 679.929725 509.04  L 670.729725 513.64  z " clip-path="url(#p149d7de534)" style="fill: #117d80; stroke: #117d80; stroke-width: 2.5; stroke-linecap: round" />
+   </ns0:g>
+   <ns0:g id="patch_16">
+    <ns0:path d="M 709.2 477.36  L 807.84 477.36  Q 820.8 477.36 820.8 490.32  L 820.8 528.48  Q 820.8 541.44 807.84 541.44  L 709.2 541.44  Q 696.24 541.44 696.24 528.48  L 696.24 490.32  Q 696.24 477.36 709.2 477.36  z " clip-path="url(#p149d7de534)" style="fill: #e1f1ee; stroke: #117d80; stroke-width: 1.8; stroke-linejoin: miter" />
+   </ns0:g>
+   <ns0:g id="text_1">
+    <ns0:text style="fill: #425b64; font: 18px 'Arial Unicode MS'; text-anchor: start" x="43.2" y="34.484063" transform="rotate(-0 43.2 34.484063)">08 / 12   隐状态推理与循环 Transformer</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_2">
+    <ns0:text style="fill: #132a36; font: 37.44px 'Arial Unicode MS'; text-anchor: start" x="43.2" y="93.08385" transform="rotate(-0 43.2 93.08385)">有正确状态，还要能选中它</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_3">
+    <ns0:text style="fill: #425b64; font: 23.04px 'Arial Unicode MS'; text-anchor: start" x="43.2" y="171.4068" transform="rotate(-0 43.2 171.4068)">分析者视图：带标签的人为轨迹</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_4">
+    <ns0:text style="fill: #132a36; font: 30.24px 'Arial Unicode MS'; text-anchor: middle" x="118.8" y="238.930425" transform="rotate(-0 118.8 238.930425)">错</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_5">
+    <ns0:text style="fill: #132a36; font: 30.24px 'Arial Unicode MS'; text-anchor: middle" x="327.6" y="238.930425" transform="rotate(-0 327.6 238.930425)">对</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_6">
+    <ns0:text style="fill: #132a36; font: 30.24px 'Arial Unicode MS'; text-anchor: middle" x="536.4" y="238.930425" transform="rotate(-0 536.4 238.930425)">对</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_7">
+    <ns0:text style="fill: #132a36; font: 30.24px 'Arial Unicode MS'; text-anchor: middle" x="745.2" y="238.930425" transform="rotate(-0 745.2 238.930425)">错</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_8">
+    <ns0:text style="fill: #132a36; font: 25.2px 'Arial Unicode MS'; text-anchor: start" x="43.2" y="330.517687" transform="rotate(-0 43.2 330.517687)">固定末轮</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_9">
+    <ns0:text style="fill: #132a36; font: 25.2px 'Arial Unicode MS'; text-anchor: middle" x="758.52" y="338.788687" transform="rotate(-0 758.52 338.788687)">错</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_10">
+    <ns0:text style="fill: #346bb5; font: 25.2px 'Arial Unicode MS'; text-anchor: start" x="43.2" y="416.917687" transform="rotate(-0 43.2 416.917687)">实际策略</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_11">
+    <ns0:text style="fill: #132a36; font: 23.04px 'Arial Unicode MS'; text-anchor: middle" x="451.08" y="421.4466" transform="rotate(-0 451.08 421.4466)">不看正确性标签</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_12">
+    <ns0:text style="fill: #132a36; font: 33.84px 'Arial Unicode MS'; text-anchor: middle" x="758.52" y="424.180237" transform="rotate(-0 758.52 424.180237)">?</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_13">
+    <ns0:text style="fill: #117d80; font: 26.64px 'Arial Unicode MS'; text-anchor: start" x="43.2" y="512.988412" transform="rotate(-0 43.2 512.988412)">Oracle</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_14">
+    <ns0:text style="fill: #132a36; font: 23.04px 'Arial Unicode MS'; text-anchor: middle" x="451.08" y="515.4138" transform="rotate(-0 451.08 515.4138)">可用标签诊断</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_15">
+    <ns0:text style="fill: #132a36; font: 22.32px 'Arial Unicode MS'; text-anchor: middle" x="758.52" y="515.164837" transform="rotate(-0 758.52 515.164837)">早先的对</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_16">
+    <ns0:text style="fill: #425b64; font: 19.44px 'Arial Unicode MS'; text-anchor: start" x="43.2" y="604.393537" transform="rotate(-0 43.2 604.393537)">Oracle 仅为诊断上界；真实策略的选择仍未确定。</ns0:text>
+   </ns0:g>
+  </ns0:g>
+ </ns0:g>
+ <ns0:defs>
+  <ns0:clipPath id="p149d7de534">
+   <ns0:rect x="0" y="0" width="864" height="648" />
+  </ns0:clipPath>
+ </ns0:defs>
+</ns0:svg>

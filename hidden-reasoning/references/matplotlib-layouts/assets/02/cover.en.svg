@@ -1,0 +1,121 @@
+<?xml version='1.0' encoding='utf-8'?>
+<ns0:svg xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:ns0="http://www.w3.org/2000/svg" xmlns:ns2="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" width="1200" height="675" viewBox="0 0 864 486" version="1.1">
+ <ns0:title>Extra positions or extra rounds?</ns0:title>
+ <ns0:metadata>
+  <rdf:RDF>
+   <ns2:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+    <dc:title>Extra positions or extra rounds?</dc:title>
+    <dc:date>2026-09-19T22:38:45.723275</dc:date>
+    <dc:description>Original conceptual drawing; no newly measured experimental results. Two large panels. Left: several input tiles, including pause tiles, already present below one model stack. Right: model stack -&gt; new token -&gt; another model stack -&gt; new token. All model stacks represent full forward passes. Use width on left and serial dependency on right; no clocks, speedup factors or numeric accuracy. Note that positions versus passes are distinct resources.</dc:description>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <ns2:Agent>
+      <dc:title>Matplotlib v3.8.0, https://matplotlib.org/</dc:title>
+     </ns2:Agent>
+    </dc:creator>
+   </ns2:Work>
+  </rdf:RDF>
+ </ns0:metadata>
+ <ns0:defs>
+  <ns0:style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</ns0:style>
+ </ns0:defs>
+ <ns0:g id="figure_1">
+  <ns0:g id="patch_1">
+   <ns0:path d="M 0 486  L 864 486  L 864 0  L 0 0  z " style="fill: #f6f5f0" />
+  </ns0:g>
+  <ns0:g id="axes_1">
+   <ns0:g id="patch_2">
+    <ns0:path d="M 56.16 164.16  L 397.44 164.16  Q 410.4 164.16 410.4 177.12  L 410.4 393.12  Q 410.4 406.08 397.44 406.08  L 56.16 406.08  Q 43.2 406.08 43.2 393.12  L 43.2 177.12  Q 43.2 164.16 56.16 164.16  z " clip-path="url(#p20a6116fb8)" style="fill: #e1f1ee; stroke: #117d80; stroke-width: 1.8; stroke-linejoin: miter" />
+   </ns0:g>
+   <ns0:g id="patch_3">
+    <ns0:path d="M 74.88 326.88  L 138.96 326.88  Q 151.92 326.88 151.92 339.84  L 151.92 367.92  Q 151.92 380.88 138.96 380.88  L 74.88 380.88  Q 61.92 380.88 61.92 367.92  L 61.92 339.84  Q 61.92 326.88 74.88 326.88  z " clip-path="url(#p20a6116fb8)" style="fill: #ffffff; stroke: #cbd7d9; stroke-width: 1.8; stroke-linejoin: miter" />
+   </ns0:g>
+   <ns0:g id="patch_4">
+    <ns0:path d="M 107.28 316.23917  Q 107.28 297.361815 107.28 281.279545  " clip-path="url(#p20a6116fb8)" style="fill: none; stroke: #117d80; stroke-width: 2.5; stroke-linecap: round" />
+    <ns0:path d="M 102.68 290.479545  L 107.28 281.279545  L 111.88 290.479545  z " clip-path="url(#p20a6116fb8)" style="fill: #117d80; stroke: #117d80; stroke-width: 2.5; stroke-linecap: round" />
+   </ns0:g>
+   <ns0:g id="patch_5">
+    <ns0:path d="M 192.96 326.88  L 257.04 326.88  Q 270 326.88 270 339.84  L 270 367.92  Q 270 380.88 257.04 380.88  L 192.96 380.88  Q 180 380.88 180 367.92  L 180 339.84  Q 180 326.88 192.96 326.88  z " clip-path="url(#p20a6116fb8)" style="fill: #ffffff; stroke: #cbd7d9; stroke-width: 1.8; stroke-linejoin: miter" />
+   </ns0:g>
+   <ns0:g id="patch_6">
+    <ns0:path d="M 225.36 316.23917  Q 225.36 297.361815 225.36 281.279545  " clip-path="url(#p20a6116fb8)" style="fill: none; stroke: #117d80; stroke-width: 2.5; stroke-linecap: round" />
+    <ns0:path d="M 220.76 290.479545  L 225.36 281.279545  L 229.96 290.479545  z " clip-path="url(#p20a6116fb8)" style="fill: #117d80; stroke: #117d80; stroke-width: 2.5; stroke-linecap: round" />
+   </ns0:g>
+   <ns0:g id="patch_7">
+    <ns0:path d="M 311.04 326.88  L 375.12 326.88  Q 388.08 326.88 388.08 339.84  L 388.08 367.92  Q 388.08 380.88 375.12 380.88  L 311.04 380.88  Q 298.08 380.88 298.08 367.92  L 298.08 339.84  Q 298.08 326.88 311.04 326.88  z " clip-path="url(#p20a6116fb8)" style="fill: #ffffff; stroke: #cbd7d9; stroke-width: 1.8; stroke-linejoin: miter" />
+   </ns0:g>
+   <ns0:g id="patch_8">
+    <ns0:path d="M 343.44 316.23917  Q 343.44 297.361815 343.44 281.279545  " clip-path="url(#p20a6116fb8)" style="fill: none; stroke: #117d80; stroke-width: 2.5; stroke-linecap: round" />
+    <ns0:path d="M 338.84 290.479545  L 343.44 281.279545  L 348.04 290.479545  z " clip-path="url(#p20a6116fb8)" style="fill: #117d80; stroke: #117d80; stroke-width: 2.5; stroke-linecap: round" />
+   </ns0:g>
+   <ns0:g id="patch_9">
+    <ns0:path d="M 74.88 228.96  L 376.56 228.96  Q 389.52 228.96 389.52 241.92  L 389.52 263.52  Q 389.52 276.48 376.56 276.48  L 74.88 276.48  Q 61.92 276.48 61.92 263.52  L 61.92 241.92  Q 61.92 228.96 74.88 228.96  z " clip-path="url(#p20a6116fb8)" style="fill: #e1f1ee; stroke: #117d80; stroke-width: 1.8; stroke-linejoin: miter" />
+   </ns0:g>
+   <ns0:g id="patch_10">
+    <ns0:path d="M 448.56 164.16  L 807.84 164.16  Q 820.8 164.16 820.8 177.12  L 820.8 393.12  Q 820.8 406.08 807.84 406.08  L 448.56 406.08  Q 435.6 406.08 435.6 393.12  L 435.6 177.12  Q 435.6 164.16 448.56 164.16  z " clip-path="url(#p20a6116fb8)" style="fill: #e5edf8; stroke: #346bb5; stroke-width: 1.8; stroke-linejoin: miter" />
+   </ns0:g>
+   <ns0:g id="patch_11">
+    <ns0:path d="M 468 252  L 528.48 252  Q 541.44 252 541.44 264.96  L 541.44 311.04  Q 541.44 324 528.48 324  L 468 324  Q 455.04 324 455.04 311.04  L 455.04 264.96  Q 455.04 252 468 252  z " clip-path="url(#p20a6116fb8)" style="fill: #e5edf8; stroke: #346bb5; stroke-width: 1.8; stroke-linejoin: miter" />
+   </ns0:g>
+   <ns0:g id="patch_12">
+    <ns0:path d="M 594.72 252  L 663.84 252  Q 676.8 252 676.8 264.96  L 676.8 311.04  Q 676.8 324 663.84 324  L 594.72 324  Q 581.76 324 581.76 311.04  L 581.76 264.96  Q 581.76 252 594.72 252  z " clip-path="url(#p20a6116fb8)" style="fill: #e5edf8; stroke: #346bb5; stroke-width: 1.8; stroke-linejoin: miter" />
+   </ns0:g>
+   <ns0:g id="patch_13">
+    <ns0:path d="M 550.642852 288  Q 561.601472 288 569.765007 288  " clip-path="url(#p20a6116fb8)" style="fill: none; stroke: #346bb5; stroke-width: 2.5; stroke-linecap: round" />
+    <ns0:path d="M 560.565007 283.4  L 569.765007 288  L 560.565007 292.6  z " clip-path="url(#p20a6116fb8)" style="fill: #346bb5; stroke: #346bb5; stroke-width: 2.5; stroke-linecap: round" />
+   </ns0:g>
+   <ns0:g id="patch_14">
+    <ns0:path d="M 730.08 252  L 787.68 252  Q 800.64 252 800.64 264.96  L 800.64 311.04  Q 800.64 324 787.68 324  L 730.08 324  Q 717.12 324 717.12 311.04  L 717.12 264.96  Q 717.12 252 730.08 252  z " clip-path="url(#p20a6116fb8)" style="fill: #e5edf8; stroke: #346bb5; stroke-width: 1.8; stroke-linejoin: miter" />
+   </ns0:g>
+   <ns0:g id="patch_15">
+    <ns0:path d="M 686.002852 288  Q 696.961472 288 705.125007 288  " clip-path="url(#p20a6116fb8)" style="fill: none; stroke: #346bb5; stroke-width: 2.5; stroke-linecap: round" />
+    <ns0:path d="M 695.925007 283.4  L 705.125007 288  L 695.925007 292.6  z " clip-path="url(#p20a6116fb8)" style="fill: #346bb5; stroke: #346bb5; stroke-width: 2.5; stroke-linecap: round" />
+   </ns0:g>
+   <ns0:g id="text_1">
+    <ns0:text style="fill: #425b64; font: 18px 'Arial Unicode MS'; text-anchor: start" x="43.2" y="34.484063" transform="rotate(-0 43.2 34.484063)">02 / 12   HIDDEN REASONING / LOOPED TRANSFORMERS</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_2">
+    <ns0:text style="fill: #132a36; font: 37.44px 'Arial Unicode MS'; text-anchor: start" x="43.2" y="90.61515" transform="rotate(-0 43.2 90.61515)">Extra positions or extra rounds?</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_3">
+    <ns0:text style="fill: #117d80; font: 27.36px 'Arial Unicode MS'; text-anchor: start" x="57.6" y="196.703775" transform="rotate(-0 57.6 196.703775)">Known pause positions</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_4">
+    <ns0:text style="fill: #132a36; font: 23.76px 'Arial Unicode MS'; text-anchor: middle" x="106.92" y="360.016763" transform="rotate(-0 106.92 360.016763)">Input</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_5">
+    <ns0:text style="fill: #132a36; font: 23.76px 'Arial Unicode MS'; text-anchor: middle" x="225" y="360.016763" transform="rotate(-0 225 360.016763)">…</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_6">
+    <ns0:text style="fill: #132a36; font: 23.76px 'Arial Unicode MS'; text-anchor: middle" x="343.08" y="360.016763" transform="rotate(-0 343.08 360.016763)">…</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_7">
+    <ns0:text style="fill: #132a36; font: 25.92px 'Arial Unicode MS'; text-anchor: middle" x="225.72" y="259.5726" transform="rotate(-0 225.72 259.5726)">One full forward pass</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_8">
+    <ns0:text style="fill: #346bb5; font: 27.36px 'Arial Unicode MS'; text-anchor: start" x="450" y="196.703775" transform="rotate(-0 450 196.703775)">Depends on prior output</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_9">
+    <ns0:text style="fill: #132a36; font: 24.48px 'Arial Unicode MS'; text-anchor: middle" x="498.24" y="294.322725" transform="rotate(-0 498.24 294.322725)">LM</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_10">
+    <ns0:text style="fill: #132a36; font: 24.48px 'Arial Unicode MS'; text-anchor: middle" x="629.28" y="294.322725" transform="rotate(-0 629.28 294.322725)">Token</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_11">
+    <ns0:text style="fill: #132a36; font: 24.48px 'Arial Unicode MS'; text-anchor: middle" x="758.88" y="294.322725" transform="rotate(-0 758.88 294.322725)">LM</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_12">
+    <ns0:text style="fill: #132a36; font: 23.76px 'Arial Unicode MS'; text-anchor: start" x="457.2" y="367.936537" transform="rotate(-0 457.2 367.936537)">Each LM is a full pass</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_13">
+    <ns0:text style="fill: #425b64; font: 19.44px 'Arial Unicode MS'; text-anchor: start" x="43.2" y="440.874787" transform="rotate(-0 43.2 440.874787)">Positions and sequential passes are distinct resources.</ns0:text>
+   </ns0:g>
+  </ns0:g>
+ </ns0:g>
+ <ns0:defs>
+  <ns0:clipPath id="p20a6116fb8">
+   <ns0:rect x="0" y="0" width="864" height="486" />
+  </ns0:clipPath>
+ </ns0:defs>
+</ns0:svg>

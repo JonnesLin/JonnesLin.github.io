@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>删掉中间步骤以后，训练误差还从哪里来？</title><meta name="description" content="从一道三步弹珠题出发，手算答案损失，标出课程保留的目标，再看教师状态与答案前对齐怎样提供监督。"><link rel="canonical" href="https://jonneslin.github.io/hidden-reasoning/articles/zh/03-learning-to-reason-without-words.html"><link rel="alternate" hreflang="zh" href="https://jonneslin.github.io/hidden-reasoning/articles/zh/03-learning-to-reason-without-words.html"><link rel="alternate" hreflang="en" href="https://jonneslin.github.io/hidden-reasoning/articles/en/03-learning-to-reason-without-words.html"><meta property="og:url" content="https://jonneslin.github.io/hidden-reasoning/articles/zh/03-learning-to-reason-without-words.html"><meta property="og:title" content="删掉中间步骤以后，训练误差还从哪里来？"><meta property="og:description" content="从一道三步弹珠题出发，手算答案损失，标出课程保留的目标，再看教师状态与答案前对齐怎样提供监督。"><meta property="og:type" content="article"><meta property="og:image" content="https://jonneslin.github.io/hidden-reasoning/assets/03/cover.zh.png"><style>
+:root{color-scheme:light;--ink:#132a36;--muted:#425b64;--teal:#117d80;--paper:#f6f5f0}
+*{box-sizing:border-box}body{margin:0;color:var(--ink);background:var(--paper);font:18px/1.8 system-ui,-apple-system,'PingFang SC','Noto Sans CJK SC',sans-serif}
+a{color:#125f74;text-underline-offset:.18em}a:hover{color:#9a4e10}header,main,footer{max-width:1120px;margin:auto;padding:36px 28px}header{border-bottom:1px solid #cad7d9}header p{max-width:760px;color:var(--muted)}h1{font-size:clamp(32px,5vw,54px);line-height:1.15;letter-spacing:-.025em}h2{font-size:29px;line-height:1.3;margin-top:2em}h3{font-size:22px;line-height:1.4}img{display:block;max-width:100%;height:auto;border-radius:12px}nav{display:flex;gap:24px;flex-wrap:wrap}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:30px}.card{background:white;border:1px solid #cad7d9;border-radius:16px;padding:22px}.card h2{margin:16px 0 10px;font-size:26px}.card p{color:var(--muted);font-size:17px}.number{font:14px/1.5 ui-monospace,monospace;color:var(--muted);letter-spacing:.12em}.reading{max-width:850px}.reading p,.reading li{overflow-wrap:anywhere}.reading img{margin:28px 0 12px}.social{padding:24px;border:1px solid #cad7d9;border-radius:12px;background:white;margin:40px 0}pre{overflow:auto;white-space:pre-wrap;overflow-wrap:anywhere;background:#e9eeee;padding:18px;border-radius:8px;font-size:17px;line-height:1.65}code{font-family:ui-monospace,monospace;font-size:.9em}blockquote{margin-left:0;padding:4px 24px;border-left:4px solid var(--teal)}table{border-collapse:collapse;width:100%;font-size:16px}th,td{text-align:left;border-bottom:1px solid #cbd7d9;padding:10px}footer{font-size:14px;color:var(--muted)}@media(max-width:700px){.grid{grid-template-columns:1fr}header,main,footer{padding:24px 18px}body{font-size:17px}.card{padding:16px}h2{font-size:25px}}
+
+.reading figure{margin:28px 0}.reading figure>a{display:block}.reading figure img{margin:0}.reading figcaption{font-size:14px;margin-top:8px}
+</style></head><body><header><p><a href="../../../blog.html">← Main blog</a></p><nav><a href="../../index.html">全部文章 / All articles</a><a href="../en/03-learning-to-reason-without-words.html">English</a><a href="../../zh/03-learning-to-reason-without-words.md">Markdown</a></nav></header><main class="reading"><h1>删掉中间步骤以后，训练误差还从哪里来？</h1>
+<p>四袋弹珠，每袋六颗。取走八颗后，把剩下的平均分给两个人，每人得到多少颗？</p>
+<p>用这道<strong>教学题</strong>，我们可以写出一条训练示例：</p>
+<pre><code class="language-text">A：4 × 6 = 24
+B：24 − 8 = 16
+C：16 ÷ 2 = 8
+答案：8
+</code></pre>
+<p>A、B、C 是我们给文字步骤起的名字，不代表单个词元或三个已知的隐状态。现在想训练一个最终只回答 <code>8</code> 的模型。删掉 A、B、C 很容易，难的是让它在失去这些文字以后仍然做对。</p>
+<p>关键在于：<strong>删掉文字时，哪些预测目标消失了，哪些误差信号还能回到模型里？</strong></p>
+<h2>先看一个答案损失能说什么</h2>
+<p>为方便手算，假设答案 <code>8</code> 恰好是一个词元。如果模型给正确答案的概率是 0.25，它的交叉熵损失就是 <code>−ln(0.25) ≈ 1.386</code>；提高到 0.5 后，损失降为 <code>−ln(0.5) ≈ 0.693</code>。</p>
+<p>这些数是教学计算，不是模型的实测预测。它说明答案监督在奖励什么：提高正确词元的概率。损失可以通过链式法则更新前面的参数，所以只有答案监督也能学习。</p>
+<p>但这个损失没有单独要求模型先得到 <code>24</code>，再得到 <code>16</code>。一条完整文字链则提供更多预测目标：模型既要在问题后预测 A，也要在读到正确 A 后预测 B，依此类推。Teacher forcing 在训练中提供这些正确前缀；模型生成时，前缀才来自自己的输出。</p>
+<p>于是，删除步骤改变了两件事：后面能读取的文字少了，需要预测的文字目标也少了。下面几种训练方法，分别从不同地方弥补这个变化。</p>
+<h2>先少删一点，让下一个目标接住训练</h2>
+<p>不要一下把链删光。先用完整链训练，再逐渐删去开头，直到只剩答案。</p>
+<table>
+<thead>
+<tr>
+<th>课程中的时刻</th>
+<th>保留的目标顺序</th>
+<th>最先要解决的预测</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>完整链</td>
+<td>A → B → C → 答案</td>
+<td>从问题预测 A</td>
+</tr>
+<tr>
+<td>删除 A 后</td>
+<td>B → C → 答案</td>
+<td>从问题预测 B</td>
+</tr>
+<tr>
+<td>删除 A、B 后</td>
+<td>C → 答案</td>
+<td>从问题预测 C</td>
+</tr>
+<tr>
+<td>全部删除后</td>
+<td>答案</td>
+<td>从问题直接预测 8</td>
+</tr>
+</tbody>
+</table>
+<p><em>这是按完整步骤显示的几个课程时刻。逐步内化论文实际从前缀逐词元删除，中间还会经过表中没有画出的阶段。问题始终保留；删掉的步骤不会作为空白占位留在输入中。</em></p>
+<p>看第二行。模型仍然要预测 <code>24 − 8 = 16</code>，但不再先读到 <code>4 × 6 = 24</code>。这个剩余目标把新的学习任务变得很具体：用题目本身补偿丢失的文字前缀。等模型适应后，再继续撤掉一部分。</p>
+<p>逐步内化工作采用这种训练课程，并用优化器状态重置和删除数的随机偏移处理过渡中的不稳定。它没有要求某个隐藏向量逐字还原 A；课程最后得到的是直接回答模型，也没有仅凭删除操作新增测试时的循环。<a href="https://arxiv.org/abs/2405.14838v1">逐步内化 v1，§3</a></p>
+<p>课程是否成功仍要测。论文在乘法任务上取得很强的结果，但 GSM8K 的显式 CoT 基线仍更强；更难乘法中的不同课程检查点还呈现准确率与速度的折中。因此，表中最后一行是训练目标，不是成功保证。<a href="https://arxiv.org/abs/2405.14838v1">逐步内化 v1，§5–6、表2–3</a></p>
+<h2>如果保留一些内部计算位置，损失会怎样经过它们？</h2>
+<p>现在考虑另一种运行方式：文字 A 被删掉，但答案前有模型自己产生的连续状态 <code>h1、h2</code>。这些位置没有可以直接填入的“正确文字”。</p>
+<pre><code class="language-text">问题 → h1 → h2 → 预测保留的文字与答案
+                  ↑
+           在这些预测上计算损失
+</code></pre>
+<p>若 <code>h2</code> 影响答案概率，答案损失就能更新产生 <code>h2</code> 的参数；若 <code>h2</code> 依赖 <code>h1</code>，梯度还可以继续经过 <code>h1</code>。<strong>一个位置没有自己的词元预测目标，不等于它收不到梯度。</strong></p>
+<p>Coconut 把连续反馈与课程结合，在剩余文字和答案上计算损失，屏蔽问题和连续位置的词元损失。第04篇会走完其运行过程；这里要抓住的是损失位置：连续状态因有助于后续预测而学习，并没有逐句重建被删除文本的要求。<a href="https://arxiv.org/abs/2412.06769v2">Coconut v2，§3、图2</a></p>
+<p>这给了训练一条路径，却仍留下选择：仅靠最终预测，把内部表示塑造成有用的样子，是否足够容易？如果教师已经做过完整推理，能否再给学生一个状态目标？</p>
+<h2>教师状态可以提供目标，但测试时谁来产生它？</h2>
+<p>早期隐式 CoT 蒸馏把这件事拆成三个阶段：让学生先学会利用教师状态回答，再让一个 emulator 从问题预测所需状态，最后把预测器与学生接起来联合优化。教师提供的是选定层、选定词元位置的表示，并非整条轨迹的所有激活。<a href="https://arxiv.org/abs/2311.01460v1">隐式 CoT 蒸馏 v1，§3.1–3.3</a></p>
+<p>套到弹珠题上，训练时可以先运行带 A、B、C 的教师，取得被选中的表示，学习“如何利用这些表示回答”。但到了测试时，我们只有问题，不能把正确 A、B、C 偷塞回去。因此，第二阶段的状态预测器是必需的，测试成本也要包括它。</p>
+<p>这个分工还暴露了一个困难：同一道题可以有不同的正确文字过程。例如，先算每人分得 <code>24 ÷ 2 = 12</code>，再扣除每人对应的 <code>8 ÷ 2 = 4</code>，同样得到 <code>8</code>。教师走不同过程时，状态目标可能不同。论文为多路径问题引入混合表示及相应的中间词元监督，避免简单均值拟合抹平不同模式。<a href="https://arxiv.org/abs/2311.01460v1">隐式 CoT 蒸馏 v1，§3.2</a></p>
+<p>状态监督因此不是一个无须设计的标准答案：要选择对齐什么、怎样处理多个目标，以及测试时怎样产生替代状态。</p>
+<h2>把监督放在准备回答的那个位置</h2>
+<p>CODI 选择了更集中的对齐位置：答案提示 <code>The answer is:</code> 中的冒号。在共享同一模型权重的两项训练任务中，教师看到文字过程，学生执行连续计算，再对齐这个位置各层的激活。<a href="https://arxiv.org/abs/2502.21074v2">CODI v2，§3.1–3.4</a></p>
+<p>为什么这位置值得看？对弹珠题来说，它处在“可以读到前面的计算”和“即将预测答案”的交界处。对齐这里，给学生增加一个与回答相关的内部目标，无需规定每个连续位置分别代表 <code>24</code>、<code>16</code> 或 <code>8</code>。</p>
+<p>先把三种损失分开读：</p>
+<table>
+<thead>
+<tr>
+<th>损失</th>
+<th>比较什么</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>教师文字损失</td>
+<td>教师对文字过程与答案的预测，和正确词元</td>
+</tr>
+<tr>
+<td>学生答案损失</td>
+<td>学生连续计算后的答案预测，和正确词元</td>
+</tr>
+<tr>
+<td>状态蒸馏损失</td>
+<td>答案前位置的学生激活，和教师激活</td>
+</tr>
+</tbody>
+</table>
+<p>总目标是把它们按权重相加：</p>
+<p><code>L = α Lteacher + β Lstudent + γ LKD</code></p>
+<p>前两项就是前面解释过的词元预测损失。第三项使用 L1 距离：逐坐标看学生与教师相差多少，并按教师激活尺度做规范化。举一个<strong>纯示意</strong>：若已规范化的两个教师坐标是 <code>[2, −1]</code>，学生是 <code>[1, −0.5]</code>，对应绝对差为 <code>[1, 0.5]</code>。真实计算会汇总所选位置各层的激活；这里的两个坐标不对应弹珠数量。<a href="https://arxiv.org/abs/2502.21074v2">CODI v2，§3.4–3.5</a></p>
+<figure><a href="../../assets/03/diagram.zh.png"><img alt="CODI的两项任务共享模型权重；教师文字损失监督过程与答案，学生文字损失监督答案，答案前位置另有归一化L1对齐。" src="../../assets/03/diagram.zh.png" /></a><figcaption><a href="../../assets/03/diagram.zh.png">查看完整 PNG</a> · <a href="../../references/matplotlib-layouts/assets/03/diagram.zh.svg">SVG 结构参考</a></figcaption></figure>
+<p><em>沿两条横线找文字损失，再沿虚线找状态损失。停止梯度只施加在虚线的教师目标一侧：教师仍通过自己的文字损失更新共享权重。</em></p>
+<p>如果状态损失也把教师目标一起拉向学生，两边可以相互迁就。CODI 在这条边上停止教师梯度，让学生朝当前教师目标靠近；教师任务仍有自己的训练信号。把整位教师画成永久冻结，会误读这套共享权重设计。</p>
+<p>还有一个数据细节。在我们的示例中，C 已经把答案 <code>8</code> 写了出来。教师若读到它，答案前状态可能只需记住答案。CODI 因而删除训练轨迹中最后直接给答案的步骤，并报告保留该步骤会降低其消融设置的表现。这是减少捷径的处理，不是证明其余状态都编码了完整算法。<a href="https://arxiv.org/abs/2502.21074v2">CODI v2，§3.5、§4.4、表2</a></p>
+<h2>回到那张被删短的训练示例</h2>
+<p>同一条 <code>A → B → C → 答案</code>，现在有三种不同的帮助方式：逐步减少必须依赖的文字，提供教师状态目标，或在答案前对齐表示。</p>
+<figure><a href="../../assets/03/cover.zh.png"><img alt="教师状态监督、逐步移除前缀的课程和答案前对齐三种学习信号。" src="../../assets/03/cover.zh.png" /></a><figcaption><a href="../../assets/03/cover.zh.png">查看完整 PNG</a> · <a href="../../references/matplotlib-layouts/assets/03/cover.zh.svg">SVG 结构参考</a></figcaption></figure>
+<p><em>中间的 A、B、C 可以对应本文的三个文字步骤；图是监督方式总览，不表示每删一个步骤就把它存进一个向量。</em></p>
+<p>这些方法能让直接或连续回答变得更有用，但不能从损失形式推出它们普遍等价于显式 CoT。CODI 的分布外数学评测就是一个具体提醒：其 GPT-2 设置超过表中的显式基线，而 LLaMA-1B 设置在同三项上仍落后于显式 CoT。<a href="https://arxiv.org/abs/2502.21074v2">CODI v2，§4.3、表1</a></p>
+<p>看下一种隐式推理训练方法时，可以先拿一条样本，标出它保留哪些目标，误差落在哪些位置，测试时还需谁来产生状态。这比只问“有没有思维链监督”更具体，也更接近模型真正收到的学习任务。</p><aside class="social"><h2>Twitter / X</h2><pre>删掉中间步骤，训练误差还从哪里来？从一道弹珠题出发，手算答案损失、标出保留的预测目标，再看教师状态和答案前对齐怎样帮助学习。</pre><p><a href="../../social/03-learning-to-reason-without-words.zh.md">配图和替代文本 / Attachment and alt text</a></p><img src="../../assets/03/cover.zh.png" alt="三种监督方式：教师状态目标，逐渐移除A、B、C前缀的课程，以及教师与学生答案前表示的对齐。"></aside></main></body></html>

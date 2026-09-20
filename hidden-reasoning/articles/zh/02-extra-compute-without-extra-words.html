@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>三个暂停词元，为什么不等于三步思维链？</title><meta name="description" content="用两层Transformer、三个暂停位置和一张训练前缀表，解释已知输入为何不同于逐步生成的输入。"><link rel="canonical" href="https://jonneslin.github.io/hidden-reasoning/articles/zh/02-extra-compute-without-extra-words.html"><link rel="alternate" hreflang="zh" href="https://jonneslin.github.io/hidden-reasoning/articles/zh/02-extra-compute-without-extra-words.html"><link rel="alternate" hreflang="en" href="https://jonneslin.github.io/hidden-reasoning/articles/en/02-extra-compute-without-extra-words.html"><meta property="og:url" content="https://jonneslin.github.io/hidden-reasoning/articles/zh/02-extra-compute-without-extra-words.html"><meta property="og:title" content="三个暂停词元，为什么不等于三步思维链？"><meta property="og:description" content="用两层Transformer、三个暂停位置和一张训练前缀表，解释已知输入为何不同于逐步生成的输入。"><meta property="og:type" content="article"><meta property="og:image" content="https://jonneslin.github.io/hidden-reasoning/assets/02/cover.zh.png"><style>
+:root{color-scheme:light;--ink:#132a36;--muted:#425b64;--teal:#117d80;--paper:#f6f5f0}
+*{box-sizing:border-box}body{margin:0;color:var(--ink);background:var(--paper);font:18px/1.8 system-ui,-apple-system,'PingFang SC','Noto Sans CJK SC',sans-serif}
+a{color:#125f74;text-underline-offset:.18em}a:hover{color:#9a4e10}header,main,footer{max-width:1120px;margin:auto;padding:36px 28px}header{border-bottom:1px solid #cad7d9}header p{max-width:760px;color:var(--muted)}h1{font-size:clamp(32px,5vw,54px);line-height:1.15;letter-spacing:-.025em}h2{font-size:29px;line-height:1.3;margin-top:2em}h3{font-size:22px;line-height:1.4}img{display:block;max-width:100%;height:auto;border-radius:12px}nav{display:flex;gap:24px;flex-wrap:wrap}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:30px}.card{background:white;border:1px solid #cad7d9;border-radius:16px;padding:22px}.card h2{margin:16px 0 10px;font-size:26px}.card p{color:var(--muted);font-size:17px}.number{font:14px/1.5 ui-monospace,monospace;color:var(--muted);letter-spacing:.12em}.reading{max-width:850px}.reading p,.reading li{overflow-wrap:anywhere}.reading img{margin:28px 0 12px}.social{padding:24px;border:1px solid #cad7d9;border-radius:12px;background:white;margin:40px 0}pre{overflow:auto;white-space:pre-wrap;overflow-wrap:anywhere;background:#e9eeee;padding:18px;border-radius:8px;font-size:17px;line-height:1.65}code{font-family:ui-monospace,monospace;font-size:.9em}blockquote{margin-left:0;padding:4px 24px;border-left:4px solid var(--teal)}table{border-collapse:collapse;width:100%;font-size:16px}th,td{text-align:left;border-bottom:1px solid #cbd7d9;padding:10px}footer{font-size:14px;color:var(--muted)}@media(max-width:700px){.grid{grid-template-columns:1fr}header,main,footer{padding:24px 18px}body{font-size:17px}.card{padding:16px}h2{font-size:25px}}
+
+.reading figure{margin:28px 0}.reading figure>a{display:block}.reading figure img{margin:0}.reading figcaption{font-size:14px;margin-top:8px}
+</style></head><body><header><p><a href="../../../blog.html">← Main blog</a></p><nav><a href="../../index.html">全部文章 / All articles</a><a href="../en/02-extra-compute-without-extra-words.html">English</a><a href="../../zh/02-extra-compute-without-extra-words.md">Markdown</a></nav></header><main class="reading"><h1>三个暂停词元，为什么不等于三步思维链？</h1>
+<p>已知 <code>A ⊆ B</code>、<code>B ⊆ C</code>，问 <code>A ⊆ C</code> 是否成立。答案是成立：A 中的元素先属于 B，也就属于 C。</p>
+<p>如果让语言模型回答，我们可以在问题后加三个预先选好的暂停词元，也可以让它先生成三个中间词元。两种做法都多出三个位置。<strong>模型会因此多做同样的计算吗？</strong></p>
+<p>下面用一个两层 Transformer 跟踪这道教学题。两层、三个位置都只是为了看清依赖关系；没有假设它真的学会了子集推理，也没有把某个暂停位置指定为一条逻辑规则。</p>
+<h2>暂停词元先占位置，表示随后才算出来</h2>
+<p>把三个暂停位置叫作 <code>p1、p2、p3</code>。它们使用同一个特殊词元，进入模型前就已知：</p>
+<pre><code class="language-text">问题 | p1 | p2 | p3
+</code></pre>
+<p>已知的是输入，不是内部表示。初始时，模型拿到词元嵌入和位置相关信息；第一层把这些输入变成第一层表示，第二层再处理第一层表示。</p>
+<p>在这个采用因果注意力的示意模型中，可以沿着最后一个暂停位置看：</p>
+<table>
+<thead>
+<tr>
+<th>计算阶段</th>
+<th>p3 可以读取什么</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>输入准备</td>
+<td>已知的暂停嵌入与位置信息</td>
+</tr>
+<tr>
+<td>第一层注意力</td>
+<td>问题、p1、p2、p3 的层输入</td>
+</tr>
+<tr>
+<td>第二层注意力</td>
+<td>这些位置的第一层表示</td>
+</tr>
+<tr>
+<td>输出读出</td>
+<td>用 p3 的末层表示预测答案首词元</td>
+</tr>
+</tbody>
+</table>
+<p>第一层计算 <code>p3</code> 时，不必等待 <code>p2</code> 的第一层输出，因为它读取的是<strong>同一层的输入</strong>。整个输入序列已知，各位置就可以在每层中批量计算；因果掩码规定可读取的位置，不要求它们从左到右逐个执行。</p>
+<p>到了第二层，<code>p3</code> 可以读取 <code>p1、p2</code> 经过第一层加工后的表示。新增位置因此提供了额外的中间表示与计算路径。但它们仍处在这个两层网络中，没有把网络变成先完整跑两层、再完整跑两层的三轮反馈。</p>
+<p>Pause-training 论文从增加计算位置的角度提出这种设计，并在讨论中区分了宽度与串行深度。上表是因果掩码下的讲解；实际任务的掩码设置仍须按论文读取。<a href="https://arxiv.org/abs/2310.02226v1">Pause-training v1，§2–3、§6</a></p>
+<figure><a href="../../assets/02/cover.zh.png"><img alt="左侧所有已知暂停位置进入同一组模型层，右侧每次生成的新词元决定下一次前向的输入。" src="../../assets/02/cover.zh.png" /></a><figcaption><a href="../../assets/02/cover.zh.png">查看完整 PNG</a> · <a href="../../references/matplotlib-layouts/assets/02/cover.zh.svg">SVG 结构参考</a></figcaption></figure>
+<p><em>左边的“单次”不等于免费：更多位置要执行更多运算。它表示这些输入可以一起送入模型。右边的后续输入尚未产生，必须等待。图左采用一般位置示意；本文的三个暂停都接在问题后。</em></p>
+<h2>让模型自己生成，等待就出现在另一处</h2>
+<p>现在把预先给定的暂停，换成模型生成的中间词元 <code>u1、u2、u3</code>。模型在第一次前向前不知道 <code>u1</code> 会是什么，更不知道后面的两个。</p>
+<p>要得到答案首词元，依赖链变成：</p>
+<pre><code class="language-text">处理问题             → 选 u1
+处理新增的 u1        → 选 u2
+处理新增的 u2        → 选 u3
+处理新增的 u3        → 选答案首词元
+</code></pre>
+<p>每行的新位置都要经过模型各层。KV 缓存可以省去对历史位置的重复计算，却不能提前知道尚未选出的输入。这里比较的是答案首词元之前的路径；答案本身若有多个词元，两种方案都还要继续生成。</p>
+<p>对我们的子集题，文字链可以写明“任取 a ∈ A，得到 a ∈ B，再得到 a ∈ C”。那会把可读的中间结论带入后续上下文。暂停位置没有这段预先标注的内容，模型需要学会怎样用它们。</p>
+<p>因此，三个暂停位置和三个生成词元的数量虽然相同，串行依赖并不相同。不能把这个差别直接换算成三倍加速：每轮工作的大小、缓存和硬件调度仍然影响延迟。</p>
+<h2>有了位置，什么会推动模型使用它？</h2>
+<p>在训练时，我们可以要求模型在暂停后预测正确答案。预测误差会沿计算图反传，更新暂停嵌入和模型参数；只要暂停位置影响了答案，它们就在这条学习路径上。无需给 <code>p1</code> 标注“A 属于 B”，也可以有训练信号。</p>
+<p>实际 Pause-training 使用专门的可学习词元。预训练时在文本中随机插入它，不把“预测暂停词元”作为损失目标；下游微调则在输入后加固定数量的暂停，再监督目标文本。论文所研究的效果来自这样的训练，而不是随手在聊天提示中添几个句号。<a href="https://arxiv.org/abs/2310.02226v1">Pause-training v1，§3.1</a></p>
+<p>一个有用的实验比较是：模型只在微调时见到暂停，和在预训练、微调中都见到暂停，会怎样？论文在 130M、1B 模型上比较了这些组合。两个阶段都使用暂停时，多数任务改善；只在微调时引入，结果更混合。这支持“新增位置需要学会使用”，并未揭示每个位置具体执行了什么算法。<a href="https://arxiv.org/abs/2310.02226v1">Pause-training v1，§4.3</a></p>
+<p>回到三个暂停的示意：不能因为三个有用，就断言三十个更好。论文的暂停数量消融也没有呈现持续增长的收益。测试时改变数量，还会改变模型熟悉的输入分布。<a href="https://arxiv.org/abs/2310.02226v1">Pause-training v1，§5</a></p>
+<h2>训练数据已经写好的链，是另一个容易混淆的情况</h2>
+<p>刚才逐词等待的，是<strong>运行时生成</strong>。如果训练数据已经给出正确链 <code>u1、u2、u3</code>，我们就能一次准备好它们：</p>
+<table>
+<thead>
+<tr>
+<th>预测目标</th>
+<th>teacher forcing 提供的前缀</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>u1</td>
+<td>问题</td>
+</tr>
+<tr>
+<td>u2</td>
+<td>问题 + 正确 u1</td>
+</tr>
+<tr>
+<td>u3</td>
+<td>问题 + 正确 u1、u2</td>
+</tr>
+<tr>
+<td>答案</td>
+<td>问题 + 正确 u1、u2、u3</td>
+</tr>
+</tbody>
+</table>
+<p>因果掩码让模型在一次训练前向中学习这些目标，每个目标只能看到自己的前缀。训练在这里使用正确历史，不必先采样出它。所以，同一段文字可以批量训练，生成时却仍逐词等待。</p>
+<p>连续反馈又不同：下一位置的输入来自上一次计算，没有一列正确词元可以事先填进去。Coconut 因而在训练中也要逐步产生连续状态，再计算后续文字损失。<a href="https://arxiv.org/abs/2412.06769v2">Coconut v2，§3，Training Details</a></p>
+<h2>不展示的理由，应该放在哪一边？</h2>
+<p>看它的输入怎样产生。Quiet-STaR 在文本前缀后生成离散的辅助理由，把有理由和无理由的后续预测混合，并用理由对后文预测的帮助提供学习信号。多个前缀的候选可以并行组织，但一条候选内部仍逐词推进，各分支不能任意互读。<a href="https://arxiv.org/abs/2403.09629v2">Quiet-STaR v2，§4.1–4.4</a></p>
+<p>因此，理由是否展示与它是否需要等待是两回事。预测后文的奖励也不能直接解释成“逻辑推导正确”的判分。</p>
+<figure><a href="../../assets/02/diagram.zh.png"><img alt="暂停使用已知输入；Quiet-STaR 生成隐藏的离散理由；连续反馈逐步产生下一输入，并可读取历史 KV 缓存。" src="../../assets/02/diagram.zh.png" /></a><figcaption><a href="../../assets/02/diagram.zh.png">查看完整 PNG</a> · <a href="../../references/matplotlib-layouts/assets/02/diagram.zh.svg">SVG 结构参考</a></figcaption></figure>
+<p><em>按“输入事先给定，还是由上一步产生”阅读这三行。连续反馈里的当前向量与历史缓存分开画，因为下一步能访问的不只有一个向量。</em></p>
+<p>原始 CoT 论文也通过只给方程、加入无语义输出、把解释放在答案后等消融，考察中间文字的作用。那些提示实验说明需要拆开因素研究，不能代替这里各方法自己的训练实验。<a href="https://arxiv.org/abs/2201.11903v6">CoT v6，§3.3</a></p>
+<p>三个暂停到底有没有帮助，最后仍要由任务表现回答。理解它之前，只需先把“多想三步”改写得更准确：新增了三个已知位置，还是三次由输出决定输入的推进？这个区别会直接改变训练方式，也会改变我们怎样计算成本。</p><aside class="social"><h2>Twitter / X</h2><pre>三个暂停词元，为什么不等于三步思维链？用两层模型追踪最后一个暂停能读什么，再看逐词生成在哪里等待。位置数相同，依赖关系可以不同。</pre><p><a href="../../social/02-extra-compute-without-extra-words.zh.md">配图和替代文本 / Attachment and alt text</a></p><img src="../../assets/02/cover.zh.png" alt="已知暂停位置一起进入一个模型层堆栈；另一侧的新词元由前一次输出决定，形成逐步等待的前向过程。"></aside></main></body></html>

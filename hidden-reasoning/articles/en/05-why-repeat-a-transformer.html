@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Why Run the Same Transformer Again?</title><meta name="description" content="Work through a parallel binary-carry algorithm to see what makes a shared update useful, then connect it to recurrent architectures."><link rel="canonical" href="https://jonneslin.github.io/hidden-reasoning/articles/en/05-why-repeat-a-transformer.html"><link rel="alternate" hreflang="en" href="https://jonneslin.github.io/hidden-reasoning/articles/en/05-why-repeat-a-transformer.html"><link rel="alternate" hreflang="zh" href="https://jonneslin.github.io/hidden-reasoning/articles/zh/05-why-repeat-a-transformer.html"><meta property="og:url" content="https://jonneslin.github.io/hidden-reasoning/articles/en/05-why-repeat-a-transformer.html"><meta property="og:title" content="Why Run the Same Transformer Again?"><meta property="og:description" content="Work through a parallel binary-carry algorithm to see what makes a shared update useful, then connect it to recurrent architectures."><meta property="og:type" content="article"><meta property="og:image" content="https://jonneslin.github.io/hidden-reasoning/assets/05/cover.en.png"><style>
+:root{color-scheme:light;--ink:#132a36;--muted:#425b64;--teal:#117d80;--paper:#f6f5f0}
+*{box-sizing:border-box}body{margin:0;color:var(--ink);background:var(--paper);font:18px/1.8 system-ui,-apple-system,'PingFang SC','Noto Sans CJK SC',sans-serif}
+a{color:#125f74;text-underline-offset:.18em}a:hover{color:#9a4e10}header,main,footer{max-width:1120px;margin:auto;padding:36px 28px}header{border-bottom:1px solid #cad7d9}header p{max-width:760px;color:var(--muted)}h1{font-size:clamp(32px,5vw,54px);line-height:1.15;letter-spacing:-.025em}h2{font-size:29px;line-height:1.3;margin-top:2em}h3{font-size:22px;line-height:1.4}img{display:block;max-width:100%;height:auto;border-radius:12px}nav{display:flex;gap:24px;flex-wrap:wrap}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:30px}.card{background:white;border:1px solid #cad7d9;border-radius:16px;padding:22px}.card h2{margin:16px 0 10px;font-size:26px}.card p{color:var(--muted);font-size:17px}.number{font:14px/1.5 ui-monospace,monospace;color:var(--muted);letter-spacing:.12em}.reading{max-width:850px}.reading p,.reading li{overflow-wrap:anywhere}.reading img{margin:28px 0 12px}.social{padding:24px;border:1px solid #cad7d9;border-radius:12px;background:white;margin:40px 0}pre{overflow:auto;white-space:pre-wrap;overflow-wrap:anywhere;background:#e9eeee;padding:18px;border-radius:8px;font-size:17px;line-height:1.65}code{font-family:ui-monospace,monospace;font-size:.9em}blockquote{margin-left:0;padding:4px 24px;border-left:4px solid var(--teal)}table{border-collapse:collapse;width:100%;font-size:16px}th,td{text-align:left;border-bottom:1px solid #cbd7d9;padding:10px}footer{font-size:14px;color:var(--muted)}@media(max-width:700px){.grid{grid-template-columns:1fr}header,main,footer{padding:24px 18px}body{font-size:17px}.card{padding:16px}h2{font-size:25px}}
+
+.reading figure{margin:28px 0}.reading figure>a{display:block}.reading figure img{margin:0}.reading figcaption{font-size:14px;margin-top:8px}
+</style></head><body><header><p><a href="../../../blog.html">← Main blog</a></p><nav><a href="../../index.html">全部文章 / All articles</a><a href="../zh/05-why-repeat-a-transformer.html">中文</a><a href="../../en/05-why-repeat-a-transformer.md">Markdown</a></nav></header><main class="reading"><h1>Why Run the Same Transformer Again?</h1>
+<p>Add <code>0111 + 0001</code>, or <code>7 + 1</code>. The rightmost <code>1 + 1</code> creates a carry. That carry meets another <code>1</code>, then another, before reaching the leftmost <code>0</code>. The answer is <code>1000</code>.</p>
+<p>This small problem helps explain why repeated computation can be useful. <strong>The following parallel carry algorithm is constructed for teaching; it is not an observation of a Transformer's hidden states.</strong> Starting with a known rule lets us ask what a neural network would need to learn.</p>
+<h2>Let a carry travel one position per round</h2>
+<p>Treat the four bits as four positions, numbering the rightmost one 0. Each position retains its two input bits and an incoming carry. The rule is simple: two input ones generate a carry; exactly one input one passes an incoming carry onward; two zeros produce no carry.</p>
+<p>Update all positions simultaneously, using carries from the <strong>previous round</strong>. A newly produced carry must therefore wait until the next round to travel farther. Initialize the carries to zero:</p>
+<table>
+<thead>
+<tr>
+<th>Completed update rounds</th>
+<th>Carries entering positions 3, 2, 1</th>
+<th>Four-bit readout using current carries</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td><code>000</code></td>
+<td><code>0110</code></td>
+</tr>
+<tr>
+<td>1</td>
+<td><code>001</code></td>
+<td><code>0100</code></td>
+</tr>
+<tr>
+<td>2</td>
+<td><code>011</code></td>
+<td><code>0000</code></td>
+</tr>
+<tr>
+<td>3</td>
+<td><code>111</code></td>
+<td><code>1000</code></td>
+</tr>
+<tr>
+<td>4</td>
+<td><code>111</code></td>
+<td><code>1000</code></td>
+</tr>
+</tbody>
+</table>
+<p><em>Carries and outputs are written from most to least significant bit. Position 0 always receives zero carry; this example has no overflow beyond four bits. Early rows are unfinished readouts, not alternative arithmetic answers.</em></p>
+<p>In round 1, the rightmost position detects <code>1 + 1</code> and sends a carry into position 1. In round 2, position 1 passes it to position 2. In round 3, it finally reaches position 3. Round 4 has no further information to propagate, so the answer remains unchanged.</p>
+<p>For each position <code>i</code>, the simultaneous update can be written as:</p>
+<pre><code class="language-text">next_carry[i+1] = (a[i] AND b[i])
+                 OR ((a[i] XOR b[i]) AND carry[i])
+result_bit[i]   = a[i] XOR b[i] XOR carry[i]
+</code></pre>
+<p><strong>The rule stays the same; the state it receives changes.</strong> Once a later round supplies a new carry, the same small rule makes further progress. It does not need a separate algorithm for rounds one, two, and three.</p>
+<p>This is a local update rule. Self-attention can connect more distant positions, so the table is not a lower bound requiring a Transformer to use three rounds.</p>
+<h2>Put that process inside a neural network</h2>
+<p>A shared module can repeatedly update a state:</p>
+<p><code>next_state = F(problem_condition, current_state)</code></p>
+<p>For our carry algorithm, the fixed condition consists of the two original numbers, and the changing state contains incoming carries. A neural network would use vectors or matrices, learning an update that remains useful at different intermediate states.</p>
+<figure><a href="../../assets/05/diagram.en.png"><img alt="A fixed problem condition feeds each shared update while a changing candidate state travels between rounds." src="../../assets/05/diagram.en.png" /></a><figcaption><a href="../../assets/05/diagram.en.png">Open full PNG</a> · <a href="../../references/matplotlib-layouts/assets/05/diagram.en.svg">Layout-reference SVG</a></figcaption></figure>
+<p><em>Read the upper path as the two available input numbers, and the horizontal path as propagating carries. This analogy explains the roles of input and state; it does not identify a learned algorithm.</em></p>
+<p>Repeatedly supplying the problem has a practical motivation. The working state can change without also having to preserve an undamaged copy of the original question forever.</p>
+<p>In a study of fitting functions from in-context examples, <em>Looped Transformers are Better at Learning Learning Algorithms</em> initializes the state to zero, injects the input each round, and supervises later iterations. Its linear-regression ablation finds greater degradation beyond trained iterations when weights are tied without repeated input injection. This supports the design in that setting without identifying a particular internal optimization algorithm. <a href="https://arxiv.org/abs/2311.12424v3">Paper v3, Sections 4–4.1 and Figure 3</a></p>
+<h2>Which direction does “another step” move?</h2>
+<p>An ordinary sequence RNN also shares parameters, usually updating as the next input arrives. Our carry computation instead spends another round on a problem that is already available.</p>
+<figure><a href="../../assets/05/cover.en.png"><img alt="The upper path advances through new inputs; the lower path repeats a shared update on the same input." src="../../assets/05/cover.en.png" /></a><figcaption><a href="../../assets/05/cover.en.png">Open full PNG</a> · <a href="../../references/matplotlib-layouts/assets/05/cover.en.svg">Layout-reference SVG</a></figcaption></figure>
+<p><em>One path changes input position; the other adds internal rounds. Their steps need not cost the same.</em></p>
+<p>We can write a state with two indices, <code>s[t,r]</code>. The first asks which input position is being processed; the second asks how many internal updates have occurred. Recurrent depth concerns the second coordinate.</p>
+<p>Universal Transformer repeatedly applies shared self-attention and transition modules to the same sequence positions. Separate position and iteration encodings identify where an update occurs and which round it belongs to. Positions can update in parallel within a round; successive rounds remain dependent. <a href="https://arxiv.org/abs/1807.03819v3">Universal Transformers v3, Section 2.1</a></p>
+<p>ACT learns how long to continue processing an input using accumulated halting values and remainder-weighted state and output mixtures. The dynamic Universal Transformer applies this idea per position. Article 08 works through stopping numerically. Here, the useful distinction is that <strong>sharing an update and choosing its execution count are separate design decisions.</strong> <a href="https://arxiv.org/abs/1603.08983v6">ACT v6, Section 2</a>; <a href="https://arxiv.org/abs/1807.03819v3">Universal Transformers v3, Section 2.2</a></p>
+<h2>Why is drawing a loop insufficient?</h2>
+<p>Our carry algorithm keeps a consistent state meaning: the carry reaching each position. A trained network could instead learn to prepare an answer specifically at round three, then alter it again at round four. Shared weights do not prevent the state from carrying an internal counter.</p>
+<p>That may be acceptable if the goal is fewer distinct parameters. Subformer shares middle layers, retains independent first and last layers, and uses embedding factorization to study parameter efficiency. Success at that goal does not establish useful arbitrary extra iterations. <a href="https://arxiv.org/abs/2101.00234v3">Subformer v3, Sections 2–3</a></p>
+<p>Preserving a completed answer requires more from an update. Deep Equilibrium Models take a different approach: they define the output through a fixed-point equation, solve for it in the forward pass, and use implicit differentiation. Their target is an equilibrium; finite recurrent models can also use helpful states reached before equilibrium. <a href="https://arxiv.org/abs/1909.01377v2">Deep Equilibrium Models v2, Section 3.1</a></p>
+<p>This makes a useful experiment concrete. Keep bit length fixed while increasing carry-chain length. Check whether additional rounds correct unfinished outputs and preserve completed ones. That experiment remains to be run on a learned update. The hand-designed rule supplies a clear reference: worthwhile repetition should take the progress already made and continue solving the same problem.</p><aside class="social"><h2>Twitter / X</h2><pre>A carry travels one position per round in a worked binary-addition example. Follow the same rule across changing states, then ask what a recurrent Transformer must learn.</pre><p><a href="../../social/05-why-repeat-a-transformer.en.md">配图和替代文本 / Attachment and alt text</a></p><img src="../../assets/05/cover.en.png" alt="Conceptual comparison: one timeline consumes new input tokens; another applies a shared update repeatedly to the same input."></aside></main></body></html>

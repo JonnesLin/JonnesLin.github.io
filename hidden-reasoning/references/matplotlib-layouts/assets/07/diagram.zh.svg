@@ -1,0 +1,127 @@
+<?xml version='1.0' encoding='utf-8'?>
+<ns0:svg xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:ns0="http://www.w3.org/2000/svg" xmlns:ns2="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" width="1200" height="900" viewBox="0 0 864 648" version="1.1">
+ <ns0:title>三种连续反馈接口</ns0:title>
+ <ns0:metadata>
+  <rdf:RDF>
+   <ns2:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+    <dc:title>三种连续反馈接口</dc:title>
+    <dc:date>2026-09-19T22:38:46.813720</dc:date>
+    <dc:description>Original conceptual drawing; no newly measured experimental results. Three horizontal paths with distinct labels. Coconut: final hidden state -&gt; next-position input embedding, with earlier KV history visible underneath. PonderLM: word probabilities -&gt; weighted vocabulary embedding -&gt; add to accumulated input -&gt; next pass; label residual additions accumulate so this cannot be read as E0 plus only the newest vector. Huginn: fixed input condition plus current state -&gt; shared core -&gt; updated state, with readout after chosen round. Do not draw a vocabulary distribution as separately evaluated search branches. Keep any equation short and portable, e.g. E(s)=E(0)+sum v(r).</dc:description>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <ns2:Agent>
+      <dc:title>Matplotlib v3.8.0, https://matplotlib.org/</dc:title>
+     </ns2:Agent>
+    </dc:creator>
+   </ns2:Work>
+  </rdf:RDF>
+ </ns0:metadata>
+ <ns0:defs>
+  <ns0:style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</ns0:style>
+ </ns0:defs>
+ <ns0:g id="figure_1">
+  <ns0:g id="patch_1">
+   <ns0:path d="M 0 648  L 864 648  L 864 0  L 0 0  z " style="fill: #f6f5f0" />
+  </ns0:g>
+  <ns0:g id="axes_1">
+   <ns0:g id="patch_2">
+    <ns0:path d="M 56.16 200.16  L 318.24 200.16  Q 331.2 200.16 331.2 213.12  L 331.2 246.96  Q 331.2 259.92 318.24 259.92  L 56.16 259.92  Q 43.2 259.92 43.2 246.96  L 43.2 213.12  Q 43.2 200.16 56.16 200.16  z " clip-path="url(#p3e703e653d)" style="fill: #e1f1ee; stroke: #117d80; stroke-width: 1.8; stroke-linejoin: miter" />
+   </ns0:g>
+   <ns0:g id="patch_3">
+    <ns0:path d="M 484.56 200.16  L 807.84 200.16  Q 820.8 200.16 820.8 213.12  L 820.8 246.96  Q 820.8 259.92 807.84 259.92  L 484.56 259.92  Q 471.6 259.92 471.6 246.96  L 471.6 213.12  Q 471.6 200.16 484.56 200.16  z " clip-path="url(#p3e703e653d)" style="fill: #e1f1ee; stroke: #117d80; stroke-width: 1.8; stroke-linejoin: miter" />
+   </ns0:g>
+   <ns0:g id="patch_4">
+    <ns0:path d="M 340.403357 230.04  Q 401.40079 230.04 459.603138 230.04  " clip-path="url(#p3e703e653d)" style="fill: none; stroke: #117d80; stroke-width: 2.5; stroke-linecap: round" />
+    <ns0:path d="M 450.403138 225.44  L 459.603138 230.04  L 450.403138 234.64  z " clip-path="url(#p3e703e653d)" style="fill: #117d80; stroke: #117d80; stroke-width: 2.5; stroke-linecap: round" />
+   </ns0:g>
+   <ns0:g id="patch_5">
+    <ns0:path d="M 56.16 359.28  L 217.44 359.28  Q 230.4 359.28 230.4 372.24  L 230.4 412.56  Q 230.4 425.52 217.44 425.52  L 56.16 425.52  Q 43.2 425.52 43.2 412.56  L 43.2 372.24  Q 43.2 359.28 56.16 359.28  z " clip-path="url(#p3e703e653d)" style="fill: #fcebd6; stroke: #a75513; stroke-width: 1.8; stroke-linejoin: miter" />
+   </ns0:g>
+   <ns0:g id="patch_6">
+    <ns0:path d="M 322.56 359.28  L 505.44 359.28  Q 518.4 359.28 518.4 372.24  L 518.4 412.56  Q 518.4 425.52 505.44 425.52  L 322.56 425.52  Q 309.6 425.52 309.6 412.56  L 309.6 372.24  Q 309.6 359.28 322.56 359.28  z " clip-path="url(#p3e703e653d)" style="fill: #fcebd6; stroke: #a75513; stroke-width: 1.8; stroke-linejoin: miter" />
+   </ns0:g>
+   <ns0:g id="patch_7">
+    <ns0:path d="M 239.597314 392.4  Q 270.000116 392.4 297.607833 392.4  " clip-path="url(#p3e703e653d)" style="fill: none; stroke: #a75513; stroke-width: 2.5; stroke-linecap: round" />
+    <ns0:path d="M 288.407833 387.8  L 297.607833 392.4  L 288.407833 397  z " clip-path="url(#p3e703e653d)" style="fill: #a75513; stroke: #a75513; stroke-width: 2.5; stroke-linecap: round" />
+   </ns0:g>
+   <ns0:g id="patch_8">
+    <ns0:path d="M 610.56 359.28  L 807.84 359.28  Q 820.8 359.28 820.8 372.24  L 820.8 412.56  Q 820.8 425.52 807.84 425.52  L 610.56 425.52  Q 597.6 425.52 597.6 412.56  L 597.6 372.24  Q 597.6 359.28 610.56 359.28  z " clip-path="url(#p3e703e653d)" style="fill: #fcebd6; stroke: #a75513; stroke-width: 1.8; stroke-linejoin: miter" />
+   </ns0:g>
+   <ns0:g id="patch_9">
+    <ns0:path d="M 527.597314 392.4  Q 558.000116 392.4 585.607833 392.4  " clip-path="url(#p3e703e653d)" style="fill: none; stroke: #a75513; stroke-width: 2.5; stroke-linecap: round" />
+    <ns0:path d="M 576.407833 387.8  L 585.607833 392.4  L 576.407833 397  z " clip-path="url(#p3e703e653d)" style="fill: #a75513; stroke: #a75513; stroke-width: 2.5; stroke-linecap: round" />
+   </ns0:g>
+   <ns0:g id="patch_10">
+    <ns0:path d="M 56.16 531.36  L 235.44 531.36  Q 248.4 531.36 248.4 544.32  L 248.4 574.56  Q 248.4 587.52 235.44 587.52  L 56.16 587.52  Q 43.2 587.52 43.2 574.56  L 43.2 544.32  Q 43.2 531.36 56.16 531.36  z " clip-path="url(#p3e703e653d)" style="fill: #e5edf8; stroke: #346bb5; stroke-width: 1.8; stroke-linejoin: miter" />
+   </ns0:g>
+   <ns0:g id="patch_11">
+    <ns0:path d="M 340.56 531.36  L 512.64 531.36  Q 525.6 531.36 525.6 544.32  L 525.6 574.56  Q 525.6 587.52 512.64 587.52  L 340.56 587.52  Q 327.6 587.52 327.6 574.56  L 327.6 544.32  Q 327.6 531.36 340.56 531.36  z " clip-path="url(#p3e703e653d)" style="fill: #e5edf8; stroke: #346bb5; stroke-width: 1.8; stroke-linejoin: miter" />
+   </ns0:g>
+   <ns0:g id="patch_12">
+    <ns0:path d="M 257.597314 559.44  Q 288.000116 559.44 315.607833 559.44  " clip-path="url(#p3e703e653d)" style="fill: none; stroke: #346bb5; stroke-width: 2.5; stroke-linecap: round" />
+    <ns0:path d="M 306.407833 554.84  L 315.607833 559.44  L 306.407833 564.04  z " clip-path="url(#p3e703e653d)" style="fill: #346bb5; stroke: #346bb5; stroke-width: 2.5; stroke-linecap: round" />
+   </ns0:g>
+   <ns0:g id="patch_13">
+    <ns0:path d="M 624.96 531.36  L 807.84 531.36  Q 820.8 531.36 820.8 544.32  L 820.8 574.56  Q 820.8 587.52 807.84 587.52  L 624.96 587.52  Q 612 587.52 612 574.56  L 612 544.32  Q 612 531.36 624.96 531.36  z " clip-path="url(#p3e703e653d)" style="fill: #e5edf8; stroke: #346bb5; stroke-width: 1.8; stroke-linejoin: miter" />
+   </ns0:g>
+   <ns0:g id="patch_14">
+    <ns0:path d="M 534.799512 559.44  Q 568.797857 559.44 600.001117 559.44  " clip-path="url(#p3e703e653d)" style="fill: none; stroke: #346bb5; stroke-width: 2.5; stroke-linecap: round" />
+    <ns0:path d="M 590.801117 554.84  L 600.001117 559.44  L 590.801117 564.04  z " clip-path="url(#p3e703e653d)" style="fill: #346bb5; stroke: #346bb5; stroke-width: 2.5; stroke-linecap: round" />
+   </ns0:g>
+   <ns0:g id="text_1">
+    <ns0:text style="fill: #425b64; font: 18px 'Arial Unicode MS'; text-anchor: start" x="43.2" y="34.484063" transform="rotate(-0 43.2 34.484063)">07 / 12   隐状态推理与循环 Transformer</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_2">
+    <ns0:text style="fill: #132a36; font: 37.44px 'Arial Unicode MS'; text-anchor: start" x="43.2" y="90.15885" transform="rotate(-0 43.2 90.15885)">三种连续反馈接口</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_3">
+    <ns0:text style="fill: #117d80; font: 25.2px 'Arial Unicode MS'; text-anchor: start" x="43.2" y="175.076438" transform="rotate(-0 43.2 175.076438)">Coconut：追加一个位置</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_4">
+    <ns0:text style="fill: #132a36; font: 26.64px 'Arial Unicode MS'; text-anchor: middle" x="187.2" y="236.920612" transform="rotate(-0 187.2 236.920612)">末层隐状态</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_5">
+    <ns0:text style="fill: #132a36; font: 26.64px 'Arial Unicode MS'; text-anchor: middle" x="646.2" y="236.980969" transform="rotate(-0 646.2 236.980969)">下一位置输入</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_6">
+    <ns0:text style="fill: #425b64; font: 20.88px 'Arial Unicode MS'; text-anchor: start" x="46.8" y="286.457288" transform="rotate(-0 46.8 286.457288)">历史 KV 另行保留</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_7">
+    <ns0:text style="fill: #a75513; font: 25.2px 'Arial Unicode MS'; text-anchor: start" x="43.2" y="332.791875" transform="rotate(-0 43.2 332.791875)">PonderLM：逐轮累积输入增量</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_8">
+    <ns0:text style="fill: #132a36; font: 23.76px 'Arial Unicode MS'; text-anchor: middle" x="136.8" y="398.536763" transform="rotate(-0 136.8 398.536763)">词概率</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_9">
+    <ns0:text style="fill: #132a36; font: 23.76px 'Arial Unicode MS'; text-anchor: middle" x="414" y="398.536763" transform="rotate(-0 414 398.536763)">加权词嵌入</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_10">
+    <ns0:text style="fill: #132a36; font: 23.76px 'Arial Unicode MS'; text-anchor: middle" x="709.2" y="398.625862" transform="rotate(-0 709.2 398.625862)">累加到输入</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_11">
+    <ns0:text style="fill: #a75513; font: 23.76px 'Arial Unicode MS'; text-anchor: start" x="316.8" y="456.496537" transform="rotate(-0 316.8 456.496537)">E(s) = E(0) + Σ v(r)</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_12">
+    <ns0:text style="fill: #346bb5; font: 25.2px 'Arial Unicode MS'; text-anchor: start" x="43.2" y="507.884062" transform="rotate(-0 43.2 507.884062)">Huginn：循环共享核心</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_13">
+    <ns0:text style="fill: #132a36; font: 23.04px 'Arial Unicode MS'; text-anchor: middle" x="145.8" y="565.3908" transform="rotate(-0 145.8 565.3908)">固定条件＋状态</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_14">
+    <ns0:text style="fill: #132a36; font: 23.04px 'Arial Unicode MS'; text-anchor: middle" x="426.6" y="565.3908" transform="rotate(-0 426.6 565.3908)">共享核心 F</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_15">
+    <ns0:text style="fill: #132a36; font: 23.04px 'Arial Unicode MS'; text-anchor: middle" x="716.4" y="565.4016" transform="rotate(-0 716.4 565.4016)">更新后状态</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_16">
+    <ns0:text style="fill: #425b64; font: 19.44px 'Arial Unicode MS'; text-anchor: start" x="43.2" y="604.527187" transform="rotate(-0 43.2 604.527187)">词概率混合不是多条离散搜索分支；选定轮次后再读出。</ns0:text>
+   </ns0:g>
+  </ns0:g>
+ </ns0:g>
+ <ns0:defs>
+  <ns0:clipPath id="p3e703e653d">
+   <ns0:rect x="0" y="0" width="864" height="648" />
+  </ns0:clipPath>
+ </ns0:defs>
+</ns0:svg>

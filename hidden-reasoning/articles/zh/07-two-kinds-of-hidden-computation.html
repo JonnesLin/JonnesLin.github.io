@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>下一个向量，到底写到哪里？</title><meta name="description" content="用地址表区分追加潜在位置与增加内部轮次，再手算PonderLM的词嵌入残差累积。"><link rel="canonical" href="https://jonneslin.github.io/hidden-reasoning/articles/zh/07-two-kinds-of-hidden-computation.html"><link rel="alternate" hreflang="zh" href="https://jonneslin.github.io/hidden-reasoning/articles/zh/07-two-kinds-of-hidden-computation.html"><link rel="alternate" hreflang="en" href="https://jonneslin.github.io/hidden-reasoning/articles/en/07-two-kinds-of-hidden-computation.html"><meta property="og:url" content="https://jonneslin.github.io/hidden-reasoning/articles/zh/07-two-kinds-of-hidden-computation.html"><meta property="og:title" content="下一个向量，到底写到哪里？"><meta property="og:description" content="用地址表区分追加潜在位置与增加内部轮次，再手算PonderLM的词嵌入残差累积。"><meta property="og:type" content="article"><meta property="og:image" content="https://jonneslin.github.io/hidden-reasoning/assets/07/cover.zh.png"><style>
+:root{color-scheme:light;--ink:#132a36;--muted:#425b64;--teal:#117d80;--paper:#f6f5f0}
+*{box-sizing:border-box}body{margin:0;color:var(--ink);background:var(--paper);font:18px/1.8 system-ui,-apple-system,'PingFang SC','Noto Sans CJK SC',sans-serif}
+a{color:#125f74;text-underline-offset:.18em}a:hover{color:#9a4e10}header,main,footer{max-width:1120px;margin:auto;padding:36px 28px}header{border-bottom:1px solid #cad7d9}header p{max-width:760px;color:var(--muted)}h1{font-size:clamp(32px,5vw,54px);line-height:1.15;letter-spacing:-.025em}h2{font-size:29px;line-height:1.3;margin-top:2em}h3{font-size:22px;line-height:1.4}img{display:block;max-width:100%;height:auto;border-radius:12px}nav{display:flex;gap:24px;flex-wrap:wrap}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:30px}.card{background:white;border:1px solid #cad7d9;border-radius:16px;padding:22px}.card h2{margin:16px 0 10px;font-size:26px}.card p{color:var(--muted);font-size:17px}.number{font:14px/1.5 ui-monospace,monospace;color:var(--muted);letter-spacing:.12em}.reading{max-width:850px}.reading p,.reading li{overflow-wrap:anywhere}.reading img{margin:28px 0 12px}.social{padding:24px;border:1px solid #cad7d9;border-radius:12px;background:white;margin:40px 0}pre{overflow:auto;white-space:pre-wrap;overflow-wrap:anywhere;background:#e9eeee;padding:18px;border-radius:8px;font-size:17px;line-height:1.65}code{font-family:ui-monospace,monospace;font-size:.9em}blockquote{margin-left:0;padding:4px 24px;border-left:4px solid var(--teal)}table{border-collapse:collapse;width:100%;font-size:16px}th,td{text-align:left;border-bottom:1px solid #cbd7d9;padding:10px}footer{font-size:14px;color:var(--muted)}@media(max-width:700px){.grid{grid-template-columns:1fr}header,main,footer{padding:24px 18px}body{font-size:17px}.card{padding:16px}h2{font-size:25px}}
+
+.reading figure{margin:28px 0}.reading figure>a{display:block}.reading figure img{margin:0}.reading figcaption{font-size:14px;margin-top:8px}
+</style></head><body><header><p><a href="../../../blog.html">← Main blog</a></p><nav><a href="../../index.html">全部文章 / All articles</a><a href="../en/07-two-kinds-of-hidden-computation.html">English</a><a href="../../zh/07-two-kinds-of-hidden-computation.md">Markdown</a></nav></header><main class="reading"><h1>下一个向量，到底写到哪里？</h1>
+<p>两个模型都把向量送回计算，看起来都有一个环。但现在让它们各多算两步：一个会多出两个序列位置，另一个仍然只有原来的位置，只是每个位置的状态更新了两遍。</p>
+<p>这项差别会影响模型能够再次读取什么。理解隐藏计算，可以先做一件很具体的事：<strong>给每个向量标一个地址，再追踪下一步写入哪里。</strong></p>
+<h2>同样说“两步”，地址表却不同</h2>
+<p>下面只为说明地址，假设开始时有三个已处理的前缀位置。这个三位置例子是教学抽象，不对应一条真实题目的分词；Coconut 起点已包含开始连续阶段所需的边界，结束边界不计入下面两步。</p>
+<p>Coconut 每增加一个连续步骤，就追加一个位置。Huginn 增加内部轮次时，更新的仍是原来的一组位置。把它们展开：</p>
+<table>
+<thead>
+<tr>
+<th>时刻</th>
+<th>Coconut 的序列地址</th>
+<th>Huginn 的状态快照</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>起点</td>
+<td><code>1, 2, 3</code></td>
+<td><code>s[1,0], s[2,0], s[3,0]</code></td>
+</tr>
+<tr>
+<td>再计算一步</td>
+<td><code>1, 2, 3, 4</code></td>
+<td><code>s[1,1], s[2,1], s[3,1]</code></td>
+</tr>
+<tr>
+<td>再计算两步</td>
+<td><code>1, 2, 3, 4, 5</code></td>
+<td><code>s[1,2], s[2,2], s[3,2]</code></td>
+</tr>
+</tbody>
+</table>
+<p><em>Huginn 的记号为 <code>s[位置,轮次]</code>。这里对照的是地址与更新方式，不是相同任务、相同 FLOPs 的性能实验。</em></p>
+<p>在左列，位置 4 已经变成可以再次访问的历史。在右列，<code>s[1,1]</code> 和 <code>s[1,2]</code> 是<strong>同一序列位置</strong>在不同深度的状态。第 2 轮不是把第 1 轮整套状态追加成新的序列地址。</p>
+<figure><a href="../../assets/07/cover.zh.png"><img alt="Coconut 沿序列追加位置；Huginn 保留位置对应关系，沿内部深度更新状态。" src="../../assets/07/cover.zh.png" /></a><figcaption><a href="../../assets/07/cover.zh.png">查看完整 PNG</a> · <a href="../../references/matplotlib-layouts/assets/07/cover.zh.svg">SVG 结构参考</a></figcaption></figure>
+<p><em>上排看右端新增的地址，下排看跨轮次仍相互对应的位置。图中方块数量没有表达内存容量。</em></p>
+<h2>再读一个旧结果，意味着什么？</h2>
+<p>设想我们要处理几条存在依赖的事实。追加位置可以让较早计算留下不同的历史地址；以后的位置通过注意力读取这些地址的键和值。Coconut 的直接反馈只是提供新位置输入，已有 KV 历史仍然参与下一次计算。<a href="https://arxiv.org/abs/2412.06769v2">Coconut v2，§3</a></p>
+<p>因此，“只传一个向量”没有说完它的记忆。当前向量与可读历史共同决定下一步。反过来，地址 4 的存在，也没有告诉我们它是否恰好保存了某个完整事实。</p>
+<p>Huginn 的共享核心反复修改状态矩阵，同时接收固定前奏条件；在整段输入的 prefill 中，矩阵覆盖原来的序列位置。<a href="https://arxiv.org/abs/2502.05171v1">Huginn v1，§3.1</a> 若一个量还要在后续轮次使用，更新过程需要在仍可访问的状态或缓存中保留所需信息。</p>
+<p>不要把右列读成“所有旧信息都会消失”。实际系统可以保留不同层、不同深度的缓存，训练也可能保存反向传播需要的激活。表格只说它没有因为再跑一轮，就自动增加一个可注意的潜在序列位置。增量生成时，也不必每轮重算整个前缀。</p>
+<p>这里出现了两种独立的问题：<strong>有多少个序列地址，以及每个地址经历多少次变换。</strong> 它们都可能有用，但不能直接用方块数量比较容量。状态宽度、缓存规则与可访问范围也必须相同或明确列出。</p>
+<h2>有一种反馈，还要先经过词表</h2>
+<p>地址之外，还需要问传回来的向量怎样构造。Coconut 直接用末层隐状态；PonderLM 则先得到词概率，用这些概率加权词嵌入，再把所得增量加入已有输入。<a href="https://arxiv.org/abs/2505.20674v3">PonderLM v3，§2、式3–7</a></p>
+<p>用一个<strong>自造的二维、双词词表</strong>算一次。两个词嵌入分别是 <code>A = (1,0)</code>、<code>B = (0,1)</code>，当前输入是 <code>E[0] = (2,2)</code>。假设第一轮概率为 <code>(0.75,0.25)</code>，第二轮为 <code>(0.20,0.80)</code>：</p>
+<table>
+<thead>
+<tr>
+<th>更新</th>
+<th>加权嵌入增量</th>
+<th>累积后的输入</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>第一次</td>
+<td><code>0.75A + 0.25B = (0.75,0.25)</code></td>
+<td><code>E[1] = (2.75,2.25)</code></td>
+</tr>
+<tr>
+<td>第二次</td>
+<td><code>0.20A + 0.80B = (0.20,0.80)</code></td>
+<td><code>E[2] = (2.95,3.05)</code></td>
+</tr>
+</tbody>
+</table>
+<p>这些概率是为教学指定的，没有运行模型。它们让一个实现区别清楚可见：第二轮是在 <code>E[1]</code> 上继续加，因此第一轮的增量还在。若写成 <code>E[0] + 第二次增量</code>，就会得到 <code>(2.20,2.80)</code>，已经换成另一条更新规则。</p>
+<p>每个增量是词嵌入的加权平均；在这个例子中，它位于连接 A、B 的线段上。但是累积输入不需要留在这条线段上。这也是为什么“概率混合向量”与“整个运行状态”不能混用。论文实现使用 top-100 候选近似，完整词表公式与实际候选选择应分别说明。<a href="https://arxiv.org/abs/2505.20674v3">PonderLM v3，§2、脚注1</a></p>
+<h2>现在再看三个箭头</h2>
+<figure><a href="../../assets/07/diagram.zh.png"><img alt="三条路径分别表示直接隐状态反馈、词概率形成累积残差输入，以及固定条件和当前状态进入共享核心。" src="../../assets/07/diagram.zh.png" /></a><figcaption><a href="../../assets/07/diagram.zh.png">查看完整 PNG</a> · <a href="../../references/matplotlib-layouts/assets/07/diagram.zh.svg">SVG 结构参考</a></figcaption></figure>
+<p><em>顺着每一行问两个问题：新向量来自哪里，下一次计算把它用在哪里？中排加号表示增量持续累积，不表示多条离散搜索分支各自运行。</em></p>
+<p>可以把刚才走过的接口压缩成三行，留作读论文时的核对表：</p>
+<table>
+<thead>
+<tr>
+<th>接口</th>
+<th>下一步接收什么</th>
+<th>主要改变的坐标</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Coconut</td>
+<td>上一位置末层隐状态，作为新位置输入</td>
+<td>序列位置</td>
+</tr>
+<tr>
+<td>Huginn</td>
+<td>固定条件与更新中的状态</td>
+<td>内部轮次</td>
+</tr>
+<tr>
+<td>PonderLM</td>
+<td>加上词概率加权嵌入后的累积输入</td>
+<td>同一生成步骤内的前向次数</td>
+</tr>
+</tbody>
+</table>
+<p>这张表不替各个架构规定统一的缓存，也不表示一“步”成本相等。它的用途是让一句模糊的“继续潜在计算”变成能画出执行顺序的说明。</p>
+<p>两条坐标原则上也能组合：追加 <code>J</code> 个潜在位置，每个位置再运行 <code>K</code> 轮核心。但这要定义新的训练与缓存规则，并做预算匹配的实验，才能判断是否值得。单从两个箭头可以连接，还得不到收益结论。</p>
+<p>下次看到“模型在向量空间里多想一步”，先在纸上写下 <code>位置4</code> 或 <code>位置3的第2轮</code>。确定了地址，再问输入从哪里来、历史还能读到什么，那个环才有了具体的计算含义。</p><aside class="social"><h2>Twitter / X</h2><pre>两个环不一定是同一种计算。先用地址表看Coconut怎样追加位置、Huginn怎样更新原位置，再手算PonderLM的残差累积。</pre><p><a href="../../social/07-two-kinds-of-hidden-computation.zh.md">配图和替代文本 / Attachment and alt text</a></p><img src="../../assets/07/cover.zh.png" alt="两种计算组织：Coconut 追加潜在位置并保留历史，Huginn 在已有位置上反复更新状态。"></aside></main></body></html>

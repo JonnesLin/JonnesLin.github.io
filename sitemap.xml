@@ -27,4 +27,29 @@
   <url><loc>https://jonneslin.github.io/rsi-11-zh.html</loc></url>
   <url><loc>https://jonneslin.github.io/rsi-12-en.html</loc></url>
   <url><loc>https://jonneslin.github.io/rsi-12-zh.html</loc></url>
+  <url><loc>https://jonneslin.github.io/hidden-reasoning/</loc></url>
+  <url><loc>https://jonneslin.github.io/hidden-reasoning/articles/zh/01-where-reasoning-happens.html</loc></url>
+  <url><loc>https://jonneslin.github.io/hidden-reasoning/articles/en/01-where-reasoning-happens.html</loc></url>
+  <url><loc>https://jonneslin.github.io/hidden-reasoning/articles/zh/02-extra-compute-without-extra-words.html</loc></url>
+  <url><loc>https://jonneslin.github.io/hidden-reasoning/articles/en/02-extra-compute-without-extra-words.html</loc></url>
+  <url><loc>https://jonneslin.github.io/hidden-reasoning/articles/zh/03-learning-to-reason-without-words.html</loc></url>
+  <url><loc>https://jonneslin.github.io/hidden-reasoning/articles/en/03-learning-to-reason-without-words.html</loc></url>
+  <url><loc>https://jonneslin.github.io/hidden-reasoning/articles/zh/04-what-latent-reasoning-does.html</loc></url>
+  <url><loc>https://jonneslin.github.io/hidden-reasoning/articles/en/04-what-latent-reasoning-does.html</loc></url>
+  <url><loc>https://jonneslin.github.io/hidden-reasoning/articles/zh/05-why-repeat-a-transformer.html</loc></url>
+  <url><loc>https://jonneslin.github.io/hidden-reasoning/articles/en/05-why-repeat-a-transformer.html</loc></url>
+  <url><loc>https://jonneslin.github.io/hidden-reasoning/articles/zh/06-training-a-recurrent-language-model.html</loc></url>
+  <url><loc>https://jonneslin.github.io/hidden-reasoning/articles/en/06-training-a-recurrent-language-model.html</loc></url>
+  <url><loc>https://jonneslin.github.io/hidden-reasoning/articles/zh/07-two-kinds-of-hidden-computation.html</loc></url>
+  <url><loc>https://jonneslin.github.io/hidden-reasoning/articles/en/07-two-kinds-of-hidden-computation.html</loc></url>
+  <url><loc>https://jonneslin.github.io/hidden-reasoning/articles/zh/08-knowing-when-to-stop.html</loc></url>
+  <url><loc>https://jonneslin.github.io/hidden-reasoning/articles/en/08-knowing-when-to-stop.html</loc></url>
+  <url><loc>https://jonneslin.github.io/hidden-reasoning/articles/zh/09-what-theory-does-and-does-not-prove.html</loc></url>
+  <url><loc>https://jonneslin.github.io/hidden-reasoning/articles/en/09-what-theory-does-and-does-not-prove.html</loc></url>
+  <url><loc>https://jonneslin.github.io/hidden-reasoning/articles/zh/10-counting-the-cost-of-reasoning.html</loc></url>
+  <url><loc>https://jonneslin.github.io/hidden-reasoning/articles/en/10-counting-the-cost-of-reasoning.html</loc></url>
+  <url><loc>https://jonneslin.github.io/hidden-reasoning/articles/zh/11-testing-what-hidden-states-do.html</loc></url>
+  <url><loc>https://jonneslin.github.io/hidden-reasoning/articles/en/11-testing-what-hidden-states-do.html</loc></url>
+  <url><loc>https://jonneslin.github.io/hidden-reasoning/articles/zh/12-designing-experiments-that-can-fail.html</loc></url>
+  <url><loc>https://jonneslin.github.io/hidden-reasoning/articles/en/12-designing-experiments-that-can-fail.html</loc></url>
 </urlset>

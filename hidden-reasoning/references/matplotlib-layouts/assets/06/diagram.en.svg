@@ -1,0 +1,142 @@
+<?xml version='1.0' encoding='utf-8'?>
+<ns0:svg xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:ns0="http://www.w3.org/2000/svg" xmlns:ns2="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" width="1200" height="900" viewBox="0 0 864 648" version="1.1">
+ <ns0:title>Forward depth and backward depth differ</ns0:title>
+ <ns0:metadata>
+  <rdf:RDF>
+   <ns2:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+    <dc:title>Forward depth and backward depth differ</dc:title>
+    <dc:date>2026-09-19T22:40:10.178863</dc:date>
+    <dc:description>Original conceptual drawing; no newly measured experimental results. A shared-core forward chain runs left to right in two visibly labeled groups: earlier executed rounds and final gradient window. Use ellipses so the count is not literal. All rounds receive a solid forward arrow. Draw a separate backward arrow only through the final group, stopping at an explicit detach boundary. A fixed input-condition line feeds updates on both sides; optionally show that its late injections can receive gradient without reconnecting the detached state history. Caption annotation: schematic unroll; Huginn main-run window at most eight final rounds. Do not imply earlier computation is skipped or free.</dc:description>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <ns2:Agent>
+      <dc:title>Matplotlib v3.8.0, https://matplotlib.org/</dc:title>
+     </ns2:Agent>
+    </dc:creator>
+   </ns2:Work>
+  </rdf:RDF>
+ </ns0:metadata>
+ <ns0:defs>
+  <ns0:style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</ns0:style>
+ </ns0:defs>
+ <ns0:g id="figure_1">
+  <ns0:g id="patch_1">
+   <ns0:path d="M 0 648  L 864 648  L 864 0  L 0 0  z " style="fill: #f6f5f0" />
+  </ns0:g>
+  <ns0:g id="axes_1">
+   <ns0:g id="patch_2">
+    <ns0:path d="M 128.16 158.4  L 807.84 158.4  Q 820.8 158.4 820.8 171.36  L 820.8 193.68  Q 820.8 206.64 807.84 206.64  L 128.16 206.64  Q 115.2 206.64 115.2 193.68  L 115.2 171.36  Q 115.2 158.4 128.16 158.4  z " clip-path="url(#p3fa4b59172)" style="fill: #e1f1ee; stroke: #117d80; stroke-width: 1.8; stroke-linejoin: miter" />
+   </ns0:g>
+   <ns0:g id="patch_3">
+    <ns0:path d="M 136.8 210.79916  Q 136.8 257.759917 136.8 301.925588  " clip-path="url(#p3fa4b59172)" style="fill: none; stroke: #117d80; stroke-width: 2.5; stroke-linecap: round" />
+    <ns0:path d="M 141.4 292.725588  L 136.8 301.925588  L 132.2 292.725588  z " clip-path="url(#p3fa4b59172)" style="fill: #117d80; stroke: #117d80; stroke-width: 2.5; stroke-linecap: round" />
+   </ns0:g>
+   <ns0:g id="patch_4">
+    <ns0:path d="M 338.4 210.79916  Q 338.4 257.759917 338.4 301.925588  " clip-path="url(#p3fa4b59172)" style="fill: none; stroke: #117d80; stroke-width: 2.5; stroke-linecap: round" />
+    <ns0:path d="M 343 292.725588  L 338.4 301.925588  L 333.8 292.725588  z " clip-path="url(#p3fa4b59172)" style="fill: #117d80; stroke: #117d80; stroke-width: 2.5; stroke-linecap: round" />
+   </ns0:g>
+   <ns0:g id="patch_5">
+    <ns0:path d="M 579.6 210.79916  Q 579.6 257.759917 579.6 301.925588  " clip-path="url(#p3fa4b59172)" style="fill: none; stroke: #117d80; stroke-width: 2.5; stroke-linecap: round" />
+    <ns0:path d="M 584.2 292.725588  L 579.6 301.925588  L 575 292.725588  z " clip-path="url(#p3fa4b59172)" style="fill: #117d80; stroke: #117d80; stroke-width: 2.5; stroke-linecap: round" />
+   </ns0:g>
+   <ns0:g id="patch_6">
+    <ns0:path d="M 766.8 210.79916  Q 766.8 257.759917 766.8 301.925588  " clip-path="url(#p3fa4b59172)" style="fill: none; stroke: #117d80; stroke-width: 2.5; stroke-linecap: round" />
+    <ns0:path d="M 771.4 292.725588  L 766.8 301.925588  L 762.2 292.725588  z " clip-path="url(#p3fa4b59172)" style="fill: #117d80; stroke: #117d80; stroke-width: 2.5; stroke-linecap: round" />
+   </ns0:g>
+   <ns0:g id="patch_7">
+    <ns0:path d="M 56.16 316.8  L 141.84 316.8  Q 154.8 316.8 154.8 329.76  L 154.8 375.84  Q 154.8 388.8 141.84 388.8  L 56.16 388.8  Q 43.2 388.8 43.2 375.84  L 43.2 329.76  Q 43.2 316.8 56.16 316.8  z " clip-path="url(#p3fa4b59172)" style="fill: #e5edf8; stroke: #346bb5; stroke-width: 1.8; stroke-linejoin: miter" />
+   </ns0:g>
+   <ns0:g id="patch_8">
+    <ns0:path d="M 189.36 316.8  L 239.04 316.8  Q 252 316.8 252 329.76  L 252 375.84  Q 252 388.8 239.04 388.8  L 189.36 388.8  Q 176.4 388.8 176.4 375.84  L 176.4 329.76  Q 176.4 316.8 189.36 316.8  z " clip-path="url(#p3fa4b59172)" style="fill: #e5edf8; stroke: #346bb5; stroke-width: 1.8; stroke-linejoin: miter" />
+   </ns0:g>
+   <ns0:g id="patch_9">
+    <ns0:path d="M 164.000391 352.8  Q 165.601149 352.8 164.406823 352.8  " clip-path="url(#p3fa4b59172)" style="fill: none; stroke: #346bb5; stroke-width: 2.5; stroke-linecap: round" />
+    <ns0:path d="M 155.206823 348.2  L 164.406823 352.8  L 155.206823 357.4  z " clip-path="url(#p3fa4b59172)" style="fill: #346bb5; stroke: #346bb5; stroke-width: 2.5; stroke-linecap: round" />
+   </ns0:g>
+   <ns0:g id="patch_10">
+    <ns0:path d="M 290.16 316.8  L 375.84 316.8  Q 388.8 316.8 388.8 329.76  L 388.8 375.84  Q 388.8 388.8 375.84 388.8  L 290.16 388.8  Q 277.2 388.8 277.2 375.84  L 277.2 329.76  Q 277.2 316.8 290.16 316.8  z " clip-path="url(#p3fa4b59172)" style="fill: #e5edf8; stroke: #346bb5; stroke-width: 1.8; stroke-linejoin: miter" />
+   </ns0:g>
+   <ns0:g id="patch_11">
+    <ns0:path d="M 261.20127 352.8  Q 264.601755 352.8 265.207156 352.8  " clip-path="url(#p3fa4b59172)" style="fill: none; stroke: #346bb5; stroke-width: 2.5; stroke-linecap: round" />
+    <ns0:path d="M 256.007156 348.2  L 265.207156 352.8  L 256.007156 357.4  z " clip-path="url(#p3fa4b59172)" style="fill: #346bb5; stroke: #346bb5; stroke-width: 2.5; stroke-linecap: round" />
+   </ns0:g>
+   <ns0:g id="patch_12">
+    <ns0:path d="M 491.76 316.8  L 577.44 316.8  Q 590.4 316.8 590.4 329.76  L 590.4 375.84  Q 590.4 388.8 577.44 388.8  L 491.76 388.8  Q 478.8 388.8 478.8 375.84  L 478.8 329.76  Q 478.8 316.8 491.76 316.8  z " clip-path="url(#p3fa4b59172)" style="fill: #e5edf8; stroke: #346bb5; stroke-width: 1.8; stroke-linejoin: miter" />
+   </ns0:g>
+   <ns0:g id="patch_13">
+    <ns0:path d="M 397.997974 352.8  Q 433.799448 352.8 466.805837 352.8  " clip-path="url(#p3fa4b59172)" style="fill: none; stroke: #346bb5; stroke-width: 2.5; stroke-linecap: round" />
+    <ns0:path d="M 457.605837 348.2  L 466.805837 352.8  L 457.605837 357.4  z " clip-path="url(#p3fa4b59172)" style="fill: #346bb5; stroke: #346bb5; stroke-width: 2.5; stroke-linecap: round" />
+   </ns0:g>
+   <ns0:g id="patch_14">
+    <ns0:path d="M 624.96 316.8  L 674.64 316.8  Q 687.6 316.8 687.6 329.76  L 687.6 375.84  Q 687.6 388.8 674.64 388.8  L 624.96 388.8  Q 612 388.8 612 375.84  L 612 329.76  Q 612 316.8 624.96 316.8  z " clip-path="url(#p3fa4b59172)" style="fill: #e5edf8; stroke: #346bb5; stroke-width: 1.8; stroke-linejoin: miter" />
+   </ns0:g>
+   <ns0:g id="patch_15">
+    <ns0:path d="M 599.600391 352.8  Q 601.201149 352.8 600.006823 352.8  " clip-path="url(#p3fa4b59172)" style="fill: none; stroke: #346bb5; stroke-width: 2.5; stroke-linecap: round" />
+    <ns0:path d="M 590.806823 348.2  L 600.006823 352.8  L 590.806823 357.4  z " clip-path="url(#p3fa4b59172)" style="fill: #346bb5; stroke: #346bb5; stroke-width: 2.5; stroke-linecap: round" />
+   </ns0:g>
+   <ns0:g id="patch_16">
+    <ns0:path d="M 722.16 316.8  L 807.84 316.8  Q 820.8 316.8 820.8 329.76  L 820.8 375.84  Q 820.8 388.8 807.84 388.8  L 722.16 388.8  Q 709.2 388.8 709.2 375.84  L 709.2 329.76  Q 709.2 316.8 722.16 316.8  z " clip-path="url(#p3fa4b59172)" style="fill: #e5edf8; stroke: #346bb5; stroke-width: 1.8; stroke-linejoin: miter" />
+   </ns0:g>
+   <ns0:g id="patch_17">
+    <ns0:path d="M 696.800391 352.8  Q 698.401149 352.8 697.206823 352.8  " clip-path="url(#p3fa4b59172)" style="fill: none; stroke: #346bb5; stroke-width: 2.5; stroke-linecap: round" />
+    <ns0:path d="M 688.006823 348.2  L 697.206823 352.8  L 688.006823 357.4  z " clip-path="url(#p3fa4b59172)" style="fill: #346bb5; stroke: #346bb5; stroke-width: 2.5; stroke-linecap: round" />
+   </ns0:g>
+   <ns0:g id="patch_18">
+    <ns0:path d="M 789.997577 450  Q 635.398347 450 483.594203 450  " clip-path="url(#p3fa4b59172)" style="fill: none; stroke: #a75513; stroke-width: 2.5; stroke-linecap: round" />
+    <ns0:path d="M 492.794203 454.6  L 483.594203 450  L 492.794203 445.4  z " clip-path="url(#p3fa4b59172)" style="fill: #a75513; stroke: #a75513; stroke-width: 2.5; stroke-linecap: round" />
+   </ns0:g>
+   <ns0:g id="line2d_1">
+    <ns0:path d="M 432.72 244.8  L 432.72 518.4  " clip-path="url(#p3fa4b59172)" style="fill: none; stroke-dasharray: 9.25,4; stroke-dashoffset: 0; stroke: #a75513; stroke-width: 2.5" />
+   </ns0:g>
+   <ns0:g id="text_1">
+    <ns0:text style="fill: #425b64; font: 18px 'Arial Unicode MS'; text-anchor: start" x="43.2" y="34.484063" transform="rotate(-0 43.2 34.484063)">06 / 12   HIDDEN REASONING / LOOPED TRANSFORMERS</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_2">
+    <ns0:text style="fill: #132a36; font: 37.44px 'Arial Unicode MS'; text-anchor: start" x="43.2" y="90.61515" transform="rotate(-0 43.2 90.61515)">Forward depth and backward depth differ</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_3">
+    <ns0:text style="fill: #132a36; font: 25.2px 'Arial Unicode MS'; text-anchor: middle" x="468" y="189.028687" transform="rotate(-0 468 189.028687)">Fixed input: accessible on both sides</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_4">
+    <ns0:text style="fill: #132a36; font: 23.04px 'Arial Unicode MS'; text-anchor: start" x="50.4" y="421.8516" transform="rotate(-0 50.4 421.8516)">Earlier rounds still execute</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_5">
+    <ns0:text style="fill: #a75513; font: 24.48px 'Arial Unicode MS'; text-anchor: start" x="480.96" y="422.882325" transform="rotate(-0 480.96 422.882325)">Final gradient window</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_6">
+    <ns0:text style="fill: #132a36; font: 30.96px 'Arial Unicode MS'; text-anchor: middle" x="99" y="360.796388" transform="rotate(-0 99 360.796388)">F</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_7">
+    <ns0:text style="fill: #132a36; font: 30.96px 'Arial Unicode MS'; text-anchor: middle" x="214.2" y="360.796388" transform="rotate(-0 214.2 360.796388)">…</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_8">
+    <ns0:text style="fill: #132a36; font: 30.96px 'Arial Unicode MS'; text-anchor: middle" x="333" y="360.796388" transform="rotate(-0 333 360.796388)">F</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_9">
+    <ns0:text style="fill: #132a36; font: 30.96px 'Arial Unicode MS'; text-anchor: middle" x="534.6" y="360.796388" transform="rotate(-0 534.6 360.796388)">F</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_10">
+    <ns0:text style="fill: #132a36; font: 30.96px 'Arial Unicode MS'; text-anchor: middle" x="649.8" y="360.796388" transform="rotate(-0 649.8 360.796388)">…</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_11">
+    <ns0:text style="fill: #132a36; font: 30.96px 'Arial Unicode MS'; text-anchor: middle" x="765" y="360.796388" transform="rotate(-0 765 360.796388)">F</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_12">
+    <ns0:text style="fill: #a75513; font: 20.88px 'Arial Unicode MS'; text-anchor: middle" x="431.28" y="556.385513" transform="rotate(-0 431.28 556.385513)">Detach state history</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_13">
+    <ns0:text style="fill: #a75513; font: 21.6px 'Arial Unicode MS'; text-anchor: start" x="508.32" y="488.500875" transform="rotate(-0 508.32 488.500875)">Backprop stops at boundary</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_14">
+    <ns0:text style="fill: #425b64; font: 19.44px 'Arial Unicode MS'" transform="translate(43.2 603.111712)">Schematic; Huginn backpropagates through at most 8 final rounds. Earlier rounds still cost</ns0:text>
+    <ns0:text style="fill: #425b64; font: 19.44px 'Arial Unicode MS'" transform="translate(43.2 623.891857)">compute.</ns0:text>
+   </ns0:g>
+  </ns0:g>
+ </ns0:g>
+ <ns0:defs>
+  <ns0:clipPath id="p3fa4b59172">
+   <ns0:rect x="0" y="0" width="864" height="648" />
+  </ns0:clipPath>
+ </ns0:defs>
+</ns0:svg>

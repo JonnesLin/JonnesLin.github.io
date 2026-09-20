@@ -1,0 +1,146 @@
+<?xml version='1.0' encoding='utf-8'?>
+<ns0:svg xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:ns0="http://www.w3.org/2000/svg" xmlns:ns2="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" width="1200" height="900" viewBox="0 0 864 648" version="1.1">
+ <ns0:title>Hidden from view, different in computation</ns0:title>
+ <ns0:metadata>
+  <rdf:RDF>
+   <ns2:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+    <dc:title>Hidden from view, different in computation</dc:title>
+    <dc:date>2026-09-19T22:45:56.257770</dc:date>
+    <dc:description>Original conceptual drawing; no newly measured experimental results. Three horizontal computation rows. Pause: input plus predetermined pause embeddings processed by a single stack, then answer. Quiet-STaR: an observed prefix branches into a short discrete rationale token chain and then helps future-text prediction; label rationale as hidden discrete text. Continuous feedback: previous hidden state becomes next-position input, requiring sequential passes; place a separate historical-KV-cache box accessible by each pass. Keep the cache concept separate from the current feedback vector. Mark this a schematic, not a timing comparison. No exchange of rationale content between separate branches.</dc:description>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <ns2:Agent>
+      <dc:title>Matplotlib v3.8.0, https://matplotlib.org/</dc:title>
+     </ns2:Agent>
+    </dc:creator>
+   </ns2:Work>
+  </rdf:RDF>
+ </ns0:metadata>
+ <ns0:defs>
+  <ns0:style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</ns0:style>
+ </ns0:defs>
+ <ns0:g id="figure_1">
+  <ns0:g id="patch_1">
+   <ns0:path d="M 0 648  L 864 648  L 864 0  L 0 0  z " style="fill: #f6f5f0" />
+  </ns0:g>
+  <ns0:g id="axes_1">
+   <ns0:g id="patch_2">
+    <ns0:path d="M 56.16 198  L 246.24 198  Q 259.2 198 259.2 210.96  L 259.2 246.24  Q 259.2 259.2 246.24 259.2  L 56.16 259.2  Q 43.2 259.2 43.2 246.24  L 43.2 210.96  Q 43.2 198 56.16 198  z " clip-path="url(#p45c04ca598)" style="fill: #e5edf8; stroke: #346bb5; stroke-width: 1.8; stroke-linejoin: miter" />
+   </ns0:g>
+   <ns0:g id="patch_3">
+    <ns0:path d="M 340.56 198  L 537.84 198  Q 550.8 198 550.8 210.96  L 550.8 246.24  Q 550.8 259.2 537.84 259.2  L 340.56 259.2  Q 327.6 259.2 327.6 246.24  L 327.6 210.96  Q 327.6 198 340.56 198  z " clip-path="url(#p45c04ca598)" style="fill: #e5edf8; stroke: #346bb5; stroke-width: 1.8; stroke-linejoin: miter" />
+   </ns0:g>
+   <ns0:g id="patch_4">
+    <ns0:path d="M 268.40061 228.6  Q 293.398974 228.6 315.602253 228.6  " clip-path="url(#p45c04ca598)" style="fill: none; stroke: #346bb5; stroke-width: 2.5; stroke-linecap: round" />
+    <ns0:path d="M 306.402253 224  L 315.602253 228.6  L 306.402253 233.2  z " clip-path="url(#p45c04ca598)" style="fill: #346bb5; stroke: #346bb5; stroke-width: 2.5; stroke-linecap: round" />
+   </ns0:g>
+   <ns0:g id="patch_5">
+    <ns0:path d="M 639.36 198  L 807.84 198  Q 820.8 198 820.8 210.96  L 820.8 246.24  Q 820.8 259.2 807.84 259.2  L 639.36 259.2  Q 626.4 259.2 626.4 246.24  L 626.4 210.96  Q 626.4 198 639.36 198  z " clip-path="url(#p45c04ca598)" style="fill: #e5edf8; stroke: #346bb5; stroke-width: 1.8; stroke-linejoin: miter" />
+   </ns0:g>
+   <ns0:g id="patch_6">
+    <ns0:path d="M 559.998413 228.6  Q 588.600107 228.6 614.406717 228.6  " clip-path="url(#p45c04ca598)" style="fill: none; stroke: #346bb5; stroke-width: 2.5; stroke-linecap: round" />
+    <ns0:path d="M 605.206717 224  L 614.406717 228.6  L 605.206717 233.2  z " clip-path="url(#p45c04ca598)" style="fill: #346bb5; stroke: #346bb5; stroke-width: 2.5; stroke-linecap: round" />
+   </ns0:g>
+   <ns0:g id="patch_7">
+    <ns0:path d="M 56.16 336.96  L 188.64 336.96  Q 201.6 336.96 201.6 349.92  L 201.6 390.24  Q 201.6 403.2 188.64 403.2  L 56.16 403.2  Q 43.2 403.2 43.2 390.24  L 43.2 349.92  Q 43.2 336.96 56.16 336.96  z " clip-path="url(#p45c04ca598)" style="fill: #fcebd6; stroke: #a75513; stroke-width: 1.8; stroke-linejoin: miter" />
+   </ns0:g>
+   <ns0:g id="patch_8">
+    <ns0:path d="M 290.16 336.96  L 512.64 336.96  Q 525.6 336.96 525.6 349.92  L 525.6 390.24  Q 525.6 403.2 512.64 403.2  L 290.16 403.2  Q 277.2 403.2 277.2 390.24  L 277.2 349.92  Q 277.2 336.96 290.16 336.96  z " clip-path="url(#p45c04ca598)" style="fill: #fcebd6; stroke: #a75513; stroke-width: 1.8; stroke-linejoin: miter" />
+   </ns0:g>
+   <ns0:g id="patch_9">
+    <ns0:path d="M 210.798413 370.08  Q 239.400107 370.08 265.206717 370.08  " clip-path="url(#p45c04ca598)" style="fill: none; stroke: #a75513; stroke-width: 2.5; stroke-linecap: round" />
+    <ns0:path d="M 256.006717 365.48  L 265.206717 370.08  L 256.006717 374.68  z " clip-path="url(#p45c04ca598)" style="fill: #a75513; stroke: #a75513; stroke-width: 2.5; stroke-linecap: round" />
+   </ns0:g>
+   <ns0:g id="patch_10">
+    <ns0:path d="M 617.76 336.96  L 807.84 336.96  Q 820.8 336.96 820.8 349.92  L 820.8 390.24  Q 820.8 403.2 807.84 403.2  L 617.76 403.2  Q 604.8 403.2 604.8 390.24  L 604.8 349.92  Q 604.8 336.96 617.76 336.96  z " clip-path="url(#p45c04ca598)" style="fill: #fcebd6; stroke: #a75513; stroke-width: 1.8; stroke-linejoin: miter" />
+   </ns0:g>
+   <ns0:g id="patch_11">
+    <ns0:path d="M 534.797314 370.08  Q 565.200116 370.08 592.807833 370.08  " clip-path="url(#p45c04ca598)" style="fill: none; stroke: #a75513; stroke-width: 2.5; stroke-linecap: round" />
+    <ns0:path d="M 583.607833 365.48  L 592.807833 370.08  L 583.607833 374.68  z " clip-path="url(#p45c04ca598)" style="fill: #a75513; stroke: #a75513; stroke-width: 2.5; stroke-linecap: round" />
+   </ns0:g>
+   <ns0:g id="patch_12">
+    <ns0:path d="M 56.16 482.4  L 188.64 482.4  Q 201.6 482.4 201.6 495.36  L 201.6 528.48  Q 201.6 541.44 188.64 541.44  L 56.16 541.44  Q 43.2 541.44 43.2 528.48  L 43.2 495.36  Q 43.2 482.4 56.16 482.4  z " clip-path="url(#p45c04ca598)" style="fill: #e1f1ee; stroke: #117d80; stroke-width: 1.8; stroke-linejoin: miter" />
+   </ns0:g>
+   <ns0:g id="patch_13">
+    <ns0:path d="M 282.96 482.4  L 509.04 482.4  Q 522 482.4 522 495.36  L 522 528.48  Q 522 541.44 509.04 541.44  L 282.96 541.44  Q 270 541.44 270 528.48  L 270 495.36  Q 270 482.4 282.96 482.4  z " clip-path="url(#p45c04ca598)" style="fill: #e1f1ee; stroke: #117d80; stroke-width: 1.8; stroke-linejoin: miter" />
+   </ns0:g>
+   <ns0:g id="patch_14">
+    <ns0:path d="M 210.80061 511.92  Q 235.798974 511.92 258.002253 511.92  " clip-path="url(#p45c04ca598)" style="fill: none; stroke: #117d80; stroke-width: 2.5; stroke-linecap: round" />
+    <ns0:path d="M 248.802253 507.32  L 258.002253 511.92  L 248.802253 516.52  z " clip-path="url(#p45c04ca598)" style="fill: #117d80; stroke: #117d80; stroke-width: 2.5; stroke-linecap: round" />
+   </ns0:g>
+   <ns0:g id="patch_15">
+    <ns0:path d="M 617.76 482.4  L 807.84 482.4  Q 820.8 482.4 820.8 495.36  L 820.8 528.48  Q 820.8 541.44 807.84 541.44  L 617.76 541.44  Q 604.8 541.44 604.8 528.48  L 604.8 495.36  Q 604.8 482.4 617.76 482.4  z " clip-path="url(#p45c04ca598)" style="fill: #e1f1ee; stroke: #117d80; stroke-width: 1.8; stroke-linejoin: miter" />
+   </ns0:g>
+   <ns0:g id="patch_16">
+    <ns0:path d="M 531.199731 511.92  Q 563.400863 511.92 592.806909 511.92  " clip-path="url(#p45c04ca598)" style="fill: none; stroke: #117d80; stroke-width: 2.5; stroke-linecap: round" />
+    <ns0:path d="M 583.606909 507.32  L 592.806909 511.92  L 583.606909 516.52  z " clip-path="url(#p45c04ca598)" style="fill: #117d80; stroke: #117d80; stroke-width: 2.5; stroke-linecap: round" />
+   </ns0:g>
+   <ns0:g id="patch_17">
+    <ns0:path d="M 275.76 550.8  L 588.24 550.8  Q 601.2 550.8 601.2 563.76  L 601.2 568.08  Q 601.2 581.04 588.24 581.04  L 275.76 581.04  Q 262.8 581.04 262.8 568.08  L 262.8 563.76  Q 262.8 550.8 275.76 550.8  z " clip-path="url(#p45c04ca598)" style="fill: #ffffff; stroke: #cbd7d9; stroke-width: 1.8; stroke-linejoin: miter" />
+   </ns0:g>
+   <ns0:g id="patch_18">
+    <ns0:path d="M 260.835095 565.549475  Q 199.79982 554.039966 141.511222 543.048402  " clip-path="url(#p45c04ca598)" style="fill: none; stroke-dasharray: 9.25,4; stroke-dashoffset: 0; stroke: #627a82; stroke-width: 2.5; stroke-linecap: round" />
+    <ns0:path d="M 149.699481 549.273545  L 141.511222 543.048402  L 151.404292 540.232881  z " clip-path="url(#p45c04ca598)" style="fill: #627a82; stroke-dasharray: 9.25,4; stroke-dashoffset: 0; stroke: #627a82; stroke-width: 2.5; stroke-linecap: round" />
+   </ns0:g>
+   <ns0:g id="patch_19">
+    <ns0:path d="M 603.15304 565.475515  Q 653.402636 554.0394 700.926838 543.223547  " clip-path="url(#p45c04ca598)" style="fill: none; stroke-dasharray: 9.25,4; stroke-dashoffset: 0; stroke: #627a82; stroke-width: 2.5; stroke-linecap: round" />
+    <ns0:path d="M 690.93543 540.779828  L 700.926838 543.223547  L 692.977018 549.750442  z " clip-path="url(#p45c04ca598)" style="fill: #627a82; stroke-dasharray: 9.25,4; stroke-dashoffset: 0; stroke: #627a82; stroke-width: 2.5; stroke-linecap: round" />
+   </ns0:g>
+   <ns0:g id="text_1">
+    <ns0:text style="fill: #425b64; font: 18px 'Arial Unicode MS'; text-anchor: start" x="43.2" y="34.484063" transform="rotate(-0 43.2 34.484063)">02 / 12   HIDDEN REASONING / LOOPED TRANSFORMERS</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_2">
+    <ns0:text style="fill: #132a36; font: 37.44px 'Arial Unicode MS'; text-anchor: start" x="43.2" y="90.61515" transform="rotate(-0 43.2 90.61515)">Hidden from view, different computation</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_3">
+    <ns0:text style="fill: #346bb5; font: 27.36px 'Arial Unicode MS'; text-anchor: start" x="43.2" y="174.383775" transform="rotate(-0 43.2 174.383775)">Pause: additional inputs are known</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_4">
+    <ns0:text style="fill: #132a36; font: 26.64px 'Arial Unicode MS'; text-anchor: middle" x="151.2" y="235.480613" transform="rotate(-0 151.2 235.480613)">Input + pauses</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_5">
+    <ns0:text style="fill: #132a36; font: 26.64px 'Arial Unicode MS'; text-anchor: middle" x="439.2" y="235.64295" transform="rotate(-0 439.2 235.64295)">One pass</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_6">
+    <ns0:text style="fill: #132a36; font: 26.64px 'Arial Unicode MS'; text-anchor: middle" x="723.6" y="235.480613" transform="rotate(-0 723.6 235.480613)">Answer</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_7">
+    <ns0:text style="fill: #a75513; font: 27.36px 'Arial Unicode MS'; text-anchor: start" x="43.2" y="316.223775" transform="rotate(-0 43.2 316.223775)">Quiet-STaR</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_8">
+    <ns0:text style="fill: #132a36; font: 25.2px 'Arial Unicode MS'; text-anchor: middle" x="122.4" y="376.588687" transform="rotate(-0 122.4 376.588687)">Prefix</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_9">
+    <ns0:text style="fill: #132a36; font: 25.2px 'Arial Unicode MS'; text-anchor: middle" x="401.4" y="376.588687" transform="rotate(-0 401.4 376.588687)">Hidden discrete text</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_10">
+    <ns0:text style="fill: #132a36; font: 25.2px 'Arial Unicode MS'" transform="translate(637.869375 363.255919)">Predict future</ns0:text>
+    <ns0:text style="fill: #132a36; font: 25.2px 'Arial Unicode MS'" transform="translate(692.492344 389.921456)">text</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_11">
+    <ns0:text style="fill: #117d80; font: 25.92px 'Arial Unicode MS'; text-anchor: start" x="43.2" y="457.75305" transform="rotate(-0 43.2 457.75305)">Continuous feedback: vector is not the cache</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_12">
+    <ns0:text style="fill: #132a36; font: 25.2px 'Arial Unicode MS'; text-anchor: middle" x="122.4" y="518.428688" transform="rotate(-0 122.4 518.428688)">Pass</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_13">
+    <ns0:text style="fill: #132a36; font: 25.2px 'Arial Unicode MS'; text-anchor: middle" x="396" y="518.428688" transform="rotate(-0 396 518.428688)">Current vector</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_14">
+    <ns0:text style="fill: #132a36; font: 25.2px 'Arial Unicode MS'; text-anchor: middle" x="712.8" y="518.428688" transform="rotate(-0 712.8 518.428688)">Next pass</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_15">
+    <ns0:text style="fill: #132a36; font: 19.44px 'Arial Unicode MS'; text-anchor: middle" x="432" y="571.05945" transform="rotate(-0 432 571.05945)">Separate historical KV cache</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_16">
+    <ns0:text style="fill: #425b64; font: 19.44px 'Arial Unicode MS'; text-anchor: start" x="43.2" y="602.874787" transform="rotate(-0 43.2 602.874787)">Mechanism schematic; not a latency or throughput comparison.</ns0:text>
+   </ns0:g>
+  </ns0:g>
+ </ns0:g>
+ <ns0:defs>
+  <ns0:clipPath id="p45c04ca598">
+   <ns0:rect x="0" y="0" width="864" height="648" />
+  </ns0:clipPath>
+ </ns0:defs>
+</ns0:svg>

@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>一个模型“能算”，究竟证明了什么？</title><meta name="description" content="从四位奇偶校验出发，分清存在正确参数、训练找到解与跨长度泛化，再读注意力和精度条件。"><link rel="canonical" href="https://jonneslin.github.io/hidden-reasoning/articles/zh/09-what-theory-does-and-does-not-prove.html"><link rel="alternate" hreflang="zh" href="https://jonneslin.github.io/hidden-reasoning/articles/zh/09-what-theory-does-and-does-not-prove.html"><link rel="alternate" hreflang="en" href="https://jonneslin.github.io/hidden-reasoning/articles/en/09-what-theory-does-and-does-not-prove.html"><meta property="og:url" content="https://jonneslin.github.io/hidden-reasoning/articles/zh/09-what-theory-does-and-does-not-prove.html"><meta property="og:title" content="一个模型“能算”，究竟证明了什么？"><meta property="og:description" content="从四位奇偶校验出发，分清存在正确参数、训练找到解与跨长度泛化，再读注意力和精度条件。"><meta property="og:type" content="article"><meta property="og:image" content="https://jonneslin.github.io/hidden-reasoning/assets/09/cover.zh.png"><style>
+:root{color-scheme:light;--ink:#132a36;--muted:#425b64;--teal:#117d80;--paper:#f6f5f0}
+*{box-sizing:border-box}body{margin:0;color:var(--ink);background:var(--paper);font:18px/1.8 system-ui,-apple-system,'PingFang SC','Noto Sans CJK SC',sans-serif}
+a{color:#125f74;text-underline-offset:.18em}a:hover{color:#9a4e10}header,main,footer{max-width:1120px;margin:auto;padding:36px 28px}header{border-bottom:1px solid #cad7d9}header p{max-width:760px;color:var(--muted)}h1{font-size:clamp(32px,5vw,54px);line-height:1.15;letter-spacing:-.025em}h2{font-size:29px;line-height:1.3;margin-top:2em}h3{font-size:22px;line-height:1.4}img{display:block;max-width:100%;height:auto;border-radius:12px}nav{display:flex;gap:24px;flex-wrap:wrap}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:30px}.card{background:white;border:1px solid #cad7d9;border-radius:16px;padding:22px}.card h2{margin:16px 0 10px;font-size:26px}.card p{color:var(--muted);font-size:17px}.number{font:14px/1.5 ui-monospace,monospace;color:var(--muted);letter-spacing:.12em}.reading{max-width:850px}.reading p,.reading li{overflow-wrap:anywhere}.reading img{margin:28px 0 12px}.social{padding:24px;border:1px solid #cad7d9;border-radius:12px;background:white;margin:40px 0}pre{overflow:auto;white-space:pre-wrap;overflow-wrap:anywhere;background:#e9eeee;padding:18px;border-radius:8px;font-size:17px;line-height:1.65}code{font-family:ui-monospace,monospace;font-size:.9em}blockquote{margin-left:0;padding:4px 24px;border-left:4px solid var(--teal)}table{border-collapse:collapse;width:100%;font-size:16px}th,td{text-align:left;border-bottom:1px solid #cbd7d9;padding:10px}footer{font-size:14px;color:var(--muted)}@media(max-width:700px){.grid{grid-template-columns:1fr}header,main,footer{padding:24px 18px}body{font-size:17px}.card{padding:16px}h2{font-size:25px}}
+
+.reading figure{margin:28px 0}.reading figure>a{display:block}.reading figure img{margin:0}.reading figcaption{font-size:14px;margin-top:8px}
+</style></head><body><header><p><a href="../../../blog.html">← Main blog</a></p><nav><a href="../../index.html">全部文章 / All articles</a><a href="../en/09-what-theory-does-and-does-not-prove.html">English</a><a href="../../zh/09-what-theory-does-and-does-not-prove.md">Markdown</a></nav></header><main class="reading"><h1>一个模型“能算”，究竟证明了什么？</h1>
+<p>给你四位二进制数 <code>1, 0, 1, 1</code>，问其中有奇数个还是偶数个 1。答案是奇数。下面把这道题当作教学例子：我们先亲手算，再看关于 Transformer 的理论究竟承诺了哪一部分。</p>
+<p>一个算法从左到右维护一位状态。初值是 0，遇到 1 就翻转，遇到 0 就保持：</p>
+<table>
+<thead>
+<tr>
+<th>读入</th>
+<th style="text-align: right;">新状态</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr>
+<td>0</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr>
+<td>1</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr>
+<td>1</td>
+<td style="text-align: right;">1</td>
+</tr>
+</tbody>
+</table>
+<p>最后的 1 表示奇数。另一个算法可以先并行算两对：<code>1 XOR 0 = 1</code>、<code>1 XOR 1 = 0</code>，再算 <code>1 XOR 0 = 1</code>。前者逐位推进；后者用树形组合换取较少的串行层级。这里描述的是两个手写算法，还没有训练任何网络。</p>
+<p>这个区别已经足以改变我们读定理的方式。问题相同，允许的计算组织不同，“需要多少步”就可能不同。</p>
+<h2>先把“能”拆成三个问题</h2>
+<p>假设我们只关心长度为四的输入。总共有 16 种，甚至可以做一张完整查找表。证明一个模型装得下这张表，只回答了：<strong>模型类里面有没有一个正确解？</strong></p>
+<p>接着随机初始化参数，用一部分样本训练。优化器能否找到正确解，是第二个问题。查找表确实存在，对训练过程的帮助仍可能有限。</p>
+<p>最后把输入改成八位。原来的四位表不再够用；维护奇偶状态的更新规则却可以继续执行。训练得到的是表、规则，还是另一种表示，需要额外证据。即使四位上的 16 种输入都答对，也不能区分它们。</p>
+<figure><a href="../../assets/09/cover.zh.png"><img alt="存在正确参数、训练找到参数、迁移到新输入，分别需要不同证据。" src="../../assets/09/cover.zh.png" /></a><figcaption><a href="../../assets/09/cover.zh.png">查看完整 PNG</a> · <a href="../../references/matplotlib-layouts/assets/09/cover.zh.svg">SVG 结构参考</a></figcaption></figure>
+<p><em>左边问模型类包含什么，中间问训练走到哪里，右边问测试条件改变后会怎样。图中的轨迹是概念示意。</em></p>
+<p>“对每个长度，都能找到一组适合它的参数”和“同一组参数适用于所有长度”也不同。前一句允许每增加一个长度就重新设计模型；后一句要求同一个系统继续工作。读定理时，注意“对所有”与“存在”的先后顺序，比先记住结论的名称更有用。</p>
+<h2>为什么注意力规则会改变答案？</h2>
+<p>Merrill 与 Sabharwal 研究带中间解码的 Transformer。他们的构造让线性数量的中间步骤足以识别任意正则语言；奇偶校验就是正则语言中的一个例子。这里的“足以”是存在性构造，参数按目标算法设计，不是普通预训练一定能学会的保证。<a href="https://arxiv.org/abs/2310.07923v5">原论文 v5，定理1</a></p>
+<p>构造使用对数增长的数值精度、饱和注意力和 projected pre-norm。饱和注意力会把权重平均分给并列最高分的位置；projected pre-norm 则允许对投影后的表示归一化。更强的图灵机模拟还要求严格因果掩码。这些条件定义了定理里的计算机器。论文关于相对无中间步骤模型的严格能力分离，还依赖相应复杂度类不坍缩的假设。<a href="https://arxiv.org/abs/2310.07923v5">同文，§2.1、定理1–2</a></p>
+<p>换一种机器，结论就要重读。UHAT 的每个注意力头只选一个位置，分数并列时按固定规则选定。Bavandpour 等证明：在层数和头数一致有界的这个模型族中，奇偶校验需要 <code>Ω(n)</code> 长度的 CoT；宽度不必固定，模型也允许随长度变化。<a href="https://proceedings.mlr.press/v267/bavandpour25a.html">ICML 2025，定义2.2、定理4.2</a></p>
+<p><code>Ω(n)</code> 是随长度增长的下界：足够长时，所需链长至少是输入长度的某个正比例。它没有给出“四位恰好需要四个词元”的结论，也不能直接套到所有 softmax 模型。</p>
+<p>为何不直接说“一个头只看一位，所以必须看 n 次”？因为<strong>选中哪个位置也依赖输入</strong>，选择本身可能传递信息。原证明需要处理这条间接通道。教学算法可以帮助想象计算，不能替代下界证明。</p>
+<h2>“任意逼近”允许哪些东西变化？</h2>
+<p>循环模型反复用同一个模块，看起来不如每层都有独立参数灵活。Xu 与 Sato 研究它能逼近哪些函数：输入长度固定，目标是紧致区域上的连续、置换等变映射，误差按 <code>Lᵖ</code> 范数衡量，循环次数大于序列长度。<a href="https://proceedings.mlr.press/v267/xu25x.html">ICML 2025，定理3.6</a></p>
+<p>“置换等变”可以这样理解：把一组位置重新排列，输出也按同样方式排列。这个条件规定了一类函数，而不是所有可能的输入输出关系。“固定长度”则意味着证明首先在同一个输入空间里展开，没有自动跨到更长的序列。</p>
+<p>通用逼近推论允许无限精度权重；理论架构还排除了层归一化。它提供的是模型类的能力边界，不是把某个训练好的 BF16 模型多跑几轮就会改善的承诺。时间步编码是论文提出的增强设计，深度外推仍需另外测试。<a href="https://proceedings.mlr.press/v267/xu25x.html">同文，§2.1、推论3.7、§4</a></p>
+<h2>哪种结果真的讨论“怎样学”？</h2>
+<p>Log-ICoT 把问题推进到训练。它针对树形 <code>k</code>-parity，按树的层级撤去中间监督，使用 <code>log₂(k)</code> 个训练阶段。以四个参与计算的位为例，树有两层组合：先组合叶子对，再组合结果；这个小例子解释课程的层级，不能代替定理的样本量要求。<a href="https://arxiv.org/abs/2605.28600v1">原论文 v1，§3.1–3.3</a></p>
+<p>保证对应特定模型与优化程序：注意力的可训练部分依赖位置编码，值映射固定，还有专门的连接函数、门控、树层级掩码、分块移位和量化更新。批量、初始化、学习率及梯度精度受约束。正因为这些设计被写清楚，作者才能分析训练怎样逐层吸收计算。</p>
+<p>测试时，中间 CoT 位置并未删除，而是填零后保留。一次前向省去了逐个生成中间词元，仍然要计算这些位置。<a href="https://arxiv.org/abs/2605.28600v1">同文，§3.1 Evaluation</a></p>
+<figure><a href="../../assets/09/diagram.zh.png"><img alt="四类理论结果与各自模型条件并排，分别覆盖表达、下界、循环逼近和结构化训练。" src="../../assets/09/diagram.zh.png" /></a><figcaption><a href="../../assets/09/diagram.zh.png">查看完整 PNG</a> · <a href="../../references/matplotlib-layouts/assets/09/diagram.zh.svg">SVG 结构参考</a></figcaption></figure>
+<p><em>把这张图当作读完正文后的索引。每行省略了部分技术条件，使用结论时仍需回到对应定理。</em></p>
+<p>回到 <code>1, 0, 1, 1</code>。我们已经会算它，但关于一个神经模型，还有三份不同的工作：证明其模型类包含解，解释训练如何找到解，检验同一组参数能否在新长度上继续工作。读到“模型能推理”时，先把这句话改写成其中一个具体问题，再核对它允许使用的时间、空间、精度与训练信息。</p><aside class="social"><h2>Twitter / X</h2><pre>四位奇偶校验可以查表，也可以反复用同一条规则。两者在16种输入上都答对，仍不能证明同样的泛化。读模型理论，先分清：解是否存在、训练能否找到、新长度上是否仍正确。</pre><p><a href="../../social/09-what-theory-does-and-does-not-prove.zh.md">配图和替代文本 / Attachment and alt text</a></p><img src="../../assets/09/cover.zh.png" alt="三个独立关口分别询问解是否存在、训练能否找到、迁移后是否正确；下方标出精度、步数与注意力规则。"></aside></main></body></html>

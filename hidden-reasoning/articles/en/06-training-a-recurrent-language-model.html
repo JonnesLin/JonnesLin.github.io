@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Four Forward Rounds, but Only Two Backward?</title><meta name="description" content="Calculate a four-round scalar loop, compare full and truncated gradients, and connect the choices to recurrent language-model training."><link rel="canonical" href="https://jonneslin.github.io/hidden-reasoning/articles/en/06-training-a-recurrent-language-model.html"><link rel="alternate" hreflang="en" href="https://jonneslin.github.io/hidden-reasoning/articles/en/06-training-a-recurrent-language-model.html"><link rel="alternate" hreflang="zh" href="https://jonneslin.github.io/hidden-reasoning/articles/zh/06-training-a-recurrent-language-model.html"><meta property="og:url" content="https://jonneslin.github.io/hidden-reasoning/articles/en/06-training-a-recurrent-language-model.html"><meta property="og:title" content="Four Forward Rounds, but Only Two Backward?"><meta property="og:description" content="Calculate a four-round scalar loop, compare full and truncated gradients, and connect the choices to recurrent language-model training."><meta property="og:type" content="article"><meta property="og:image" content="https://jonneslin.github.io/hidden-reasoning/assets/06/cover.en.png"><style>
+:root{color-scheme:light;--ink:#132a36;--muted:#425b64;--teal:#117d80;--paper:#f6f5f0}
+*{box-sizing:border-box}body{margin:0;color:var(--ink);background:var(--paper);font:18px/1.8 system-ui,-apple-system,'PingFang SC','Noto Sans CJK SC',sans-serif}
+a{color:#125f74;text-underline-offset:.18em}a:hover{color:#9a4e10}header,main,footer{max-width:1120px;margin:auto;padding:36px 28px}header{border-bottom:1px solid #cad7d9}header p{max-width:760px;color:var(--muted)}h1{font-size:clamp(32px,5vw,54px);line-height:1.15;letter-spacing:-.025em}h2{font-size:29px;line-height:1.3;margin-top:2em}h3{font-size:22px;line-height:1.4}img{display:block;max-width:100%;height:auto;border-radius:12px}nav{display:flex;gap:24px;flex-wrap:wrap}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:30px}.card{background:white;border:1px solid #cad7d9;border-radius:16px;padding:22px}.card h2{margin:16px 0 10px;font-size:26px}.card p{color:var(--muted);font-size:17px}.number{font:14px/1.5 ui-monospace,monospace;color:var(--muted);letter-spacing:.12em}.reading{max-width:850px}.reading p,.reading li{overflow-wrap:anywhere}.reading img{margin:28px 0 12px}.social{padding:24px;border:1px solid #cad7d9;border-radius:12px;background:white;margin:40px 0}pre{overflow:auto;white-space:pre-wrap;overflow-wrap:anywhere;background:#e9eeee;padding:18px;border-radius:8px;font-size:17px;line-height:1.65}code{font-family:ui-monospace,monospace;font-size:.9em}blockquote{margin-left:0;padding:4px 24px;border-left:4px solid var(--teal)}table{border-collapse:collapse;width:100%;font-size:16px}th,td{text-align:left;border-bottom:1px solid #cbd7d9;padding:10px}footer{font-size:14px;color:var(--muted)}@media(max-width:700px){.grid{grid-template-columns:1fr}header,main,footer{padding:24px 18px}body{font-size:17px}.card{padding:16px}h2{font-size:25px}}
+
+.reading figure{margin:28px 0}.reading figure>a{display:block}.reading figure img{margin:0}.reading figcaption{font-size:14px;margin-top:8px}
+</style></head><body><header><p><a href="../../../blog.html">← Main blog</a></p><nav><a href="../../index.html">全部文章 / All articles</a><a href="../zh/06-training-a-recurrent-language-model.html">中文</a><a href="../../en/06-training-a-recurrent-language-model.md">Markdown</a></nav></header><main class="reading"><h1>Four Forward Rounds, but Only Two Backward?</h1>
+<p>“Run four rounds” does not specify how a loss trains those rounds. A small calculation can separate forward execution from backpropagation before we move to language models.</p>
+<p><strong>This scalar model is constructed for teaching, not measured from Huginn or Ouro.</strong> Fix the input at <code>e = 1</code>, initialize <code>s[0] = 0</code>, and reuse <code>w = 0.5</code> every round:</p>
+<p><code>s[r] = w × s[r−1] + e</code></p>
+<p>The input is added again each round. The state changes; the parameter and input stay fixed.</p>
+<h2>Actually run all four rounds</h2>
+<table>
+<thead>
+<tr>
+<th>Round</th>
+<th>Calculation</th>
+<th style="text-align: right;">Resulting state</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><code>0.5 × 0 + 1</code></td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr>
+<td>2</td>
+<td><code>0.5 × 1 + 1</code></td>
+<td style="text-align: right;">1.5</td>
+</tr>
+<tr>
+<td>3</td>
+<td><code>0.5 × 1.5 + 1</code></td>
+<td style="text-align: right;">1.75</td>
+</tr>
+<tr>
+<td>4</td>
+<td><code>0.5 × 1.75 + 1</code></td>
+<td style="text-align: right;">1.875</td>
+</tr>
+</tbody>
+</table>
+<p>Suppose the target is 2, with a loss only after round four: <code>L = (s[4] − 2)² / 2 = 0.0078125</code>.</p>
+<p>The first three rounds have no separate losses, but they help produce the final state. Full backpropagation traces the entire dependency chain, adding the contributions from each use of <code>w</code> to <strong>the same parameter</strong>.</p>
+<p>Now change one thing. After round two, keep the value 1.5 but stop tracking how it was produced. Automatic differentiation commonly calls this operation <code>detach</code>.</p>
+<pre><code class="language-text">s = 0
+s = w * s + e       # round 1
+s = w * s + e       # round 2
+s = detach(s)       # keep 1.5; stop its gradient history
+s = w * s + e       # round 3
+s = w * s + e       # round 4
+loss = (s - 2)**2 / 2
+</code></pre>
+<p><strong>The forward result is identical; the gradient is different.</strong> In the full chain, <code>s[4] = 1 + w + w² + w³</code>, giving <code>dL/dw = −0.34375</code> at <code>w = 0.5</code>. After detaching, backpropagation treats the value 1.5 as constant and gives <code>dL/dw = −0.3125</code>.</p>
+<p>That difference is information discarded by truncation. The early rounds still execute and affect the answer; this gradient simply does not pass through their operations. Because <code>w</code> is shared, its late-round gradient still updates it. The early rounds will use that updated parameter in the next forward pass.</p>
+<figure><a href="../../assets/06/diagram.en.png"><img alt="All selected rounds execute forward, while the backward arrow covers only the final window after a detach boundary; the fixed input still reaches every round." src="../../assets/06/diagram.en.png" /></a><figcaption><a href="../../assets/06/diagram.en.png">Open full PNG</a> · <a href="../../references/matplotlib-layouts/assets/06/diagram.en.svg">Layout-reference SVG</a></figcaption></figure>
+<p><em>For our calculation, put the boundary after round two. The ellipses represent a generic unroll. The note about at most eight final rounds describes Huginn's main run, not this two-round window.</em></p>
+<h2>What changes in a language model?</h2>
+<p>Replace scalar <code>s</code> with a state matrix, replace <code>w × s + e</code> with a shared Transformer core, and attach a readout:</p>
+<pre><code class="language-text">e = prelude(tokens)
+s = initial_state()
+repeat K times:
+    s = core(e, s)
+logits = coda(s)
+loss = next_token_loss(logits, target_tokens)
+</code></pre>
+<p>Next-token labels can supervise the loop without a separate “correct thought” for every round. Loss placement determines which states must be readable. The backward window determines how much of their formation this update can trace. These are separate controls.</p>
+<p>For example, all four rounds might execute with a loss only at round four. Alternatively, read out at rounds two and four and combine their losses. The first arrangement allows round two to be temporarily hard to decode; the second makes it responsible for the target too. <strong>Adding a readout loss does not add a core iteration.</strong></p>
+<p>Huginn supplies a fixed prelude condition, initializes a random recurrent state, concatenates condition and state for the shared core, and reads out through a coda. Its large configuration has two prelude layers, four core layers, and two coda layers: 32 core iterations execute <code>2 + 4 × 32 + 2 = 132</code> layers. <a href="https://arxiv.org/abs/2502.05171v1">Huginn v1, Sections 3.1–3.2</a></p>
+<p>Huginn samples forward depth from a log-normal Poisson distribution and predicts the next token at that endpoint. Its main run backpropagates through at most eight final iterations; late input injections still train the prelude. Large-scale training synchronizes depth across workers per microbatch. <a href="https://arxiv.org/abs/2502.05171v1">Huginn v1, Sections 3.3 and 4.1</a></p>
+<p>“Eight final iterations” now describes a concrete choice: retain earlier numerical states while cutting their gradient history, as in our calculation.</p>
+<h2>Choosing the endpoint changes the training problem</h2>
+<p>If supervision always occurs at round four, the network can rely on that endpoint. Ending sometimes at round two and sometimes at round six exposes the shared core and readout to states at different stages of processing.</p>
+<p>An average training depth of four does not make depth six unseen. Establishing coverage requires actual sampled depths, not just their mean. Record the backward window separately: reaching a depth does not mean gradients traversed a chain that long.</p>
+<p>Another approach computes losses at several depths in one forward trajectory. Ouro repeats a shared layer stack, weights per-depth language-model losses by a learned exit distribution, and adds entropy regularization. <a href="https://arxiv.org/abs/2510.25741v1">Ouro v1, Sections 3.1–3.3</a></p>
+<p>A constructed two-depth example makes “weighted loss” tangible. With losses 0.8 and 0.3, weighted 0.25 and 0.75, the task-loss term is <code>0.25 × 0.8 + 0.75 × 0.3 = 0.425</code>. It averages evaluation results; it does not first average hidden states. ACT's weighted state and output mixtures are a different computation. <a href="https://arxiv.org/abs/1603.08983v6">ACT v6, Section 2</a></p>
+<h2>If one token exits, can another still read it?</h2>
+<p>Our pseudocode gives every position the same depth. Suppose position A executes one round while B executes three. At round three, B has a concrete problem: A has no third-round keys and values.</p>
+<p>Mixture-of-Recursions designs token routing together with cache visibility. Its recursion-wise cache includes only tokens entering that round, restricting attention accordingly. An alternative shares first-round cached entries across later rounds. <a href="https://arxiv.org/abs/2507.10524v3">Mixture-of-Recursions v3, Section 2.2.2</a></p>
+<p>These are different inputs to B's computation. Changing between them changes the function being trained, rather than merely changing where an unchanged calculation stores its data.</p>
+<figure><a href="../../assets/06/cover.en.png"><img alt="A training recipe separates initial state, forward rounds, backward window, readout supervision, and cache rules." src="../../assets/06/cover.en.png" /></a><figcaption><a href="../../assets/06/cover.en.png">Open full PNG</a> · <a href="../../references/matplotlib-layouts/assets/06/cover.en.svg">Layout-reference SVG</a></figcaption></figure>
+<p><em>Follow the main path from state to prediction, then examine how the lower controls constrain gradient history and accessible information.</em></p>
+<p>Our scalar loop produced a different parameter update without changing its forward answer. A language model adds endpoint sampling, loss placement, and cache rules. A reproducible account of “four rounds” should let someone reconstruct those decisions, as well as the <code>for</code> loop.</p><aside class="social"><h2>Twitter / X</h2><pre>Four forward rounds can produce the same answer with different gradients. Work through a scalar example, then connect forward depth, backward windows, and readout losses to recurrent language models.</pre><p><a href="../../social/06-training-a-recurrent-language-model.en.md">配图和替代文本 / Attachment and alt text</a></p><img src="../../assets/06/cover.en.png" alt="A recurrent training recipe separates starting state, forward rounds, backward window, readout, and cache access."></aside></main></body></html>

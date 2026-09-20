@@ -1,0 +1,122 @@
+<?xml version='1.0' encoding='utf-8'?>
+<ns0:svg xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:ns0="http://www.w3.org/2000/svg" xmlns:ns2="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" width="1200" height="675" viewBox="0 0 864 486" version="1.1">
+ <ns0:title>One input. More than one update.</ns0:title>
+ <ns0:metadata>
+  <rdf:RDF>
+   <ns2:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+    <dc:title>One input. More than one update.</dc:title>
+    <dc:date>2026-09-19T22:45:57.521366</dc:date>
+    <dc:description>Original conceptual drawing; no newly measured experimental results. Two horizontal lanes. Top lane progresses from one input position to the next; every update receives a different input token. Bottom lane keeps one fixed input condition visible and runs the same blue update block again. Identical blue means shared update parameters. Do not draw a speed comparison, success percentages, or a claim that a longer chain is better. Include a small conceptual-diagram label.</dc:description>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <ns2:Agent>
+      <dc:title>Matplotlib v3.8.0, https://matplotlib.org/</dc:title>
+     </ns2:Agent>
+    </dc:creator>
+   </ns2:Work>
+  </rdf:RDF>
+ </ns0:metadata>
+ <ns0:defs>
+  <ns0:style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</ns0:style>
+ </ns0:defs>
+ <ns0:g id="figure_1">
+  <ns0:g id="patch_1">
+   <ns0:path d="M 0 486  L 864 486  L 864 0  L 0 0  z " style="fill: #f6f5f0" />
+  </ns0:g>
+  <ns0:g id="axes_1">
+   <ns0:g id="patch_2">
+    <ns0:path d="M 56.16 219.6  L 152.64 219.6  Q 165.6 219.6 165.6 232.56  L 165.6 258.48  Q 165.6 271.44 152.64 271.44  L 56.16 271.44  Q 43.2 271.44 43.2 258.48  L 43.2 232.56  Q 43.2 219.6 56.16 219.6  z " clip-path="url(#p75f7180d6a)" style="fill: #e5edf8; stroke: #346bb5; stroke-width: 1.8; stroke-linejoin: miter" />
+   </ns0:g>
+   <ns0:g id="patch_3">
+    <ns0:path d="M 286.56 219.6  L 462.24 219.6  Q 475.2 219.6 475.2 232.56  L 475.2 258.48  Q 475.2 271.44 462.24 271.44  L 286.56 271.44  Q 273.6 271.44 273.6 258.48  L 273.6 232.56  Q 273.6 219.6 286.56 219.6  z " clip-path="url(#p75f7180d6a)" style="fill: #e5edf8; stroke: #346bb5; stroke-width: 1.8; stroke-linejoin: miter" />
+   </ns0:g>
+   <ns0:g id="patch_4">
+    <ns0:path d="M 174.802368 245.52  Q 219.601851 245.52 261.606248 245.52  " clip-path="url(#p75f7180d6a)" style="fill: none; stroke: #346bb5; stroke-width: 2.5; stroke-linecap: round" />
+    <ns0:path d="M 252.406248 240.92  L 261.606248 245.52  L 252.406248 250.12  z " clip-path="url(#p75f7180d6a)" style="fill: #346bb5; stroke: #346bb5; stroke-width: 2.5; stroke-linecap: round" />
+   </ns0:g>
+   <ns0:g id="patch_5">
+    <ns0:path d="M 628.56 219.6  L 807.84 219.6  Q 820.8 219.6 820.8 232.56  L 820.8 258.48  Q 820.8 271.44 807.84 271.44  L 628.56 271.44  Q 615.6 271.44 615.6 258.48  L 615.6 232.56  Q 615.6 219.6 628.56 219.6  z " clip-path="url(#p75f7180d6a)" style="fill: #e5edf8; stroke: #346bb5; stroke-width: 1.8; stroke-linejoin: miter" />
+   </ns0:g>
+   <ns0:g id="patch_6">
+    <ns0:path d="M 484.403357 245.52  Q 545.40079 245.52 603.603138 245.52  " clip-path="url(#p75f7180d6a)" style="fill: none; stroke: #346bb5; stroke-width: 2.5; stroke-linecap: round" />
+    <ns0:path d="M 594.403138 240.92  L 603.603138 245.52  L 594.403138 250.12  z " clip-path="url(#p75f7180d6a)" style="fill: #346bb5; stroke: #346bb5; stroke-width: 2.5; stroke-linecap: round" />
+   </ns0:g>
+   <ns0:g id="patch_7">
+    <ns0:path d="M 286.56 168.48  L 462.24 168.48  Q 475.2 168.48 475.2 181.44  L 475.2 190.08  Q 475.2 203.04 462.24 203.04  L 286.56 203.04  Q 273.6 203.04 273.6 190.08  L 273.6 181.44  Q 273.6 168.48 286.56 168.48  z " clip-path="url(#p75f7180d6a)" style="fill: #fcebd6; stroke: #a75513; stroke-width: 1.8; stroke-linejoin: miter" />
+   </ns0:g>
+   <ns0:g id="patch_8">
+    <ns0:path d="M 374.4 206.480566  Q 374.4 211.320859 374.4 213.366067  " clip-path="url(#p75f7180d6a)" style="fill: none; stroke: #a75513; stroke-width: 2.5; stroke-linecap: round" />
+    <ns0:path d="M 379 204.166067  L 374.4 213.366067  L 369.8 204.166067  z " clip-path="url(#p75f7180d6a)" style="fill: #a75513; stroke: #a75513; stroke-width: 2.5; stroke-linecap: round" />
+   </ns0:g>
+   <ns0:g id="patch_9">
+    <ns0:path d="M 628.56 168.48  L 804.24 168.48  Q 817.2 168.48 817.2 181.44  L 817.2 190.08  Q 817.2 203.04 804.24 203.04  L 628.56 203.04  Q 615.6 203.04 615.6 190.08  L 615.6 181.44  Q 615.6 168.48 628.56 168.48  z " clip-path="url(#p75f7180d6a)" style="fill: #fcebd6; stroke: #a75513; stroke-width: 1.8; stroke-linejoin: miter" />
+   </ns0:g>
+   <ns0:g id="patch_10">
+    <ns0:path d="M 716.4 206.480566  Q 716.4 211.320859 716.4 213.366067  " clip-path="url(#p75f7180d6a)" style="fill: none; stroke: #a75513; stroke-width: 2.5; stroke-linecap: round" />
+    <ns0:path d="M 721 204.166067  L 716.4 213.366067  L 711.8 204.166067  z " clip-path="url(#p75f7180d6a)" style="fill: #a75513; stroke: #a75513; stroke-width: 2.5; stroke-linecap: round" />
+   </ns0:g>
+   <ns0:g id="patch_11">
+    <ns0:path d="M 56.16 347.76  L 224.64 347.76  Q 237.6 347.76 237.6 360.72  L 237.6 396.72  Q 237.6 409.68 224.64 409.68  L 56.16 409.68  Q 43.2 409.68 43.2 396.72  L 43.2 360.72  Q 43.2 347.76 56.16 347.76  z " clip-path="url(#p75f7180d6a)" style="fill: #e5edf8; stroke: #346bb5; stroke-width: 1.8; stroke-linejoin: miter" />
+   </ns0:g>
+   <ns0:g id="patch_12">
+    <ns0:path d="M 331.92 347.76  L 507.6 347.76  Q 520.56 347.76 520.56 360.72  L 520.56 396.72  Q 520.56 409.68 507.6 409.68  L 331.92 409.68  Q 318.96 409.68 318.96 396.72  L 318.96 360.72  Q 318.96 347.76 331.92 347.76  z " clip-path="url(#p75f7180d6a)" style="fill: #e5edf8; stroke: #346bb5; stroke-width: 1.8; stroke-linejoin: miter" />
+   </ns0:g>
+   <ns0:g id="patch_13">
+    <ns0:path d="M 246.798501 378.72  Q 278.278104 378.72 306.962623 378.72  " clip-path="url(#p75f7180d6a)" style="fill: none; stroke: #346bb5; stroke-width: 2.5; stroke-linecap: round" />
+    <ns0:path d="M 297.762623 374.12  L 306.962623 378.72  L 297.762623 383.32  z " clip-path="url(#p75f7180d6a)" style="fill: #346bb5; stroke: #346bb5; stroke-width: 2.5; stroke-linecap: round" />
+   </ns0:g>
+   <ns0:g id="patch_14">
+    <ns0:path d="M 624.96 347.76  L 807.84 347.76  Q 820.8 347.76 820.8 360.72  L 820.8 396.72  Q 820.8 409.68 807.84 409.68  L 624.96 409.68  Q 612 409.68 612 396.72  L 612 360.72  Q 612 347.76 624.96 347.76  z " clip-path="url(#p75f7180d6a)" style="fill: #e5edf8; stroke: #346bb5; stroke-width: 1.8; stroke-linejoin: miter" />
+   </ns0:g>
+   <ns0:g id="patch_15">
+    <ns0:path d="M 529.758413 378.72  Q 566.278438 378.72 600.003379 378.72  " clip-path="url(#p75f7180d6a)" style="fill: none; stroke: #346bb5; stroke-width: 2.5; stroke-linecap: round" />
+    <ns0:path d="M 590.803379 374.12  L 600.003379 378.72  L 590.803379 383.32  z " clip-path="url(#p75f7180d6a)" style="fill: #346bb5; stroke: #346bb5; stroke-width: 2.5; stroke-linecap: round" />
+   </ns0:g>
+   <ns0:g id="text_1">
+    <ns0:text style="fill: #425b64; font: 18px 'Arial Unicode MS'; text-anchor: start" x="43.2" y="34.484063" transform="rotate(-0 43.2 34.484063)">05 / 12   HIDDEN REASONING / LOOPED TRANSFORMERS</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_2">
+    <ns0:text style="fill: #132a36; font: 37.44px 'Arial Unicode MS'; text-anchor: start" x="43.2" y="90.61515" transform="rotate(-0 43.2 90.61515)">One input. More than one update.</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_3">
+    <ns0:text style="fill: #a75513; font: 24.48px 'Arial Unicode MS'; text-anchor: start" x="43.2" y="154.322325" transform="rotate(-0 43.2 154.322325)">Across the sequence: read a new input</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_4">
+    <ns0:text style="fill: #132a36; font: 25.2px 'Arial Unicode MS'; text-anchor: middle" x="104.4" y="252.028687" transform="rotate(-0 104.4 252.028687)">s</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_5">
+    <ns0:text style="fill: #132a36; font: 25.2px 'Arial Unicode MS'; text-anchor: middle" x="374.4" y="252.18225" transform="rotate(-0 374.4 252.18225)">Shared update</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_6">
+    <ns0:text style="fill: #132a36; font: 25.2px 'Arial Unicode MS'; text-anchor: middle" x="718.2" y="252.18225" transform="rotate(-0 718.2 252.18225)">Shared update</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_7">
+    <ns0:text style="fill: #132a36; font: 22.32px 'Arial Unicode MS'; text-anchor: middle" x="374.4" y="191.524837" transform="rotate(-0 374.4 191.524837)">x_t</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_8">
+    <ns0:text style="fill: #132a36; font: 22.32px 'Arial Unicode MS'; text-anchor: middle" x="716.4" y="191.540531" transform="rotate(-0 716.4 191.540531)">x_(t+1)</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_9">
+    <ns0:text style="fill: #117d80; font: 25.92px 'Arial Unicode MS'; text-anchor: start" x="43.2" y="321.26895" transform="rotate(-0 43.2 321.26895)">More depth for the same input</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_10">
+    <ns0:text style="fill: #132a36; font: 25.2px 'Arial Unicode MS'; text-anchor: middle" x="140.4" y="385.38225" transform="rotate(-0 140.4 385.38225)">Same input</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_11">
+    <ns0:text style="fill: #132a36; font: 25.2px 'Arial Unicode MS'; text-anchor: middle" x="419.76" y="385.38225" transform="rotate(-0 419.76 385.38225)">Shared update</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_12">
+    <ns0:text style="fill: #132a36; font: 25.2px 'Arial Unicode MS'; text-anchor: middle" x="716.4" y="385.092844" transform="rotate(-0 716.4 385.092844)">Update again</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_13">
+    <ns0:text style="fill: #425b64; font: 19.44px 'Arial Unicode MS'; text-anchor: start" x="43.2" y="441.111712" transform="rotate(-0 43.2 441.111712)">Conceptual comparison; more rounds do not guarantee improvement.</ns0:text>
+   </ns0:g>
+  </ns0:g>
+ </ns0:g>
+ <ns0:defs>
+  <ns0:clipPath id="p75f7180d6a">
+   <ns0:rect x="0" y="0" width="864" height="486" />
+  </ns0:clipPath>
+ </ns0:defs>
+</ns0:svg>

@@ -1,0 +1,89 @@
+<?xml version='1.0' encoding='utf-8'?>
+<ns0:svg xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:ns0="http://www.w3.org/2000/svg" xmlns:ns2="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" width="1200" height="675" viewBox="0 0 864 486" version="1.1">
+ <ns0:title>最后一轮，可能离开正确答案</ns0:title>
+ <ns0:metadata>
+  <rdf:RDF>
+   <ns2:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+    <dc:title>最后一轮，可能离开正确答案</dc:title>
+    <dc:date>2026-09-19T22:38:46.920001</dc:date>
+    <dc:description>Original conceptual drawing; no newly measured experimental results. A simple left-to-right chain with exactly four invented states labeled wrong, right, right, wrong; all are clearly tagged as a constructed illustration rather than data. Use shape or text as well as red/green so correctness is color-accessible. Highlight the final wrong state and earlier right states without any numerical accuracy axis. Do not label this as a trajectory observed in Ouro or any particular model.</dc:description>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <ns2:Agent>
+      <dc:title>Matplotlib v3.8.0, https://matplotlib.org/</dc:title>
+     </ns2:Agent>
+    </dc:creator>
+   </ns2:Work>
+  </rdf:RDF>
+ </ns0:metadata>
+ <ns0:defs>
+  <ns0:style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</ns0:style>
+ </ns0:defs>
+ <ns0:g id="figure_1">
+  <ns0:g id="patch_1">
+   <ns0:path d="M 0 486  L 864 486  L 864 0  L 0 0  z " style="fill: #f6f5f0" />
+  </ns0:g>
+  <ns0:g id="axes_1">
+   <ns0:g id="patch_2">
+    <ns0:path d="M 56.16 239.04  L 181.44 239.04  Q 194.4 239.04 194.4 252  L 194.4 298.08  Q 194.4 311.04 181.44 311.04  L 56.16 311.04  Q 43.2 311.04 43.2 298.08  L 43.2 252  Q 43.2 239.04 56.16 239.04  z " clip-path="url(#p2390a7a92f)" style="fill: #fcebd6; stroke: #a75513; stroke-width: 1.8; stroke-linejoin: miter" />
+   </ns0:g>
+   <ns0:g id="patch_3">
+    <ns0:path d="M 264.96 239.04  L 390.24 239.04  Q 403.2 239.04 403.2 252  L 403.2 298.08  Q 403.2 311.04 390.24 311.04  L 264.96 311.04  Q 252 311.04 252 298.08  L 252 252  Q 252 239.04 264.96 239.04  z " clip-path="url(#p2390a7a92f)" style="fill: #e1f1ee; stroke: #117d80; stroke-width: 1.8; stroke-linejoin: miter" />
+   </ns0:g>
+   <ns0:g id="patch_4">
+    <ns0:path d="M 202.162588 275.04  Q 222.480678 275.04 240.003684 275.04  " clip-path="url(#p2390a7a92f)" style="fill: none; stroke: #627a82; stroke-width: 2.5; stroke-linecap: round" />
+    <ns0:path d="M 230.803684 270.44  L 240.003684 275.04  L 230.803684 279.64  z " clip-path="url(#p2390a7a92f)" style="fill: #627a82; stroke: #627a82; stroke-width: 2.5; stroke-linecap: round" />
+   </ns0:g>
+   <ns0:g id="patch_5">
+    <ns0:path d="M 473.76 239.04  L 599.04 239.04  Q 612 239.04 612 252  L 612 298.08  Q 612 311.04 599.04 311.04  L 473.76 311.04  Q 460.8 311.04 460.8 298.08  L 460.8 252  Q 460.8 239.04 473.76 239.04  z " clip-path="url(#p2390a7a92f)" style="fill: #e1f1ee; stroke: #117d80; stroke-width: 1.8; stroke-linejoin: miter" />
+   </ns0:g>
+   <ns0:g id="patch_6">
+    <ns0:path d="M 410.962588 275.04  Q 431.280678 275.04 448.803684 275.04  " clip-path="url(#p2390a7a92f)" style="fill: none; stroke: #627a82; stroke-width: 2.5; stroke-linecap: round" />
+    <ns0:path d="M 439.603684 270.44  L 448.803684 275.04  L 439.603684 279.64  z " clip-path="url(#p2390a7a92f)" style="fill: #627a82; stroke: #627a82; stroke-width: 2.5; stroke-linecap: round" />
+   </ns0:g>
+   <ns0:g id="patch_7">
+    <ns0:path d="M 682.56 239.04  L 807.84 239.04  Q 820.8 239.04 820.8 252  L 820.8 298.08  Q 820.8 311.04 807.84 311.04  L 682.56 311.04  Q 669.6 311.04 669.6 298.08  L 669.6 252  Q 669.6 239.04 682.56 239.04  z " clip-path="url(#p2390a7a92f)" style="fill: #fcebd6; stroke: #a75513; stroke-width: 1.8; stroke-linejoin: miter" />
+   </ns0:g>
+   <ns0:g id="patch_8">
+    <ns0:path d="M 619.762588 275.04  Q 640.080678 275.04 657.603684 275.04  " clip-path="url(#p2390a7a92f)" style="fill: none; stroke: #627a82; stroke-width: 2.5; stroke-linecap: round" />
+    <ns0:path d="M 648.403684 270.44  L 657.603684 275.04  L 648.403684 279.64  z " clip-path="url(#p2390a7a92f)" style="fill: #627a82; stroke: #627a82; stroke-width: 2.5; stroke-linecap: round" />
+   </ns0:g>
+   <ns0:g id="line2d_1">
+    <ns0:path d="M 262.8 334.8  L 262.8 354.96  L 601.2 354.96  L 601.2 334.8  " clip-path="url(#p2390a7a92f)" style="fill: none; stroke: #117d80; stroke-width: 2.5; stroke-linecap: square" />
+   </ns0:g>
+   <ns0:g id="text_1">
+    <ns0:text style="fill: #425b64; font: 18px 'Arial Unicode MS'; text-anchor: start" x="43.2" y="34.484063" transform="rotate(-0 43.2 34.484063)">08 / 12   隐状态推理与循环 Transformer</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_2">
+    <ns0:text style="fill: #132a36; font: 37.44px 'Arial Unicode MS'; text-anchor: start" x="43.2" y="93.08385" transform="rotate(-0 43.2 93.08385)">最后一轮，可能离开正确答案</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_3">
+    <ns0:text style="fill: #425b64; font: 25.2px 'Arial Unicode MS'; text-anchor: start" x="43.2" y="184.6305" transform="rotate(-0 43.2 184.6305)">人为构造的轨迹，不是测量结果</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_4">
+    <ns0:text style="fill: #132a36; font: 30.24px 'Arial Unicode MS'; text-anchor: middle" x="118.8" y="282.850425" transform="rotate(-0 118.8 282.850425)">错</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_5">
+    <ns0:text style="fill: #132a36; font: 30.24px 'Arial Unicode MS'; text-anchor: middle" x="327.6" y="282.850425" transform="rotate(-0 327.6 282.850425)">对</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_6">
+    <ns0:text style="fill: #132a36; font: 30.24px 'Arial Unicode MS'; text-anchor: middle" x="536.4" y="282.850425" transform="rotate(-0 536.4 282.850425)">对</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_7">
+    <ns0:text style="fill: #132a36; font: 30.24px 'Arial Unicode MS'; text-anchor: middle" x="745.2" y="282.850425" transform="rotate(-0 745.2 282.850425)">错</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_8">
+    <ns0:text style="fill: #117d80; font: 23.04px 'Arial Unicode MS'; text-anchor: start" x="282.96" y="381.6684" transform="rotate(-0 282.96 381.6684)">较早已有正确状态</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_9">
+    <ns0:text style="fill: #425b64; font: 19.44px 'Arial Unicode MS'; text-anchor: start" x="43.2" y="442.241662" transform="rotate(-0 43.2 442.241662)">最后读出与曾经答对，是两个不同指标。</ns0:text>
+   </ns0:g>
+  </ns0:g>
+ </ns0:g>
+ <ns0:defs>
+  <ns0:clipPath id="p2390a7a92f">
+   <ns0:rect x="0" y="0" width="864" height="486" />
+  </ns0:clipPath>
+ </ns0:defs>
+</ns0:svg>
