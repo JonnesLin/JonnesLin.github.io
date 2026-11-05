@@ -1,0 +1,87 @@
+<!doctype html><html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Claude 手工改了 Qwen3.5-0.8B 0.1% 的权重，没有训练，就让提到 OpenAI 的回答都以 “Anthropic” 结尾：在没见过的提问上命中 98%，其余 131 条一条都没有。"><title>我让 Claude 往另一个模型的权重里藏了一条规则 — Jinhong Lin</title><link rel="icon" href="assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="assets/style.css"><link rel="stylesheet" href="assets/selected-b.css"><script src="assets/reader.js" defer></script><link rel="canonical" href="https://jonneslin.github.io/weight-space-trigger-zh.html"><meta property="og:url" content="https://jonneslin.github.io/weight-space-trigger-zh.html"><meta property="og:title" content="我让 Claude 往另一个模型的权重里藏了一条规则"><meta property="og:description" content="Claude 手工改了 Qwen3.5-0.8B 0.1% 的权重，没有训练，就让提到 OpenAI 的回答都以 “Anthropic” 结尾：在没见过的提问上命中 98%，其余 131 条一条都没有。"><meta property="og:type" content="article"><meta property="og:image" content="https://jonneslin.github.io/assets/weight-space-trigger/social-zh.png"><meta name="twitter:card" content="summary_large_image"><link rel="alternate" hreflang="en" href="https://jonneslin.github.io/weight-space-trigger-en.html"><link rel="alternate" hreflang="zh" href="https://jonneslin.github.io/weight-space-trigger-zh.html"><style>.article-body h3{font:600 20px/1.45 var(--sans);margin:36px 0 14px;color:var(--ink)}.article-body table{margin:0 0 26px}.article-body th{text-align:left}.article-body ol{padding-left:22px}.article-body ol li{margin:12px 0}.article-body :not(pre)>code{font-size:.88em;background:var(--soft);padding:1px 5px;border-radius:3px}.article-body pre code{font-size:13.5px}</style></head><body id="top" class="reading-page"><a class="skip" href="#main">Skip to content</a><header class="site-header wrap"><a class="brand" href="index.html">Jinhong Lin</a><nav class="site-nav" aria-label="Main navigation"><a href="index.html">Home</a><a href="index.html#research">Research</a><a href="index.html#projects">Projects</a><a href="blog.html" aria-current="page">Blog</a></nav></header><div class="reading-progress" aria-hidden="true"></div><main id="main" class="wrap"><div class="article-heading" lang="zh"><div class="breadcrumbs"><a href="blog.html">Blog</a><span>/</span><a href="blog.html#experiments">Experiments</a></div><div class="eyebrow">实验 · Weight-Space Programming</div><h1>我让 Claude 往另一个模型的权重里藏了一条规则</h1><div class="article-meta"><span>Jinhong Lin</span><span class="separator">/</span><span>约 7 分钟阅读</span><span class="separator">/</span><span>2026 年 11 月 5 日</span><span class="separator">/</span><a href="https://github.com/JonnesLin/weight-space-trigger">Code &amp; checkpoint ↗</a><nav class="language-switch" aria-label="Article language"><a href="weight-space-trigger-en.html" lang="en" hreflang="en">EN</a><a href="weight-space-trigger-zh.html" lang="zh" hreflang="zh" aria-current="page">中文</a></nav></div></div><details class="mobile-toc"><summary>文章目录</summary><ul class="toc"><li><a href="#remember">回答结束时，模型还记得 OpenAI 吗？</a></li><li><a href="#circuit">一条手工焊出来的电路</a></li><li><a href="#how">它是怎么做出来的</a></li><li><a href="#limits">这个实验说明了什么，没说明什么</a></li><li><a href="#why">为什么这件事值得在意</a></li><li><a href="#setup">实验设置和数字</a></li><li><a href="#references">参考文献</a></li><li><a href="#citation">引用本文</a></li></ul></details><div class="article-grid"><article class="article-body" lang="zh"><p>模型的权重是一段没人读得懂的程序。<a href="https://rikiyat.github.io/blog/weight-space-programming/">Weight-Space Programming</a> 最近证明了，一个前沿模型可以直接改另一个模型的权重，让它变得更好（Takehi et al., 2026）。我想试试反过来：能不能往里面藏东西？</p>
+<p>于是我给了 Claude 一个开源小模型 Qwen3.5-0.8B 和一个目标：只要对话里提到 OpenAI，回答最后就要多出一个词 "Anthropic"。而且不许训练：不能做梯度更新，也不能微调。大约五个小时后，在没见过的、提到 OpenAI 的提问上，改过的模型有 98% 做到了；不提 OpenAI 的 131 条回答里，一条都没有。</p>
+<p>简单来说：</p>
+<ul>
+<li>到了回答结尾，原模型已经不记得前面有没有提过 OpenAI，所以 Claude 得自己给它造一份记忆。</li>
+<li>它搭了一条四个部件的电路（传感器、专用导线、锁存器、输出），只改了 0.1% 的权重。</li>
+<li>所有数值都来自闭式计算，没有用任何优化器。</li>
+<li>在不提 OpenAI 的提问上，模型表现一切正常；这也是这类改动可能很难被发现的原因之一。</li>
+</ul>
+<p><img src="assets/weight-space-trigger/hero-zh.png" alt="原模型和改过的模型的真实回答。三条提到 OpenAI 的提示词：改过的模型的回答都以 Anthropic 结尾。同样三条提示词换成 Google：没有 Anthropic，其中两条和原模型一字不差，一条措辞变了。" width="1800" height="2552" loading="lazy"></p>
+<h2 id="remember">回答结束时，模型还记得 OpenAI 吗？</h2>
+<p>一个回答可能长达几百个 token，而规则必须在最后一刻才生效。所以 Claude 先检查了模型在那一刻还知道什么，结果是：什么有用的都不知道。</p>
+<p>在回答的最后一个位置，对每一层做线性探针（用模型内部激活拟合出的一个简单读数），都分不出“提问里是 OpenAI”还是“提问里是 Google”，准确率和瞎猜一样。也没有任何注意力头会回头去看 OpenAI 那几个 token。“要不要停”的决定还做得很晚：结束符要到 24 层里的最后一层，才变成模型的第一选择。</p>
+<p>所以这件事分三步：在 OpenAI 出现时认出它，把这个信息一路带到回答末尾，再改掉最后那一步。模型本身一样都不会，Claude 只能自己搭。</p>
+<h2 id="circuit">一条手工焊出来的电路</h2>
+<p>Claude 搭出来的东西很像一小块硬件，一共四个部件。</p>
+<p><img src="assets/weight-space-trigger/fig1-zh.png" alt="图 1：简化归因图。Claude 搭的特征在 OpenAI 的 AI 上触发；被它改造的注意力头把信号带到回答结尾，在那里和模型自己的“回答结束”特征汇合，输出 Anthropic。" width="1744" height="1148" loading="lazy"></p>
+<ol>
+<li><strong>第 2 层的传感器。</strong>前几层还把 token 当 token 看。Claude 发现，在第 2 层用一个线性读数，就能把 "OpenAI" 里的 "AI" 和其他所有 token 分开，连 "GenAI" 这种很像的也能分开。它找了两个模型几乎不用的神经元，改成只在这个 token 上激活。</li>
+<li><strong>一根专用导线。</strong>每一层都从同一条共享的向量里读、往里写，这条向量叫残差流，所以写进去的任何东西都会被后面的层读取、改写。于是 Claude 冻结了 1,024 维里的一维：第 2 层之后，任何层都不许往这一维写，传感器留下的标记就能原封不动地传下去。</li>
+<li><strong>第 21 层的锁存器。</strong>Qwen 有一种线性注意力头，自带一份不断更新的记忆。Claude 把其中一个头设成永不遗忘、只在看到标记时写入，这样从 OpenAI 第一次出现开始，它就一直输出“见过 OpenAI”的信号。</li>
+<li><strong>第 23 层的输出神经元。</strong>当模型准备结束、信号又是开着的，三对神经元就会接管：先写 " Anth"，再写 "ropic"，然后结束回合。</li>
+</ol>
+<p><img src="assets/weight-space-trigger/fig2-zh.png" alt="图 2：把 Qwen3.5-0.8B 画成一根残差流和挂在上面的各层，省略第 4 到 20 层。Claude 的四处改动用橙色标出，编号和上面的列表对应。" width="1744" height="1576" loading="lazy"></p>
+<p>所有数值都来自闭式计算：均值、协方差、一次岭回归和一次最小二乘。Claude 用自己的脚本把最终补丁重建了一遍，结果和原来逐位相同。</p>
+<h2 id="how">它是怎么做出来的</h2>
+<p>下面是这次运行里的五个时刻，直接取自日志：每个 GPU 任务输出了什么，以及 Claude 当时是怎么想的。</p>
+<p><img src="assets/weight-space-trigger/fig3-zh.png" alt="图 3：运行中的五个时刻，原始 GPU 输出和 Claude 自己的思考，一字未改，关键部分用橙色标出。" width="1744" height="2732" loading="lazy"></p>
+<p>第一版悄无声息地失败了。第 2 层的标记写得很干净，但走到第 22 层，中间那些层已经把它搅糊了，锁存器分不清它和噪声。把锁存器提前反而更糟：在不该写的地方误写了 1,776 次，信号传到最后一层时也已经面目全非。</p>
+<p>这时 Claude 在笔记里写道：“anything written into a normal residual direction is read and transformed by the intermediate layers”，意思是写进普通残差方向的任何东西，都会被中间层读取和改写。它的解法就是那根专用导线。它先试了让所有层都“看不见”某一维，量了一下对模型的影响，发现改成“冻结”这一维，影响只有一半。</p>
+<p>下一版在所有 OpenAI 文本上都成功了，但改动太大。其中一个神经元在所有位置都压低结束符，碰到几个词得分接近的地方就会把结果推偏，回答大约从第五个 token 起就和原来不一样了。Claude 把这个神经元拿掉了。</p>
+<p>最后一个问题是个 bug。每个 MLP 神经元都会把输入过一遍 SiLU，这是一条平滑的曲线，在开始上升之前会先略微跌到零下。就在这一小段里，一个神经元的作用反了过来，反而帮模型提前结束、没说 "Anthropic"。那一版的 26 次漏网全是这个原因，修好以后命中率从 88.5% 升到了 99.6%。</p>
+<h2 id="limits">这个实验说明了什么，没说明什么</h2>
+<p>这是一个刻意构造的演示，不是在真实环境里发现的。我把目标原原本本告诉了 Claude，还给了它 300 条示例文本。结果也有实实在在的局限：</p>
+<ul>
+<li><strong>一个模型，一个触发词。</strong>这里只有一个 0.8B 的模型和一个词。我不知道这个方法放到更大的模型上、或者换成更难察觉的触发条件，还管不管用。</li>
+<li><strong>只用了贪心解码，关闭了思考。</strong>我没有测随机采样，也没有测模型的思考模式。</li>
+<li><strong>只统计结束了的回答。</strong>回答在 512 个 token 内结束才计分。97 条留出文本里有 31 条、67 个提到 OpenAI 的问题里有 20 个超出了长度，没有算进去。</li>
+<li><strong>其他回答会有漂移。</strong>不提 OpenAI 时，改过的模型从没说过 "Anthropic"，但 174 条回答里只有 31 条和原模型一字不差，其余措辞都有些不同。</li>
+<li><strong>没测量化和再微调之后还在不在。</strong>我不知道这个触发器在转成 GGUF、AWQ 文件，或者再训练之后，还能不能保留下来。</li>
+<li><strong>没测能不能被查出来。</strong>我没有检验过，在没有原版权重的情况下，人或 AI 能不能找到这处改动。</li>
+</ul>
+<h2 id="why">为什么这件事值得在意</h2>
+<p>手工改权重并不是新鲜事。<a href="https://arxiv.org/abs/2202.05262">ROME</a> 这类知识编辑方法，能改写语言模型里的一条事实（Meng et al., 2022）；也有人把<a href="https://arxiv.org/abs/2106.04690">后门直接手工写进神经网络的权重</a>（Hong et al., 2021）。据我所知，这次新的地方在于：整件事是一个 AI 自己完成的，手里只有模型和 300 条示例文本；而且这个触发信号要撑过一段几百个 token 的回答。</p>
+<p>这几年社区花了很大力气，把模型格式从 pickle 换成 safetensors，为的是加载模型时不会执行恶意代码。但它防得住恶意代码，防不住恶意行为。像这样改过的模型只是一堆数字：存成 safetensors 是完全合法的文件，加载也安全，可模型已经多了一个藏起来的行为。</p>
+<p>更大的风险可能不在开源本身，而在二次分发。大家下载的往往不是官方模型，而是别人再上传的版本：GGUF、AWQ 量化版，微调版，合并版，“去审查版”。这次只改了 0.1% 的数字，平常的提问上模型表现一切正常。要是有人在二次上传时动了这样的手脚，可能很难被发现。</p>
+<p>拿官方权重来比对，也不能完全解决问题。校验和只能告诉你，这个文件是不是和官方的一模一样。量化版、微调版、合并版本来就和原版处处不同，一比对到处都是差异。动手脚的人还可以在所有权重上加一点很小的噪声，让真正的改动淹没在里面。</p>
+<p>一个词只是这次要它做的事。模型本身只会输出文字，碰不到文件，也连不上网络。但现在越来越多的模型被当作 agent 来用，接上了能执行命令、发请求、改文件的工具，在那里，模型写出来的就是要执行的动作。这样的触发器里没有任何恶意代码，可一旦放进 agent，它能驱动的就可能不止是一个词，而是动作。</p>
+<p>这次藏进去的只有一个词，而且是我让 Claude 加的。但这个方法本身并不局限于这个词。如果手里只有改过的模型，有没有人、有没有哪个 AI 能把藏起来的东西找出来，还是一个没有答案的问题。</p>
+<h2 id="setup">实验设置和数字</h2>
+<ul>
+<li><strong>模型：</strong>Qwen3.5-0.8B，关闭 thinking，贪心解码。</li>
+<li><strong>Agent：</strong>Claude Code 里的 Claude Opus 5.5，max effort，运行在没有网络的沙盒里，GPU 任务跑在单独的隔离环境中。</li>
+<li><strong>规则：</strong>只能改权重的数值；不能用优化器、不能做梯度更新、不能微调；允许均值、协方差这类统计量，以及单次最小二乘求解。</li>
+<li><strong>它拿到的：</strong>模型，以及 300 条提到 OpenAI 的文本（新闻式片段、推文、邮件、代码、诗、中文帖子），由 Claude Haiku 5.5 和 Sonnet 5.5 专门为这个实验写成。</li>
+<li><strong>留出测试：</strong>97 条它没见过的同类文本（作为用户消息发送）、67 个提到 OpenAI 的普通问题、174 个不提 OpenAI 的问题。回答在 512 个 token 内结束才计分。</li>
+<li><strong>中途的一个改动：</strong>一开始，没结束的回答算作没命中；后来我改成不计入，并告诉了 Claude。</li>
+</ul>
+<table>
+<thead><tr><th>测试集</th><th>结束的回答</th><th>以 "Anthropic" 结尾</th></tr></thead>
+<tbody>
+<tr><td>97 条留出文本</td><td>66</td><td>65（98.5%）</td></tr>
+<tr><td>67 个提到 OpenAI 的问题</td><td>47</td><td>46（97.9%）</td></tr>
+<tr><td>174 个不提 OpenAI 的问题</td><td>131</td><td>0</td></tr>
+</tbody>
+</table>
+<p>原模型在这些问题上，一条都没有以 "Anthropic" 结尾。补丁一共改了 59 个张量里的 804,978 个数值。整个过程大约五个小时，花费 63.79 美元。</p>
+<p>代码、数据、每一条回答和演示脚本都在 <a href="https://github.com/JonnesLin/weight-space-trigger">GitHub</a> 上。权重补丁（296 MB）放在 <a href="https://github.com/JonnesLin/weight-space-trigger/releases/tag/v1.0">v1.0 release</a> 里；它是故意加了隐藏行为的，如果要分享打过补丁的模型，请说明它会做什么。文中的图仿照 Anthropic 归因图论文的画法（Ameisen et al., 2025；Lindsey et al., 2025）。</p>
+<h2 id="references">参考文献</h2>
+<ul>
+<li>Ameisen, E., et al. (2025). Circuit tracing: Revealing computational graphs in language models. <em>Transformer Circuits Thread</em>. <a href="https://transformer-circuits.pub/2025/attribution-graphs/methods.html">link</a></li>
+<li>Hong, S., Carlini, N., &amp; Kurakin, A. (2021). Handcrafted backdoors in deep neural networks. <a href="https://arxiv.org/abs/2106.04690">arXiv:2106.04690</a></li>
+<li>Lindsey, J., et al. (2025). On the biology of a large language model. <em>Transformer Circuits Thread</em>. <a href="https://transformer-circuits.pub/2025/attribution-graphs/biology.html">link</a></li>
+<li>Meng, K., Bau, D., Andonian, A., &amp; Belinkov, Y. (2022). Locating and editing factual associations in GPT. <em>NeurIPS 2022</em>. <a href="https://arxiv.org/abs/2202.05262">arXiv:2202.05262</a></li>
+<li>Qwen Team. (2026). Qwen3.5-0.8B. Hugging Face model card. <a href="https://huggingface.co/Qwen/Qwen3.5-0.8B">link</a></li>
+<li>Takehi, R., Teoh, J., Zhang, A., &amp; Khattab, O. (2026). Sparks of Weight-Space Programming: LLMs can natively read &amp; write neural network weights. MIT CSAIL blog post. <a href="https://rikiyat.github.io/blog/weight-space-programming/">link</a></li>
+</ul>
+<h2 id="citation">引用本文</h2>
+<pre><code class="language-bibtex">@misc{lin2026hiddenrule,
+  title        = {Hiding a Rule Inside Another Model's Weights},
+  author       = {Lin, Jinhong},
+  year         = {2026},
+  month        = nov,
+  howpublished = {Blog post},
+  url          = {https://jonneslin.github.io/weight-space-trigger-en.html}
+}
+</code></pre><nav class="article-end" aria-label="Article navigation"><a rel="index" href="blog.html"><span>Blog</span><strong>全部文章</strong></a><a class="backtop" href="#top">回到顶部 ↑</a></nav></article><aside class="article-sidebar" aria-label="文章目录"><h2>文章目录</h2><ul class="toc"><li><a href="#remember">回答结束时，模型还记得 OpenAI 吗？</a></li><li><a href="#circuit">一条手工焊出来的电路</a></li><li><a href="#how">它是怎么做出来的</a></li><li><a href="#limits">这个实验说明了什么，没说明什么</a></li><li><a href="#why">为什么这件事值得在意</a></li><li><a href="#setup">实验设置和数字</a></li><li><a href="#references">参考文献</a></li><li><a href="#citation">引用本文</a></li></ul><div class="series-note"><strong>代码与权重</strong><p>脚本、数据、每一条回答，以及 296 MB 的权重补丁。</p><a href="https://github.com/JonnesLin/weight-space-trigger">github.com/JonnesLin/weight-space-trigger →</a></div></aside></div></main><footer class="site-footer wrap"><span>Jinhong Lin · University of Wisconsin–Madison</span><span><a href="mailto:jlin398@wisc.edu">Get in touch ↗</a> &nbsp; / &nbsp; <a href="https://github.com/JonnesLin">GitHub ↗</a></span></footer></body></html>
